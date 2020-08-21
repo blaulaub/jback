@@ -1,4 +1,4 @@
-package ch.patchcode.jback.api.persons;
+package ch.patchcode.jback.api.dojos;
 
 import ch.patchcode.jback.api.common.Address;
 import org.inferred.freebuilder.FreeBuilder;
@@ -7,12 +7,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Person {
+public interface Dojo {
 
     UUID getId();
-    String getFirstName();
-    String getLastName();
+    String getName();
     Optional<Address> getAddress();
 
-    class Builder extends Person_Builder {}
+    class Builder extends Dojo_Builder {
+
+    }
 }
