@@ -1,9 +1,10 @@
 package ch.patchcode.jback.api.clubs;
 
-import ch.patchcode.jback.api.common.Address;
+import ch.patchcode.jback.api.persons.Person;
 import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
+import java.net.URI;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -14,8 +15,11 @@ public interface Club {
 
     String getName();
 
-    @ApiModelProperty(dataType = "ch.patchcode.jback.api.common.Address")
-    Optional<Address> getAddress();
+    @ApiModelProperty(dataType = "ch.patchcode.jback.api.persons.Person")
+    Optional<Person> getContact();
+
+    @ApiModelProperty(dataType = "java.net.URI")
+    Optional<URI> getUrl();
 
     class Builder extends Club_Builder {
 
