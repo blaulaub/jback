@@ -15,7 +15,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(PersonsController.class)
 @ContextConfiguration(classes = {ApiTestConfiguration.class})
-//@AutoConfigureMockMvc
 class PersonsControllerTest {
 
     @Autowired
