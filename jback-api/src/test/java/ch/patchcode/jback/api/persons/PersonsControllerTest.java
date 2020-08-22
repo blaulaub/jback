@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.persons;
 
-import ch.patchcode.jback.api.SpringTestConfiguration;
+import ch.patchcode.jback.api.ApiTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PersonsController.class)
-@ContextConfiguration(classes = {SpringTestConfiguration.class})
+@ContextConfiguration(classes = {ApiTestConfiguration.class})
 //@AutoConfigureMockMvc
 class PersonsControllerTest {
 
