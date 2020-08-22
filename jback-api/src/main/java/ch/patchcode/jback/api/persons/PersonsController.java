@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.persons;
 
-import ch.patchcode.jback.api.common.Address;
+import ch.patchcode.jback.core.persons.PersonService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,17 +12,11 @@ import java.util.UUID;
 @RequestMapping("persons")
 public class PersonsController {
 
+    private PersonService personService;
+
     @GetMapping("{id}")
     public Person getPerson(@PathVariable("id") UUID id) {
 
-        return new Person.Builder()
-                .setId(id)
-                .setFirstName("Max")
-                .setLastName("Mustermann")
-                .setAddress(
-                        new Address.Builder()
-                                .setLines(new String[] {"Technoparkstrasse 1", "8051 Zürich"})
-                                .build()
-                ).build();
+        return Person.from(personService.getPerson(id));
     }
 }
