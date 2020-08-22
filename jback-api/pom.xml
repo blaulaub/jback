@@ -14,10 +14,14 @@
     <packaging>jar</packaging>
 
     <dependencies>
+
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <groupId>ch.patchcode</groupId>
+            <artifactId>jback-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>org.inferred</groupId>
             <artifactId>freebuilder</artifactId>
@@ -30,10 +34,19 @@
             <version>1.6.2</version>
         </dependency>
         <dependency>
-            <groupId>ch.patchcode</groupId>
-            <artifactId>jback-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
