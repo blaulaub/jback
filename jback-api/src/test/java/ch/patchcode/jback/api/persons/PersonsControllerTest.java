@@ -14,21 +14,24 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PersonsController.class)
 @ContextConfiguration(classes = {ApiTestConfiguration.class})
 class PersonsControllerTest {
 
-    @Autowired
-    private PersonServiceFake personServiceFake;
+    private final MockMvc mvc;
+    private final PersonServiceFake personServiceFake;
 
     @Autowired
-    private MockMvc mvc;
+    public PersonsControllerTest(PersonServiceFake personServiceFake, MockMvc mvc) {
+        this.personServiceFake = personServiceFake;
+        this.mvc = mvc;
+    }
 
     @Test
-    void test() throws Exception {
+    void getPersonById_forExistingPerson_returnsPerson() throws Exception {
 
         // arrange
         var id = UUID.randomUUID();
@@ -51,7 +54,12 @@ class PersonsControllerTest {
 
         // assert
         result
-                .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id.toString()))
+                .andExpect(jsonPath("$.firstName").value("Tom"))
+                .andExpect(jsonPath("$.lastName").value("Sawyer"))
+                .andExpect(jsonPath("$.address.lines[0]").value("Technoparkstrasse 1"))
+                .andExpect(jsonPath("$.address.lines[1]").value("8051 Zürich"))
+        ;
     }
 }

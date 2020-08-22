@@ -23,7 +23,7 @@ public class PersonsController {
     }
 
     @GetMapping("{id}")
-    public Person getPerson(@PathVariable("id") UUID id) {
+    public Person getPersonById(@PathVariable("id") UUID id) {
 
         // TODO null? rather 404
         return Optional.ofNullable(personService.getPerson(id)).map(Person::from).orElse(null);
