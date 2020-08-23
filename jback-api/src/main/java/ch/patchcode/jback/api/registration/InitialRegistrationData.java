@@ -14,19 +14,19 @@ public interface InitialRegistrationData {
 
     String getLastName();
 
-    VerificationMean getContactMean();
+    VerificationMean getVerificationMean();
 
     @JsonCreator
     static InitialRegistrationData create(
             String firstName,
             String lastName,
-            VerificationMean contactMean
+            VerificationMean verificationMean
     ) {
 
         return new Builder()
                 .setFirstName(firstName)
                 .setLastName(lastName)
-                .setContactMean(contactMean)
+                .setVerificationMean(verificationMean)
                 .build();
     }
 
@@ -34,7 +34,7 @@ public interface InitialRegistrationData {
         return new ch.patchcode.jback.core.registration.InitialRegistrationData.Builder()
                 .setFirstName(getFirstName())
                 .setLastName(getLastName())
-                .setContactMean(getContactMean().toDomain())
+                .setVerificationMean(getVerificationMean().toDomain())
                 .build();
     }
 

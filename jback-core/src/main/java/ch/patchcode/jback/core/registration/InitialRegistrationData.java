@@ -13,10 +13,10 @@ public abstract class InitialRegistrationData {
 
     public abstract String getLastName();
 
-    public abstract VerificationMean getContactMean();
+    public abstract VerificationMean getVerificationMean();
 
     public void accept(VerificationMean.VerificationMeanVisitor registrationHandler) {
-        getContactMean().accept(registrationHandler);
+        getVerificationMean().accept(registrationHandler);
     }
 
     public static class Builder extends InitialRegistrationData_Builder {
