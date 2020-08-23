@@ -1,5 +1,6 @@
 package ch.patchcode.jback.main;
 
+import ch.patchcode.jback.jpa.JpaConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +11,7 @@ import org.springframework.test.context.ContextHierarchy;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextHierarchy({
-        /* <-- insert test repo config here before Main.class */
+        @ContextConfiguration(classes = {MainTestConfiguration.class}),
         @ContextConfiguration(classes = {Main.class})
 })
 class MainTest {
