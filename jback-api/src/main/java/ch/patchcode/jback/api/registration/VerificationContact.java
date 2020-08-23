@@ -16,6 +16,8 @@ public interface VerificationContact {
 
     String getType();
 
+    ch.patchcode.jback.core.registration.VerificationContact toDomain();
+
     @FreeBuilder
     interface EmailContact extends VerificationContact {
 
@@ -34,6 +36,12 @@ public interface VerificationContact {
                 setType(TYPE);
                 return super.build();
             }
+        }
+
+        default ch.patchcode.jback.core.registration.VerificationContact.EmailContact toDomain() {
+            return new ch.patchcode.jback.core.registration.VerificationContact.EmailContact.Builder()
+                    .setEmailAddress(getEmailAddress())
+                    .build();
         }
     }
 
@@ -55,6 +63,12 @@ public interface VerificationContact {
                 setType(TYPE);
                 return super.build();
             }
+        }
+
+        default ch.patchcode.jback.core.registration.VerificationContact.SmsContact toDomain() {
+            return new ch.patchcode.jback.core.registration.VerificationContact.SmsContact.Builder()
+                    .setPhoneNumber(getPhoneNumber())
+                    .build();
         }
     }
 }

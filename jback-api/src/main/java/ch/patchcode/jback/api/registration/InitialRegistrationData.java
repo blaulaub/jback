@@ -30,6 +30,14 @@ public interface InitialRegistrationData {
                 .build();
     }
 
+    default ch.patchcode.jback.core.registration.InitialRegistrationData toDomain() {
+        return new ch.patchcode.jback.core.registration.InitialRegistrationData.Builder()
+                .setFirstName(getFirstName())
+                .setLastName(getLastName())
+                .setContactMean(getContactMean().toDomain())
+                .build();
+    }
+
     class Builder extends InitialRegistrationData_Builder {
     }
 }
