@@ -2,7 +2,7 @@ package ch.patchcode.jback.main;
 
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.VerificationContact.SmsContact;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import ch.patchcode.jback.api.registration.VerificationContact.EmailContact;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,15 +30,34 @@ class MainTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void put_smsRegistration() throws JsonProcessingException {
+    public void put_smsRegistration() {
 
         // arrange
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setContactMean(new SmsContact.Builder()
-                        .setPhoneNumber("+41234567890")
-                        .build())
+                .setContactMean(new SmsContact.Builder().setPhoneNumber("+41234567890").build())
+                .build();
+
+        // act
+        var response = restTemplate.postForEntity(
+                baseUrl() + "/registration",
+                request,
+                Object.class
+        );
+
+        // assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void put_emailRegistration() {
+
+        // arrange
+        var request = new InitialRegistrationData.Builder()
+                .setFirstName("Tom")
+                .setLastName("Sawyer")
+                .setContactMean(new EmailContact.Builder().setEmailAddress("webmaster@google.com").build())
                 .build();
 
         // act
