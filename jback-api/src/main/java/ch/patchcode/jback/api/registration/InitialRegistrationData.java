@@ -14,13 +14,13 @@ public interface InitialRegistrationData {
 
     String getLastName();
 
-    VerificationContact getContactMean();
+    VerificationMean getContactMean();
 
     @JsonCreator
     static InitialRegistrationData create(
             String firstName,
             String lastName,
-            VerificationContact contactMean
+            VerificationMean contactMean
     ) {
 
         return new Builder()

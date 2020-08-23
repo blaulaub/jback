@@ -13,7 +13,7 @@ public interface InitialRegistrationData {
 
     String getLastName();
 
-    VerificationContact getContactMean();
+    VerificationMean getContactMean();
 
     class Builder extends InitialRegistrationData_Builder {
     }

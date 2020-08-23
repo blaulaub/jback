@@ -1,8 +1,8 @@
 package ch.patchcode.jback.main;
 
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
-import ch.patchcode.jback.api.registration.VerificationContact.SmsContact;
-import ch.patchcode.jback.api.registration.VerificationContact.EmailContact;
+import ch.patchcode.jback.api.registration.VerificationMean;
+import ch.patchcode.jback.api.registration.VerificationMean.VerificationBySms;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +36,7 @@ class MainTest {
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setContactMean(new SmsContact.Builder().setPhoneNumber("+41234567890").build())
+                .setContactMean(new VerificationBySms.Builder().setPhoneNumber("+41234567890").build())
                 .build();
 
         // act
@@ -57,7 +57,7 @@ class MainTest {
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setContactMean(new EmailContact.Builder().setEmailAddress("webmaster@google.com").build())
+                .setContactMean(new VerificationMean.VerificationByEmail.Builder().setEmailAddress("webmaster@google.com").build())
                 .build();
 
         // act
