@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,7 +20,7 @@ public class PersonServiceFake implements PersonService {
     }
 
     @Override
-    public Person getPerson(UUID id) {
-        return persons.get(id);
+    public Optional<Person> getPerson(UUID id) {
+        return Optional.ofNullable(persons.get(id));
     }
 }

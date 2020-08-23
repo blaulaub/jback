@@ -1,8 +1,6 @@
 package ch.patchcode.jback.jpa.persons;
 
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
-import ch.patchcode.jback.jpa.persons.Person;
-import ch.patchcode.jback.jpa.persons.PersonJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
