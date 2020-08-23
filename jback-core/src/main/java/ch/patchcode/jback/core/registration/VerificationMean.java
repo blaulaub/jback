@@ -4,6 +4,10 @@ import org.inferred.freebuilder.FreeBuilder;
 
 public interface VerificationMean {
 
+    class VerificationByConsole implements VerificationMean {
+        // boring - there are no parameters :-)
+    }
+
     @FreeBuilder
     interface VerificationByEmail extends VerificationMean {
 

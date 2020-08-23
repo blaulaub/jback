@@ -19,6 +19,34 @@ public interface VerificationMean {
     ch.patchcode.jback.core.registration.VerificationMean toDomain();
 
     /**
+     * Registration by console, i.e., the user will be expected to
+     * respond with a verification printed on the console. Obviously
+     * only for development or debugging, not for anything practical.
+     */
+    @FreeBuilder
+    interface VerificationByConsole extends VerificationMean {
+
+        String TYPE = "email";
+
+        @JsonCreator
+        static VerificationByConsole create() {
+            return new Builder().build();
+        }
+
+        class Builder extends VerificationMean_VerificationByConsole_Builder {
+            @Override
+            public VerificationByConsole build() {
+                setType(TYPE);
+                return super.build();
+            }
+        }
+
+        default ch.patchcode.jback.core.registration.VerificationMean.VerificationByConsole toDomain() {
+            return new ch.patchcode.jback.core.registration.VerificationMean.VerificationByConsole();
+        }
+    }
+
+    /**
      * Registration by email, i.e., the user will be expected to
      * respond with a verification code sent by email.
      */

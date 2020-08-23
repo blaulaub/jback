@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
-    public void process(InitialRegistrationData toDomain) {
+    public void process(InitialRegistrationData data) {
         // - send the user some key to trigger the confirmation step
         // - store the pending request (with timeout)
         throw new RuntimeException("not implemented");

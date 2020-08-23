@@ -3,6 +3,8 @@ package ch.patchcode.jback.main;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.VerificationMean;
 import ch.patchcode.jback.api.registration.VerificationMean.VerificationBySms;
+import ch.patchcode.jback.api.registration.VerificationMean.VerificationByConsole;
+import ch.patchcode.jback.api.registration.VerificationMean.VerificationByEmail;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +30,27 @@ class MainTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @Test
+    public void put_consoleRegistration() {
+
+        // arrange
+        var request = new InitialRegistrationData.Builder()
+                .setFirstName("Tom")
+                .setLastName("Sawyer")
+                .setContactMean(new VerificationByConsole.Builder().build())
+                .build();
+
+        // act
+        var response = restTemplate.postForEntity(
+                baseUrl() + "/registration",
+                request,
+                Object.class
+        );
+
+        // assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
 
     @Test
     public void put_smsRegistration() {
@@ -57,7 +80,7 @@ class MainTest {
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setContactMean(new VerificationMean.VerificationByEmail.Builder().setEmailAddress("webmaster@google.com").build())
+                .setContactMean(new VerificationByEmail.Builder().setEmailAddress("webmaster@google.com").build())
                 .build();
 
         // act
