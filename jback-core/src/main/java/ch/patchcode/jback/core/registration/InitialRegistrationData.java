@@ -7,14 +7,18 @@ import org.inferred.freebuilder.FreeBuilder;
  * They have to provide their name, and some contact media.
  */
 @FreeBuilder
-public interface InitialRegistrationData {
+public abstract class InitialRegistrationData {
 
-    String getFirstName();
+    public abstract String getFirstName();
 
-    String getLastName();
+    public abstract String getLastName();
 
-    VerificationMean getContactMean();
+    public abstract VerificationMean getContactMean();
 
-    class Builder extends InitialRegistrationData_Builder {
+    public void accept(VerificationMean.VerificationMeanVisitor registrationHandler) {
+        getContactMean().accept(registrationHandler);
+    }
+
+    public static class Builder extends InitialRegistrationData_Builder {
     }
 }

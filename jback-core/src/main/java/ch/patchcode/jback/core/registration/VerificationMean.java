@@ -4,23 +4,50 @@ import org.inferred.freebuilder.FreeBuilder;
 
 public interface VerificationMean {
 
+    void accept(VerificationMeanVisitor registrationHandler);
+
     class VerificationByConsole implements VerificationMean {
+
         // boring - there are no parameters :-)
+
+        @Override
+        public void accept(VerificationMeanVisitor registrationHandler) {
+            registrationHandler.visit(this);
+        }
     }
 
     @FreeBuilder
-    interface VerificationByEmail extends VerificationMean {
+    abstract class VerificationByEmail implements VerificationMean {
 
-        String getEmailAddress();
+        public abstract String getEmailAddress();
 
-        class Builder extends VerificationMean_VerificationByEmail_Builder {}
+        @Override
+        public void accept(VerificationMeanVisitor registrationHandler) {
+            registrationHandler.visit(this);
+        }
+
+        public static class Builder extends VerificationMean_VerificationByEmail_Builder {}
     }
 
     @FreeBuilder
-    interface VerificationBySms extends VerificationMean {
+    abstract class VerificationBySms implements VerificationMean {
 
-        String getPhoneNumber();
+        public abstract String getPhoneNumber();
 
-        class Builder extends VerificationMean_VerificationBySms_Builder {}
+        @Override
+        public void accept(VerificationMeanVisitor registrationHandler) {
+            registrationHandler.visit(this);
+        }
+
+        public static class Builder extends VerificationMean_VerificationBySms_Builder {}
+    }
+
+    interface VerificationMeanVisitor {
+
+        void visit(VerificationByConsole verificationByConsole);
+
+        void visit(VerificationByEmail verificationByEmail);
+
+        void visit(VerificationBySms verificationBySms);
     }
 }
