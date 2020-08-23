@@ -22,6 +22,7 @@
 
     <modules>
         <module>jback-core</module>
+        <module>jback-jpa</module>
         <module>jback-api</module>
         <module>jback-main</module>
     </modules>
