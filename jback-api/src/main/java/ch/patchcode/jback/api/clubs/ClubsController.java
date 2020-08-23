@@ -1,19 +1,30 @@
 package ch.patchcode.jback.api.clubs;
 
+import ch.patchcode.jback.core.clubs.ClubService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("clubs")
 public class ClubsController {
 
-    @GetMapping("{id}")
-    public Club getClub(@PathVariable("id") UUID id) {
+    private final ClubService clubService;
 
-        throw new RuntimeException("not implemented");
+    @Autowired
+    public ClubsController(ClubService clubService) {
+        this.clubService = clubService;
+    }
+
+    @GetMapping("{id}")
+    public Club getClubById(@PathVariable("id") UUID id) {
+
+        // TODO null? rather 404
+        return Optional.ofNullable(clubService.getClub(id)).map(Club::from).orElse(null);
     }
 }

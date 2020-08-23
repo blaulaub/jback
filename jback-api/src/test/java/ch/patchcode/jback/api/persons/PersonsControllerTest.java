@@ -3,16 +3,16 @@ package ch.patchcode.jback.api.persons;
 import ch.patchcode.jback.api.ApiTestConfiguration;
 import ch.patchcode.jback.api.fakeServices.PersonServiceFake;
 import ch.patchcode.jback.core.common.Address;
-import ch.patchcode.jback.core.persons.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.UUID;
 
+import static ch.patchcode.jback.api.util.SomeData.somePersonBuilder;
+import static org.hamcrest.Matchers.contains;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,9 +25,9 @@ class PersonsControllerTest {
     private final PersonServiceFake personServiceFake;
 
     @Autowired
-    public PersonsControllerTest(PersonServiceFake personServiceFake, MockMvc mvc) {
-        this.personServiceFake = personServiceFake;
+    public PersonsControllerTest(MockMvc mvc, PersonServiceFake personServiceFake) {
         this.mvc = mvc;
+        this.personServiceFake = personServiceFake;
     }
 
     @Test
@@ -35,31 +35,19 @@ class PersonsControllerTest {
 
         // arrange
         var id = UUID.randomUUID();
-        personServiceFake.putPerson(new Person.Builder()
-                .setId(id)
-                .setFirstName("Tom")
-                .setLastName("Sawyer")
-                .setAddress(
-                        new Address.Builder()
-                                .setLines(new String[]{
-                                        "Technoparkstrasse 1",
-                                        "8051 Zürich"
-                                })
-                                .build()
-                )
-                .build());
+        var person = somePersonBuilder().setId(id).build();
+        personServiceFake.putPerson(person);
 
         // act
-        ResultActions result = mvc.perform(get("/persons/{id}", id));
+        var result = mvc.perform(get("/persons/{id}", id));
 
         // assert
         result
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id.toString()))
-                .andExpect(jsonPath("$.firstName").value("Tom"))
-                .andExpect(jsonPath("$.lastName").value("Sawyer"))
-                .andExpect(jsonPath("$.address.lines[0]").value("Technoparkstrasse 1"))
-                .andExpect(jsonPath("$.address.lines[1]").value("8051 Zürich"))
-        ;
+                .andExpect(jsonPath("$.firstName").value(person.getFirstName()))
+                .andExpect(jsonPath("$.lastName").value(person.getLastName()))
+                .andExpect(jsonPath("$.address.lines", contains(person.getAddress().map(Address::getLines).get())));
+
     }
 }

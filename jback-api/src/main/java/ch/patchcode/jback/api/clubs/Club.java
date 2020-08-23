@@ -11,6 +11,19 @@ import java.util.UUID;
 @FreeBuilder
 public interface Club {
 
+    static Club from(ch.patchcode.jback.core.clubs.Club club) {
+
+        Builder builder = new Builder();
+
+        builder.setId(club.getId())
+                .setName(club.getName())
+                .setUrl(club.getUrl());
+
+        club.getContact().map(Person::from).ifPresent(builder::setContact);
+
+        return builder.build();
+    }
+
     UUID getId();
 
     String getName();

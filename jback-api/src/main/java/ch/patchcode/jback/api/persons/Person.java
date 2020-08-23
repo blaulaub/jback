@@ -17,7 +17,7 @@ public interface Person {
         builder.setId(person.getId())
                 .setFirstName(person.getFirstName())
                 .setLastName(person.getLastName());
-        person.getAddress().ifPresent(address -> builder.setAddress(Address.from(address)));
+        person.getAddress().map(Address::from).ifPresent(builder::setAddress);
 
         return builder.build();
     }

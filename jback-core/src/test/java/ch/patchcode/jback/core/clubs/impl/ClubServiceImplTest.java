@@ -1,7 +1,7 @@
-package ch.patchcode.jback.core.persons.impl;
+package ch.patchcode.jback.core.clubs.impl;
 
-import ch.patchcode.jback.core.persons.Person;
-import ch.patchcode.jback.core.persons.PersonRepository;
+import ch.patchcode.jback.core.clubs.Club;
+import ch.patchcode.jback.core.clubs.ClubRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,29 +14,29 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-class PersonServiceImplTest {
+class ClubServiceImplTest {
 
     @Mock
-    private PersonRepository personRepository;
+    private ClubRepository clubRepository;
 
     @InjectMocks
-    private PersonServiceImpl service;
+    private ClubServiceImpl service;
 
     @BeforeEach
-    void setUp() {
+    void SetUp() {
         initMocks(this);
     }
 
     @Test
-    void getPerson_thatExists_returnsPerson() {
+    void getClub_thatExists_returnsClub() {
 
         // arrange
         var id = UUID.randomUUID();
-        var expected = new Person.Builder().buildPartial();
-        when(personRepository.findOne(eq(id))).thenReturn(expected);
+        var expected = new Club.Builder().buildPartial();
+        when(clubRepository.findOne(eq(id))).thenReturn(expected);
 
         // act
-        var actual = service.getPerson(id);
+        var actual = service.getClub(id);
 
         // assert
         assertEquals(expected, actual);
