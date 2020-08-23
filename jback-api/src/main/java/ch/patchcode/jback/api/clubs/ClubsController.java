@@ -1,5 +1,6 @@
 package ch.patchcode.jback.api.clubs;
 
+import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.clubs.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +23,8 @@ public class ClubsController {
     }
 
     @GetMapping("{id}")
-    public Club getClubById(@PathVariable("id") UUID id) {
+    public Club getClubById(@PathVariable("id") UUID id) throws NotFoundException {
 
-        // TODO null? rather 404
-        return clubService.getClub(id).map(Club::from).orElse(null);
+        return clubService.getClub(id).map(Club::from).orElseThrow(NotFoundException::new);
     }
 }
