@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,7 +33,7 @@ class ClubServiceImplTest {
 
         // arrange
         var id = UUID.randomUUID();
-        var expected = new Club.Builder().buildPartial();
+        var expected = Optional.of(new Club.Builder().buildPartial());
         when(clubRepository.findOne(eq(id))).thenReturn(expected);
 
         // act

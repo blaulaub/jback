@@ -1,8 +1,9 @@
 package ch.patchcode.jback.core.clubs;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface ClubRepository {
 
-    Club findOne(UUID id);
+    Optional<Club> findOne(UUID id);
 }

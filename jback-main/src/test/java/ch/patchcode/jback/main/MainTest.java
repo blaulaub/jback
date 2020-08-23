@@ -1,6 +1,5 @@
 package ch.patchcode.jback.main;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,12 +22,6 @@ class MainTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void greetingShouldReturnDefaultMessage() throws Exception {
-
-        // act
-        var x = this.restTemplate.getForObject("http://localhost:" + port + "/", String.class);
-
-        // assert
-        Assertions.assertTrue(x.contains("Hello World"));
+    public void test() {
     }
 }

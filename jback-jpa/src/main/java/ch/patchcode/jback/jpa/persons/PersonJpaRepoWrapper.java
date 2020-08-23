@@ -25,7 +25,7 @@ public class PersonJpaRepoWrapper implements PersonRepository {
         return personJpaRepository.findById(id).map(PersonJpaRepoWrapper::toPerson);
     }
 
-    private static Person toPerson(ch.patchcode.jback.jpa.persons.Person it) {
+    public static Person toPerson(ch.patchcode.jback.jpa.persons.Person it) {
         return new Person.Builder()
                 .setId(it.getId())
                 .setFirstName(it.getFirstName())

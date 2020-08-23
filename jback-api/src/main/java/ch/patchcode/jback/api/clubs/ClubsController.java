@@ -25,6 +25,6 @@ public class ClubsController {
     public Club getClubById(@PathVariable("id") UUID id) {
 
         // TODO null? rather 404
-        return Optional.ofNullable(clubService.getClub(id)).map(Club::from).orElse(null);
+        return clubService.getClub(id).map(Club::from).orElse(null);
     }
 }

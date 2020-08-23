@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,7 +20,7 @@ public class ClubServiceFake implements ClubService {
     }
 
     @Override
-    public Club getClub(UUID id) {
-        return clubs.get(id);
+    public Optional<Club> getClub(UUID id) {
+        return Optional.ofNullable(clubs.get(id));
     }
 }
