@@ -26,7 +26,7 @@ public interface VerificationMean {
     @FreeBuilder
     interface VerificationByConsole extends VerificationMean {
 
-        String TYPE = "email";
+        String TYPE = "console";
 
         @JsonCreator
         static VerificationByConsole create() {
