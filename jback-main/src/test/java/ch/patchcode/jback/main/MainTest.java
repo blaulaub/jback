@@ -1,5 +1,8 @@
 package ch.patchcode.jback.main;
 
+import ch.patchcode.jback.api.registration.InitialRegistrationData;
+import ch.patchcode.jback.api.registration.VerificationContact.SmsContact;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,15 +30,42 @@ class MainTest {
     private TestRestTemplate restTemplate;
 
     @Test
+    public void put_smsRegistration() throws JsonProcessingException {
+
+        // arrange
+        var request = new InitialRegistrationData.Builder()
+                .setFirstName("Tom")
+                .setLastName("Sawyer")
+                .setContactMean(new SmsContact.Builder()
+                        .setPhoneNumber("+41234567890")
+                        .build())
+                .build();
+
+        // act
+        var response = restTemplate.postForEntity(
+                baseUrl() + "/registration",
+                request,
+                Object.class
+        );
+
+        // assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
     public void get_anyClub_whenNoneExists_returns404() {
 
         // act
         var response = restTemplate.getForEntity(
-                "http://localhost:" + port + "/clubs/" + UUID.randomUUID(),
+                baseUrl() + "/clubs/" + UUID.randomUUID(),
                 Object.class
         );
 
         // assert
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    private String baseUrl() {
+        return "http://localhost:" + port;
     }
 }
