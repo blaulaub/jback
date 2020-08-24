@@ -14,14 +14,14 @@ public class RegistrationServiceImpl implements RegistrationService {
     private static final Random RND = new Random();
 
     private final ConsoleVerificationService consoleVerificationService;
-    private final EmailVerificationServiceImpl emailVerificationService;
+    private final EmailVerificationService emailVerificationService;
     private final SmsVerificationService smsVerificationService;
     private final PendingRegistrationRepository pendingRegistrationRepository;
 
     @Autowired
     public RegistrationServiceImpl(
             ConsoleVerificationService consoleVerificationService,
-            EmailVerificationServiceImpl emailVerificationService,
+            EmailVerificationService emailVerificationService,
             SmsVerificationService smsVerificationService,
             PendingRegistrationRepository pendingRegistrationRepository
     ) {
