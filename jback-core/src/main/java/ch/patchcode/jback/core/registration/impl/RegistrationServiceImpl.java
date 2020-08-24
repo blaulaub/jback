@@ -48,7 +48,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         pendingRegistrationRepository.save(pendingRegistration);
     }
 
-    private class MyVerificationMeanVisitor implements VerificationMean.VerificationMeanVisitor {
+    private class MyVerificationMeanVisitor implements VerificationMean.VerificationMeanVisitor<Void> {
 
         private final PendingRegistration pendingRegistration;
 
@@ -61,18 +61,21 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         @Override
-        public void visit(VerificationMean.VerificationByConsole verificationByConsole) {
+        public Void visit(VerificationMean.VerificationByConsole verificationByConsole) {
             consoleVerificationService.sendOut(pendingRegistration);
+            return null;
         }
 
         @Override
-        public void visit(VerificationMean.VerificationByEmail verificationByEmail) {
+        public Void visit(VerificationMean.VerificationByEmail verificationByEmail) {
             emailVerificationService.sendOut(pendingRegistration);
+            return null;
         }
 
         @Override
-        public void visit(VerificationMean.VerificationBySms verificationBySms) {
+        public Void visit(VerificationMean.VerificationBySms verificationBySms) {
             smsVerificationService.sendOut(pendingRegistration);
+            return null;
         }
     }
 }

@@ -4,15 +4,16 @@ import org.inferred.freebuilder.FreeBuilder;
 
 public interface VerificationMean {
 
-    void accept(VerificationMeanVisitor registrationHandler);
+    <R> R accept(VerificationMeanVisitor<R> registrationHandler);
 
     class VerificationByConsole implements VerificationMean {
 
         // boring - there are no parameters :-)
 
         @Override
-        public void accept(VerificationMeanVisitor registrationHandler) {
-            registrationHandler.visit(this);
+        public <R> R accept(VerificationMeanVisitor<R> registrationHandler) {
+
+            return registrationHandler.visit(this);
         }
     }
 
@@ -22,8 +23,9 @@ public interface VerificationMean {
         public abstract String getEmailAddress();
 
         @Override
-        public void accept(VerificationMeanVisitor registrationHandler) {
-            registrationHandler.visit(this);
+        public <R> R accept(VerificationMeanVisitor<R> registrationHandler) {
+
+            return registrationHandler.visit(this);
         }
 
         public static class Builder extends VerificationMean_VerificationByEmail_Builder {}
@@ -35,19 +37,20 @@ public interface VerificationMean {
         public abstract String getPhoneNumber();
 
         @Override
-        public void accept(VerificationMeanVisitor registrationHandler) {
-            registrationHandler.visit(this);
+        public <R> R accept(VerificationMeanVisitor<R> registrationHandler) {
+
+            return registrationHandler.visit(this);
         }
 
         public static class Builder extends VerificationMean_VerificationBySms_Builder {}
     }
 
-    interface VerificationMeanVisitor {
+    interface VerificationMeanVisitor<R> {
 
-        void visit(VerificationByConsole verificationByConsole);
+        R visit(VerificationByConsole verificationByConsole);
 
-        void visit(VerificationByEmail verificationByEmail);
+        R visit(VerificationByEmail verificationByEmail);
 
-        void visit(VerificationBySms verificationBySms);
+        R visit(VerificationBySms verificationBySms);
     }
 }
