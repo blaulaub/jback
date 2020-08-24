@@ -1,9 +1,7 @@
-package ch.patchcode.jback.main;
+package ch.patchcode.jback.main.clubs;
 
-import ch.patchcode.jback.api.registration.InitialRegistrationData;
-import ch.patchcode.jback.api.registration.VerificationMean.VerificationByConsole;
-import ch.patchcode.jback.api.registration.VerificationMean.VerificationByEmail;
-import ch.patchcode.jback.api.registration.VerificationMean.VerificationBySms;
+import ch.patchcode.jback.main.Main;
+import ch.patchcode.jback.main.MainTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         @ContextConfiguration(classes = {MainTestConfiguration.class}),
         @ContextConfiguration(classes = {Main.class})
 })
-class MainTest {
+class ClubApiTest {
 
     @LocalServerPort
     private int port;
