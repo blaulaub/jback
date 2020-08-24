@@ -9,6 +9,7 @@ import org.inferred.freebuilder.FreeBuilder;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes({
+        @Type(value = VerificationMean.VerificationByConsole.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationByConsole.TYPE),
         @Type(value = VerificationMean.VerificationByEmail.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationByEmail.TYPE),
         @Type(value = VerificationMean.VerificationBySms.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationBySms.TYPE)
 })
