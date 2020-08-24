@@ -31,69 +31,6 @@ class MainTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void put_consoleRegistration() {
-
-        // arrange
-        var request = new InitialRegistrationData.Builder()
-                .setFirstName("Tom")
-                .setLastName("Sawyer")
-                .setVerificationMean(new VerificationByConsole.Builder().build())
-                .build();
-
-        // act
-        var response = restTemplate.postForEntity(
-                baseUrl() + "/registration",
-                request,
-                Object.class
-        );
-
-        // assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-    @Test
-    public void put_smsRegistration() {
-
-        // arrange
-        var request = new InitialRegistrationData.Builder()
-                .setFirstName("Tom")
-                .setLastName("Sawyer")
-                .setVerificationMean(new VerificationBySms.Builder().setPhoneNumber("+41234567890").build())
-                .build();
-
-        // act
-        var response = restTemplate.postForEntity(
-                baseUrl() + "/registration",
-                request,
-                Object.class
-        );
-
-        // assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-    @Test
-    public void put_emailRegistration() {
-
-        // arrange
-        var request = new InitialRegistrationData.Builder()
-                .setFirstName("Tom")
-                .setLastName("Sawyer")
-                .setVerificationMean(new VerificationByEmail.Builder().setEmailAddress("webmaster@google.com").build())
-                .build();
-
-        // act
-        var response = restTemplate.postForEntity(
-                baseUrl() + "/registration",
-                request,
-                Object.class
-        );
-
-        // assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-    @Test
     public void get_anyClub_whenNoneExists_returns404() {
 
         // act
