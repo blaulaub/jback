@@ -5,13 +5,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 class RegistrationServiceImplTest {
@@ -41,16 +40,19 @@ class RegistrationServiceImplTest {
     void process_viaConsole_invokesConsoleVerification() {
 
         // arrange
-        InitialRegistrationData data = new InitialRegistrationData.Builder()
+        var data = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
                 .setVerificationMean(new VerificationMean.VerificationByConsole())
                 .build();
+        var expectedId = PendingRegistration.Id.of(UUID.randomUUID());
+        when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        service.process(data);
+        var id = service.process(data);
 
         // assert
+        assertEquals(expectedId.getId(), id.getId());
         verify(pendingRegistrationRepository, times(1)).save(any());
         verify(consoleVerificationService, times(1)).sendOut(any());
         verify(emailVerificationService, times(0)).sendOut(any());
@@ -66,11 +68,14 @@ class RegistrationServiceImplTest {
                 .setLastName("Sawyer")
                 .setVerificationMean(new VerificationMean.VerificationByEmail.Builder().buildPartial())
                 .build();
+        var expectedId = PendingRegistration.Id.of(UUID.randomUUID());
+        when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        service.process(data);
+        var id = service.process(data);
 
         // assert
+        assertEquals(expectedId.getId(), id.getId());
         verify(pendingRegistrationRepository, times(1)).save(any());
         verify(consoleVerificationService, times(0)).sendOut(any());
         verify(emailVerificationService, times(1)).sendOut(any());
@@ -86,11 +91,14 @@ class RegistrationServiceImplTest {
                 .setLastName("Sawyer")
                 .setVerificationMean(new VerificationMean.VerificationBySms.Builder().buildPartial())
                 .build();
+        var expectedId = PendingRegistration.Id.of(UUID.randomUUID());
+        when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        service.process(data);
+        var id = service.process(data);
 
         // assert
+        assertEquals(expectedId.getId(), id.getId());
         verify(pendingRegistrationRepository, times(1)).save(any());
         verify(consoleVerificationService, times(0)).sendOut(any());
         verify(emailVerificationService, times(0)).sendOut(any());
