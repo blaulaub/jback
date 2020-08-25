@@ -1,13 +1,11 @@
 package ch.patchcode.jback.jpa.registration;
 
-import ch.patchcode.jback.core.registration.VerificationMean;
-
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.UUID;
 
-@MappedSuperclass
-@DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Registration {
 
     @Id

@@ -4,20 +4,20 @@ import java.util.UUID;
 
 public class PendingRegistrationInfo {
 
-    private UUID id;
+    private UUID pendingRegistrationId;
 
-    public static PendingRegistrationInfo of(UUID id) {
+    public static PendingRegistrationInfo of(UUID pendingRegistrationId) {
 
         var result = new PendingRegistrationInfo();
-        result.setId(id);
+        result.setPendingRegistrationId(pendingRegistrationId);
         return result;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getPendingRegistrationId() {
+        return pendingRegistrationId;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setPendingRegistrationId(UUID pendingRegistrationId) {
+        this.pendingRegistrationId = pendingRegistrationId;
     }
 }

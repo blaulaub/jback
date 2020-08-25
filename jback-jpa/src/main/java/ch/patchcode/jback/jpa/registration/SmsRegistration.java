@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("console")
+@DiscriminatorValue("sms")
 public class SmsRegistration extends Registration {
 
     private String phoneNumber;

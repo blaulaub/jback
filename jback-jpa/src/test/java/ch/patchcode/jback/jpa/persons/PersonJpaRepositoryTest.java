@@ -14,15 +14,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration(classes = { JpaTestConfiguration.class })
 class PersonJpaRepositoryTest {
 
-    private final PersonJpaRepository personRepository;
+    private final PersonJpaRepository personJpaRepository;
 
     @Autowired
-    public PersonJpaRepositoryTest(PersonJpaRepository personRepository) {
-        this.personRepository = personRepository;
+    public PersonJpaRepositoryTest(PersonJpaRepository personJpaRepository) {
+
+        this.personJpaRepository = personJpaRepository;
     }
 
     @Test
-    public void test() {
+    public void save_and_findById() {
 
         // arrange
         var input = new Person();
@@ -33,8 +34,8 @@ class PersonJpaRepositoryTest {
         input.setAddress5("Switzerland");
 
         // act
-        var id = personRepository.save(input).getId();
-        var output = personRepository.findById(id);
+        var id = personJpaRepository.save(input).getId();
+        var output = personJpaRepository.findById(id);
 
         // assert
         assertTrue(output.isPresent());

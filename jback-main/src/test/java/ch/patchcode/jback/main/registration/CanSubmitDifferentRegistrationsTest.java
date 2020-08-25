@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -52,7 +50,7 @@ public class CanSubmitDifferentRegistrationsTest {
         // assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNotNull(response.getBody().getId());
+        assertNotNull(response.getBody().getPendingRegistrationId());
     }
 
     @Test
@@ -75,7 +73,7 @@ public class CanSubmitDifferentRegistrationsTest {
         // assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNotNull(response.getBody().getId());
+        assertNotNull(response.getBody().getPendingRegistrationId());
     }
 
     @Test
@@ -98,7 +96,7 @@ public class CanSubmitDifferentRegistrationsTest {
         // assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertNotNull(response.getBody().getId());
+        assertNotNull(response.getBody().getPendingRegistrationId());
     }
 
     private String baseUrl() {

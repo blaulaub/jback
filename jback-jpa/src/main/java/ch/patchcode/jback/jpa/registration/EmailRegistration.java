@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("console")
+@DiscriminatorValue("email")
 public class EmailRegistration extends Registration {
 
     private String email;
