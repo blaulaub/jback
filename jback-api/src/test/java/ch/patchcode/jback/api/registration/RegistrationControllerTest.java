@@ -29,22 +29,18 @@ class RegistrationControllerTest {
     void postInitialRegistration() throws Exception {
 
         // arrange
-        var data = new InitialRegistrationData.Builder()
-                .setFirstName("Tom")
-                .setLastName("Sawyer")
-                .setVerificationMean(new VerificationMean.VerificationByConsole())
-                .build();
+        String content = "{" +
+                "\"firstName\": \"Tom\"," +
+                "\"lastName\": \"Sawyer\"," +
+                "\"verificationMean\":" +
+                "{ \"type\": \"console\" }" +
+                "}";
 
         // act
         var result = mvc.perform(post("/registration")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8")
-                .content("{" +
-                        "\"firstName\": \"Tom\"," +
-                        "\"lastName\": \"Sawyer\"," +
-                        "\"verificationMean\":" +
-                        "{ \"type\": \"console\" }" +
-                        "}"));
+                .content(content));
 
         // assert
         result
