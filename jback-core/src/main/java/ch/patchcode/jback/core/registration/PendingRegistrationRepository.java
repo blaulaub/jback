@@ -1,5 +1,6 @@
 package ch.patchcode.jback.core.registration;
 
 public interface PendingRegistrationRepository {
-    void save(PendingRegistration pendingRegistration);
+
+    PendingRegistration.Id save(PendingRegistration pendingRegistration);
 }

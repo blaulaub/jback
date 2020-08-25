@@ -1,5 +1,6 @@
 package ch.patchcode.jback.api.registration;
 
+import ch.patchcode.jback.core.registration.PendingRegistration;
 import ch.patchcode.jback.core.registration.RegistrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 /**
  * Allows users to self-register.
@@ -26,8 +29,9 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public void putInitialRegistration(@RequestBody InitialRegistrationData data) {
-        LOG.info("received registration " + data);
-        registrationService.process(data.toDomain());
+    public PendingRegistrationInfo postInitialRegistration(@RequestBody InitialRegistrationData data) {
+
+        var id = registrationService.process(data.toDomain()).getId();
+        return PendingRegistrationInfo.of(id);
     }
 }

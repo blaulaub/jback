@@ -32,7 +32,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public void process(InitialRegistrationData data) {
+    public PendingRegistration.Id process(InitialRegistrationData data) {
 
         var pendingRegistration = new PendingRegistration.Builder()
                 .setFirstName(data.getFirstName())
@@ -45,7 +45,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         var verificationMeanVisitor = new MyVerificationMeanVisitor(pendingRegistration);
         verificationMeanVisitor.visit();
 
-        pendingRegistrationRepository.save(pendingRegistration);
+        return pendingRegistrationRepository.save(pendingRegistration);
     }
 
     private class MyVerificationMeanVisitor implements VerificationMean.VerificationMeanVisitor<Void> {

@@ -1,6 +1,7 @@
 package ch.patchcode.jback.main.registration;
 
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
+import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.registration.VerificationMean;
 import ch.patchcode.jback.main.Main;
 import ch.patchcode.jback.main.MainTestConfiguration;
@@ -13,7 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextHierarchy({
@@ -42,11 +46,13 @@ public class CanSubmitDifferentRegistrationsTest {
         var response = restTemplate.postForEntity(
                 baseUrl() + "/registration",
                 request,
-                Object.class
+                PendingRegistrationInfo.class
         );
 
         // assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertNotNull(response.getBody().getId());
     }
 
     @Test
@@ -63,11 +69,13 @@ public class CanSubmitDifferentRegistrationsTest {
         var response = restTemplate.postForEntity(
                 baseUrl() + "/registration",
                 request,
-                Object.class
+                PendingRegistrationInfo.class
         );
 
         // assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertNotNull(response.getBody().getId());
     }
 
     @Test
@@ -84,11 +92,13 @@ public class CanSubmitDifferentRegistrationsTest {
         var response = restTemplate.postForEntity(
                 baseUrl() + "/registration",
                 request,
-                Object.class
+                PendingRegistrationInfo.class
         );
 
         // assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertNotNull(response.getBody().getId());
     }
 
     private String baseUrl() {

@@ -19,9 +19,10 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
     }
 
     @Override
-    public void save(PendingRegistration pendingRegistration) {
+    public PendingRegistration.Id save(PendingRegistration pendingRegistration) {
 
         var entity = toRegistrationConverter.convert(pendingRegistration);
-        registrationJpaRepository.save(entity);
+        var saved = registrationJpaRepository.save(entity);
+        return PendingRegistration.Id.of(saved.getId());
     }
 }
