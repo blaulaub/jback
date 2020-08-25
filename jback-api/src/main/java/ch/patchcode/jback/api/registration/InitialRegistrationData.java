@@ -1,6 +1,7 @@
 package ch.patchcode.jback.api.registration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
 /**
@@ -18,9 +19,9 @@ public interface InitialRegistrationData {
 
     @JsonCreator
     static InitialRegistrationData create(
-            String firstName,
-            String lastName,
-            VerificationMean verificationMean
+            @JsonProperty("firstName") String firstName,
+            @JsonProperty("lastName") String lastName,
+            @JsonProperty("verificationMean") VerificationMean verificationMean
     ) {
 
         return new Builder()
