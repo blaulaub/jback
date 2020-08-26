@@ -5,6 +5,8 @@ import ch.patchcode.jback.core.registration.PendingRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository {
 
@@ -24,5 +26,11 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
         var entity = toRegistrationConverter.convert(pendingRegistration);
         var saved = registrationJpaRepository.save(entity);
         return PendingRegistration.Id.of(saved.getId());
+    }
+
+    @Override
+    public PendingRegistration findById(UUID id) {
+
+        throw new RuntimeException("not implemented");
     }
 }
