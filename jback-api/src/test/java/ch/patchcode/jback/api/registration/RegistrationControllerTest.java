@@ -8,7 +8,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.UUID;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,9 +44,25 @@ class RegistrationControllerTest {
                 .characterEncoding("utf-8")
                 .content(content));
 
-        // assert
+        // assert (only an API test, so no end-to-end testing, no testing of error handling)
         result
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.pendingRegistrationId").exists());
+    }
+
+    @Test
+    void putVerificationCode() throws Exception {
+
+        // arrange
+        String content = "{ \"verificationCode\": \"1234\"}";
+
+        // act
+        var result = mvc.perform(put("/registration/{id}", UUID.randomUUID())
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8")
+                .content(content));
+
+        // assert (only an API test, so no end-to-end testing, no testing of error handling)
+        result.andExpect(status().isOk());
     }
 }
