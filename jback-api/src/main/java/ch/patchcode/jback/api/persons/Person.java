@@ -10,6 +10,18 @@ import java.util.UUID;
 @FreeBuilder
 public interface Person {
 
+    static Person from(ch.patchcode.jback.core.persons.Person person) {
+
+        Builder builder = new Builder();
+
+        builder.setId(person.getId())
+                .setFirstName(person.getFirstName())
+                .setLastName(person.getLastName());
+        person.getAddress().map(Address::from).ifPresent(builder::setAddress);
+
+        return builder.build();
+    }
+
     UUID getId();
 
     String getFirstName();
@@ -19,5 +31,6 @@ public interface Person {
     @ApiModelProperty(dataType = "ch.patchcode.jback.api.common.Address")
     Optional<Address> getAddress();
 
-    class Builder extends Person_Builder {}
+    class Builder extends Person_Builder {
+    }
 }
