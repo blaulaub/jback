@@ -1,8 +1,6 @@
 package ch.patchcode.jback.api.registration;
 
 import ch.patchcode.jback.api.ApiTestConfiguration;
-import ch.patchcode.jback.core.registration.InitialRegistrationData;
-import ch.patchcode.jback.core.registration.VerificationMean;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,6 +20,7 @@ class RegistrationControllerTest {
 
     @Autowired
     public RegistrationControllerTest(MockMvc mvc) {
+
         this.mvc = mvc;
     }
 

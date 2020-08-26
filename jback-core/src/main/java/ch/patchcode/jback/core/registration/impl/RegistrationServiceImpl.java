@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
@@ -46,6 +47,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         verificationMeanVisitor.visit();
 
         return pendingRegistrationRepository.save(pendingRegistration);
+    }
+
+    @Override
+    public ConfirmationResult confirm(UUID id, String verificationCode) {
+
+        throw new RuntimeException("not implemented");
     }
 
     private class MyVerificationMeanVisitor implements VerificationMean.VerificationMeanVisitor<Void> {
