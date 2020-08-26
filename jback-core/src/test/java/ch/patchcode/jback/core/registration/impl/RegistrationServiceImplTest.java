@@ -49,7 +49,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        var id = service.process(data);
+        var id = service.beginRegistration(data);
 
         // assert
         assertEquals(expectedId.getId(), id.getId());
@@ -72,7 +72,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        var id = service.process(data);
+        var id = service.beginRegistration(data);
 
         // assert
         assertEquals(expectedId.getId(), id.getId());
@@ -95,7 +95,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        var id = service.process(data);
+        var id = service.beginRegistration(data);
 
         // assert
         assertEquals(expectedId.getId(), id.getId());

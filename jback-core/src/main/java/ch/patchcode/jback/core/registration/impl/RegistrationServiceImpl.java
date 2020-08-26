@@ -33,7 +33,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public PendingRegistration.Id process(InitialRegistrationData data) {
+    public PendingRegistration.Id beginRegistration(InitialRegistrationData data) {
 
         var pendingRegistration = new PendingRegistration.Builder()
                 .setFirstName(data.getFirstName())
@@ -50,7 +50,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public ConfirmationResult confirm(UUID id, String verificationCode) {
+    public ConfirmationResult concludeRegistration(UUID id, String verificationCode) {
 
         throw new RuntimeException("not implemented");
     }
