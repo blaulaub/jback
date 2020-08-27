@@ -56,6 +56,11 @@ public class RegistrationServiceImpl implements RegistrationService {
     public ConfirmationResult concludeRegistration(UUID id, String verificationCode) {
 
         var pendingRegistration = pendingRegistrationRepository.findById(id);
+
+        if (pendingRegistration.isEmpty()) {
+            return ConfirmationResult.NOT_FOUND;
+        }
+
         throw new RuntimeException("not implemented");
     }
 

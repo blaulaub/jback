@@ -9,8 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
+import static ch.patchcode.jback.core.util.SomeData.somePendingRegistration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -106,5 +109,20 @@ class RegistrationServiceImplTest {
         verify(consoleVerificationService, times(0)).sendOut(any());
         verify(emailVerificationService, times(0)).sendOut(any());
         verify(smsVerificationService, times(1)).sendOut(any());
+    }
+
+    @Test
+    void concludeRegistration_whenNotPending_fails() {
+
+        // arrange
+        UUID id = UUID.randomUUID();
+        String code = "1234";
+        when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.empty());
+
+        // act
+        var result = service.concludeRegistration(id, code);
+
+        // assert
+        assertEquals(ConfirmationResult.NOT_FOUND, result);
     }
 }
