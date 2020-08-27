@@ -61,6 +61,10 @@ public class RegistrationServiceImpl implements RegistrationService {
             return ConfirmationResult.NOT_FOUND;
         }
 
+        if (pendingRegistration.get().getExpiresAt().isBefore(Instant.now())) {
+            return ConfirmationResult.NOT_FOUND;
+        }
+
         throw new RuntimeException("not implemented");
     }
 

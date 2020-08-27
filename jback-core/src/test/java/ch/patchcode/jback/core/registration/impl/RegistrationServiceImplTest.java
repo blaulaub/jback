@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
@@ -118,6 +119,25 @@ class RegistrationServiceImplTest {
         UUID id = UUID.randomUUID();
         String code = "1234";
         when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.empty());
+
+        // act
+        var result = service.concludeRegistration(id, code);
+
+        // assert
+        assertEquals(ConfirmationResult.NOT_FOUND, result);
+    }
+
+    @Test
+    void concludeRegistration_whenExpired_fails() {
+
+        // arrange
+        UUID id = UUID.randomUUID();
+        String code = "1234";
+        PendingRegistration pendingRegistration = PendingRegistration.Builder.from(somePendingRegistration())
+                .setVerificationCode(code)
+                .setExpiresAt(Instant.now().minus(Duration.ofMinutes(1)))
+                .build();
+        when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.of(pendingRegistration));
 
         // act
         var result = service.concludeRegistration(id, code);
