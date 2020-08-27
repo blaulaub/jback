@@ -65,11 +65,11 @@ public class RegistrationServiceImpl implements RegistrationService {
             return ConfirmationResult.NOT_FOUND;
         }
 
-        if (!pendingRegistration.get().getVerificationCode().equals(verificationCode)) {
-            return ConfirmationResult.MISMATCH;
+        if (pendingRegistration.get().getVerificationCode().equals(verificationCode)) {
+            return ConfirmationResult.CONFIRMED;
         }
 
-        throw new RuntimeException("not implemented");
+        return ConfirmationResult.MISMATCH;
     }
 
     private class MyVerificationMeanVisitor implements VerificationMean.VerificationMeanVisitor<Void> {
