@@ -29,7 +29,7 @@ class RegistrationJpaRepositoryTest {
 
         // arrange
         var expiresAt = Instant.now().toEpochMilli();
-        var input = new ConsoleRegistration();
+        var input = new Registration.ConsoleRegistration();
         input.setFirstName("Tom");
         input.setLastName("Sawyer");
         input.setVerificationCode("5555");
@@ -44,7 +44,7 @@ class RegistrationJpaRepositoryTest {
         assertEquals("Tom", output.get().getFirstName());
         assertEquals("Sawyer", output.get().getLastName());
         assertEquals(expiresAt, output.get().getExpiresAt());
-        assertTrue(output.get() instanceof ConsoleRegistration);
+        assertTrue(output.get() instanceof Registration.ConsoleRegistration);
     }
 
     @Test
@@ -52,7 +52,7 @@ class RegistrationJpaRepositoryTest {
 
         // arrange
         var expiresAt = Instant.now().toEpochMilli();
-        var input = new EmailRegistration();
+        var input = new Registration.EmailRegistration();
         input.setFirstName("Tom");
         input.setLastName("Sawyer");
         input.setVerificationCode("5555");
@@ -68,8 +68,8 @@ class RegistrationJpaRepositoryTest {
         assertEquals("Tom", output.get().getFirstName());
         assertEquals("Sawyer", output.get().getLastName());
         assertEquals(expiresAt, output.get().getExpiresAt());
-        assertTrue(output.get() instanceof EmailRegistration);
-        var emailRegistration = output.map(EmailRegistration.class::cast).get();
+        assertTrue(output.get() instanceof Registration.EmailRegistration);
+        var emailRegistration = output.map(Registration.EmailRegistration.class::cast).get();
         assertEquals("admin@google.com", emailRegistration.getEmail());
     }
 
@@ -78,7 +78,7 @@ class RegistrationJpaRepositoryTest {
 
         // arrange
         var expiresAt = Instant.now().toEpochMilli();
-        var input = new SmsRegistration();
+        var input = new Registration.SmsRegistration();
         input.setFirstName("Tom");
         input.setLastName("Sawyer");
         input.setVerificationCode("5555");
@@ -94,8 +94,8 @@ class RegistrationJpaRepositoryTest {
         assertEquals("Tom", output.get().getFirstName());
         assertEquals("Sawyer", output.get().getLastName());
         assertEquals(expiresAt, output.get().getExpiresAt());
-        assertTrue(output.get() instanceof SmsRegistration);
-        var smsRegistration = output.map(SmsRegistration.class::cast).get();
+        assertTrue(output.get() instanceof Registration.SmsRegistration);
+        var smsRegistration = output.map(Registration.SmsRegistration.class::cast).get();
         assertEquals("+41234567890", smsRegistration.getPhoneNumber());
     }
 }

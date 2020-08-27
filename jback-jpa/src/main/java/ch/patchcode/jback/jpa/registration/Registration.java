@@ -8,6 +8,8 @@ import java.util.UUID;
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Registration {
 
+    public abstract <R> R accept(Registration.RegistrationVisitor<R> registrationHandler);
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -54,5 +56,67 @@ public abstract class Registration {
 
     public void setExpiresAt(Long expiresAt) {
         this.expiresAt = expiresAt;
+    }
+
+    @Entity
+    @DiscriminatorValue("console")
+    public static class ConsoleRegistration extends Registration {
+
+        @Override
+        public <R> R accept(RegistrationVisitor<R> registrationHandler) {
+
+            return registrationHandler.visit(this);
+        }
+    }
+
+    @Entity
+    @DiscriminatorValue("email")
+    public static class EmailRegistration extends Registration {
+
+        private String email;
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        @Override
+        public <R> R accept(RegistrationVisitor<R> registrationHandler) {
+
+            return registrationHandler.visit(this);
+        }
+    }
+
+    @Entity
+    @DiscriminatorValue("sms")
+    public static class SmsRegistration extends Registration {
+
+        private String phoneNumber;
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+        @Override
+        public <R> R accept(RegistrationVisitor<R> registrationHandler) {
+
+            return registrationHandler.visit(this);
+        }
+    }
+
+    interface RegistrationVisitor<R> {
+
+        R visit(Registration.ConsoleRegistration registrationByConsole);
+
+        R visit(Registration.EmailRegistration registrationByEmail);
+
+        R visit(Registration.SmsRegistration registrationBySms);
     }
 }

@@ -52,7 +52,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public ConfirmationResult concludeRegistration(UUID id, String verificationCode) {
 
-        PendingRegistration pendingRegistration = pendingRegistrationRepository.findById(id);
+        var pendingRegistration = pendingRegistrationRepository.findById(id);
         throw new RuntimeException("not implemented");
     }
 

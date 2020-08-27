@@ -1,17 +1,21 @@
 package ch.patchcode.jback.jpa.registration;
 
 import ch.patchcode.jback.core.registration.PendingRegistration;
-import ch.patchcode.jback.jpa.JpaTestConfiguration;
+import ch.patchcode.jback.core.registration.VerificationMean;
+import ch.patchcode.jback.jpa.util.SomeData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Optional;
 import java.util.UUID;
 
+import static ch.patchcode.jback.jpa.util.SomeData.somePendingRegistration;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 class RegistrationJpaRepoWrapperTest {
@@ -32,13 +36,18 @@ class RegistrationJpaRepoWrapperTest {
     void save() {
 
         // arrange
-        PendingRegistration pendingRegistration = new PendingRegistration.Builder().buildPartial();
+        PendingRegistration pendingRegistration = somePendingRegistration(new VerificationMean.VerificationByConsole());
+        var id = UUID.randomUUID();
+        var registration = mock(Registration.class);
+        when(registration.getId()).thenReturn(id);
+        when(registrationJpaRepository.save(any())).thenReturn(registration);
 
         // act
         var result = wrapper.save(pendingRegistration);
 
         // assert
-        throw new RuntimeException("not implemented");
+        verify(registrationJpaRepository, times(1)).save(any());
+        assertEquals(id, result.getId());
     }
 
     @Test
@@ -46,13 +55,17 @@ class RegistrationJpaRepoWrapperTest {
 
         // arrange
         var id = UUID.randomUUID();
+        Registration registration = SomeData.someRegistration();
+        when(registrationJpaRepository.findById(any())).thenReturn(Optional.of(registration));
 
         // act
         var result = wrapper.findById(id);
 
         // assert
-        throw new RuntimeException("not implemented");
+        assertTrue(result.isPresent());
+        assertEquals(registration.getFirstName(), result.get().getFirstName());
+        assertEquals(registration.getLastName(), result.get().getLastName());
+        assertEquals(registration.getVerificationCode(), result.get().getVerificationCode());
+        assertEquals(registration.getExpiresAt(), result.get().getExpiresAt().toEpochMilli());
     }
-
-
 }

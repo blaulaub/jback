@@ -5,6 +5,7 @@ import ch.patchcode.jback.core.registration.PendingRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -13,6 +14,7 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
     private final RegistrationJpaRepository registrationJpaRepository;
 
     private final ToRegistrationConverter toRegistrationConverter = new ToRegistrationConverter();
+    private final ToPendingRegistrationConverter toPendingRegistrationConverter = new ToPendingRegistrationConverter();
 
     @Autowired
     public RegistrationJpaRepoWrapper(RegistrationJpaRepository registrationJpaRepository) {
@@ -29,8 +31,8 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
     }
 
     @Override
-    public PendingRegistration findById(UUID id) {
+    public Optional<PendingRegistration> findById(UUID id) {
 
-        throw new RuntimeException("not implemented");
+        return registrationJpaRepository.findById(id).map(toPendingRegistrationConverter::convert);
     }
 }
