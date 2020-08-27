@@ -1,7 +1,7 @@
 package ch.patchcode.jback.core.registration.impl;
 
-import ch.patchcode.jback.core.registration.ConsoleVerificationService;
 import ch.patchcode.jback.core.registration.PendingRegistration;
+import ch.patchcode.jback.core.registration.VerificationService.ConsoleVerificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,9 @@
 package ch.patchcode.jback.core.registration.impl;
 
 import ch.patchcode.jback.core.registration.*;
+import ch.patchcode.jback.core.registration.VerificationService.ConsoleVerificationService;
+import ch.patchcode.jback.core.registration.VerificationService.EmailVerificationService;
+import ch.patchcode.jback.core.registration.VerificationService.SmsVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
