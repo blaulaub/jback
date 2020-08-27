@@ -56,7 +56,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        var id = service.beginRegistration(data);
+        var id = service.setupRegistration(data);
 
         // assert
         assertEquals(expectedId.getId(), id.getId());
@@ -79,7 +79,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        var id = service.beginRegistration(data);
+        var id = service.setupRegistration(data);
 
         // assert
         assertEquals(expectedId.getId(), id.getId());
@@ -102,7 +102,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        var id = service.beginRegistration(data);
+        var id = service.setupRegistration(data);
 
         // assert
         assertEquals(expectedId.getId(), id.getId());
@@ -121,7 +121,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.empty());
 
         // act
-        var result = service.concludeRegistration(id, code);
+        var result = service.confirmRegistration(id, code);
 
         // assert
         assertEquals(ConfirmationResult.NOT_FOUND, result);
@@ -140,7 +140,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.of(pendingRegistration));
 
         // act
-        var result = service.concludeRegistration(id, code);
+        var result = service.confirmRegistration(id, code);
 
         // assert
         assertEquals(ConfirmationResult.NOT_FOUND, result);
@@ -159,7 +159,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.of(pendingRegistration));
 
         // act
-        var result = service.concludeRegistration(id, "abcd");
+        var result = service.confirmRegistration(id, "abcd");
 
         // assert
         assertEquals(ConfirmationResult.MISMATCH, result);
@@ -178,7 +178,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.of(pendingRegistration));
 
         // act
-        var result = service.concludeRegistration(id, code);
+        var result = service.confirmRegistration(id, code);
 
         // assert
         assertEquals(ConfirmationResult.CONFIRMED, result);

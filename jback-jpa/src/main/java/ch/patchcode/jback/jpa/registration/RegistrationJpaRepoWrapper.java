@@ -35,4 +35,10 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
 
         return registrationJpaRepository.findById(id).map(toPendingRegistrationConverter::convert);
     }
+
+    @Override
+    public void removeById(UUID id) {
+
+        registrationJpaRepository.deleteById(id);
+    }
 }

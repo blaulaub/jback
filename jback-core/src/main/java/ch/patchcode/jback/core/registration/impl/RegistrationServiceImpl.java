@@ -36,7 +36,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public PendingRegistration.Id beginRegistration(InitialRegistrationData data) {
+    public PendingRegistration.Id setupRegistration(InitialRegistrationData data) {
 
         var pendingRegistration = new PendingRegistration.Builder()
                 .setFirstName(data.getFirstName())
@@ -53,7 +53,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public ConfirmationResult concludeRegistration(UUID id, String verificationCode) {
+    public ConfirmationResult confirmRegistration(UUID id, String verificationCode) {
 
         var pendingRegistration = pendingRegistrationRepository.findById(id);
 
@@ -70,6 +70,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         return ConfirmationResult.MISMATCH;
+    }
+
+    @Override
+    public void removeRegistration(UUID id) {
+
+        pendingRegistrationRepository.removeById(id);
     }
 
     private class MyVerificationMeanVisitor implements VerificationMean.VerificationMeanVisitor<Void> {
