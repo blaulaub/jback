@@ -40,7 +40,7 @@ class RegistrationServiceImplTest {
     }
 
     @Test
-    void process_viaConsole_invokesConsoleVerification() {
+    void beginRegistration_viaConsole_invokesConsoleVerification() {
 
         // arrange
         var data = new InitialRegistrationData.Builder()
@@ -63,7 +63,7 @@ class RegistrationServiceImplTest {
     }
 
     @Test
-    void process_viaSms_invokesEmailVerification() {
+    void beginRegistration_viaEmail_invokesEmailVerification() {
 
         // arrange
         InitialRegistrationData data = new InitialRegistrationData.Builder()
@@ -86,7 +86,7 @@ class RegistrationServiceImplTest {
     }
 
     @Test
-    void process_viaSms_invokesSmsVerification() {
+    void beginRegistration_viaSms_invokesSmsVerification() {
 
         // arrange
         InitialRegistrationData data = new InitialRegistrationData.Builder()
