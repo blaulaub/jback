@@ -20,6 +20,6 @@ public class RegistrationServiceFake implements RegistrationService {
     @Override
     public ConfirmationResult concludeRegistration(UUID id, String verificationCode) {
 
-        return ConfirmationResult.SUCCESS;
+        return ConfirmationResult.CONFIRMED;
     }
 }

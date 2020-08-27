@@ -145,4 +145,23 @@ class RegistrationServiceImplTest {
         // assert
         assertEquals(ConfirmationResult.NOT_FOUND, result);
     }
+
+    @Test
+    void concludeRegistration_withWrongCode_fails() {
+
+        // arrange
+        UUID id = UUID.randomUUID();
+        String code = "1234";
+        PendingRegistration pendingRegistration = PendingRegistration.Builder.from(somePendingRegistration())
+                .setVerificationCode(code)
+                .setExpiresAt(Instant.MAX)
+                .build();
+        when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.of(pendingRegistration));
+
+        // act
+        var result = service.concludeRegistration(id, "abcd");
+
+        // assert
+        assertEquals(ConfirmationResult.MISMATCH, result);
+    }
 }

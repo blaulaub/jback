@@ -65,6 +65,10 @@ public class RegistrationServiceImpl implements RegistrationService {
             return ConfirmationResult.NOT_FOUND;
         }
 
+        if (!pendingRegistration.get().getVerificationCode().equals(verificationCode)) {
+            return ConfirmationResult.MISMATCH;
+        }
+
         throw new RuntimeException("not implemented");
     }
 

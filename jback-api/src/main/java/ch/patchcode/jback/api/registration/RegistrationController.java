@@ -42,11 +42,11 @@ public class RegistrationController {
 
         var result = registrationService.concludeRegistration(id, verificationCode.getVerificationCode());
         switch (result) {
-            case SUCCESS:
+            case CONFIRMED:
                 return new ResponseEntity<>(HttpStatus.OK);
             case NOT_FOUND:
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            case WRONG_CODE:
+            case MISMATCH:
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             default:
                 throw new RuntimeException();
