@@ -4,6 +4,7 @@ import ch.patchcode.jback.core.registration.*;
 import ch.patchcode.jback.core.registration.VerificationService.ConsoleVerificationService;
 import ch.patchcode.jback.core.registration.VerificationService.EmailVerificationService;
 import ch.patchcode.jback.core.registration.VerificationService.SmsVerificationService;
+import ch.patchcode.jback.core.verificationCodes.VerificationCodeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -34,6 +35,9 @@ class RegistrationServiceImplTest {
     @Mock
     private PendingRegistrationRepository pendingRegistrationRepository;
 
+    @Mock
+    private VerificationCodeProvider verificationCodeProvider;
+
     @InjectMocks
     private RegistrationServiceImpl service;
 
@@ -41,6 +45,8 @@ class RegistrationServiceImplTest {
     void setUp() {
 
         initMocks(this);
+
+        when(verificationCodeProvider.generateRandomCode()).thenReturn("ab34");
     }
 
     @Test

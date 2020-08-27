@@ -4,35 +4,36 @@ import ch.patchcode.jback.core.registration.*;
 import ch.patchcode.jback.core.registration.VerificationService.ConsoleVerificationService;
 import ch.patchcode.jback.core.registration.VerificationService.EmailVerificationService;
 import ch.patchcode.jback.core.registration.VerificationService.SmsVerificationService;
+import ch.patchcode.jback.core.verificationCodes.VerificationCodeProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Random;
 import java.util.UUID;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
 
-    private static final Random RND = new Random();
-
     private final ConsoleVerificationService consoleVerificationService;
     private final EmailVerificationService emailVerificationService;
     private final SmsVerificationService smsVerificationService;
     private final PendingRegistrationRepository pendingRegistrationRepository;
+    private final VerificationCodeProvider verificationCodeProvider;
 
     @Autowired
     public RegistrationServiceImpl(
             ConsoleVerificationService consoleVerificationService,
             EmailVerificationService emailVerificationService,
             SmsVerificationService smsVerificationService,
-            PendingRegistrationRepository pendingRegistrationRepository
+            PendingRegistrationRepository pendingRegistrationRepository,
+            VerificationCodeProvider verificationCodeProvider
     ) {
         this.consoleVerificationService = consoleVerificationService;
         this.emailVerificationService = emailVerificationService;
         this.smsVerificationService = smsVerificationService;
         this.pendingRegistrationRepository = pendingRegistrationRepository;
+        this.verificationCodeProvider = verificationCodeProvider;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .setFirstName(data.getFirstName())
                 .setLastName(data.getLastName())
                 .setVerificationMean(data.getVerificationMean())
-                .setVerificationCode(String.format("%04d", RND.nextInt(10000)))
+                .setVerificationCode(verificationCodeProvider.generateRandomCode())
                 .setExpiresAt(Instant.now().plus(Duration.ofMinutes(30)))
                 .build();
 
