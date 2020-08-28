@@ -1,9 +1,9 @@
 package ch.patchcode.jback.api.fakeServices;
 
-import ch.patchcode.jback.core.registration.ConfirmationResult;
-import ch.patchcode.jback.core.registration.InitialRegistrationData;
-import ch.patchcode.jback.core.registration.PendingRegistration;
-import ch.patchcode.jback.core.registration.RegistrationService;
+import ch.patchcode.jback.sec.registration.ConfirmationResult;
+import ch.patchcode.jback.sec.registration.InitialRegistrationData;
+import ch.patchcode.jback.sec.registration.PendingRegistration;
+import ch.patchcode.jback.sec.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

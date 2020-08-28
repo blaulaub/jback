@@ -1,8 +1,8 @@
 package ch.patchcode.jback.jpa.registration;
 
-import ch.patchcode.jback.core.registration.PendingRegistration;
-import ch.patchcode.jback.core.registration.VerificationMean;
 import ch.patchcode.jback.jpa.util.SomeData;
+import ch.patchcode.jback.sec.registration.PendingRegistration;
+import ch.patchcode.jback.sec.registration.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
