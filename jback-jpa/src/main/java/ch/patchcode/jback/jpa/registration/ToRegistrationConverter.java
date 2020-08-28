@@ -18,14 +18,14 @@ public class ToRegistrationConverter implements VerificationMean.VerificationMea
     @Override
     public Registration visit(VerificationMean.VerificationByConsole verificationByConsole) {
 
-        var result = new ConsoleRegistration();
+        var result = new Registration.ConsoleRegistration();
         return result;
     }
 
     @Override
     public Registration visit(VerificationMean.VerificationByEmail verificationByEmail) {
 
-        var result = new EmailRegistration();
+        var result = new Registration.EmailRegistration();
         result.setEmail(verificationByEmail.getEmailAddress());
         return result;
     }
@@ -33,7 +33,7 @@ public class ToRegistrationConverter implements VerificationMean.VerificationMea
     @Override
     public Registration visit(VerificationMean.VerificationBySms verificationBySms) {
 
-        var result = new SmsRegistration();
+        var result = new Registration.SmsRegistration();
         result.setPhoneNumber(verificationBySms.getPhoneNumber());
         return result;
     }

@@ -1,13 +1,21 @@
 package ch.patchcode.jback.core.registration.impl;
 
 import ch.patchcode.jback.core.registration.*;
+import ch.patchcode.jback.core.registration.VerificationService.ConsoleVerificationService;
+import ch.patchcode.jback.core.registration.VerificationService.EmailVerificationService;
+import ch.patchcode.jback.core.registration.VerificationService.SmsVerificationService;
+import ch.patchcode.jback.core.verificationCodes.VerificationCodeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
+import static ch.patchcode.jback.core.util.SomeData.somePendingRegistration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -27,6 +35,9 @@ class RegistrationServiceImplTest {
     @Mock
     private PendingRegistrationRepository pendingRegistrationRepository;
 
+    @Mock
+    private VerificationCodeProvider verificationCodeProvider;
+
     @InjectMocks
     private RegistrationServiceImpl service;
 
@@ -34,10 +45,12 @@ class RegistrationServiceImplTest {
     void setUp() {
 
         initMocks(this);
+
+        when(verificationCodeProvider.generateRandomCode()).thenReturn("ab34");
     }
 
     @Test
-    void process_viaConsole_invokesConsoleVerification() {
+    void beginRegistration_viaConsole_invokesConsoleVerification() {
 
         // arrange
         var data = new InitialRegistrationData.Builder()
@@ -49,7 +62,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        var id = service.beginRegistration(data);
+        var id = service.setupRegistration(data);
 
         // assert
         assertEquals(expectedId.getId(), id.getId());
@@ -60,7 +73,7 @@ class RegistrationServiceImplTest {
     }
 
     @Test
-    void process_viaSms_invokesEmailVerification() {
+    void beginRegistration_viaEmail_invokesEmailVerification() {
 
         // arrange
         InitialRegistrationData data = new InitialRegistrationData.Builder()
@@ -72,7 +85,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        var id = service.beginRegistration(data);
+        var id = service.setupRegistration(data);
 
         // assert
         assertEquals(expectedId.getId(), id.getId());
@@ -83,7 +96,7 @@ class RegistrationServiceImplTest {
     }
 
     @Test
-    void process_viaSms_invokesSmsVerification() {
+    void beginRegistration_viaSms_invokesSmsVerification() {
 
         // arrange
         InitialRegistrationData data = new InitialRegistrationData.Builder()
@@ -95,7 +108,7 @@ class RegistrationServiceImplTest {
         when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
 
         // act
-        var id = service.beginRegistration(data);
+        var id = service.setupRegistration(data);
 
         // assert
         assertEquals(expectedId.getId(), id.getId());
@@ -103,5 +116,77 @@ class RegistrationServiceImplTest {
         verify(consoleVerificationService, times(0)).sendOut(any());
         verify(emailVerificationService, times(0)).sendOut(any());
         verify(smsVerificationService, times(1)).sendOut(any());
+    }
+
+    @Test
+    void concludeRegistration_whenNotPending_fails() {
+
+        // arrange
+        UUID id = UUID.randomUUID();
+        String code = "1234";
+        when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.empty());
+
+        // act
+        var result = service.confirmRegistration(id, code);
+
+        // assert
+        assertEquals(ConfirmationResult.NOT_FOUND, result);
+    }
+
+    @Test
+    void concludeRegistration_whenExpired_fails() {
+
+        // arrange
+        UUID id = UUID.randomUUID();
+        String code = "1234";
+        PendingRegistration pendingRegistration = PendingRegistration.Builder.from(somePendingRegistration())
+                .setVerificationCode(code)
+                .setExpiresAt(Instant.now().minus(Duration.ofMinutes(1)))
+                .build();
+        when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.of(pendingRegistration));
+
+        // act
+        var result = service.confirmRegistration(id, code);
+
+        // assert
+        assertEquals(ConfirmationResult.NOT_FOUND, result);
+    }
+
+    @Test
+    void concludeRegistration_withWrongCode_fails() {
+
+        // arrange
+        UUID id = UUID.randomUUID();
+        String code = "1234";
+        PendingRegistration pendingRegistration = PendingRegistration.Builder.from(somePendingRegistration())
+                .setVerificationCode(code)
+                .setExpiresAt(Instant.MAX)
+                .build();
+        when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.of(pendingRegistration));
+
+        // act
+        var result = service.confirmRegistration(id, "abcd");
+
+        // assert
+        assertEquals(ConfirmationResult.MISMATCH, result);
+    }
+
+    @Test
+    void concludeRegistration_withValidCode_succeeds() {
+
+        // arrange
+        UUID id = UUID.randomUUID();
+        String code = "1234";
+        PendingRegistration pendingRegistration = PendingRegistration.Builder.from(somePendingRegistration())
+                .setVerificationCode(code)
+                .setExpiresAt(Instant.MAX)
+                .build();
+        when(pendingRegistrationRepository.findById(eq(id))).thenReturn(Optional.of(pendingRegistration));
+
+        // act
+        var result = service.confirmRegistration(id, code);
+
+        // assert
+        assertEquals(ConfirmationResult.CONFIRMED, result);
     }
 }

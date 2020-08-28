@@ -30,7 +30,7 @@ public class RegistrationController {
     @PostMapping
     public PendingRegistrationInfo postInitialRegistration(@RequestBody InitialRegistrationData data) {
 
-        var id = registrationService.beginRegistration(data.toDomain()).getId();
+        var id = registrationService.setupRegistration(data.toDomain()).getId();
         return PendingRegistrationInfo.of(id);
     }
 
@@ -40,13 +40,13 @@ public class RegistrationController {
             @RequestBody VerificationCode verificationCode
     ) {
 
-        var result = registrationService.concludeRegistration(id, verificationCode.getVerificationCode());
+        var result = registrationService.confirmRegistration(id, verificationCode.getVerificationCode());
         switch (result) {
-            case SUCCESS:
+            case CONFIRMED:
                 return new ResponseEntity<>(HttpStatus.OK);
             case NOT_FOUND:
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            case WRONG_CODE:
+            case MISMATCH:
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             default:
                 throw new RuntimeException();

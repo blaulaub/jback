@@ -2,7 +2,12 @@ package ch.patchcode.jback.core.registration;
 
 public enum ConfirmationResult {
 
-    SUCCESS,
+    /** Means: it worked. */
+    CONFIRMED,
+
+    /** Means: non-existing or outdated. Retry will not help. */
     NOT_FOUND,
-    WRONG_CODE;
+
+    /** Means: the input was wrong and did not match. Retry with correct input if possible. */
+    MISMATCH;
 }

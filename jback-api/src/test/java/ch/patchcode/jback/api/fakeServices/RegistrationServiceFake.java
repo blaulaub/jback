@@ -12,14 +12,19 @@ import java.util.UUID;
 public class RegistrationServiceFake implements RegistrationService {
 
     @Override
-    public PendingRegistration.Id beginRegistration(InitialRegistrationData data) {
+    public PendingRegistration.Id setupRegistration(InitialRegistrationData data) {
 
         return PendingRegistration.Id.of(UUID.randomUUID());
     }
 
     @Override
-    public ConfirmationResult concludeRegistration(UUID id, String verificationCode) {
+    public ConfirmationResult confirmRegistration(UUID id, String verificationCode) {
 
-        return ConfirmationResult.SUCCESS;
+        return ConfirmationResult.CONFIRMED;
+    }
+
+    @Override
+    public void removeRegistration(UUID id) {
+        // do nothing
     }
 }
