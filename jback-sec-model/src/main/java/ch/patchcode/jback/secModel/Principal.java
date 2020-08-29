@@ -7,7 +7,14 @@ import java.util.List;
  * <p>
  * An authorized principal can then impersonate a person, inheriting that person's details, roles and privileges.
  */
-public interface Principal {
+public interface Principal<
+        TOrganisation extends Organisation,
+        TPerson extends Person<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TPrincipal extends Principal<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TPrivilege extends Privilege,
+        TRole extends Role<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TUser extends User<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>
+        > {
 
     /**
      * Zero, one or more persons that this principal can impersonate. The list may be empty, but the principal may still have the
@@ -19,7 +26,7 @@ public interface Principal {
      *
      * @return list of persons this principal may impersonate
      */
-    List<Person> getPersons();
+    List<TPerson> getPersons();
 
     /**
      * Zero or more privileges that the (or usually: any) principal always has. E.g., a principal should be able to create at
@@ -27,5 +34,5 @@ public interface Principal {
      *
      * @return list of privileges
      */
-    List<Privilege> getBasicPrivileges();
+    List<TPrivilege> getBasicPrivileges();
 }

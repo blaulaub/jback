@@ -5,20 +5,27 @@ import java.util.List;
 /**
  * Some role.
  */
-public interface Role {
+public interface Role<
+        TOrganisation extends Organisation,
+        TPerson extends Person<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TPrincipal extends Principal<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TPrivilege extends Privilege,
+        TRole extends Role<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TUser extends User<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>
+        > {
 
     /**
      * @return the person holding the role
      */
-    Person getPerson();
+    TPerson getPerson();
 
     /**
      * @return the organisation the role is for
      */
-    Organisation getOrganisation();
+    TOrganisation getOrganisation();
 
     /**
      * @return list of privileges granted by this role
      */
-    List<Privilege> getPrivileges();
+    List<TPrivilege> getPrivileges();
 }

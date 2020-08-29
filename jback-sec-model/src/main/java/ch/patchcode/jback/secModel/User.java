@@ -8,15 +8,22 @@ package ch.patchcode.jback.secModel;
  * Note: A user may switch the impersonated person (if more than one is available) while keeping the principal. This should happen
  * without re-authentication.
  */
-public interface User {
+public interface User<
+        TOrganisation extends Organisation,
+        TPerson extends Person<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TPrincipal extends Principal<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TPrivilege extends Privilege,
+        TRole extends Role<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TUser extends User<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>
+        > {
 
     /**
      * @return the principal by which the user is authenticated
      */
-    Principal getPrincipal();
+    TPrincipal getPrincipal();
 
     /**
      * @return the person currently impersonated by the user
      */
-    Person getPerson();
+    TPerson getPerson();
 }
