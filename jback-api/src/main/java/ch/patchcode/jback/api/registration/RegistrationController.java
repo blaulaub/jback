@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.registration;
 
-import ch.patchcode.jback.core.registration.RegistrationService;
+import ch.patchcode.jback.sec.registration.RegistrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.UUID;
  * Allows users to self-register.
  */
 @RestController
-@RequestMapping("registration")
+@RequestMapping("ch.patchcode.jback.sec.registration")
 public class RegistrationController {
 
     private final static Logger LOG = LoggerFactory.getLogger(RegistrationController.class);

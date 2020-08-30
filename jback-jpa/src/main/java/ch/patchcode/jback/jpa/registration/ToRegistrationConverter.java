@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.registration;
 
-import ch.patchcode.jback.core.registration.PendingRegistration;
-import ch.patchcode.jback.core.registration.VerificationMean;
+import ch.patchcode.jback.sec.registration.PendingRegistration;
+import ch.patchcode.jback.sec.registration.VerificationMean;
 
 public class ToRegistrationConverter implements VerificationMean.VerificationMeanVisitor<Registration> {
 

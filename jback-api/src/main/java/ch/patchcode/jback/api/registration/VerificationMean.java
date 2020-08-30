@@ -17,7 +17,7 @@ public interface VerificationMean {
 
     String getType();
 
-    ch.patchcode.jback.core.registration.VerificationMean toDomain();
+    ch.patchcode.jback.sec.registration.VerificationMean toDomain();
 
     /**
      * Registration by console, i.e., the user will be expected to
@@ -42,8 +42,8 @@ public interface VerificationMean {
             }
         }
 
-        default ch.patchcode.jback.core.registration.VerificationMean.VerificationByConsole toDomain() {
-            return new ch.patchcode.jback.core.registration.VerificationMean.VerificationByConsole();
+        default ch.patchcode.jback.sec.registration.VerificationMean.VerificationByConsole toDomain() {
+            return new ch.patchcode.jback.sec.registration.VerificationMean.VerificationByConsole();
         }
     }
 
@@ -71,8 +71,8 @@ public interface VerificationMean {
             }
         }
 
-        default ch.patchcode.jback.core.registration.VerificationMean.VerificationByEmail toDomain() {
-            return new ch.patchcode.jback.core.registration.VerificationMean.VerificationByEmail.Builder()
+        default ch.patchcode.jback.sec.registration.VerificationMean.VerificationByEmail toDomain() {
+            return new ch.patchcode.jback.sec.registration.VerificationMean.VerificationByEmail.Builder()
                     .setEmailAddress(getEmailAddress())
                     .build();
         }
@@ -102,8 +102,8 @@ public interface VerificationMean {
             }
         }
 
-        default ch.patchcode.jback.core.registration.VerificationMean.VerificationBySms toDomain() {
-            return new ch.patchcode.jback.core.registration.VerificationMean.VerificationBySms.Builder()
+        default ch.patchcode.jback.sec.registration.VerificationMean.VerificationBySms toDomain() {
+            return new ch.patchcode.jback.sec.registration.VerificationMean.VerificationBySms.Builder()
                     .setPhoneNumber(getPhoneNumber())
                     .build();
         }
