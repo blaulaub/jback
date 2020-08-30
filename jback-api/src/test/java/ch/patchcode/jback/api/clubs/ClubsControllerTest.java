@@ -39,7 +39,8 @@ class ClubsControllerTest {
         clubServiceFake.putClub(club);
 
         // act
-        var result = mvc.perform(get("/clubs/{id}", id));
+        var result = mvc.perform(get("/clubs/{id}", id)
+                .characterEncoding("utf-8"));
 
         // assert
         result

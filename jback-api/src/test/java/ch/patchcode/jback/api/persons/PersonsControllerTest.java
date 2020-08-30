@@ -39,7 +39,8 @@ class PersonsControllerTest {
         personServiceFake.putPerson(person);
 
         // act
-        var result = mvc.perform(get("/persons/{id}", id));
+        var result = mvc.perform(get("/persons/{id}", id)
+                .characterEncoding("utf-8"));
 
         // assert
         result
