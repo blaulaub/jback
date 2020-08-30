@@ -1,6 +1,6 @@
 package ch.patchcode.jback.sec;
 
-import ch.patchcode.jback.core.security.SecurityManager;
+import ch.patchcode.jback.secBase.SecurityManager;
 
 public class SecurityManagerImpl implements SecurityManager {
 
