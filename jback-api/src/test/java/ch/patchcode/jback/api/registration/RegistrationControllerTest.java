@@ -39,7 +39,7 @@ class RegistrationControllerTest {
                 "}";
 
         // act
-        var result = mvc.perform(post("/ch.patchcode.jback.sec.registration")
+        var result = mvc.perform(post("/registration")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8")
                 .content(content));
@@ -57,7 +57,7 @@ class RegistrationControllerTest {
         String content = "{ \"verificationCode\": \"1234\"}";
 
         // act
-        var result = mvc.perform(put("/ch.patchcode.jback.sec.registration/{id}", UUID.randomUUID())
+        var result = mvc.perform(put("/registration/{id}", UUID.randomUUID())
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8")
                 .content(content));
