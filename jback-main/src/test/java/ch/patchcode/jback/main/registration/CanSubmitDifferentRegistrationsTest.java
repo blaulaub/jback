@@ -42,7 +42,7 @@ public class CanSubmitDifferentRegistrationsTest {
 
         // act
         var response = restTemplate.postForEntity(
-                baseUrl() + "/ch.patchcode.jback.sec.registration",
+                baseUrl() + "/registration",
                 request,
                 PendingRegistrationInfo.class
         );
@@ -65,7 +65,7 @@ public class CanSubmitDifferentRegistrationsTest {
 
         // act
         var response = restTemplate.postForEntity(
-                baseUrl() + "/ch.patchcode.jback.sec.registration",
+                baseUrl() + "/registration",
                 request,
                 PendingRegistrationInfo.class
         );
@@ -88,7 +88,7 @@ public class CanSubmitDifferentRegistrationsTest {
 
         // act
         var response = restTemplate.postForEntity(
-                baseUrl() + "/ch.patchcode.jback.sec.registration",
+                baseUrl() + "/registration",
                 request,
                 PendingRegistrationInfo.class
         );
