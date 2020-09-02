@@ -1,10 +1,10 @@
-package ch.patchcode.jback.sec.registration.impl;
+package ch.patchcode.jback.security.registration.impl;
 
-import ch.patchcode.jback.sec.registration.*;
-import ch.patchcode.jback.sec.registration.VerificationService.ConsoleVerificationService;
-import ch.patchcode.jback.sec.registration.VerificationService.EmailVerificationService;
-import ch.patchcode.jback.sec.registration.VerificationService.SmsVerificationService;
-import ch.patchcode.jback.sec.verificationCodes.VerificationCodeProvider;
+import ch.patchcode.jback.security.registration.*;
+import ch.patchcode.jback.security.registration.VerificationService.ConsoleVerificationService;
+import ch.patchcode.jback.security.registration.VerificationService.EmailVerificationService;
+import ch.patchcode.jback.security.registration.VerificationService.SmsVerificationService;
+import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

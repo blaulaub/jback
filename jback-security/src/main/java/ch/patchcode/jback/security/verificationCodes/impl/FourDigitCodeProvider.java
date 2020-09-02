@@ -1,6 +1,6 @@
-package ch.patchcode.jback.sec.verificationCodes.impl;
+package ch.patchcode.jback.security.verificationCodes.impl;
 
-import ch.patchcode.jback.sec.verificationCodes.VerificationCodeProvider;
+import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;

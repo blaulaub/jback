@@ -1,4 +1,4 @@
-package ch.patchcode.jback.sec.verificationCodes.impl;
+package ch.patchcode.jback.security.verificationCodes.impl;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
-package ch.patchcode.jback.sec.util;
+package ch.patchcode.jback.security.util;
 
-import ch.patchcode.jback.sec.registration.PendingRegistration;
-import ch.patchcode.jback.sec.registration.VerificationMean;
+import ch.patchcode.jback.security.registration.PendingRegistration;
+import ch.patchcode.jback.security.registration.VerificationMean;
 
 import java.time.Duration;
 import java.time.Instant;

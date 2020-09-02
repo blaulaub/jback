@@ -3,7 +3,7 @@ package ch.patchcode.jback.main;
 import ch.patchcode.jback.core.CoreConfiguration;
 import ch.patchcode.jback.jpa.JpaConfiguration;
 import ch.patchcode.jback.main.fakes.FakesConfiguration;
-import ch.patchcode.jback.sec.SecConfiguration;
+import ch.patchcode.jback.security.SecConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

@@ -1,4 +1,4 @@
-package ch.patchcode.jback.sec.verificationCodes;
+package ch.patchcode.jback.security.verificationCodes;
 
 public interface VerificationCodeProvider {
 

@@ -1,4 +1,4 @@
-package ch.patchcode.jback.sec;
+package ch.patchcode.jback.security;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

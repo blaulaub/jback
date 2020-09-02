@@ -1,4 +1,4 @@
-package ch.patchcode.jback.sec.registration;
+package ch.patchcode.jback.security.registration;
 
 import java.util.Optional;
 import java.util.UUID;

@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.registration;
 
-import ch.patchcode.jback.sec.registration.RegistrationService;
+import ch.patchcode.jback.security.registration.RegistrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

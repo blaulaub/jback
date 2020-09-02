@@ -1,4 +1,4 @@
-package ch.patchcode.jback.sec.authentication;
+package ch.patchcode.jback.security.authentication;
 
 import org.inferred.freebuilder.FreeBuilder;
 import org.springframework.security.core.Authentication;

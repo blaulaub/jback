@@ -1,10 +1,10 @@
-package ch.patchcode.jback.sec.registration.impl;
+package ch.patchcode.jback.security.registration.impl;
 
-import ch.patchcode.jback.sec.registration.*;
-import ch.patchcode.jback.sec.registration.VerificationService.ConsoleVerificationService;
-import ch.patchcode.jback.sec.registration.VerificationService.EmailVerificationService;
-import ch.patchcode.jback.sec.registration.VerificationService.SmsVerificationService;
-import ch.patchcode.jback.sec.verificationCodes.VerificationCodeProvider;
+import ch.patchcode.jback.security.registration.*;
+import ch.patchcode.jback.security.registration.VerificationService.ConsoleVerificationService;
+import ch.patchcode.jback.security.registration.VerificationService.EmailVerificationService;
+import ch.patchcode.jback.security.registration.VerificationService.SmsVerificationService;
+import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -16,7 +16,7 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
-import static ch.patchcode.jback.sec.util.SomeData.somePendingRegistration;
+import static ch.patchcode.jback.security.util.SomeData.somePendingRegistration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;

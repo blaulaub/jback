@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.registration;
 
-import ch.patchcode.jback.sec.registration.PendingRegistration;
-import ch.patchcode.jback.sec.registration.PendingRegistrationRepository;
+import ch.patchcode.jback.security.registration.PendingRegistration;
+import ch.patchcode.jback.security.registration.PendingRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
