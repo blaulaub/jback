@@ -3,7 +3,7 @@ package ch.patchcode.jback.main;
 import ch.patchcode.jback.core.CoreConfiguration;
 import ch.patchcode.jback.jpa.JpaConfiguration;
 import ch.patchcode.jback.main.fakes.FakesConfiguration;
-import ch.patchcode.jback.security.SecConfiguration;
+import ch.patchcode.jback.security.SecurityConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@Import({JpaConfiguration.class, CoreConfiguration.class, SecConfiguration.class, FakesConfiguration.class})
+@Import({JpaConfiguration.class, CoreConfiguration.class, SecurityConfiguration.class, FakesConfiguration.class})
 @PropertySource("classpath:/main.test.properties")
 public class MainTestConfiguration {
 

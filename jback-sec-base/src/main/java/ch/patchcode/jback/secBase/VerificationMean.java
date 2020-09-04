@@ -1,4 +1,4 @@
-package ch.patchcode.jback.security.registration;
+package ch.patchcode.jback.secBase;
 
 import org.inferred.freebuilder.FreeBuilder;
 

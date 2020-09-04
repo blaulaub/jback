@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security.authentication;
 
-import ch.patchcode.jback.security.registration.ConfirmationResult;
+import ch.patchcode.jback.secBase.ConfirmationResult;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

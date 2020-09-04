@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security.registration.impl;
 
-import ch.patchcode.jback.security.registration.PendingRegistration;
+import ch.patchcode.jback.secBase.PendingRegistration;
 import org.junit.jupiter.api.Test;
 
 class ConsoleVerificationServiceImplTest {

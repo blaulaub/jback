@@ -1,5 +1,6 @@
-package ch.patchcode.jback.security.registration;
+package ch.patchcode.jback.secBase;
 
+import ch.patchcode.jback.secBase.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.time.Instant;

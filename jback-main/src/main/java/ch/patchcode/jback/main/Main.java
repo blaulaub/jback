@@ -2,7 +2,7 @@ package ch.patchcode.jback.main;
 
 import ch.patchcode.jback.api.ApiConfiguration;
 import ch.patchcode.jback.core.CoreConfiguration;
-import ch.patchcode.jback.security.SecConfiguration;
+import ch.patchcode.jback.security.SecurityConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Import;
 @Import({
                 ApiConfiguration.class,
                 CoreConfiguration.class,
-                SecConfiguration.class
+                SecurityConfiguration.class
         })
 public class Main {
 

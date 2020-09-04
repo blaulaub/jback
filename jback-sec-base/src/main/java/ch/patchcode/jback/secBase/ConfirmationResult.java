@@ -1,4 +1,4 @@
-package ch.patchcode.jback.security.registration;
+package ch.patchcode.jback.secBase;
 
 // todo: implement visitor to prevent switch-case or if-if-if
 public enum ConfirmationResult {
