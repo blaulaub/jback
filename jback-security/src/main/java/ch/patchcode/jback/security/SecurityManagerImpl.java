@@ -27,6 +27,14 @@ public class SecurityManagerImpl implements SecurityManager {
 
     @Override
     public ConfirmationResult confirmRegistration(UUID id, String verificationCode) {
-        return registrationService.confirmRegistration(id, verificationCode);
+
+        ConfirmationResult confirmationResult = registrationService.confirmRegistration(id, verificationCode);
+
+        if (confirmationResult == ConfirmationResult.CONFIRMED) {
+            // TODO: change security context, add authentication
+            // SecurityContextHolder.getContext().setAuthentication(auth);
+        }
+
+        return confirmationResult;
     }
 }
