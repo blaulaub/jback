@@ -40,7 +40,7 @@ class ClubsControllerTest {
         clubServiceFake.putClub(club);
 
         // act
-        var result = mvc.perform(get("/clubs/{id}", id)
+        var result = mvc.perform(get("/api/v1/clubs/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8"));
 

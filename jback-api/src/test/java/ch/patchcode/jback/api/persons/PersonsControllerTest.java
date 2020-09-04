@@ -40,7 +40,7 @@ class PersonsControllerTest {
         personServiceFake.putPerson(person);
 
         // act
-        var result = mvc.perform(get("/persons/{id}", id)
+        var result = mvc.perform(get("/api/v1/persons/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8"));
 

@@ -14,7 +14,7 @@ import java.util.UUID;
  * Allows users to self-register.
  */
 @RestController
-@RequestMapping("registration")
+@RequestMapping("/api/v1/registration")
 public class RegistrationController {
 
     private final static Logger LOG = LoggerFactory.getLogger(RegistrationController.class);

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("dojos")
+@RequestMapping("/api/v1/dojos")
 public class DojosController {
 
     @GetMapping("{id}")
