@@ -16,12 +16,15 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.Optional;
+
+import static java.util.stream.Collectors.joining;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = {MainTestConfiguration.class})
-class CanRegisterAndLogout {
+class CanRegister {
 
     @LocalServerPort
     int port;
@@ -103,18 +106,33 @@ class CanRegisterAndLogout {
         );
         assumeTrue(confirmationResponse.getStatusCode() == HttpStatus.OK);
 
+        HttpHeaders httpHeaders = new HttpHeaders();
+        copyCookies(confirmationResponse, httpHeaders);
+
+
         // act
-        var result = restTemplate.getForEntity(baseUrl() + "/api/v1/session/", SessionInfo.class);
+        var result = restTemplate.exchange(
+                baseUrl() + "/api/v1/session/",
+                HttpMethod.GET,
+                new HttpEntity<Void>(httpHeaders),
+                SessionInfo.class
+        );
 
         // assert
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertNotNull(result.getBody());
         assertTrue(result.getBody().isAuthenticated());
-        // TODO this is the default, we will replace that with our own
-        assertEquals("anonymousUser", result.getBody().getPrincipalName());
+        assertEquals(pendingRegistrationResponse.getBody().getPendingRegistrationId().toString(), result.getBody().getPrincipalName());
     }
 
     private String baseUrl() {
         return "http://localhost:" + port;
+    }
+
+    private <T> void copyCookies(ResponseEntity<T> previousResponse, HttpHeaders nextHeaders) {
+
+        Optional.ofNullable(previousResponse.getHeaders().get("Set-Cookie")).ifPresent(
+                cookies -> nextHeaders.set("Cookie",cookies.stream().collect(joining(";")))
+        );
     }
 }

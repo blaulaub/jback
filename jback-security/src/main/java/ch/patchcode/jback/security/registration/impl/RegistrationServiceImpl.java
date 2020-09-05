@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -58,19 +59,27 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
+    public Optional<PendingRegistration> getRegistration(UUID id) {
+
+        return pendingRegistrationRepository.findById(id);
+    }
+
+    @Override
     public ConfirmationResult confirmRegistration(UUID id, String verificationCode) {
 
-        var pendingRegistration = pendingRegistrationRepository.findById(id);
+        return getRegistration(id)
+                .map(it -> confirmRegistration(it, verificationCode))
+                .orElse(ConfirmationResult.NOT_FOUND);
+    }
 
-        if (pendingRegistration.isEmpty()) {
+    @Override
+    public ConfirmationResult confirmRegistration(PendingRegistration pendingRegistration, String verificationCode) {
+
+        if (pendingRegistration.getExpiresAt().isBefore(Instant.now())) {
             return ConfirmationResult.NOT_FOUND;
         }
 
-        if (pendingRegistration.get().getExpiresAt().isBefore(Instant.now())) {
-            return ConfirmationResult.NOT_FOUND;
-        }
-
-        if (pendingRegistration.get().getVerificationCode().equals(verificationCode)) {
+        if (pendingRegistration.getVerificationCode().equals(verificationCode)) {
             return ConfirmationResult.CONFIRMED;
         }
 

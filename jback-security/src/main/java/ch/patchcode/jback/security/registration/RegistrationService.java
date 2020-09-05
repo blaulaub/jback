@@ -4,6 +4,7 @@ import ch.patchcode.jback.secBase.ConfirmationResult;
 import ch.patchcode.jback.secBase.InitialRegistrationData;
 import ch.patchcode.jback.secBase.PendingRegistration;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -26,6 +27,7 @@ public interface RegistrationService {
      */
     PendingRegistration.Id setupRegistration(InitialRegistrationData data);
 
+    Optional<PendingRegistration> getRegistration(UUID id);
     /**
      * Confirm a pending ch.patchcode.jback.sec.registration with the given verification code.
      * <p>
@@ -40,6 +42,7 @@ public interface RegistrationService {
      */
     ConfirmationResult confirmRegistration(UUID id, String verificationCode);
 
+    ConfirmationResult confirmRegistration(PendingRegistration pendingRegistration, String verificationCode);
     /**
      * Remove a pending ch.patchcode.jback.sec.registration.
      * <p>

@@ -1,5 +1,6 @@
 package ch.patchcode.jback.api.registration;
 
+import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.SecurityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,16 +41,7 @@ public class RegistrationController {
             @RequestBody VerificationCode verificationCode
     ) {
 
-        var result = securityManager.confirmRegistration(id, verificationCode.getVerificationCode());
-        switch (result) {
-            case CONFIRMED:
-                return new ResponseEntity<>(HttpStatus.OK);
-            case NOT_FOUND:
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            case MISMATCH:
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            default:
-                throw new RuntimeException();
-        }
+        securityManager.authenticate(PendingRegistration.Id.of(id), verificationCode.toDomain());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

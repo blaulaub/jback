@@ -15,5 +15,10 @@ public interface VerificationCode {
         return new Builder().setVerificationCode(verificationCode).build();
     }
 
+    default ch.patchcode.jback.secBase.VerificationCode toDomain() {
+
+        return  ch.patchcode.jback.secBase.VerificationCode.of(getVerificationCode());
+    }
+
     class Builder extends VerificationCode_Builder {}
 }
