@@ -39,4 +39,12 @@ public class RestApi {
         ));
     }
 
+    public SessionPostLogout sessionPostLogout() throws Exception {
+        return new SessionPostLogout(restSession.post(
+                "/api/v1/session/logout",
+                null,
+                Void.class
+        ));
+
+    }
 }

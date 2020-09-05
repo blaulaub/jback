@@ -36,7 +36,6 @@ public class SessionController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             LOG.info("logging out {}", auth.getName());
-
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         SecurityContextHolder.getContext().setAuthentication(null);
