@@ -2,9 +2,9 @@ package ch.patchcode.jback.main.session;
 
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.registration.VerificationCode;
-import ch.patchcode.jback.api.session.SessionInfo;
 import ch.patchcode.jback.main.MainTestConfiguration;
 import ch.patchcode.jback.main.fakes.FixVerificationCodeProvider;
+import ch.patchcode.jback.main.util.RestApi;
 import ch.patchcode.jback.main.util.RestSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -24,11 +24,11 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 @ContextConfiguration(classes = {MainTestConfiguration.class})
 class CanRegister {
 
-    private final Api api;
+    private final RestApi api;
 
     @Autowired
     public CanRegister(@LocalServerPort int port, TestRestTemplate restTemplate, ObjectMapper objectMapper) {
-        this.api = new Api(new RestSession(port, restTemplate, objectMapper));
+        this.api = new RestApi(new RestSession(port, restTemplate, objectMapper));
     }
 
     @Test
@@ -83,57 +83,4 @@ class CanRegister {
                 result.getBody().getPrincipalName());
     }
 
-    public static class Api {
-
-        private final RestSession restSession;
-
-        public Api(RestSession restSession) {
-            this.restSession = restSession;
-        }
-
-        public RegistrationPostData registrationPostData() {
-            return new RegistrationPostData();
-        }
-
-        public class RegistrationPostData {
-
-            private ResponseEntity<PendingRegistrationInfo> andReturn(ch.patchcode.jback.api.registration.InitialRegistrationData initialRegistrationData) throws Exception {
-                return restSession.post("/api/v1/registration", initialRegistrationData, PendingRegistrationInfo.class);
-            }
-
-            private void checkResultIsSuccess(ResponseEntity<PendingRegistrationInfo> result) {
-                assertEquals(HttpStatus.OK, result.getStatusCode());
-            }
-        }
-
-        public RegistrationPutCode registrationPutCode() {
-            return new RegistrationPutCode();
-        }
-
-        public class RegistrationPutCode {
-
-            private ResponseEntity<Void> andReturn(PendingRegistrationInfo registrationInfo, VerificationCode code) throws Exception {
-                return restSession.put("/api/v1/registration/" + registrationInfo.getPendingRegistrationId(), code);
-            }
-
-            private void checkResultIsSuccess(ResponseEntity<Void> result) {
-                assertEquals(HttpStatus.OK, result.getStatusCode());
-            }
-        }
-
-        public SessionGet sessionGet() {
-            return new SessionGet();
-        }
-
-        public class SessionGet {
-
-            private ResponseEntity<SessionInfo> andReturn() {
-                return restSession.get("/api/v1/session/", SessionInfo.class);
-            }
-
-            private void checkResultIsSuccess(ResponseEntity<SessionInfo> result) {
-                assertEquals(HttpStatus.OK, result.getStatusCode());
-            }
-        }
-    }
 }
