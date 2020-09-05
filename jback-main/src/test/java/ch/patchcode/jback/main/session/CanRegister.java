@@ -5,20 +5,18 @@ import ch.patchcode.jback.api.registration.VerificationCode;
 import ch.patchcode.jback.api.session.SessionInfo;
 import ch.patchcode.jback.main.MainTestConfiguration;
 import ch.patchcode.jback.main.fakes.FixVerificationCodeProvider;
+import ch.patchcode.jback.main.util.RestSession;
 import ch.patchcode.jback.main.util.SomeData;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.Optional;
-
-import static java.util.stream.Collectors.joining;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -26,29 +24,24 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 @ContextConfiguration(classes = {MainTestConfiguration.class})
 class CanRegister {
 
-    @LocalServerPort
-    int port;
+    private final RestSession restSession;
 
     @Autowired
-    TestRestTemplate restTemplate;
+    public CanRegister(@LocalServerPort int port, TestRestTemplate restTemplate, ObjectMapper objectMapper) {
+        this.restSession = new RestSession(port, restTemplate, objectMapper);
+    }
 
-    @Autowired
-    ObjectMapper objectMapper;
-
-    private ResponseEntity<PendingRegistrationInfo> postSomeInitialRegistrationData() {
+    private ResponseEntity<PendingRegistrationInfo> postSomeInitialRegistrationData() throws Exception {
 
         // arrange
         var initialRegistrationData = SomeData.someInitialRegistrationData();
 
         // act - request registration
-        return restTemplate.postForEntity(
-                baseUrl() + "/api/v1/registration",
-                initialRegistrationData,
-                PendingRegistrationInfo.class);
+        return restSession.post("/api/v1/registration", initialRegistrationData, PendingRegistrationInfo.class);
     }
 
     @Test
-    void postSomeInitialRegistrationData_works() {
+    void postSomeInitialRegistrationData_works() throws Exception {
 
         // act
         var result = postSomeInitialRegistrationData();
@@ -59,22 +52,11 @@ class CanRegister {
     }
 
     private ResponseEntity<Void> registerWithCode(PendingRegistrationInfo registrationInfo, String verificationCode)
-            throws JsonProcessingException {
-
-        // arrange
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+            throws Exception {
 
         // act
-        return restTemplate.exchange(
-                baseUrl() + "/api/v1/registration/" + registrationInfo.getPendingRegistrationId(),
-                HttpMethod.PUT,
-                new HttpEntity<>(
-                        objectMapper.writeValueAsString(VerificationCode.of(verificationCode)),
-                        httpHeaders
-                ),
-                Void.class
-        );
+        return restSession.put("/api/v1/registration/" + registrationInfo.getPendingRegistrationId(),
+                VerificationCode.of(verificationCode));
     }
 
     @Test
@@ -99,6 +81,7 @@ class CanRegister {
         // arrange
         ResponseEntity<PendingRegistrationInfo> pendingRegistrationResponse = postSomeInitialRegistrationData();
         assumeTrue(pendingRegistrationResponse.getBody() != null);
+        String expectedPrincipal = pendingRegistrationResponse.getBody().getPendingRegistrationId().toString();
 
         ResponseEntity<Void> confirmationResponse = registerWithCode(
                 pendingRegistrationResponse.getBody(),
@@ -106,33 +89,15 @@ class CanRegister {
         );
         assumeTrue(confirmationResponse.getStatusCode() == HttpStatus.OK);
 
-        HttpHeaders httpHeaders = new HttpHeaders();
-        copyCookies(confirmationResponse, httpHeaders);
-
-
         // act
-        var result = restTemplate.exchange(
-                baseUrl() + "/api/v1/session/",
-                HttpMethod.GET,
-                new HttpEntity<Void>(httpHeaders),
-                SessionInfo.class
-        );
+        var result = restSession.get("/api/v1/session/", SessionInfo.class);
 
         // assert
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertNotNull(result.getBody());
         assertTrue(result.getBody().isAuthenticated());
-        assertEquals(pendingRegistrationResponse.getBody().getPendingRegistrationId().toString(), result.getBody().getPrincipalName());
-    }
-
-    private String baseUrl() {
-        return "http://localhost:" + port;
-    }
-
-    private <T> void copyCookies(ResponseEntity<T> previousResponse, HttpHeaders nextHeaders) {
-
-        Optional.ofNullable(previousResponse.getHeaders().get("Set-Cookie")).ifPresent(
-                cookies -> nextHeaders.set("Cookie",cookies.stream().collect(joining(";")))
-        );
+        assertEquals(
+                expectedPrincipal,
+                result.getBody().getPrincipalName());
     }
 }
