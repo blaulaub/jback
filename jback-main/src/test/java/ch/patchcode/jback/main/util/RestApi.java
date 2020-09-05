@@ -18,11 +18,14 @@ public class RestApi {
     }
 
     public RegistrationPostData registrationPostData(InitialRegistrationData initialRegistrationData) throws Exception {
-        var response = restSession.post("/api/v1/registration", initialRegistrationData, PendingRegistrationInfo.class);
-        return new RegistrationPostData(response);
+        return new RegistrationPostData(restSession.post(
+                "/api/v1/registration",
+                initialRegistrationData,
+                PendingRegistrationInfo.class
+        ));
     }
 
-    public class RegistrationPostData {
+    public static class RegistrationPostData {
 
         private final ResponseEntity<PendingRegistrationInfo> response;
 
@@ -30,59 +33,62 @@ public class RestApi {
             this.response = response;
         }
 
-        public ResponseEntity<PendingRegistrationInfo> andReturn() {
-            return response;
-        }
-
         public RegistrationPostData checkResultIsSuccess() {
             assertEquals(HttpStatus.OK, response.getStatusCode());
             return this;
         }
-    }
 
-    public RegistrationPutCode registrationPutCode() {
-        return new RegistrationPutCode();
-    }
-
-    public class RegistrationPutCode {
-
-        private ResponseEntity<Void> response;
-
-        private void invoke(PendingRegistrationInfo registrationInfo, VerificationCode code) throws Exception {
-            response = restSession.put("/api/v1/registration/" + registrationInfo.getPendingRegistrationId(), code);
-        }
-
-        public ResponseEntity<Void> andReturn(PendingRegistrationInfo registrationInfo, VerificationCode code) throws Exception {
-            invoke(registrationInfo, code);
+        public ResponseEntity<PendingRegistrationInfo> andReturn() {
             return response;
         }
+    }
 
-        public RegistrationPutCode checkResultIsSuccess(ResponseEntity<Void> result) {
-            assertEquals(HttpStatus.OK, result.getStatusCode());
+    public RegistrationPutCode registrationPutCode(
+            PendingRegistrationInfo registrationInfo,
+            VerificationCode code
+    ) throws Exception {
+        return new RegistrationPutCode(
+                restSession.put("/api/v1/registration/" + registrationInfo.getPendingRegistrationId(), code)
+        );
+    }
+
+    public static class RegistrationPutCode {
+
+        private final ResponseEntity<Void> response;
+
+        public RegistrationPutCode(ResponseEntity<Void> response) {
+            this.response = response;
+        }
+
+        public RegistrationPutCode checkResultIsSuccess() {
+            assertEquals(HttpStatus.OK, response.getStatusCode());
             return this;
+        }
+
+        public ResponseEntity<Void> andReturn() {
+            return response;
         }
     }
 
     public SessionGet sessionGet() {
-        return new SessionGet();
+        return new SessionGet(restSession.get("/api/v1/session/", SessionInfo.class));
     }
 
     public class SessionGet {
 
-        private ResponseEntity<SessionInfo> response;
+        private final ResponseEntity<SessionInfo> response;
 
-        private void invoke() {
-            response = restSession.get("/api/v1/session/", SessionInfo.class);
+        public SessionGet(ResponseEntity<SessionInfo> response) {
+            this.response = response;
+        }
+
+        public SessionGet checkResultIsSuccess() {
+            assertEquals(HttpStatus.OK, response.getStatusCode());
+            return this;
         }
 
         public ResponseEntity<SessionInfo> andReturn() {
-            invoke();
             return response;
-        }
-
-        public SessionGet checkResultIsSuccess(ResponseEntity<SessionInfo> result) {
-            assertEquals(HttpStatus.OK, result.getStatusCode());
-            return this;
         }
     }
 }

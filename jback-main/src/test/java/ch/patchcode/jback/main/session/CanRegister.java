@@ -52,10 +52,10 @@ class CanRegister {
 
         // act
         VerificationCode code = VerificationCode.of(FixVerificationCodeProvider.FIX_VERIFICATION_CODE);
-        ResponseEntity<Void> confirmationResponse = api.registrationPutCode().andReturn(pendingRegistrationResponse.getBody(), code);
+        var invocation = api.registrationPutCode(pendingRegistrationResponse.getBody(), code);
 
         // assert
-        api.registrationPutCode().checkResultIsSuccess(confirmationResponse);
+        invocation.checkResultIsSuccess();
     }
 
     @Test
@@ -68,19 +68,19 @@ class CanRegister {
 
         // act
         VerificationCode code = VerificationCode.of(FixVerificationCodeProvider.FIX_VERIFICATION_CODE);
-        ResponseEntity<Void> confirmationResponse = api.registrationPutCode().andReturn(pendingRegistrationResponse.getBody(), code);
+        ResponseEntity<Void> confirmationResponse = api.registrationPutCode(pendingRegistrationResponse.getBody(), code).andReturn();
         assumeTrue(confirmationResponse.getStatusCode() == HttpStatus.OK);
 
         // act
-        var result = api.sessionGet().andReturn();
+        var invocation = api.sessionGet();
 
         // assert
-        api.sessionGet().checkResultIsSuccess(result);
-        assertNotNull(result.getBody());
-        assertTrue(result.getBody().isAuthenticated());
+        invocation.checkResultIsSuccess();
+        assertNotNull(invocation.andReturn().getBody());
+        assertTrue(invocation.andReturn().getBody().isAuthenticated());
         assertEquals(
                 expectedPrincipal,
-                result.getBody().getPrincipalName());
+                invocation.andReturn().getBody().getPrincipalName());
     }
 
 }
