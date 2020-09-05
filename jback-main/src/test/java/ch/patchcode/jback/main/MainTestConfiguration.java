@@ -1,9 +1,11 @@
 package ch.patchcode.jback.main;
 
+import ch.patchcode.jback.api.ApiConfiguration;
 import ch.patchcode.jback.core.CoreConfiguration;
 import ch.patchcode.jback.jpa.JpaConfiguration;
 import ch.patchcode.jback.main.fakes.FakesConfiguration;
 import ch.patchcode.jback.security.SecurityConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -20,12 +22,21 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@Import({JpaConfiguration.class, CoreConfiguration.class, SecurityConfiguration.class, FakesConfiguration.class})
+@EnableAutoConfiguration
+@Import({
+                ApiConfiguration.class,
+                JpaConfiguration.class,
+                CoreConfiguration.class,
+                SecurityConfiguration.class,
+                FakesConfiguration.class,
+                MainWebSecurityTestConfig.class
+        })
 @PropertySource("classpath:/main.test.properties")
 public class MainTestConfiguration {
 
     @Bean
     public DataSource dataSource() {
+
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
@@ -72,6 +83,7 @@ public class MainTestConfiguration {
 
     @Bean(name = "transactionManager")
     public PlatformTransactionManager getTransactionManager(EntityManagerFactory entityManagerFactory) {
+
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
