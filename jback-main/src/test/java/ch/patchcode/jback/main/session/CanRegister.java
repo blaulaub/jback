@@ -4,7 +4,7 @@ import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.registration.VerificationCode;
 import ch.patchcode.jback.main.MainTestConfiguration;
 import ch.patchcode.jback.main.fakes.FixVerificationCodeProvider;
-import ch.patchcode.jback.main.util.RestApi;
+import ch.patchcode.jback.main.restApi.RestApi;
 import ch.patchcode.jback.main.util.RestSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
