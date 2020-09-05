@@ -3,12 +3,8 @@ package ch.patchcode.jback.api.persons;
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -27,5 +23,11 @@ public class PersonsController {
     public Person getPersonById(@PathVariable("id") UUID id) throws NotFoundException {
 
         return personService.getPerson(id).map(Person::from).orElseThrow(NotFoundException::new);
+    }
+
+    @PostMapping
+    public Person createPerson(PersonDraft draft) {
+
+        throw new RuntimeException("not implemented");
     }
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Person {
+public interface Person extends PersonDraft {
 
     static Person from(ch.patchcode.jback.core.persons.Person person) {
 
@@ -23,10 +23,6 @@ public interface Person {
     }
 
     UUID getId();
-
-    String getFirstName();
-
-    String getLastName();
 
     @ApiModelProperty(dataType = "ch.patchcode.jback.api.common.Address")
     Optional<Address> getAddress();
