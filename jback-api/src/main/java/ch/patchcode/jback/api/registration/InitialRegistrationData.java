@@ -31,8 +31,8 @@ public interface InitialRegistrationData {
                 .build();
     }
 
-    default ch.patchcode.jback.sec.registration.InitialRegistrationData toDomain() {
-        return new ch.patchcode.jback.sec.registration.InitialRegistrationData.Builder()
+    default ch.patchcode.jback.secBase.InitialRegistrationData toDomain() {
+        return new ch.patchcode.jback.secBase.InitialRegistrationData.Builder()
                 .setFirstName(getFirstName())
                 .setLastName(getLastName())
                 .setVerificationMean(getVerificationMean().toDomain())

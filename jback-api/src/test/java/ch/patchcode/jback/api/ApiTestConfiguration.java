@@ -1,6 +1,7 @@
 package ch.patchcode.jback.api;
 
 import ch.patchcode.jback.api.fakeServices.FakeServicesConfiguration;
+import ch.patchcode.jback.security.SecurityConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

@@ -33,7 +33,7 @@ class ClubApiTest {
 
         // act
         var response = restTemplate.getForEntity(
-                baseUrl() + "/clubs/" + UUID.randomUUID(),
+                baseUrl() + "/api/v1/clubs/" + UUID.randomUUID(),
                 Object.class
         );
 

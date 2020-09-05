@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("clubs")
+@RequestMapping("/api/v1/clubs")
 public class ClubsController {
 
     private final ClubService clubService;

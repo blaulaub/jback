@@ -1,16 +1,19 @@
 package ch.patchcode.jback.api.registration;
 
-public class VerificationCode {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.inferred.freebuilder.FreeBuilder;
 
-    private String verificationCode;
+@FreeBuilder
+public interface VerificationCode {
 
-    public String getVerificationCode() {
+    String getVerificationCode();
 
-        return verificationCode;
+    @JsonCreator
+    static VerificationCode of(@JsonProperty("verificationCode") String verificationCode) {
+
+        return new Builder().setVerificationCode(verificationCode).build();
     }
 
-    public void setVerificationCode(String verificationCode) {
-
-        this.verificationCode = verificationCode;
-    }
+    class Builder extends VerificationCode_Builder {}
 }

@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.registration;
 
-import ch.patchcode.jback.sec.registration.RegistrationService;
+import ch.patchcode.jback.secBase.SecurityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,23 +14,23 @@ import java.util.UUID;
  * Allows users to self-register.
  */
 @RestController
-@RequestMapping("ch.patchcode.jback.sec.registration")
+@RequestMapping("/api/v1/registration")
 public class RegistrationController {
 
     private final static Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
 
-    private final RegistrationService registrationService;
+    private final SecurityManager securityManager;
 
     @Autowired
-    public RegistrationController(RegistrationService registrationService) {
+    public RegistrationController(SecurityManager securityManager) {
 
-        this.registrationService = registrationService;
+        this.securityManager = securityManager;
     }
 
     @PostMapping
     public PendingRegistrationInfo postInitialRegistration(@RequestBody InitialRegistrationData data) {
 
-        var id = registrationService.setupRegistration(data.toDomain()).getId();
+        var id = securityManager.setupRegistration(data.toDomain()).getId();
         return PendingRegistrationInfo.of(id);
     }
 
@@ -40,7 +40,7 @@ public class RegistrationController {
             @RequestBody VerificationCode verificationCode
     ) {
 
-        var result = registrationService.confirmRegistration(id, verificationCode.getVerificationCode());
+        var result = securityManager.confirmRegistration(id, verificationCode.getVerificationCode());
         switch (result) {
             case CONFIRMED:
                 return new ResponseEntity<>(HttpStatus.OK);

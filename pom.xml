@@ -25,7 +25,7 @@
         <module>jback-sec-base</module>
         <module>jback-core</module>
         <module>jback-jpa</module>
-        <module>jback-sec</module>
+        <module>jback-security</module>
         <module>jback-api</module>
         <module>jback-main</module>
     </modules>

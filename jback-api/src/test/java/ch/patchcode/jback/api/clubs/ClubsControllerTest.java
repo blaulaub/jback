@@ -6,6 +6,7 @@ import ch.patchcode.jback.core.common.Address;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -39,7 +40,9 @@ class ClubsControllerTest {
         clubServiceFake.putClub(club);
 
         // act
-        var result = mvc.perform(get("/clubs/{id}", id));
+        var result = mvc.perform(get("/api/v1/clubs/{id}", id)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8"));
 
         // assert
         result
