@@ -1,9 +1,7 @@
 package ch.patchcode.jback.security;
 
-import ch.patchcode.jback.secBase.InitialRegistrationData;
-import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.SecurityManager;
-import ch.patchcode.jback.secBase.VerificationCode;
+import ch.patchcode.jback.secBase.*;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -38,16 +36,23 @@ public class SecurityManagerImpl implements SecurityManager {
                 verificationCode.getVerificationCode()
         );
 
-        // TODO use visitor
-        switch (confirmationResult) {
-            case CONFIRMED:
+        confirmationResult.accept(new ConfirmationResult.Visitor<Void>() {
+            @Override
+            public Void caseConfirmed() {
                 SecurityContextHolder.getContext()
                         .setAuthentication(new TemporaryAuthentication(registrationId, pendingRegistration));
-                break;
-            case MISMATCH:
-                throw new BadCredentialsException("Invalid code provided for " + registrationId.getId());
-            case NOT_FOUND:
+                return null;
+            }
+
+            @Override
+            public Void caseNotFound() {
                 throw new NoPendingRegistrationException(registrationId);
-        }
+            }
+
+            @Override
+            public Void caseMismatch() {
+                throw new BadCredentialsException("Invalid code provided for " + registrationId.getId());
+            }
+        });
     }
 }
