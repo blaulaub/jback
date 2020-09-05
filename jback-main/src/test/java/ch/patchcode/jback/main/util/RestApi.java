@@ -1,5 +1,6 @@
 package ch.patchcode.jback.main.util;
 
+import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.registration.VerificationCode;
 import ch.patchcode.jback.api.session.SessionInfo;
@@ -16,25 +17,25 @@ public class RestApi {
         this.restSession = restSession;
     }
 
-    public RegistrationPostData registrationPostData() {
-        return new RegistrationPostData();
+    public RegistrationPostData registrationPostData(InitialRegistrationData initialRegistrationData) throws Exception {
+        var response = restSession.post("/api/v1/registration", initialRegistrationData, PendingRegistrationInfo.class);
+        return new RegistrationPostData(response);
     }
 
     public class RegistrationPostData {
 
-        private ResponseEntity<PendingRegistrationInfo> response;
+        private final ResponseEntity<PendingRegistrationInfo> response;
 
-        private void invoke(ch.patchcode.jback.api.registration.InitialRegistrationData initialRegistrationData) throws Exception {
-            response = restSession.post("/api/v1/registration", initialRegistrationData, PendingRegistrationInfo.class);
+        public RegistrationPostData(ResponseEntity<PendingRegistrationInfo> response) {
+            this.response = response;
         }
 
-        public ResponseEntity<PendingRegistrationInfo> andReturn(ch.patchcode.jback.api.registration.InitialRegistrationData initialRegistrationData) throws Exception {
-            invoke(initialRegistrationData);
+        public ResponseEntity<PendingRegistrationInfo> andReturn() {
             return response;
         }
 
-        public RegistrationPostData checkResultIsSuccess(ResponseEntity<PendingRegistrationInfo> result) {
-            assertEquals(HttpStatus.OK, result.getStatusCode());
+        public RegistrationPostData checkResultIsSuccess() {
+            assertEquals(HttpStatus.OK, response.getStatusCode());
             return this;
         }
     }

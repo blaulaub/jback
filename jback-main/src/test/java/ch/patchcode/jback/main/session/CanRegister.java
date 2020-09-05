@@ -35,18 +35,18 @@ class CanRegister {
     void postSomeInitialRegistrationData_works() throws Exception {
 
         // act
-        var result = api.registrationPostData().andReturn(someInitialRegistrationData());
+        var invocation = api.registrationPostData(someInitialRegistrationData());
 
         // assert
-        api.registrationPostData().checkResultIsSuccess(result);
-        assertNotNull(result.getBody());
+        invocation.checkResultIsSuccess();
+        assertNotNull(invocation.andReturn().getBody());
     }
 
     @Test
     void registerWithCorrectCode_succeeds() throws Exception {
 
         // arrange
-        var pendingRegistrationResponse = api.registrationPostData().andReturn(someInitialRegistrationData());
+        var pendingRegistrationResponse = api.registrationPostData(someInitialRegistrationData()).andReturn();
         assumeTrue(HttpStatus.OK == pendingRegistrationResponse.getStatusCode());
         assumeTrue(pendingRegistrationResponse.getBody() != null);
 
@@ -62,7 +62,7 @@ class CanRegister {
     void afterRegistration_userIsAuthenticated() throws Exception {
 
         // arrange
-        ResponseEntity<PendingRegistrationInfo> pendingRegistrationResponse = api.registrationPostData().andReturn(someInitialRegistrationData());
+        ResponseEntity<PendingRegistrationInfo> pendingRegistrationResponse = api.registrationPostData(someInitialRegistrationData()).andReturn();
         assumeTrue(pendingRegistrationResponse.getBody() != null);
         String expectedPrincipal = pendingRegistrationResponse.getBody().getPendingRegistrationId().toString();
 
