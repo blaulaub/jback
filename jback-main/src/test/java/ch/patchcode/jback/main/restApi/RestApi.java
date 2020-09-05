@@ -6,8 +6,6 @@ import ch.patchcode.jback.api.registration.VerificationCode;
 import ch.patchcode.jback.api.session.SessionInfo;
 import ch.patchcode.jback.main.util.RestSession;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class RestApi {
 
     private final RestSession restSession;
@@ -28,13 +26,17 @@ public class RestApi {
             PendingRegistrationInfo registrationInfo,
             VerificationCode code
     ) throws Exception {
-        return new RegistrationPutCode(
-                restSession.put("/api/v1/registration/" + registrationInfo.getPendingRegistrationId(), code)
-        );
+        return new RegistrationPutCode(restSession.put(
+                "/api/v1/registration/" + registrationInfo.getPendingRegistrationId(),
+                code
+        ));
     }
 
     public SessionGet sessionGet() {
-        return new SessionGet(restSession.get("/api/v1/session/", SessionInfo.class));
+        return new SessionGet(restSession.get(
+                "/api/v1/session/",
+                SessionInfo.class
+        ));
     }
 
 }

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SessionGet {
+public class SessionGet implements RestApiInvocationResult<SessionGet, SessionInfo> {
 
     private final ResponseEntity<SessionInfo> response;
 
@@ -14,11 +14,13 @@ public class SessionGet {
         this.response = response;
     }
 
+    @Override
     public SessionGet checkResultIsSuccess() {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         return this;
     }
 
+    @Override
     public ResponseEntity<SessionInfo> andReturn() {
         return response;
     }

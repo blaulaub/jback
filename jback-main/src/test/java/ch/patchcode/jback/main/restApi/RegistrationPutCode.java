@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RegistrationPutCode {
+public class RegistrationPutCode implements RestApiInvocationResult<RegistrationPutCode, Void> {
 
     private final ResponseEntity<Void> response;
 
@@ -13,11 +13,13 @@ public class RegistrationPutCode {
         this.response = response;
     }
 
+    @Override
     public RegistrationPutCode checkResultIsSuccess() {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         return this;
     }
 
+    @Override
     public ResponseEntity<Void> andReturn() {
         return response;
     }

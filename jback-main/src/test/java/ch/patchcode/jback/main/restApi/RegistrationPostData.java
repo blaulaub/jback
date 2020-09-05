@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RegistrationPostData {
+public class RegistrationPostData implements RestApiInvocationResult<RegistrationPostData, PendingRegistrationInfo> {
 
     private final ResponseEntity<PendingRegistrationInfo> response;
 
@@ -14,11 +14,13 @@ public class RegistrationPostData {
         this.response = response;
     }
 
+    @Override
     public RegistrationPostData checkResultIsSuccess() {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         return this;
     }
 
+    @Override
     public ResponseEntity<PendingRegistrationInfo> andReturn() {
         return response;
     }
