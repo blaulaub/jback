@@ -6,7 +6,6 @@ import ch.patchcode.jback.api.session.SessionInfo;
 import ch.patchcode.jback.main.MainTestConfiguration;
 import ch.patchcode.jback.main.fakes.FixVerificationCodeProvider;
 import ch.patchcode.jback.main.util.RestSession;
-import ch.patchcode.jback.main.util.SomeData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 
+import static ch.patchcode.jback.main.util.SomeData.someInitialRegistrationData;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -31,73 +31,79 @@ class CanRegister {
         this.restSession = new RestSession(port, restTemplate, objectMapper);
     }
 
-    private ResponseEntity<PendingRegistrationInfo> postSomeInitialRegistrationData() throws Exception {
-
-        // arrange
-        var initialRegistrationData = SomeData.someInitialRegistrationData();
-
-        // act - request registration
-        return restSession.post("/api/v1/registration", initialRegistrationData, PendingRegistrationInfo.class);
-    }
-
     @Test
     void postSomeInitialRegistrationData_works() throws Exception {
 
         // act
-        var result = postSomeInitialRegistrationData();
+        var result = registration_postData_andReturn(someInitialRegistrationData());
 
         // assert
-        assertEquals(HttpStatus.OK, result.getStatusCode());
+        registration_postData_checkResultIsSuccess(result);
         assertNotNull(result.getBody());
-    }
-
-    private ResponseEntity<Void> registerWithCode(PendingRegistrationInfo registrationInfo, String verificationCode)
-            throws Exception {
-
-        // act
-        return restSession.put("/api/v1/registration/" + registrationInfo.getPendingRegistrationId(),
-                VerificationCode.of(verificationCode));
     }
 
     @Test
     void registerWithCorrectCode_succeeds() throws Exception {
 
         // arrange
-        ResponseEntity<PendingRegistrationInfo> pendingRegistrationResponse = postSomeInitialRegistrationData();
+        var pendingRegistrationResponse = registration_postData_andReturn(someInitialRegistrationData());
+        assumeTrue(HttpStatus.OK == pendingRegistrationResponse.getStatusCode());
         assumeTrue(pendingRegistrationResponse.getBody() != null);
 
-        ResponseEntity<Void> confirmationResponse = registerWithCode(
-                pendingRegistrationResponse.getBody(),
-                FixVerificationCodeProvider.FIX_VERIFICATION_CODE
-        );
+        // act
+        VerificationCode code = VerificationCode.of(FixVerificationCodeProvider.FIX_VERIFICATION_CODE);
+        ResponseEntity<Void> confirmationResponse = registration_putCode_andReturn(pendingRegistrationResponse.getBody(), code);
 
         // assert
-        assertEquals(HttpStatus.OK, confirmationResponse.getStatusCode());
+        registration_putCode_checkResultIsSuccess(confirmationResponse);
     }
 
     @Test
     void afterRegistration_userIsAuthenticated() throws Exception {
 
         // arrange
-        ResponseEntity<PendingRegistrationInfo> pendingRegistrationResponse = postSomeInitialRegistrationData();
+        ResponseEntity<PendingRegistrationInfo> pendingRegistrationResponse = registration_postData_andReturn(someInitialRegistrationData());
         assumeTrue(pendingRegistrationResponse.getBody() != null);
         String expectedPrincipal = pendingRegistrationResponse.getBody().getPendingRegistrationId().toString();
 
-        ResponseEntity<Void> confirmationResponse = registerWithCode(
-                pendingRegistrationResponse.getBody(),
-                FixVerificationCodeProvider.FIX_VERIFICATION_CODE
-        );
+        // act
+        VerificationCode code = VerificationCode.of(FixVerificationCodeProvider.FIX_VERIFICATION_CODE);
+        ResponseEntity<Void> confirmationResponse = registration_putCode_andReturn(pendingRegistrationResponse.getBody(), code);
         assumeTrue(confirmationResponse.getStatusCode() == HttpStatus.OK);
 
         // act
-        var result = restSession.get("/api/v1/session/", SessionInfo.class);
+        var result = session_get_andReturn();
 
         // assert
-        assertEquals(HttpStatus.OK, result.getStatusCode());
+        session_get_checkResultIsSuccess(result);
         assertNotNull(result.getBody());
         assertTrue(result.getBody().isAuthenticated());
         assertEquals(
                 expectedPrincipal,
                 result.getBody().getPrincipalName());
+    }
+
+    private ResponseEntity<PendingRegistrationInfo> registration_postData_andReturn(ch.patchcode.jback.api.registration.InitialRegistrationData initialRegistrationData) throws Exception {
+        return restSession.post("/api/v1/registration", initialRegistrationData, PendingRegistrationInfo.class);
+    }
+
+    private void registration_postData_checkResultIsSuccess(ResponseEntity<PendingRegistrationInfo> result) {
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+    }
+
+    private ResponseEntity<Void> registration_putCode_andReturn(PendingRegistrationInfo registrationInfo, VerificationCode code) throws Exception {
+        return restSession.put("/api/v1/registration/" + registrationInfo.getPendingRegistrationId(), code);
+    }
+
+    private void registration_putCode_checkResultIsSuccess(ResponseEntity<Void> result) {
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+    }
+
+    private ResponseEntity<SessionInfo> session_get_andReturn() {
+        return restSession.get("/api/v1/session/", SessionInfo.class);
+    }
+
+    private void session_get_checkResultIsSuccess(ResponseEntity<SessionInfo> result) {
+        assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 }
