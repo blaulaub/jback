@@ -19,10 +19,7 @@ import org.springframework.test.context.ContextHierarchy;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextHierarchy({
-        @ContextConfiguration(classes = {MainTestConfiguration.class}),
-        @ContextConfiguration(classes = {Main.class})
-})
+@ContextConfiguration(classes = {MainTestConfiguration.class})
 class CanRegisterAndLogout {
 
     @LocalServerPort
