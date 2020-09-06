@@ -1,16 +1,20 @@
 package ch.patchcode.jback.security;
 
-import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.secBase.PendingRegistration;
+import ch.patchcode.jback.secBase.secModelImpl.Authority;
+import ch.patchcode.jback.secBase.secModelImpl.Person;
 import ch.patchcode.jback.security.authorities.ApiAuthority;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+import java.util.List;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
 
-public class TemporaryAuthentication implements Authentication {
+public class TemporaryAuthentication implements Authentication, ch.patchcode.jback.secBase.secModelImpl.Principal {
 
     private final String principal;
     private final String code;
@@ -23,12 +27,12 @@ public class TemporaryAuthentication implements Authentication {
         this.userName = String.join(" ", registration.getFirstName(), registration.getLastName());
     }
 
+    // impl org.springframework.security.core.Authentication
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return asList(
-                ApiAuthority.of(Authority.CAN_CREATE_PERSON)
-        );
+        return getBasicPrivileges().stream().map(ApiAuthority::of).collect(toList());
     }
 
     @Override
@@ -59,12 +63,28 @@ public class TemporaryAuthentication implements Authentication {
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 
         throw new IllegalArgumentException("immutable");
-
     }
+
+    // impl java.security.Principal
 
     @Override
     public String getName() {
 
         return principal;
+    }
+
+    // impl ch.patchcode.jback.secBase.secModelImpl.Principal
+
+    @Override
+    public List<Person> getPersons() {
+
+        // TODO this is stupid and should go away. turn the reference around, person to principals.
+        return emptyList();
+    }
+
+    @Override
+    public List<Authority> getBasicPrivileges() {
+
+        return asList(Authority.CAN_CREATE_PERSON);
     }
 }
