@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.web.client.RestClientException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -34,8 +35,10 @@ public class NotAnybodyCanCreatePersons {
                 .build();
 
         // TODO should fail with 401 or 403
+        assertThrows(RestClientException.class, () -> {
         var createdPerson = api.personsPostNewPerson(newPerson)
                 .checkResultIsSuccess()
                 .andReturnBody();
+        });
     }
 }

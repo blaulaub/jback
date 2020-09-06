@@ -3,6 +3,8 @@ package ch.patchcode.jback.api.persons;
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -28,7 +30,10 @@ public class PersonsController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('CAN_CREATE_PERSON')")
     public Person createPerson(@RequestBody Person.Draft draft) {
+
+        var context = SecurityContextHolder.getContext();
 
         return fromDomain(personService.create(draft.toDomain()));
     }
