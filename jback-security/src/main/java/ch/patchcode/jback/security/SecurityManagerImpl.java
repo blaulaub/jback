@@ -2,6 +2,7 @@ package ch.patchcode.jback.security;
 
 import ch.patchcode.jback.secBase.SecurityManager;
 import ch.patchcode.jback.secBase.*;
+import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;

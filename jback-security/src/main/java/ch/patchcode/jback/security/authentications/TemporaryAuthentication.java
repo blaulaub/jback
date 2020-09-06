@@ -1,4 +1,4 @@
-package ch.patchcode.jback.security;
+package ch.patchcode.jback.security.authentications;
 
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationMean;
@@ -21,15 +21,27 @@ public class TemporaryAuthentication implements Authentication, ch.patchcode.jba
 
     private final String principal;
     private final String code;
-    private final String userName;
+    private final String firstName;
+    private final String lastName;
     private final VerificationMean mean;
 
     public TemporaryAuthentication(PendingRegistration.Id id, PendingRegistration registration) {
 
         this.principal = id.getId().toString();
         this.code = registration.getVerificationCode();
-        this.userName = String.join(" ", registration.getFirstName(), registration.getLastName());
+        this.firstName = registration.getFirstName();
+        this.lastName = registration.getLastName();
         this.mean = registration.getVerificationMean();
+    }
+
+    public String getFirstName() {
+
+        return firstName;
+    }
+
+    public String getLastName() {
+
+        return lastName;
     }
 
     // impl org.springframework.security.core.Authentication
@@ -49,7 +61,7 @@ public class TemporaryAuthentication implements Authentication, ch.patchcode.jba
     @Override
     public Object getDetails() {
 
-        return userName;
+        return String.join(" ", firstName, lastName);
     }
 
     @Override
