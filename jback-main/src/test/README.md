@@ -15,4 +15,7 @@ create one or more persons.
 
 ### Tests
 
-Tested by [AnybodyCanRegister](java/ch/patchcode/jback/main/session/AnybodyCanRegister.java).
+* [AnybodyCanRegister](java/ch/patchcode/jback/main/session/AnybodyCanRegister.java)
+  ensures that registration works
+* [SomebodyRegisteredCanCreatePerson](java/ch/patchcode/jback/main/persons/SomebodyRegisteredCanCreatePerson.java)
+  ensures that a registered user can create a person

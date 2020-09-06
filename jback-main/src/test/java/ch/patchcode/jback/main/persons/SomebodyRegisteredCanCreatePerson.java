@@ -18,12 +18,12 @@ import static ch.patchcode.jback.main.util.SomeData.someInitialRegistrationData;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = {MainTestConfiguration.class})
-public class RegisteredCanCreatePerson {
+public class SomebodyRegisteredCanCreatePerson {
 
     private final RestApi api;
 
     @Autowired
-    public RegisteredCanCreatePerson(@LocalServerPort int port, TestRestTemplate restTemplate, ObjectMapper objectMapper) {
+    public SomebodyRegisteredCanCreatePerson(@LocalServerPort int port, TestRestTemplate restTemplate, ObjectMapper objectMapper) {
         this.api = new RestApi(new RestSession(port, restTemplate, objectMapper));
     }
 
