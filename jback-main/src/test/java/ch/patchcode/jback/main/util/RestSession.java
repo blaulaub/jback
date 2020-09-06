@@ -3,7 +3,10 @@ package ch.patchcode.jback.main.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.web.client.ResponseErrorHandler;
 
+import java.io.IOException;
 import java.net.HttpCookie;
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,6 +40,7 @@ public class RestSession {
     ) throws Exception {
 
         HttpEntity<String> requestEntity = new HttpEntity<>(objectMapper.writeValueAsString(requestData), headers());
+        restTemplate.getRestTemplate().setErrorHandler(errorHandler());
         ResponseEntity<TResp> result = restTemplate.exchange(
                 baseUrl() + url,
                 HttpMethod.POST,
@@ -83,5 +87,27 @@ public class RestSession {
                         .map(HttpCookie::parse)
                         .flatMap(Collection::stream)
                         .forEach(cookie -> this.cookies.put(cookie.getName(), cookie.toString())));
+    }
+
+    private ResponseErrorHandler errorHandler() {
+
+        return new ResponseErrorHandler() {
+
+            @Override
+            public boolean hasError(ClientHttpResponse response) throws IOException {
+                return response.getStatusCode().isError();
+            }
+
+            @Override
+            public void handleError(ClientHttpResponse response) throws IOException {
+                var statusCode = response.getStatusCode();
+                if (statusCode == HttpStatus.FORBIDDEN) {
+                    throw new ForbiddenException();
+                }
+            }
+        };
+    }
+
+    public static class ForbiddenException extends RuntimeException {
     }
 }

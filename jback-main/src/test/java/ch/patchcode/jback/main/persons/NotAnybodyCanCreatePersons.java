@@ -34,8 +34,7 @@ public class NotAnybodyCanCreatePersons {
                 .setLastName("Sawyer")
                 .build();
 
-        // TODO should fail with 401 or 403
-        assertThrows(RestClientException.class, () -> {
+        assertThrows(RestSession.ForbiddenException.class, () -> {
         var createdPerson = api.personsPostNewPerson(newPerson)
                 .checkResultIsSuccess()
                 .andReturnBody();
