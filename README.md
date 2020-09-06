@@ -6,7 +6,7 @@ This is a server backend.
 
 (alphabetically)
 
-* **jback-api** defines and implements the JPA using Spring Web
+* **jback-api** defines and implements the API using Spring Web
 * **jback-core** provides the business logic
 * **jback-jpa** implements persistence using JPA and Spring Data 
 * **jback-main** ties everything together to a runnable jar
