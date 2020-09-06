@@ -1,6 +1,6 @@
 # Requirements
 
-## §1 Anyone can register
+## §1 Anyone can register (and create a person)
 
 Anyone can `POST` a registration to `/api/v1/registration`.
 
@@ -19,3 +19,14 @@ create one or more persons.
   ensures that registration works
 * [SomebodyRegisteredCanCreatePerson](java/ch/patchcode/jback/main/persons/SomebodyRegisteredCanCreatePerson.java)
   ensures that a registered user can create a person
+
+## §2 Anyone unregistered cannot create a person
+
+### Definition
+
+Without registration, a caller cannot create any person.
+
+### Tests
+
+* [NotAnybodyCanCreatePersons](java/ch/patchcode/jback/main/persons/NotAnybodyCanCreatePersons.java)
+  ensures that an insufficiently authenticated call will be blocked
