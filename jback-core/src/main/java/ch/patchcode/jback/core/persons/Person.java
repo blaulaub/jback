@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Person {
+public interface Person extends ch.patchcode.jback.secBase.secModelImpl.Person {
 
     UUID getId();
 
