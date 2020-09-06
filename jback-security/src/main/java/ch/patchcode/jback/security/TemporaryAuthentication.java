@@ -1,11 +1,14 @@
 package ch.patchcode.jback.security;
 
+import ch.patchcode.jback.secBase.Authority;
 import ch.patchcode.jback.secBase.PendingRegistration;
+import ch.patchcode.jback.security.authorities.ApiAuthority;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-import java.util.Collections;
+
+import static java.util.Arrays.asList;
 
 public class TemporaryAuthentication implements Authentication {
 
@@ -23,7 +26,9 @@ public class TemporaryAuthentication implements Authentication {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return Collections.emptyList();
+        return asList(
+                ApiAuthority.of(Authority.CAN_CREATE_PERSON)
+        );
     }
 
     @Override
