@@ -15,6 +15,13 @@ public interface Person<
         > {
 
     /**
+     * Zero, one or more principals that can impersonate this person.
+     *
+     * @return list of principals that can take control over this person
+     */
+    List<TPrincipal> getPrincipals();
+
+    /**
      * A person may have zero or more roles. A role usually links a person to an organisation and defines the person's role within
      * that organisation.
      *

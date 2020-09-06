@@ -76,13 +76,6 @@ public class TemporaryAuthentication implements Authentication, ch.patchcode.jba
     // impl ch.patchcode.jback.secBase.secModelImpl.Principal
 
     @Override
-    public List<Person> getPersons() {
-
-        // TODO this is stupid and should go away. turn the reference around, person to principals.
-        return emptyList();
-    }
-
-    @Override
     public List<Authority> getBasicPrivileges() {
 
         return asList(Authority.CAN_CREATE_PERSON);

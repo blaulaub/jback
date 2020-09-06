@@ -5,6 +5,11 @@ import java.util.List;
 public class MyPerson implements Person<MyOrganisation, MyPerson, MyPrincipal, MyPrivilege, MyRole, MyUser> {
 
     @Override
+    public List<MyPrincipal> getPrincipals() {
+        return null;
+    }
+
+    @Override
     public List<MyRole> getRoles() {
 
         return null;

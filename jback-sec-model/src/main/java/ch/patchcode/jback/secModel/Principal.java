@@ -17,18 +17,6 @@ public interface Principal<
         > {
 
     /**
-     * Zero, one or more persons that this principal can impersonate. The list may be empty, but the principal may still have the
-     * privilege to create a new person.
-     * <p>
-     * Rationale: A principal may be a parent, the persons may be the parent's children managed by the parent.
-     * <p>
-     * Note: Vice versa, a person may have more than one principal, e.g., a child usually has two parents.
-     *
-     * @return list of persons this principal may impersonate
-     */
-    List<TPerson> getPersons();
-
-    /**
      * Zero or more privileges that the (or usually: any) principal always has. E.g., a principal should be able to create at
      * least one person for himself to impersonate.
      *
