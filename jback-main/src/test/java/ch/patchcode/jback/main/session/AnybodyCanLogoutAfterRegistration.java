@@ -23,7 +23,11 @@ public class AnybodyCanLogoutAfterRegistration {
     private final RestApi api;
 
     @Autowired
-    public AnybodyCanLogoutAfterRegistration(@LocalServerPort int port, TestRestTemplate restTemplate, ObjectMapper objectMapper) {
+    public AnybodyCanLogoutAfterRegistration(
+            @LocalServerPort int port,
+            TestRestTemplate restTemplate,
+            ObjectMapper objectMapper
+    ) {
         this.api = new RestApi(new RestSession(port, restTemplate, objectMapper));
     }
 

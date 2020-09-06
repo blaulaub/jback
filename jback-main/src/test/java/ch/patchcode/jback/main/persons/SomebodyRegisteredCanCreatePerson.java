@@ -23,7 +23,11 @@ public class SomebodyRegisteredCanCreatePerson {
     private final RestApi api;
 
     @Autowired
-    public SomebodyRegisteredCanCreatePerson(@LocalServerPort int port, TestRestTemplate restTemplate, ObjectMapper objectMapper) {
+    public SomebodyRegisteredCanCreatePerson(
+            @LocalServerPort int port,
+            TestRestTemplate restTemplate,
+            ObjectMapper objectMapper
+    ) {
         this.api = new RestApi(new RestSession(port, restTemplate, objectMapper));
     }
 
@@ -47,10 +51,8 @@ public class SomebodyRegisteredCanCreatePerson {
                 .checkResultIsSuccess();
 
         // create person
-        var createdPerson = api.personsPostNewPerson(newPerson)
-                .checkResultIsSuccess()
-                .andReturnBody();
-
+        api.personsPostNewPerson(newPerson)
+                .checkResultIsSuccess();
     }
 
 }
