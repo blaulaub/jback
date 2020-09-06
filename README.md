@@ -2,12 +2,26 @@
 
 This is a server backend.
 
+# The modules
 
-## The modules
+(alphabetically)
 
-* **jback-sec-model** declares a simple, generic security model
+* **jback-api** defines and implements the JPA using Spring Web
 * **jback-core** provides the business logic
 * **jback-jpa** implements persistence using JPA and Spring Data 
-* **jback-sec** implements security using Spring Security
-* **jback-api** defines and implements the JPA using Spring Web
 * **jback-main** ties everything together to a runnable jar
+* **jback-sec-base** declares fundamental security things shared between `jback-core` and `jback-security`
+* **jback-sec-model** declares a simple, generic security model
+* **jback-security** implements security using Spring Security
+
+# Usage 
+
+Undefined.
+
+# Deployment
+
+Undefined.
+
+# Requirements
+
+Undefined.
