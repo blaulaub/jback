@@ -14,6 +14,10 @@ This is a server backend.
 * **jback-sec-model** declares a simple, generic security model
 * **jback-security** implements security using Spring Security
 
+# Compile
+
+`mvn compile` should do.
+
 # Usage 
 
 Undefined.
