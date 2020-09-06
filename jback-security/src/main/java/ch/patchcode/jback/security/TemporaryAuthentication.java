@@ -2,7 +2,6 @@ package ch.patchcode.jback.security;
 
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
-import ch.patchcode.jback.secBase.secModelImpl.Person;
 import ch.patchcode.jback.security.authorities.ApiAuthority;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +10,6 @@ import java.util.Collection;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
 public class TemporaryAuthentication implements Authentication, ch.patchcode.jback.secBase.secModelImpl.Principal {
