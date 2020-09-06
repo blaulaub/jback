@@ -1,6 +1,6 @@
-package ch.patchcode.jback.secBase;
+package ch.patchcode.jback.secBase.secModelImpl;
 
-public enum Authority {
+public enum Authority implements ch.patchcode.jback.secModel.Privilege {
 
     CAN_CREATE_PERSON {
         @Override

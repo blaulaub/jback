@@ -33,6 +33,9 @@ public class RestApi {
         ));
     }
 
+    /**
+     * Gets the session info from {@code /api/v1/session/}.
+     */
     public SessionGet sessionGet() {
         return new SessionGet(restSession.get(
                 "/api/v1/session/",
@@ -49,6 +52,9 @@ public class RestApi {
 
     }
 
+    /**
+     * Posts a {@link Person.Draft} to {@code /api/v1/persons}.
+     */
     public PersonPostNewPerson personsPostNewPerson(Person.Draft newPerson) throws Exception {
         return new PersonPostNewPerson(restSession.post(
                 "/api/v1/persons",

@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security.authorities;
 
-import ch.patchcode.jback.secBase.Authority;
+import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum ApiAuthority implements GrantedAuthority {

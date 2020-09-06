@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security;
 
-import ch.patchcode.jback.secBase.Authority;
+import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.security.authorities.ApiAuthority;
 import org.springframework.security.core.Authentication;
