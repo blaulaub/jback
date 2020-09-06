@@ -23,4 +23,9 @@ public class PersonServiceImpl implements PersonService {
     public Optional<Person> getPerson(UUID id) {
         return personRepository.findOne(id);
     }
+
+    @Override
+    public Person create(Person.Draft draft) {
+        return personRepository.create(draft);
+    }
 }

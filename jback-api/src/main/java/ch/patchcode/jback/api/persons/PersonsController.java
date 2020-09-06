@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+import static ch.patchcode.jback.api.persons.Person.fromDomain;
+
 @RestController
 @RequestMapping("/api/v1/persons")
 public class PersonsController {
@@ -22,12 +24,12 @@ public class PersonsController {
     @GetMapping("{id}")
     public Person getPersonById(@PathVariable("id") UUID id) throws NotFoundException {
 
-        return personService.getPerson(id).map(Person::from).orElseThrow(NotFoundException::new);
+        return personService.getPerson(id).map(Person::fromDomain).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping
-    public Person createPerson(PersonDraft draft) {
+    public Person createPerson(@RequestBody Person.Draft draft) {
 
-        throw new RuntimeException("not implemented");
+        return fromDomain(personService.create(draft.toDomain()));
     }
 }

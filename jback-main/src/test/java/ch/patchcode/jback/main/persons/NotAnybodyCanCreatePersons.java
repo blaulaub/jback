@@ -1,6 +1,6 @@
 package ch.patchcode.jback.main.persons;
 
-import ch.patchcode.jback.api.persons.PersonDraft;
+import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.main.MainTestConfiguration;
 import ch.patchcode.jback.main.restApi.RestApi;
 import ch.patchcode.jback.main.util.RestSession;
@@ -28,12 +28,14 @@ public class NotAnybodyCanCreatePersons {
     @Test
     void withoutAuthorization_creatingPerson_fails() throws Exception {
 
-        PersonDraft newPerson = new PersonDraft.Builder()
+        Person.Draft newPerson = new Person.Draft.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
                 .build();
 
-        // TODO should return 401 or 403
-        assertThrows(RuntimeException.class, () -> api.personsPostNewPerson(newPerson));
+        // TODO should fail with 401 or 403
+        var createdPerson = api.personsPostNewPerson(newPerson)
+                .checkResultIsSuccess()
+                .andReturnBody();
     }
 }

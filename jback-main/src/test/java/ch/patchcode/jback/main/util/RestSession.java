@@ -36,10 +36,11 @@ public class RestSession {
             Class<TResp> responseClass
     ) throws Exception {
 
+        HttpEntity<String> requestEntity = new HttpEntity<>(objectMapper.writeValueAsString(requestData), headers());
         ResponseEntity<TResp> result = restTemplate.exchange(
                 baseUrl() + url,
                 HttpMethod.POST,
-                new HttpEntity<>(objectMapper.writeValueAsString(requestData), headers()),
+                requestEntity,
                 responseClass);
         setCookies(result);
         return result;
@@ -70,7 +71,9 @@ public class RestSession {
     private HttpHeaders headers() {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.set("Cookie", String.join("; ", cookies.values()));
+        if (cookies.size() > 0) {
+            httpHeaders.set("Cookie", String.join("; ", cookies.values()));
+        }
         return httpHeaders;
     }
 

@@ -1,15 +1,12 @@
 package ch.patchcode.jback.jpa.clubs;
 
 import ch.patchcode.jback.core.clubs.ClubRepository;
-import ch.patchcode.jback.core.common.Address;
 import ch.patchcode.jback.core.clubs.Club;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
-
-import static ch.patchcode.jback.jpa.persons.PersonJpaRepoWrapper.toPerson;
 
 @Service
 public class ClubJpaRepoWrapper implements ClubRepository {
@@ -31,7 +28,7 @@ public class ClubJpaRepoWrapper implements ClubRepository {
         return new Club.Builder()
                 .setId(it.getId())
                 .setName(it.getName())
-                .setContact(toPerson(it.getContact()))
+                .setContact(it.getContact().toDomain())
                 .build();
     }
 }

@@ -1,20 +1,27 @@
 package ch.patchcode.jback.main.restApi;
 
 import ch.patchcode.jback.api.persons.Person;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PersonPostNewPerson implements RestApiInvocationResult<PersonPostNewPerson, Person> {
 
-    public PersonPostNewPerson(ResponseEntity<Person> post) {
+    private final ResponseEntity<Person> response;
+
+    public PersonPostNewPerson(ResponseEntity<Person> response) {
+        this.response = response;
     }
 
     @Override
     public PersonPostNewPerson checkResultIsSuccess() {
-        return null;
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        return this;
     }
 
     @Override
     public ResponseEntity<Person> andReturn() {
-        return null;
+        return response;
     }
 }

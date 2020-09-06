@@ -1,7 +1,6 @@
 package ch.patchcode.jback.main.restApi;
 
 import ch.patchcode.jback.api.persons.Person;
-import ch.patchcode.jback.api.persons.PersonDraft;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.registration.VerificationCode;
@@ -50,7 +49,7 @@ public class RestApi {
 
     }
 
-    public PersonPostNewPerson personsPostNewPerson(PersonDraft newPerson) throws Exception {
+    public PersonPostNewPerson personsPostNewPerson(Person.Draft newPerson) throws Exception {
         return new PersonPostNewPerson(restSession.post(
                 "/api/v1/persons",
                 newPerson,

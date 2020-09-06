@@ -23,4 +23,14 @@ public class PersonServiceFake implements PersonService {
     public Optional<Person> getPerson(UUID id) {
         return Optional.ofNullable(persons.get(id));
     }
+
+    @Override
+    public Person create(Person.Draft draft) {
+        var builder = new Person.Builder();
+        builder.setId(UUID.randomUUID());
+        builder.setFirstName(draft.getFirstName());
+        builder.setLastName(draft.getLastName());
+        draft.getAddress().ifPresent(builder::setAddress);
+        return builder.build();
+    }
 }

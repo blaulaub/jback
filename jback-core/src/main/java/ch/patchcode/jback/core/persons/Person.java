@@ -19,4 +19,17 @@ public interface Person {
 
     class Builder extends Person_Builder {
     }
+
+    @FreeBuilder
+    interface Draft {
+
+        String getFirstName();
+
+        String getLastName();
+
+        Optional<Address> getAddress();
+
+        class Builder extends Person_Draft_Builder {
+        }
+    }
 }

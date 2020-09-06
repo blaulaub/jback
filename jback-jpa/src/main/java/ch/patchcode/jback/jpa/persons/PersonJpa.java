@@ -1,5 +1,7 @@
 package ch.patchcode.jback.jpa.persons;
 
+import ch.patchcode.jback.core.common.Address;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +9,7 @@ import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity
-public class Person {
+public class PersonJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -85,5 +87,19 @@ public class Person {
 
     public void setAddress5(String address5) {
         this.address5 = address5;
+    }
+
+    public ch.patchcode.jback.core.persons.Person toDomain() {
+        return new ch.patchcode.jback.core.persons.Person.Builder()
+                .setId(getId())
+                .setFirstName(getFirstName())
+                .setLastName(getLastName())
+                .setAddress(new Address.Builder().setLines(new String[]{
+                        getAddress1(),
+                        getAddress2(),
+                        getAddress3(),
+                        getAddress4(),
+                        getAddress5()
+                }).build()).build();
     }
 }
