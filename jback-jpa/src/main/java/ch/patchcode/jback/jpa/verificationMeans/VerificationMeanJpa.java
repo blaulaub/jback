@@ -1,5 +1,7 @@
 package ch.patchcode.jback.jpa.verificationMeans;
 
+import ch.patchcode.jback.jpa.principals.PrincipalJpa;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -17,6 +19,17 @@ public abstract class VerificationMeanJpa {
 
     public UUID getId() {
         return id;
+    }
+
+    @ManyToOne
+    private PrincipalJpa principal;
+
+    public PrincipalJpa getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(PrincipalJpa principal) {
+        this.principal = principal;
     }
 
     public abstract <R> R accept(VerificationMeanJpa.Visitor<R> registrationHandler);

@@ -27,10 +27,6 @@ public class PrincipalJpa {
     @ElementCollection
     private List<String> authorities;
 
-    // TODO I don't think CascadeType.All is a good choice
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<VerificationMeanJpa> verificationMeans;
-
     public List<PersonJpa> getPersons() {
         return persons;
     }
@@ -45,13 +41,5 @@ public class PrincipalJpa {
 
     public void setAuthorities(List<String> authorities) {
         this.authorities = authorities;
-    }
-
-    public List<VerificationMeanJpa> getVerificationMeans() {
-        return verificationMeans;
-    }
-
-    public void setVerificationMeans(List<VerificationMeanJpa> verificationMeans) {
-        this.verificationMeans = verificationMeans;
     }
 }
