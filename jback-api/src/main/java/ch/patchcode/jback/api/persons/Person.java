@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
-import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 
 import java.util.Optional;
 import java.util.UUID;

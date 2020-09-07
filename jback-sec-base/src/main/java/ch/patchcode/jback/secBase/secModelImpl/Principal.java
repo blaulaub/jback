@@ -10,4 +10,9 @@ public interface Principal extends ch.patchcode.jback.secModel.Principal<Authori
      * List of means the principal can be verified by.
      */
     List<VerificationMean> getMeans();
+
+    // from secModel.Principal
+
+    @Override
+    List<Authority> getBasicPrivileges();
 }
