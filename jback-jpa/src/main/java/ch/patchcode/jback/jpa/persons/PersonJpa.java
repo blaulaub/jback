@@ -3,6 +3,7 @@ package ch.patchcode.jback.jpa.persons;
 import ch.patchcode.jback.core.common.Address;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = PersonJpa.ENTITY_NAME)
@@ -32,6 +33,9 @@ public class PersonJpa {
     private String address4;
 
     private String address5;
+
+    @ElementCollection
+    private List<String> authorities;
 
     public String getFirstName() {
         return firstName;
@@ -87,6 +91,14 @@ public class PersonJpa {
 
     public void setAddress5(String address5) {
         this.address5 = address5;
+    }
+
+    public List<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<String> authorities) {
+        this.authorities = authorities;
     }
 
     public ch.patchcode.jback.core.persons.Person toDomain() {

@@ -21,13 +21,13 @@ public class PrincipalJpa {
         return id;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     private List<PersonJpa> persons;
 
     @ElementCollection
     private List<String> authorities;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<VerificationMeanJpa> verificationMeans;
 
     public List<PersonJpa> getPersons() {
