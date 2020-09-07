@@ -2,14 +2,14 @@ package ch.patchcode.jback.jpa.persons;
 
 import ch.patchcode.jback.core.common.Address;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
+@Entity(name = PersonJpa.ENTITY_NAME)
+@Table(name = PersonJpa.ENTITY_NAME)
 public class PersonJpa {
+
+    public final static String ENTITY_NAME = "Person";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
