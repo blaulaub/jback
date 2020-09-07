@@ -11,7 +11,7 @@ package ch.patchcode.jback.secModel;
 public interface User<
         TOrganisation extends Organisation,
         TPerson extends Person<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
-        TPrincipal extends Principal<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
+        TPrincipal extends Principal<TPrivilege>,
         TPrivilege extends Privilege,
         TRole extends Role<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
         TUser extends User<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>
