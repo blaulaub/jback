@@ -12,8 +12,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static ch.patchcode.jback.jpa.util.SomeData.personOf;
+import static ch.patchcode.jback.jpa.util.SomeData.principalOf;
 import static java.util.Collections.singletonList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {JpaTestConfiguration.class})
@@ -51,20 +54,4 @@ class PrincipalJpaRepositoryTest {
         assertIterableEquals(principal.get().getAuthorities(), authorities);
     }
 
-    private PrincipalJpa principalOf(
-            List<PersonJpa> persons,
-            List<String> authorities
-    ) {
-        var principal = new PrincipalJpa();
-        principal.setPersons(persons);
-        principal.setAuthorities(authorities);
-        return principal;
-    }
-
-    private PersonJpa personOf(String firstName, String lastName) {
-        var person = new PersonJpa();
-        person.setFirstName(firstName);
-        person.setLastName(lastName);
-        return person;
-    }
 }
