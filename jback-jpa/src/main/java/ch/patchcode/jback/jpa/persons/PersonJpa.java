@@ -9,7 +9,7 @@ import java.util.UUID;
 @Table(name = PersonJpa.ENTITY_NAME)
 public class PersonJpa {
 
-    public final static String ENTITY_NAME = "Person";
+    public final static String ENTITY_NAME = "Persons";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
