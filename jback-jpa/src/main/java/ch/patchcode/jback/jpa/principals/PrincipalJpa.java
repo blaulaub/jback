@@ -21,12 +21,13 @@ public class PrincipalJpa {
         return id;
     }
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany
     private List<PersonJpa> persons;
 
     @ElementCollection
     private List<String> authorities;
 
+    // TODO I don't think CascadeType.All is a good choice
     @OneToMany(cascade=CascadeType.ALL)
     private List<VerificationMeanJpa> verificationMeans;
 

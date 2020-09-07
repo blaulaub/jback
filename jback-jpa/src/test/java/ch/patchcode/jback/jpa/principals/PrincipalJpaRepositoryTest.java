@@ -19,27 +19,34 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration(classes = {JpaTestConfiguration.class})
 class PrincipalJpaRepositoryTest {
 
-    private final PrincipalJpaRepository repository;
+    private final PrincipalJpaRepository principalRepository;
+
+    // not under test, but we also need this for related entities
+    private final PersonJpaRepository personJpaRepository;
 
     @Autowired
-    public PrincipalJpaRepositoryTest(PrincipalJpaRepository repository) {
-        this.repository = repository;
+    public PrincipalJpaRepositoryTest(
+            PrincipalJpaRepository principalRepository,
+            PersonJpaRepository personJpaRepository
+    ) {
+        this.principalRepository = principalRepository;
+        this.personJpaRepository = personJpaRepository;
     }
 
     @Test
-    void test() {
+    void save_and_findById() {
 
         // arrange
-        List<PersonJpa> persons = singletonList(personOf("Huckleberry", "Finn"));
+        List<PersonJpa> persons = personJpaRepository.saveAll(singletonList(personOf("Huckleberry", "Finn")));
         List<String> authorities = singletonList("CAN_HELP_JIM");
         List<VerificationMeanJpa> verificationMeans = singletonList(smsVerificationOf("+491806672255"));
 
         // act
-        var id = repository.save(principalOf(persons, authorities, verificationMeans)).getId();
-        var person = repository.findById(id);
+        var id = principalRepository.save(principalOf(persons, authorities, verificationMeans)).getId();
+        var principal = principalRepository.findById(id);
 
         // assert
-        assertTrue(person.isPresent());
+        assertTrue(principal.isPresent());
     }
 
     private PrincipalJpa principalOf(List<PersonJpa> persons, List<String> authorities, List<VerificationMeanJpa> verificationMeans) {
