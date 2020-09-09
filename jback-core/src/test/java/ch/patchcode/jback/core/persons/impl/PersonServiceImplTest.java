@@ -34,7 +34,7 @@ class PersonServiceImplTest {
         // arrange
         var id = UUID.randomUUID();
         var expected = Optional.of(new Person.Builder().buildPartial());
-        when(personRepository.findOne(eq(id))).thenReturn(expected);
+        when(personRepository.findById(eq(id))).thenReturn(expected);
 
         // act
         var actual = service.getPerson(id);

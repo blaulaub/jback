@@ -21,7 +21,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Optional<Person> getPerson(UUID id) {
-        return personRepository.findOne(id);
+        return personRepository.findById(id);
     }
 
     @Override

@@ -44,6 +44,12 @@ public interface Person extends ch.patchcode.jback.secBase.secModelImpl.Person {
 
         Optional<Address> getAddress();
 
+        List<Principal> getPrincipals();
+
+        List<Role> getRoles();
+
+        List<Authority> getExtraPrivileges();
+
         class Builder extends Person_Draft_Builder {
         }
     }

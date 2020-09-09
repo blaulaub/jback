@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
+import static java.util.Arrays.asList;
+
 @Entity(name = PersonJpa.ENTITY_NAME)
 @Table(name = PersonJpa.ENTITY_NAME)
 public class PersonJpa {

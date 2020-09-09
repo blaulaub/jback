@@ -21,7 +21,7 @@ public class PersonJpaRepoWrapper implements PersonRepository {
     }
 
     @Override
-    public Optional<ch.patchcode.jback.core.persons.Person> findOne(UUID id) {
+    public Optional<ch.patchcode.jback.core.persons.Person> findById(UUID id) {
 
         return personJpaRepository.findById(id).map(PersonJpa::toDomain);
     }

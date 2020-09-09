@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public interface PersonRepository {
 
-    Optional<Person> findOne(UUID id);
+    Optional<Person> findById(UUID id);
 
     Person create(Person.Draft draft);
 }

@@ -34,11 +34,6 @@ public class SomebodyRegisteredCanCreatePerson {
     @Test
     void afterRegistration_creatingPerson_succeeds() throws Exception {
 
-        Person.Draft newPerson = new Person.Draft.Builder()
-                .setFirstName("Tom")
-                .setLastName("Sawyer")
-                .build();
-
         // post registration
         var pendingRegistration = api.registrationPostData(someInitialRegistrationData())
                 .checkResultIsSuccess()
@@ -51,6 +46,11 @@ public class SomebodyRegisteredCanCreatePerson {
                 .checkResultIsSuccess();
 
         // create person
+        Person.Draft newPerson = new Person.Draft.Builder()
+                .setFirstName("Tom")
+                .setLastName("Sawyer")
+                .build();
+
         api.personsPostNewPerson(newPerson)
                 .checkResultIsSuccess();
     }
