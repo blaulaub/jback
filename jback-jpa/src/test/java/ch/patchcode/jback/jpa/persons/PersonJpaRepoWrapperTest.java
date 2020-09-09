@@ -29,7 +29,6 @@ class PersonJpaRepoWrapperTest {
         var draft = new Person.Draft.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setAddress(new Address.Builder().setLines(new String[]{}).build())
                 // TODO: address
                 // TODO: principal
                 // TODO: role

@@ -104,16 +104,37 @@ public class PersonJpa {
     }
 
     public ch.patchcode.jback.core.persons.Person toDomain() {
+
+        Address.Builder addressBuilder = new Address.Builder();
+        if (getAddress1() != null) {
+            addressBuilder.addLines(getAddress1());
+            {
+                if (getAddress2() != null) {
+                    addressBuilder.addLines(getAddress2());
+                    {
+                        if (getAddress3() != null) {
+                            addressBuilder.addLines(getAddress3());
+                            {
+                                if (getAddress4() != null) {
+                                    addressBuilder.addLines(getAddress4());
+                                    {
+                                        if (getAddress5() != null) {
+                                            addressBuilder.addLines(getAddress5());
+                                            // TODO my cyclomatic complexity is bigger than yours
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Address address = addressBuilder.build();
         return new ch.patchcode.jback.core.persons.Person.Builder()
                 .setId(getId())
                 .setFirstName(getFirstName())
                 .setLastName(getLastName())
-                .setAddress(new Address.Builder().setLines(new String[]{
-                        getAddress1(),
-                        getAddress2(),
-                        getAddress3(),
-                        getAddress4(),
-                        getAddress5()
-                }).build()).build();
+                .setAddress(address).build();
     }
 }

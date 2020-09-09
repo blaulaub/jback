@@ -37,10 +37,10 @@ public class SomeData {
 
     public static Address someAddress() {
         return new Address.Builder()
-                .setLines(new String[]{
+                .addLines(
                         "Technoparkstrasse 1",
                         "8051 Zürich"
-                })
+                )
                 .build();
     }
 }

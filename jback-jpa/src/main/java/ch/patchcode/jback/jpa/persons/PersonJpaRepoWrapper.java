@@ -6,6 +6,7 @@ import ch.patchcode.jback.core.persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -41,9 +42,10 @@ public class PersonJpaRepoWrapper implements PersonRepository {
         return personJpaRepository.save(person).toDomain();
     }
 
-    private static void ifPresentThenTransfer(String[] lines, int idx, Consumer<String> consumer) {
-        if (lines.length > idx) {
-            consumer.accept(lines[idx]);
+    // TODO this was good when lines was String[], but may be bad now that lines is List<>
+    private static void ifPresentThenTransfer(List<String> lines, int idx, Consumer<String> consumer) {
+        if (lines.size() > idx) {
+            consumer.accept(lines.get(idx));
         }
     }
 }
