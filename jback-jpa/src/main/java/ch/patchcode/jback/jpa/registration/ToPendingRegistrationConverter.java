@@ -5,7 +5,7 @@ import ch.patchcode.jback.secBase.VerificationMean;
 
 import java.time.Instant;
 
-public class ToPendingRegistrationConverter implements Registration.RegistrationVisitor<PendingRegistration.Builder> {
+public class ToPendingRegistrationConverter implements Registration.Visitor<PendingRegistration.Builder> {
 
     public PendingRegistration convert(Registration registration) {
 
