@@ -51,8 +51,10 @@ public class PersonsController {
 
         // looks like a mixed concern: the api has to combine core and security here
         var person = personService.create(draft.toDomain());
-        context.setAuthentication(authorizationManager.tryGetUpgrade(callerAuth, person));
+        Authentication nextEffectiveAuth = authorizationManager.tryGetUpgrade(callerAuth, person);
+        // TODO ensure that the nextEffectiveAuth is in the list of the person's principals !!!
 
+        context.setAuthentication(nextEffectiveAuth);
         return fromDomain(person);
     }
 }
