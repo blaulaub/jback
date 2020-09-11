@@ -3,13 +3,13 @@ package ch.patchcode.jback.api.persons;
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.UUID;
+
+import static ch.patchcode.jback.api.persons.Person.fromDomain;
 
 @RestController
 @RequestMapping("/api/v1/persons")
@@ -26,6 +26,15 @@ public class PersonsController {
     @GetMapping("{id}")
     public Person getPersonById(@PathVariable("id") UUID id) throws NotFoundException {
 
-        return personService.getPerson(id).map(Person::from).orElseThrow(NotFoundException::new);
+        return personService.getPerson(id).map(Person::fromDomain).orElseThrow(NotFoundException::new);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('CAN_CREATE_PERSON')")
+    public Person createPerson(@RequestBody Person.Draft draft) {
+
+        var context = SecurityContextHolder.getContext();
+
+        return fromDomain(personService.create(draft.toDomain()));
     }
 }

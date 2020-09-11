@@ -8,7 +8,7 @@ import java.util.UUID;
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Registration {
 
-    public abstract <R> R accept(Registration.RegistrationVisitor<R> registrationHandler);
+    public abstract <R> R accept(Visitor<R> registrationHandler);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,7 +63,7 @@ public abstract class Registration {
     public static class ConsoleRegistration extends Registration {
 
         @Override
-        public <R> R accept(RegistrationVisitor<R> registrationHandler) {
+        public <R> R accept(Visitor<R> registrationHandler) {
 
             return registrationHandler.visit(this);
         }
@@ -84,7 +84,7 @@ public abstract class Registration {
         }
 
         @Override
-        public <R> R accept(RegistrationVisitor<R> registrationHandler) {
+        public <R> R accept(Visitor<R> registrationHandler) {
 
             return registrationHandler.visit(this);
         }
@@ -105,13 +105,13 @@ public abstract class Registration {
         }
 
         @Override
-        public <R> R accept(RegistrationVisitor<R> registrationHandler) {
+        public <R> R accept(Visitor<R> registrationHandler) {
 
             return registrationHandler.visit(this);
         }
     }
 
-    interface RegistrationVisitor<R> {
+    interface Visitor<R> {
 
         R visit(Registration.ConsoleRegistration registrationByConsole);
 

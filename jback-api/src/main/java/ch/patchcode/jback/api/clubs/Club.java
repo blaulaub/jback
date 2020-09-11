@@ -21,7 +21,7 @@ public interface Club {
                 .setName(club.getName())
                 .setUrl(club.getUrl());
 
-        club.getContact().map(Person::from).ifPresent(builder::setContact);
+        club.getContact().map(Person::fromDomain).ifPresent(builder::setContact);
 
         return builder.build();
     }

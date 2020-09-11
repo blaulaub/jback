@@ -1,13 +1,16 @@
 package ch.patchcode.jback.jpa.persons;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import ch.patchcode.jback.core.common.Address;
+
+import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
-@Entity
-public class Person {
+@Entity(name = PersonJpa.ENTITY_NAME)
+@Table(name = PersonJpa.ENTITY_NAME)
+public class PersonJpa {
+
+    public final static String ENTITY_NAME = "Persons";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,6 +33,9 @@ public class Person {
     private String address4;
 
     private String address5;
+
+    @ElementCollection
+    private List<String> authorities;
 
     public String getFirstName() {
         return firstName;
@@ -85,5 +91,27 @@ public class Person {
 
     public void setAddress5(String address5) {
         this.address5 = address5;
+    }
+
+    public List<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<String> authorities) {
+        this.authorities = authorities;
+    }
+
+    public ch.patchcode.jback.core.persons.Person toDomain() {
+        return new ch.patchcode.jback.core.persons.Person.Builder()
+                .setId(getId())
+                .setFirstName(getFirstName())
+                .setLastName(getLastName())
+                .setAddress(new Address.Builder().setLines(new String[]{
+                        getAddress1(),
+                        getAddress2(),
+                        getAddress3(),
+                        getAddress4(),
+                        getAddress5()
+                }).build()).build();
     }
 }

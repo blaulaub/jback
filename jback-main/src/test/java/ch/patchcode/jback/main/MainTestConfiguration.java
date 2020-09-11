@@ -24,13 +24,13 @@ import java.util.Properties;
 @Configuration
 @EnableAutoConfiguration
 @Import({
-                ApiConfiguration.class,
-                JpaConfiguration.class,
-                CoreConfiguration.class,
-                SecurityConfiguration.class,
-                FakesConfiguration.class,
-                MainWebSecurityTestConfig.class
-        })
+        ApiConfiguration.class,
+        JpaConfiguration.class,
+        CoreConfiguration.class,
+        SecurityConfiguration.class,
+        FakesConfiguration.class,
+        MainWebSecurityTestConfig.class
+})
 @PropertySource("classpath:/main.test.properties")
 public class MainTestConfiguration {
 

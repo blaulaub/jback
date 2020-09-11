@@ -26,7 +26,7 @@ class PersonJpaRepositoryTest {
     public void save_and_findById() {
 
         // arrange
-        var input = new Person();
+        var input = new PersonJpa();
         input.setFirstName("Tom");
         input.setLastName("Sawyer");
         input.setAddress1("Technoparkstrasse 1");

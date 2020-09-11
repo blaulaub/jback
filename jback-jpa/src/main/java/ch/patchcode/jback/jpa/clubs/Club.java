@@ -1,6 +1,6 @@
 package ch.patchcode.jback.jpa.clubs;
 
-import ch.patchcode.jback.jpa.persons.Person;
+import ch.patchcode.jback.jpa.persons.PersonJpa;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -21,7 +21,7 @@ public class Club {
     private String uri;
 
     @ManyToOne
-    private Person contact;
+    private PersonJpa contact;
 
     public String getName() {
         return name;
@@ -39,11 +39,11 @@ public class Club {
         this.uri = uri;
     }
 
-    public Person getContact() {
+    public PersonJpa getContact() {
         return contact;
     }
 
-    public void setContact(Person contact) {
+    public void setContact(PersonJpa contact) {
         this.contact = contact;
     }
 }
