@@ -34,7 +34,6 @@ public class VerifyablePrincipal implements Authentication, ch.patchcode.jback.s
 
     // impl org.springframework.security.core.Authentication
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -69,7 +68,6 @@ public class VerifyablePrincipal implements Authentication, ch.patchcode.jback.s
     }
 
     // impl ch.patchcode.jback.secBase.secModelImpl.Principal
-
 
     @Override
     public List<VerificationMean> getMeans() {
