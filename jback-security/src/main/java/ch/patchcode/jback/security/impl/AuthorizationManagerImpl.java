@@ -1,7 +1,11 @@
-package ch.patchcode.jback.security;
+package ch.patchcode.jback.security.impl;
 
-import ch.patchcode.jback.secBase.SecurityManager;
-import ch.patchcode.jback.secBase.*;
+import ch.patchcode.jback.secBase.ConfirmationResult;
+import ch.patchcode.jback.secBase.InitialRegistrationData;
+import ch.patchcode.jback.secBase.PendingRegistration;
+import ch.patchcode.jback.secBase.VerificationCode;
+import ch.patchcode.jback.security.AuthorizationManager;
+import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +14,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SecurityManagerImpl implements SecurityManager {
+public class AuthorizationManagerImpl implements AuthorizationManager {
 
     private final RegistrationService registrationService;
 
     @Autowired
-    public SecurityManagerImpl(RegistrationService registrationService) {
+    public AuthorizationManagerImpl(RegistrationService registrationService) {
 
         this.registrationService = registrationService;
     }

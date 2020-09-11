@@ -1,6 +1,6 @@
 package ch.patchcode.jback.secBase;
 
-public interface SecurityManager {
+public interface AuthorizationManager {
 
     PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData);
 

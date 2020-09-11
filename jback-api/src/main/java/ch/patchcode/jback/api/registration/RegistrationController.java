@@ -1,7 +1,7 @@
 package ch.patchcode.jback.api.registration;
 
 import ch.patchcode.jback.secBase.PendingRegistration;
-import ch.patchcode.jback.secBase.SecurityManager;
+import ch.patchcode.jback.security.AuthorizationManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +20,18 @@ public class RegistrationController {
 
     private final static Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
 
-    private final SecurityManager securityManager;
+    private final AuthorizationManager authorizationManager;
 
     @Autowired
-    public RegistrationController(SecurityManager securityManager) {
+    public RegistrationController(AuthorizationManager authorizationManager) {
 
-        this.securityManager = securityManager;
+        this.authorizationManager = authorizationManager;
     }
 
     @PostMapping
     public PendingRegistrationInfo postInitialRegistration(@RequestBody InitialRegistrationData data) {
 
-        var id = securityManager.setupRegistration(data.toDomain()).getId();
+        var id = authorizationManager.setupRegistration(data.toDomain()).getId();
         return PendingRegistrationInfo.of(id);
     }
 
@@ -41,7 +41,7 @@ public class RegistrationController {
             @RequestBody VerificationCode verificationCode
     ) {
 
-        securityManager.authenticate(PendingRegistration.Id.of(id), verificationCode.toDomain());
+        authorizationManager.authenticate(PendingRegistration.Id.of(id), verificationCode.toDomain());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
