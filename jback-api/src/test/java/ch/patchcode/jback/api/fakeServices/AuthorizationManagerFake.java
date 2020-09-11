@@ -26,7 +26,7 @@ public class AuthorizationManagerFake implements AuthorizationManager {
     }
 
     @Override
-    public Authentication tryUpgrade(Authentication callerAuth, Person person) {
+    public Authentication tryGetUpgrade(Authentication callerAuth, Person person) {
 
         // don't upgrade
         return callerAuth;

@@ -65,7 +65,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public Authentication tryUpgrade(Authentication callerAuth, Person person) {
+    public Authentication tryGetUpgrade(Authentication callerAuth, Person person) {
 
         // TODO simple default: return input unmodified
         return callerAuth;
