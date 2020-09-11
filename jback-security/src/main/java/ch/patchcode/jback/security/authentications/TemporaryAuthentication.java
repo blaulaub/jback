@@ -36,34 +36,6 @@ public class TemporaryAuthentication implements Authentication {
         return lastName;
     }
 
-    // impl java.security.Principal
-
-    @Override
-    public String getName() {
-
-        return null;
-    }
-
-    // impl org.springframework.security.core.Authentication
-
-    @Override
-    public Object getCredentials() {
-
-        return null;
-    }
-
-    @Override
-    public Object getDetails() {
-
-        return null;
-    }
-
-    @Override
-    public String getPrincipal() {
-
-        return null;
-    }
-
     // impl ch.patchcode.jback.secBase.secModelImpl.Principal
 
     @Override

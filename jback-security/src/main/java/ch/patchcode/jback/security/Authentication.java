@@ -14,7 +14,10 @@ public interface Authentication extends org.springframework.security.core.Authen
     // impl java.security.Principal
 
     @Override
-    String getName();
+    default String getName() {
+
+        return null;
+    }
 
     // impl org.springframework.security.core.Authentication
 
@@ -25,13 +28,22 @@ public interface Authentication extends org.springframework.security.core.Authen
     }
 
     @Override
-    Object getCredentials();
+    default Object getCredentials() {
+
+        return null;
+    }
 
     @Override
-    Object getDetails();
+    default Object getDetails() {
+
+        return null;
+    }
 
     @Override
-    String getPrincipal();
+    default Object getPrincipal() {
+
+        return null;
+    }
 
     @Override
     default boolean isAuthenticated() {
