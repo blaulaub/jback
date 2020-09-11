@@ -41,7 +41,7 @@ public class SecurityManagerImpl implements SecurityManager {
             @Override
             public Void caseConfirmed() {
                 SecurityContextHolder.getContext()
-                        .setAuthentication(new TemporaryAuthentication(registrationId, pendingRegistration));
+                        .setAuthentication(new TemporaryAuthentication(pendingRegistration));
                 return null;
             }
 

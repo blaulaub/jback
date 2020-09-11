@@ -19,16 +19,12 @@ import static java.util.stream.Collectors.toList;
  */
 public class TemporaryAuthentication implements Authentication, ch.patchcode.jback.secBase.secModelImpl.Principal {
 
-    private final String principal;
-    private final String code;
     private final String firstName;
     private final String lastName;
     private final VerificationMean mean;
 
-    public TemporaryAuthentication(PendingRegistration.Id id, PendingRegistration registration) {
+    public TemporaryAuthentication(PendingRegistration registration) {
 
-        this.principal = id.getId().toString();
-        this.code = registration.getVerificationCode();
         this.firstName = registration.getFirstName();
         this.lastName = registration.getLastName();
         this.mean = registration.getVerificationMean();
@@ -49,7 +45,7 @@ public class TemporaryAuthentication implements Authentication, ch.patchcode.jba
     @Override
     public String getName() {
 
-        return principal;
+        return null;
     }
 
     // impl org.springframework.security.core.Authentication
@@ -63,19 +59,19 @@ public class TemporaryAuthentication implements Authentication, ch.patchcode.jba
     @Override
     public Object getCredentials() {
 
-        return code;
+        return null;
     }
 
     @Override
     public Object getDetails() {
 
-        return String.join(" ", firstName, lastName);
+        return null;
     }
 
     @Override
     public String getPrincipal() {
 
-        return principal;
+        return null;
     }
 
     @Override

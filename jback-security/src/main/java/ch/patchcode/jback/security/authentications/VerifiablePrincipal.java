@@ -14,14 +14,11 @@ import static java.util.stream.Collectors.toList;
 
 public class VerifiablePrincipal implements Authentication, ch.patchcode.jback.secBase.secModelImpl.Principal {
 
-    private final String principal;
-
     // TODO use immutable type
     private final List<VerificationMean> means;
 
     // this may not be the final constructor
-    public VerifiablePrincipal(String principal, List<VerificationMean> means) {
-        this.principal = principal;
+    public VerifiablePrincipal(List<VerificationMean> means) {
         this.means = means;
     }
 
@@ -53,7 +50,7 @@ public class VerifiablePrincipal implements Authentication, ch.patchcode.jback.s
 
     @Override
     public String getPrincipal() {
-        return principal;
+        return null;
     }
 
     @Override
