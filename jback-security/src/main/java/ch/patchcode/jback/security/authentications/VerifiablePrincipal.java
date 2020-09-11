@@ -2,17 +2,13 @@ package ch.patchcode.jback.security.authentications;
 
 import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
-import ch.patchcode.jback.security.authorities.ApiAuthority;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
+import ch.patchcode.jback.security.Authentication;
 
-import java.util.Collection;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
-import static java.util.stream.Collectors.toList;
 
-public class VerifiablePrincipal implements Authentication, ch.patchcode.jback.secBase.secModelImpl.Principal {
+public class VerifiablePrincipal implements Authentication {
 
     // TODO use immutable type
     private final List<VerificationMean> means;
@@ -32,13 +28,6 @@ public class VerifiablePrincipal implements Authentication, ch.patchcode.jback.s
     // impl org.springframework.security.core.Authentication
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        // TODO maybe should consider person's extra authorities, too
-        return getBasicPrivileges().stream().map(ApiAuthority::of).collect(toList());
-    }
-
-    @Override
     public Object getCredentials() {
         return null;
     }
@@ -51,17 +40,6 @@ public class VerifiablePrincipal implements Authentication, ch.patchcode.jback.s
     @Override
     public String getPrincipal() {
         return null;
-    }
-
-    @Override
-    public boolean isAuthenticated() {
-        return true;
-    }
-
-    @Override
-    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-
-        throw new IllegalArgumentException("immutable");
     }
 
     // impl ch.patchcode.jback.secBase.secModelImpl.Principal
