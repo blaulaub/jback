@@ -12,7 +12,7 @@ import java.util.List;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
-public class VerifyablePrincipal implements Authentication, ch.patchcode.jback.secBase.secModelImpl.Principal {
+public class VerifiablePrincipal implements Authentication, ch.patchcode.jback.secBase.secModelImpl.Principal {
 
     private final String principal;
 
@@ -20,7 +20,7 @@ public class VerifyablePrincipal implements Authentication, ch.patchcode.jback.s
     private final List<VerificationMean> means;
 
     // this may not be the final constructor
-    public VerifyablePrincipal(String principal, List<VerificationMean> means) {
+    public VerifiablePrincipal(String principal, List<VerificationMean> means) {
         this.principal = principal;
         this.means = means;
     }
