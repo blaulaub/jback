@@ -70,6 +70,6 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
 
         PersonalAuthentication personalAuthentication = new PersonalAuthentication(person, means);
-        return personalAuthenticationRepository.save(personalAuthentication);
+        return personalAuthenticationRepository.create(personalAuthentication);
     }
 }

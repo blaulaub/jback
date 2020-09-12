@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -129,7 +128,7 @@ class AuthorizationManagerImplTest {
         // arrange
         Person person = new Person.Builder().buildPartial();
         List<VerificationMean> means = emptyList();
-        when(personalAuthenticationRepository.save(any()))
+        when(personalAuthenticationRepository.create(any()))
                 .thenAnswer((Answer<PersonalAuthentication>) invocation
                         -> (PersonalAuthentication) invocation.getArguments()[0]);
 
@@ -139,6 +138,6 @@ class AuthorizationManagerImplTest {
         // assert
         assertEquals(person, auth.getHolder());
         assertIterableEquals(means, auth.getMeans());
-        verify(personalAuthenticationRepository, times(1)).save(eq(auth));
+        verify(personalAuthenticationRepository, times(1)).create(eq(auth));
     }
 }
