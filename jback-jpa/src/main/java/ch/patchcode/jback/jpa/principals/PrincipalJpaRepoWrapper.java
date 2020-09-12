@@ -1,7 +1,6 @@
 package ch.patchcode.jback.jpa.principals;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
-import ch.patchcode.jback.jpa.registration.ToRegistrationConverter;
 import ch.patchcode.jback.jpa.verificationMeans.VerificationMeanJpa;
 import ch.patchcode.jback.jpa.verificationMeans.VerificationMeanJpaRepository;
 import ch.patchcode.jback.secBase.VerificationMean;
@@ -62,26 +61,8 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
                     }
                 }))
                 .map(verificationMeanJpaRepository::save)
-                .map(it -> it.accept(new VerificationMeanJpa.Visitor<VerificationMean>() {
-                    @Override
-                    public VerificationMean visit(VerificationMeanJpa.ConsoleVerification consoleVerification) {
-                        return new VerificationMean.VerificationByConsole();
-                    }
-
-                    @Override
-                    public VerificationMean visit(VerificationMeanJpa.EmailVerification emailVerification) {
-                        return new VerificationMean.VerificationByEmail.Builder()
-                                .setEmailAddress(emailVerification.getEmail())
-                                .build();
-                    }
-
-                    @Override
-                    public VerificationMean visit(VerificationMeanJpa.SmsVerification smsVerification) {
-                        return new VerificationMean.VerificationBySms.Builder()
-                                .setPhoneNumber(smsVerification.getPhoneNumber())
-                                .build();
-                    }
-                })).collect(toList());
+                .map(VerificationMeanJpa::toDomain)
+                .collect(toList());
 
         return new PersonalAuthentication(
                 principal.getSelf().toDomain(),

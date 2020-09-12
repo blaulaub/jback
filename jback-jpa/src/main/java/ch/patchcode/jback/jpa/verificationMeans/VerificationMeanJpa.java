@@ -1,6 +1,7 @@
 package ch.patchcode.jback.jpa.verificationMeans;
 
 import ch.patchcode.jback.jpa.principals.PrincipalJpa;
+import ch.patchcode.jback.secBase.VerificationMean;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -41,6 +42,31 @@ public abstract class VerificationMeanJpa {
         R visit(EmailVerification emailVerification);
 
         R visit(SmsVerification smsVerification);
+    }
+
+    public VerificationMean toDomain() {
+
+        return this.accept(new VerificationMeanJpa.Visitor<VerificationMean>() {
+
+            @Override
+            public VerificationMean visit(VerificationMeanJpa.ConsoleVerification consoleVerification) {
+                return new VerificationMean.VerificationByConsole();
+            }
+
+            @Override
+            public VerificationMean visit(VerificationMeanJpa.EmailVerification emailVerification) {
+                return new VerificationMean.VerificationByEmail.Builder()
+                        .setEmailAddress(emailVerification.getEmail())
+                        .build();
+            }
+
+            @Override
+            public VerificationMean visit(VerificationMeanJpa.SmsVerification smsVerification) {
+                return new VerificationMean.VerificationBySms.Builder()
+                        .setPhoneNumber(smsVerification.getPhoneNumber())
+                        .build();
+            }
+        });
     }
 
     @Entity
