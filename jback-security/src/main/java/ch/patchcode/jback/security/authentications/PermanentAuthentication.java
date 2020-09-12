@@ -8,13 +8,13 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 
-public class VerifiablePrincipal implements Authentication {
+public class PermanentAuthentication implements Authentication {
 
     // TODO use immutable type
     private final List<VerificationMean> means;
 
     // this may not be the final constructor
-    public VerifiablePrincipal(List<VerificationMean> means) {
+    public PermanentAuthentication(List<VerificationMean> means) {
         this.means = means;
     }
 

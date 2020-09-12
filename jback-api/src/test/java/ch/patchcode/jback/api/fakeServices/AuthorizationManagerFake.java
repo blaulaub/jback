@@ -5,7 +5,7 @@ import ch.patchcode.jback.secBase.InitialRegistrationData;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationCode;
 import ch.patchcode.jback.security.AuthorizationManager;
-import ch.patchcode.jback.security.authentications.VerifiablePrincipal;
+import ch.patchcode.jback.security.authentications.PermanentAuthentication;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -26,7 +26,7 @@ public class AuthorizationManagerFake implements AuthorizationManager {
     }
 
     @Override
-    public VerifiablePrincipal createAuthorizationFor(Person person) {
+    public PermanentAuthentication createAuthorizationFor(Person person) {
 
         // TODO implement when necessary
         throw new RuntimeException("not implemented");

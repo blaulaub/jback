@@ -4,7 +4,6 @@ import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.security.Authentication;
 import ch.patchcode.jback.security.AuthorizationManager;
-import ch.patchcode.jback.security.authentications.VerifiablePrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,6 +36,12 @@ public class PersonsController {
         return personService.getPerson(id).map(Person::fromDomain).orElseThrow(NotFoundException::new);
     }
 
+    /**
+     * Let the currently authenticated principal create a person for himself.
+     * <p>
+     * Ideally, this is part of the registration, where anybody, after passing the
+     * initial verification, then provides some more details about her own personality.
+     */
     @PostMapping("me")
     @PreAuthorize("hasAuthority('CAN_CREATE_OWN_PERSON')")
     public Person createOwnPerson(@RequestBody Person.Draft draft) {
