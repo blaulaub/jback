@@ -3,6 +3,7 @@ package ch.patchcode.jback.security.authentications;
 import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.security.Authentication;
+import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
@@ -10,12 +11,11 @@ import static java.util.Collections.singletonList;
 
 public class PermanentAuthentication implements Authentication {
 
-    // TODO use immutable type
-    private final List<VerificationMean> means;
+    private final ImmutableList<VerificationMean> means;
 
     // this may not be the final constructor
     public PermanentAuthentication(List<VerificationMean> means) {
-        this.means = means;
+        this.means = ImmutableList.copyOf(means);
     }
 
     // impl ch.patchcode.jback.secBase.secModelImpl.Principal
