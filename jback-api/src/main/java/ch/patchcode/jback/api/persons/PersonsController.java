@@ -36,6 +36,20 @@ public class PersonsController {
         return personService.getPerson(id).map(Person::fromDomain).orElseThrow(NotFoundException::new);
     }
 
+    @PostMapping("me")
+    @PreAuthorize("hasAuthority('CAN_CREATE_OWN_PERSON')")
+    public Person createOwnPerson(@RequestBody Person.Draft draft) {
+
+        var context = SecurityContextHolder.getContext();
+        var callerAuth = (Authentication) context.getAuthentication();
+
+        var person = personService.create(draft.toDomain());
+        // TODO after we have a person, make sure the session's authentication's principal is permanent
+        // TODO (i.e., at the end the person must be the owner or client of some permanent prinicipal)
+
+        return fromDomain(person);
+    }
+
     /**
      * Lets an authorized user create a new person.
      *
@@ -43,13 +57,13 @@ public class PersonsController {
      * @return the new person
      */
     @PostMapping
-    @PreAuthorize("hasAuthority('CAN_CREATE_PERSON')")
-    public Person createPerson(@RequestBody Person.Draft draft) {
+    @PreAuthorize("hasAuthority('CAN_CREATE_CLIENT_PERSON')")
+    public Person createClientPerson(@RequestBody Person.Draft draft) {
 
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Authentication) context.getAuthentication();
 
-        var person = personService.create(draft.toDomain());
+        var person = personService.createClient(draft.toDomain(), callerAuth);
         // TODO after we have a person, make sure the session's authentication's principal is permanent
         // TODO (i.e., at the end the person must be the owner or client of some permanent prinicipal)
 

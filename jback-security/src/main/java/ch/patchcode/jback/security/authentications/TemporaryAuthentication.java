@@ -47,6 +47,6 @@ public class TemporaryAuthentication implements Authentication {
     @Override
     public List<Authority> getBasicPrivileges() {
 
-        return singletonList(Authority.CAN_CREATE_PERSON);
+        return singletonList(Authority.CAN_CREATE_OWN_PERSON);
     }
 }

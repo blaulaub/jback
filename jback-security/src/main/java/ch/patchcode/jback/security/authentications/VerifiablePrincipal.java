@@ -28,6 +28,6 @@ public class VerifiablePrincipal implements Authentication {
     @Override
     public List<Authority> getBasicPrivileges() {
 
-        return singletonList(Authority.CAN_CREATE_PERSON);
+        return singletonList(Authority.CAN_CREATE_CLIENT_PERSON);
     }
 }

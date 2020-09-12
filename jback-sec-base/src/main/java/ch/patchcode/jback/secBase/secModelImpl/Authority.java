@@ -2,10 +2,23 @@ package ch.patchcode.jback.secBase.secModelImpl;
 
 public enum Authority implements ch.patchcode.jback.secModel.Privilege {
 
-    CAN_CREATE_PERSON {
+    /**
+     * Authorized to create the person that represents the own identity.
+     */
+    CAN_CREATE_OWN_PERSON {
         @Override
         public <R> R accept(Visitor<R> visitor) {
-            return visitor.caseCanCreatePerson();
+            return visitor.caseCanCreateOwnPerson();
+        }
+    },
+
+    /**
+     * Authorized to create some other person that is not oneself.
+     */
+    CAN_CREATE_CLIENT_PERSON {
+        @Override
+        public <R> R accept(Visitor<R> visitor) {
+            return visitor.caseCanCreateClientPerson();
         }
     };
 
@@ -13,6 +26,8 @@ public enum Authority implements ch.patchcode.jback.secModel.Privilege {
 
     public interface Visitor<R> {
 
-        R caseCanCreatePerson();
+        R caseCanCreateOwnPerson();
+
+        R caseCanCreateClientPerson();
     }
 }
