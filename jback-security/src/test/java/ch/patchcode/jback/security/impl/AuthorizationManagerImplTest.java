@@ -1,9 +1,6 @@
 package ch.patchcode.jback.security.impl;
 
-import ch.patchcode.jback.secBase.ConfirmationResult;
-import ch.patchcode.jback.secBase.PendingRegistration;
-import ch.patchcode.jback.secBase.VerificationCode;
-import ch.patchcode.jback.secBase.VerificationMean;
+import ch.patchcode.jback.secBase.*;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
@@ -21,7 +18,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 class AuthorizationManagerImplTest {
@@ -36,6 +33,23 @@ class AuthorizationManagerImplTest {
     void setUp() {
 
         initMocks(this);
+    }
+
+    @Test
+    void setupRegistration_calls_registrationService() {
+
+        // arrange
+        InitialRegistrationData data = new InitialRegistrationData.Builder().buildPartial();
+
+        var expectedId = PendingRegistration.Id.of(UUID.randomUUID());
+        when(registrationService.setupRegistration(eq(data))).thenReturn(expectedId);
+
+        // act
+        var actualId = manager.setupRegistration(data);
+
+        // assert
+        assertEquals(expectedId, actualId);
+        verify(registrationService, times(1)).setupRegistration(eq(data));
     }
 
     @Test
