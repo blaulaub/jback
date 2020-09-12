@@ -1,12 +1,9 @@
 package ch.patchcode.jback.security.impl;
 
-import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.ConfirmationResult;
 import ch.patchcode.jback.secBase.InitialRegistrationData;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationCode;
-import ch.patchcode.jback.secBase.secModelImpl.Principal;
-import ch.patchcode.jback.security.Authentication;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
@@ -62,12 +59,5 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
                 throw new BadCredentialsException("Invalid code provided for " + registrationId.getId());
             }
         });
-    }
-
-    @Override
-    public Authentication tryGetUpgrade(Authentication callerAuth, Person person) {
-
-        // TODO simple default: return input unmodified
-        return callerAuth;
     }
 }

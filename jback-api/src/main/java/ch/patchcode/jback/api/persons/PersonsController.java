@@ -49,12 +49,10 @@ public class PersonsController {
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Authentication) context.getAuthentication();
 
-        // looks like a mixed concern: the api has to combine core and security here
         var person = personService.create(draft.toDomain());
-        Authentication nextEffectiveAuth = authorizationManager.tryGetUpgrade(callerAuth, person);
-        // TODO ensure that the nextEffectiveAuth is in the list of the person's principals !!!
+        // TODO after we have a person, make sure the session's authentication's principal is permanent
+        // TODO (i.e., at the end the person must be the owner or client of some permanent prinicipal)
 
-        context.setAuthentication(nextEffectiveAuth);
         return fromDomain(person);
     }
 }
