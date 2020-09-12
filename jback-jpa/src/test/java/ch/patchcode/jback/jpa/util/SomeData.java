@@ -43,7 +43,7 @@ public class SomeData {
             List<String> authorities
     ) {
         var principal = new PrincipalJpa();
-        principal.setPersons(persons);
+        principal.setClients(persons);
         principal.setAuthorities(authorities);
         return principal;
     }

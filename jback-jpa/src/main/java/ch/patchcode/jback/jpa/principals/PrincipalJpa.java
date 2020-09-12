@@ -1,7 +1,6 @@
 package ch.patchcode.jback.jpa.principals;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
-import ch.patchcode.jback.jpa.verificationMeans.VerificationMeanJpa;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,18 +20,29 @@ public class PrincipalJpa {
         return id;
     }
 
+    @OneToOne
+    private PersonJpa self;
+
     @ManyToMany
-    private List<PersonJpa> persons;
+    private List<PersonJpa> clients;
 
     @ElementCollection
     private List<String> authorities;
 
-    public List<PersonJpa> getPersons() {
-        return persons;
+    public PersonJpa getSelf() {
+        return self;
     }
 
-    public void setPersons(List<PersonJpa> persons) {
-        this.persons = persons;
+    public void setSelf(PersonJpa self) {
+        this.self = self;
+    }
+
+    public List<PersonJpa> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<PersonJpa> clients) {
+        this.clients = clients;
     }
 
     public List<String> getAuthorities() {

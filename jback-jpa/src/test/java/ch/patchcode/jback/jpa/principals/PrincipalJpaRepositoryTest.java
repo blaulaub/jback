@@ -50,7 +50,7 @@ class PrincipalJpaRepositoryTest {
 
         // assert
         assertTrue(principal.isPresent());
-        assertIterableEquals(principal.get().getPersons(), persons);
+        assertIterableEquals(principal.get().getClients(), persons);
         assertIterableEquals(principal.get().getAuthorities(), authorities);
     }
 
