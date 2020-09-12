@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository {
@@ -34,40 +35,15 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
     public PersonalAuthentication create(PersonalAuthentication personalAuthentication) {
 
         PrincipalJpa principal = persist(personalAuthentication);
+        List<VerificationMean> means = toList(persist(principal, personalAuthentication.getMeans().stream()));
+        return new PersonalAuthentication(principal.getSelf().toDomain(), means);
+    }
 
-        List<VerificationMean> means = personalAuthentication.getMeans().stream()
-                .map(it -> it.accept(new VerificationMean.VerificationMeanVisitor<VerificationMeanJpa>() {
-                    @Override
-                    public VerificationMeanJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
-                        VerificationMeanJpa.ConsoleVerification consoleVerification = new VerificationMeanJpa.ConsoleVerification();
-                        consoleVerification.setPrincipal(principal);
-                        return consoleVerification;
-                    }
+    private Stream<VerificationMeanJpa> persist(PrincipalJpa principal, Stream<VerificationMean> means) {
 
-                    @Override
-                    public VerificationMeanJpa visit(VerificationMean.VerificationByEmail verificationByEmail) {
-                        VerificationMeanJpa.EmailVerification emailVerification = new VerificationMeanJpa.EmailVerification();
-                        emailVerification.setPrincipal(principal);
-                        emailVerification.setEmail(verificationByEmail.getEmailAddress());
-                        return emailVerification;
-                    }
-
-                    @Override
-                    public VerificationMeanJpa visit(VerificationMean.VerificationBySms verificationBySms) {
-                        VerificationMeanJpa.SmsVerification smsVerification = new VerificationMeanJpa.SmsVerification();
-                        smsVerification.setPrincipal(principal);
-                        smsVerification.setPhoneNumber(verificationBySms.getPhoneNumber());
-                        return smsVerification;
-                    }
-                }))
-                .map(verificationMeanJpaRepository::save)
-                .map(VerificationMeanJpa::toDomain)
-                .collect(toList());
-
-        return new PersonalAuthentication(
-                principal.getSelf().toDomain(),
-                means
-        );
+        return means
+                .map(it -> VerificationMeanJpa.fromDomain(principal, it))
+                .map(verificationMeanJpaRepository::save);
     }
 
     private PrincipalJpa persist(PersonalAuthentication personalAuthentication) {
@@ -76,7 +52,13 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
         draft.setSelf(PersonJpa.fromDomain(personalAuthentication.getHolder()));
         draft.setAuthorities(emptyList());
         draft.setClients(emptyList());
-        var principal = principalJpaRepository.save(draft);
-        return principal;
+        return principalJpaRepository.save(draft);
+    }
+
+    private List<VerificationMean> toList(Stream<VerificationMeanJpa> persisted) {
+
+        return persisted
+                .map(VerificationMeanJpa::toDomain)
+                .collect(Collectors.toList());
     }
 }

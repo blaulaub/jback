@@ -44,6 +44,34 @@ public abstract class VerificationMeanJpa {
         R visit(SmsVerification smsVerification);
     }
 
+    public static VerificationMeanJpa fromDomain(PrincipalJpa principal, VerificationMean mean) {
+
+        return mean.accept(new VerificationMean.VerificationMeanVisitor<VerificationMeanJpa>() {
+            @Override
+            public VerificationMeanJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
+                VerificationMeanJpa.ConsoleVerification consoleVerification = new VerificationMeanJpa.ConsoleVerification();
+                consoleVerification.setPrincipal(principal);
+                return consoleVerification;
+            }
+
+            @Override
+            public VerificationMeanJpa visit(VerificationMean.VerificationByEmail verificationByEmail) {
+                VerificationMeanJpa.EmailVerification emailVerification = new VerificationMeanJpa.EmailVerification();
+                emailVerification.setPrincipal(principal);
+                emailVerification.setEmail(verificationByEmail.getEmailAddress());
+                return emailVerification;
+            }
+
+            @Override
+            public VerificationMeanJpa visit(VerificationMean.VerificationBySms verificationBySms) {
+                VerificationMeanJpa.SmsVerification smsVerification = new VerificationMeanJpa.SmsVerification();
+                smsVerification.setPrincipal(principal);
+                smsVerification.setPhoneNumber(verificationBySms.getPhoneNumber());
+                return smsVerification;
+            }
+        });
+    }
+
     public VerificationMean toDomain() {
 
         return this.accept(new VerificationMeanJpa.Visitor<VerificationMean>() {
