@@ -4,10 +4,12 @@ import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.InitialRegistrationData;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationCode;
+import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,7 +28,7 @@ public class AuthorizationManagerFake implements AuthorizationManager {
     }
 
     @Override
-    public PersonalAuthentication createAuthorizationFor(Person person) {
+    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
 
         // TODO implement when necessary
         throw new RuntimeException("not implemented");

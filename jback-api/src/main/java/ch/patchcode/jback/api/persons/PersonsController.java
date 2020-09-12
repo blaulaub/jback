@@ -39,16 +39,24 @@ public class PersonsController {
     /**
      * Let the currently authenticated principal create a person for himself.
      * <p>
+     * As part of this, a new principal is created for the new person, and the new
+     * principal takes over the current session.
+     * <p>
      * Ideally, this is part of the registration, where anybody, after passing the
      * initial verification, then provides some more details about her own personality.
+     * In that process, the current, temporary principal will be replaced by the
+     * permanent principal for that person.
      */
     @PostMapping("me")
     @PreAuthorize("hasAuthority('CAN_CREATE_OWN_PERSON')")
     public Person createOwnPerson(@RequestBody Person.Draft draft) {
 
+        var context = SecurityContextHolder.getContext();
+        var callerAuth = (Authentication) context.getAuthentication();
+
         var person = personService.create(draft.toDomain());
-        var auth = authorizationManager.createAuthorizationFor(person);
-        SecurityContextHolder.getContext().setAuthentication(auth);
+        var auth = authorizationManager.createAuthorizationFor(person, callerAuth.getMeans());
+        context.setAuthentication(auth);
 
         return fromDomain(person);
     }
