@@ -1,6 +1,7 @@
 package ch.patchcode.jback.jpa.persons;
 
 import ch.patchcode.jback.core.common.Address;
+import ch.patchcode.jback.core.persons.Person;
 
 import javax.persistence.*;
 import java.util.List;
@@ -103,7 +104,21 @@ public class PersonJpa {
         this.authorities = authorities;
     }
 
-    public ch.patchcode.jback.core.persons.Person toDomain() {
+    public static PersonJpa fromDomain(Person person) {
+
+        var entity = new PersonJpa();
+        entity.setFirstName(person.getFirstName());
+        entity.setLastName(person.getLastName());
+        // TODO my redundancy is higher than yours
+        person.getAddress().map(Address::getLines).filter(it -> it.size() > 0).map(it -> it.get(0)).ifPresent(entity::setAddress1);
+        person.getAddress().map(Address::getLines).filter(it -> it.size() > 1).map(it -> it.get(1)).ifPresent(entity::setAddress2);
+        person.getAddress().map(Address::getLines).filter(it -> it.size() > 2).map(it -> it.get(2)).ifPresent(entity::setAddress3);
+        person.getAddress().map(Address::getLines).filter(it -> it.size() > 3).map(it -> it.get(3)).ifPresent(entity::setAddress4);
+        person.getAddress().map(Address::getLines).filter(it -> it.size() > 4).map(it -> it.get(4)).ifPresent(entity::setAddress5);
+        return entity;
+    }
+
+    public Person toDomain() {
 
         Address.Builder addressBuilder = new Address.Builder();
         if (getAddress1() != null) {
