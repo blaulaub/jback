@@ -51,7 +51,7 @@ public class SomebodyRegisteredCanCreatePerson {
                 .setLastName("Sawyer")
                 .build();
 
-        api.personsPostNewPerson(newPerson)
+        api.personsPostNewMe(newPerson)
                 .checkResultIsSuccess();
     }
 

@@ -3,12 +3,16 @@ package ch.patchcode.jback.security.impl;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.*;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
+import ch.patchcode.jback.security.authentications.PersonalAuthentication;
+import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -28,6 +32,9 @@ class AuthorizationManagerImplTest {
 
     @Mock
     private RegistrationService registrationService;
+
+    @Mock
+    private PersonalAuthenticationRepository personalAuthenticationRepository;
 
     @InjectMocks
     private AuthorizationManagerImpl manager;
@@ -122,6 +129,9 @@ class AuthorizationManagerImplTest {
         // arrange
         Person person = new Person.Builder().buildPartial();
         List<VerificationMean> means = emptyList();
+        when(personalAuthenticationRepository.save(any()))
+                .thenAnswer((Answer<PersonalAuthentication>) invocation
+                        -> (PersonalAuthentication) invocation.getArguments()[0]);
 
         // act
         var auth = manager.createAuthorizationFor(person, means);
@@ -129,5 +139,6 @@ class AuthorizationManagerImplTest {
         // assert
         assertEquals(person, auth.getHolder());
         assertIterableEquals(means, auth.getMeans());
+        verify(personalAuthenticationRepository, times(1)).save(eq(auth));
     }
 }

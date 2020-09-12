@@ -4,6 +4,7 @@ import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.*;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
+import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
@@ -16,11 +17,16 @@ import org.springframework.stereotype.Service;
 public class AuthorizationManagerImpl implements AuthorizationManager {
 
     private final RegistrationService registrationService;
+    private final PersonalAuthenticationRepository personalAuthenticationRepository;
 
     @Autowired
-    public AuthorizationManagerImpl(RegistrationService registrationService) {
+    public AuthorizationManagerImpl(
+            RegistrationService registrationService,
+            PersonalAuthenticationRepository personalAuthenticationRepository
+    ) {
 
         this.registrationService = registrationService;
+        this.personalAuthenticationRepository = personalAuthenticationRepository;
     }
 
     @Override
@@ -64,7 +70,6 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
 
         PersonalAuthentication personalAuthentication = new PersonalAuthentication(person, means);
-        // TODO this should be persisted
-        return personalAuthentication;
+        return personalAuthenticationRepository.save(personalAuthentication);
     }
 }
