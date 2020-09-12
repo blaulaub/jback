@@ -1,5 +1,6 @@
 package ch.patchcode.jback.security.impl;
 
+import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.*;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
@@ -12,9 +13,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -111,5 +114,20 @@ class AuthorizationManagerImplTest {
         var tempAuth = (TemporaryAuthentication) auth;
         assertEquals(pendingRegistration.getFirstName(), tempAuth.getFirstName());
         assertEquals(pendingRegistration.getLastName(), tempAuth.getLastName());
+    }
+
+    @Test
+    void createAuthorizationFor() {
+
+        // arrange
+        Person person = new Person.Builder().buildPartial();
+        List<VerificationMean> means = emptyList();
+
+        // act
+        var auth = manager.createAuthorizationFor(person, means);
+
+        // assert
+        assertEquals(person, auth.getHolder());
+        assertIterableEquals(means, auth.getMeans());
     }
 }

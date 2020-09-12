@@ -63,7 +63,8 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     @Override
     public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
 
-        // TODO implement when necessary
-        throw new RuntimeException("not implemented");
+        PersonalAuthentication personalAuthentication = new PersonalAuthentication(person, means);
+        // TODO this should be persisted
+        return personalAuthentication;
     }
 }

@@ -17,7 +17,7 @@ public class PersonalAuthentication implements Authentication {
 
     public PersonalAuthentication(
             Person holder,
-            List<VerificationMean> means
+            Iterable<VerificationMean> means
     ) {
         this.holder = holder;
         this.means = ImmutableList.copyOf(means);
