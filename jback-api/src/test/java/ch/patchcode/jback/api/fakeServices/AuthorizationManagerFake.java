@@ -1,9 +1,11 @@
 package ch.patchcode.jback.api.fakeServices;
 
+import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.InitialRegistrationData;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationCode;
 import ch.patchcode.jback.security.AuthorizationManager;
+import ch.patchcode.jback.security.authentications.VerifiablePrincipal;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -21,5 +23,12 @@ public class AuthorizationManagerFake implements AuthorizationManager {
     public void authenticate(PendingRegistration.Id registrationId, VerificationCode verificationCode) {
 
         // do nothing
+    }
+
+    @Override
+    public VerifiablePrincipal createAuthorizationFor(Person person) {
+
+        // TODO implement when necessary
+        throw new RuntimeException("not implemented");
     }
 }

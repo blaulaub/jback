@@ -1,5 +1,6 @@
 package ch.patchcode.jback.security.impl;
 
+import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.ConfirmationResult;
 import ch.patchcode.jback.secBase.InitialRegistrationData;
 import ch.patchcode.jback.secBase.PendingRegistration;
@@ -7,6 +8,7 @@ import ch.patchcode.jback.secBase.VerificationCode;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
+import ch.patchcode.jback.security.authentications.VerifiablePrincipal;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -59,5 +61,12 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
                 throw new BadCredentialsException("Invalid code provided for " + registrationId.getId());
             }
         });
+    }
+
+    @Override
+    public VerifiablePrincipal createAuthorizationFor(Person person) {
+
+        // TODO implement when necessary
+        throw new RuntimeException("not implemented");
     }
 }

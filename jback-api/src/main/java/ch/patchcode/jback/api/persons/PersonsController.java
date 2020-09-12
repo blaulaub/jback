@@ -4,6 +4,7 @@ import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.security.Authentication;
 import ch.patchcode.jback.security.AuthorizationManager;
+import ch.patchcode.jback.security.authentications.VerifiablePrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,12 +41,9 @@ public class PersonsController {
     @PreAuthorize("hasAuthority('CAN_CREATE_OWN_PERSON')")
     public Person createOwnPerson(@RequestBody Person.Draft draft) {
 
-        var context = SecurityContextHolder.getContext();
-        var callerAuth = (Authentication) context.getAuthentication();
-
         var person = personService.create(draft.toDomain());
-        // TODO after we have a person, make sure the session's authentication's principal is permanent
-        // TODO (i.e., at the end the person must be the owner or client of some permanent prinicipal)
+        var auth = authorizationManager.createAuthorizationFor(person);
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
         return fromDomain(person);
     }
