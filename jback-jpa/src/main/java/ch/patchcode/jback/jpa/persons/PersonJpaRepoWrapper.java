@@ -6,10 +6,11 @@ import ch.patchcode.jback.core.persons.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Consumer;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class PersonJpaRepoWrapper implements PersonRepository {
@@ -32,20 +33,12 @@ public class PersonJpaRepoWrapper implements PersonRepository {
         var person = new PersonJpa();
         person.setFirstName(draft.getFirstName());
         person.setLastName(draft.getLastName());
-        draft.getAddress().map(Address::getLines).ifPresent(lines -> {
-            ifPresentThenTransfer(lines, 0, person::setAddress1);
-            ifPresentThenTransfer(lines, 1, person::setAddress2);
-            ifPresentThenTransfer(lines, 2, person::setAddress3);
-            ifPresentThenTransfer(lines, 3, person::setAddress4);
-            ifPresentThenTransfer(lines, 4, person::setAddress5);
-        });
+        draft.getAddress()
+                .map(Address::getLines)
+                .map(lines -> IntStream.range(0, lines.size())
+                        .mapToObj(idx -> PersonJpa.AddressLine.of(idx, lines.get(idx)))
+                        .collect(toList()))
+                .ifPresent(person::setAddressLines);
         return personJpaRepository.save(person).toDomain();
-    }
-
-    // TODO this was good when lines was String[], but may be bad now that lines is List<>
-    private static void ifPresentThenTransfer(List<String> lines, int idx, Consumer<String> consumer) {
-        if (lines.size() > idx) {
-            consumer.accept(lines.get(idx));
-        }
     }
 }
