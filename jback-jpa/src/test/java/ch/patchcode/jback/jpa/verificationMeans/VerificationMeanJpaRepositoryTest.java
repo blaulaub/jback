@@ -3,6 +3,7 @@ package ch.patchcode.jback.jpa.verificationMeans;
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
 import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
 import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpaRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,23 @@ class VerificationMeanJpaRepositoryTest {
     private final VerificationMeanJpaRepository verificationMeanRepository;
 
     // not under test, but we also need these for related entities
-    private final PersonalAuthenticationJpaRepository principalRepository;
+    private final PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository;
+
+    private PersonalAuthenticationJpa principal;
 
     @Autowired
     public VerificationMeanJpaRepositoryTest(
             VerificationMeanJpaRepository verificationMeanRepository,
-            PersonalAuthenticationJpaRepository principalRepository
-    ) {
+            PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository) {
+
         this.verificationMeanRepository = verificationMeanRepository;
-        this.principalRepository = principalRepository;
+        this.personalAuthenticationJpaRepository = personalAuthenticationJpaRepository;
+    }
+
+    @BeforeEach
+    void setUp() {
+
+        principal = personalAuthenticationJpaRepository.save(new PersonalAuthenticationJpa());
     }
 
     @Test
@@ -36,18 +45,19 @@ class VerificationMeanJpaRepositoryTest {
     void save_and_findById() {
 
         // arrange
-        var principal = principalRepository.save(new PersonalAuthenticationJpa());
-        var smsPhoneNumber = "+491806672255";
+        var mean = smsVerificationOf("+491806672255", principal);
 
         // act
-        var id = verificationMeanRepository.save(smsVerificationOf(smsPhoneNumber, principal)).getId();
+        var id = verificationMeanRepository.save(mean).getId();
         var verificationMean = verificationMeanRepository.findById(id);
 
         // assert
         assertTrue(verificationMean.isPresent());
-        assertEquals(principal, verificationMean.get().getPersonalAuthentication());
-        assertTrue(verificationMean.get() instanceof VerificationMeanJpa.SmsVerification);
-        assertEquals(smsPhoneNumber, ((VerificationMeanJpa.SmsVerification) verificationMean.get()).getPhoneNumber());
+        assertAll(
+                () -> assertEquals(principal, verificationMean.get().getPersonalAuthentication()),
+                () -> assertTrue(mean.getClass().isAssignableFrom(verificationMean.get().getClass()))
+        );
+        assertEquals(mean.getPhoneNumber(), ((VerificationMeanJpa.SmsVerification) verificationMean.get()).getPhoneNumber());
     }
 
     private VerificationMeanJpa.SmsVerification smsVerificationOf(String phoneNumber, PersonalAuthenticationJpa principal) {
