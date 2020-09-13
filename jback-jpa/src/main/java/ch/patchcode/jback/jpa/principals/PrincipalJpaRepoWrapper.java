@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository {
@@ -34,16 +33,20 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
     @Override
     public PersonalAuthentication create(PersonalAuthentication personalAuthentication) {
 
-        PrincipalJpa principal = persist(personalAuthentication);
-        List<VerificationMean> means = toList(persist(principal, personalAuthentication.getMeans().stream()));
-        return new PersonalAuthentication(principal.getSelf().toDomain(), means);
+        var principal = persist(personalAuthentication);
+        var means = persist(principal, personalAuthentication.getMeans());
+        return new PersonalAuthentication(principal.getSelf().toDomain(), toDomain(means));
     }
 
-    private Stream<VerificationMeanJpa> persist(PrincipalJpa principal, Stream<VerificationMean> means) {
+    private List<VerificationMeanJpa> persist(PrincipalJpa principal, List<VerificationMean> means) {
 
-        return means
+        return verificationMeanJpaRepository.saveAll(means.stream()
                 .map(it -> VerificationMeanJpa.fromDomain(principal, it))
-                .map(verificationMeanJpaRepository::save);
+                .collect(toList()));
+    }
+
+    private List<VerificationMean> toDomain(List<VerificationMeanJpa> persisted) {
+        return persisted.stream().map(VerificationMeanJpa::toDomain).collect(toList());
     }
 
     private PrincipalJpa persist(PersonalAuthentication personalAuthentication) {
@@ -53,12 +56,5 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
         draft.setAuthorities(emptyList());
         draft.setClients(emptyList());
         return principalJpaRepository.save(draft);
-    }
-
-    private List<VerificationMean> toList(Stream<VerificationMeanJpa> persisted) {
-
-        return persisted
-                .map(VerificationMeanJpa::toDomain)
-                .collect(Collectors.toList());
     }
 }
