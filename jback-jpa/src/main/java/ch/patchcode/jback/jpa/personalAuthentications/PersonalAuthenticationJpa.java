@@ -1,6 +1,8 @@
 package ch.patchcode.jback.jpa.personalAuthentications;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
+import ch.patchcode.jback.jpa.verificationMeans.VerificationMeanJpa;
+import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,6 +25,9 @@ public class PersonalAuthenticationJpa {
     @OneToOne
     private PersonJpa self;
 
+    @OneToMany(mappedBy = "personalAuthentication")
+    private List<VerificationMeanJpa> verificationMeans;
+
     @ManyToMany
     private List<PersonJpa> clients;
 
@@ -35,6 +40,15 @@ public class PersonalAuthenticationJpa {
 
     public void setSelf(PersonJpa self) {
         this.self = self;
+    }
+
+    public List<VerificationMeanJpa> getVerificationMeans() {
+        return verificationMeans;
+    }
+
+    public void setVerificationMeans(List<VerificationMeanJpa> verificationMeans) {
+
+        this.verificationMeans = verificationMeans;
     }
 
     public List<PersonJpa> getClients() {
@@ -51,5 +65,13 @@ public class PersonalAuthenticationJpa {
 
     public void setAuthorities(List<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public PersonalAuthentication toDomain() {
+
+        return new PersonalAuthentication.Builder()
+                .setHolder(getSelf().toDomain())
+                .addAllMeans(getVerificationMeans().stream().map(VerificationMeanJpa::toDomain))
+                .build();
     }
 }

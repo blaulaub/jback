@@ -23,14 +23,14 @@ public abstract class VerificationMeanJpa {
     }
 
     @ManyToOne
-    private PersonalAuthenticationJpa principal;
+    private PersonalAuthenticationJpa personalAuthentication;
 
-    public PersonalAuthenticationJpa getPrincipal() {
-        return principal;
+    public PersonalAuthenticationJpa getPersonalAuthentication() {
+        return personalAuthentication;
     }
 
-    public void setPrincipal(PersonalAuthenticationJpa principal) {
-        this.principal = principal;
+    public void setPersonalAuthentication(PersonalAuthenticationJpa personalAuthentication) {
+        this.personalAuthentication = personalAuthentication;
     }
 
     public abstract <R> R accept(VerificationMeanJpa.Visitor<R> registrationHandler);
@@ -50,14 +50,14 @@ public abstract class VerificationMeanJpa {
             @Override
             public VerificationMeanJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
                 VerificationMeanJpa.ConsoleVerification consoleVerification = new VerificationMeanJpa.ConsoleVerification();
-                consoleVerification.setPrincipal(principal);
+                consoleVerification.setPersonalAuthentication(principal);
                 return consoleVerification;
             }
 
             @Override
             public VerificationMeanJpa visit(VerificationMean.VerificationByEmail verificationByEmail) {
                 VerificationMeanJpa.EmailVerification emailVerification = new VerificationMeanJpa.EmailVerification();
-                emailVerification.setPrincipal(principal);
+                emailVerification.setPersonalAuthentication(principal);
                 emailVerification.setEmail(verificationByEmail.getEmailAddress());
                 return emailVerification;
             }
@@ -65,7 +65,7 @@ public abstract class VerificationMeanJpa {
             @Override
             public VerificationMeanJpa visit(VerificationMean.VerificationBySms verificationBySms) {
                 VerificationMeanJpa.SmsVerification smsVerification = new VerificationMeanJpa.SmsVerification();
-                smsVerification.setPrincipal(principal);
+                smsVerification.setPersonalAuthentication(principal);
                 smsVerification.setPhoneNumber(verificationBySms.getPhoneNumber());
                 return smsVerification;
             }

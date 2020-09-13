@@ -45,7 +45,7 @@ class VerificationMeanJpaRepositoryTest {
 
         // assert
         assertTrue(verificationMean.isPresent());
-        assertEquals(principal, verificationMean.get().getPrincipal());
+        assertEquals(principal, verificationMean.get().getPersonalAuthentication());
         assertTrue(verificationMean.get() instanceof VerificationMeanJpa.SmsVerification);
         assertEquals(smsPhoneNumber, ((VerificationMeanJpa.SmsVerification) verificationMean.get()).getPhoneNumber());
     }
@@ -53,7 +53,7 @@ class VerificationMeanJpaRepositoryTest {
     private VerificationMeanJpa.SmsVerification smsVerificationOf(String phoneNumber, PersonalAuthenticationJpa principal) {
         var smsVerification = new VerificationMeanJpa.SmsVerification();
         smsVerification.setPhoneNumber(phoneNumber);
-        smsVerification.setPrincipal(principal);
+        smsVerification.setPersonalAuthentication(principal);
         return smsVerification;
     }
 }
