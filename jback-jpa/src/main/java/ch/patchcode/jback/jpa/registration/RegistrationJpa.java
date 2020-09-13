@@ -15,6 +15,8 @@ public abstract class RegistrationJpa {
 
     public static final String ENTITY_NAME = "Registrations";
 
+    private static final FromDomainConverter fromDomainConverter = new FromDomainConverter();
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -67,7 +69,7 @@ public abstract class RegistrationJpa {
 
     public static RegistrationJpa fromDomain(PendingRegistration.Draft draft) {
 
-        return new FromDomainConverter().convert(draft);
+        return fromDomainConverter.convert(draft);
     }
 
     /**
@@ -145,6 +147,41 @@ public abstract class RegistrationJpa {
                             .setPhoneNumber(getPhoneNumber())
                             .build())
                     .build();
+        }
+    }
+
+    private static class FromDomainConverter implements VerificationMean.VerificationMeanVisitor<RegistrationJpa> {
+
+        public RegistrationJpa convert(PendingRegistration.Draft pendingRegistration) {
+
+            var result = pendingRegistration.getVerificationMean().accept(this);
+            result.setFirstName(pendingRegistration.getFirstName());
+            result.setLastName(pendingRegistration.getLastName());
+            result.setVerificationCode(pendingRegistration.getVerificationCode());
+            result.setExpiresAt(pendingRegistration.getExpiresAt().toEpochMilli());
+            return result;
+        }
+
+        @Override
+        public RegistrationJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
+
+            return new ConsoleRegistrationJpa();
+        }
+
+        @Override
+        public RegistrationJpa visit(VerificationMean.VerificationByEmail verificationByEmail) {
+
+            var result = new EmailRegistrationJpa();
+            result.setEmail(verificationByEmail.getEmailAddress());
+            return result;
+        }
+
+        @Override
+        public RegistrationJpa visit(VerificationMean.VerificationBySms verificationBySms) {
+
+            var result = new SmsRegistrationJpa();
+            result.setPhoneNumber(verificationBySms.getPhoneNumber());
+            return result;
         }
     }
 }

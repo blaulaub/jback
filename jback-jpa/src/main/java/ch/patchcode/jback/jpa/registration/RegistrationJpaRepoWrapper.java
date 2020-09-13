@@ -13,8 +13,6 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
 
     private final RegistrationJpaRepository registrationJpaRepository;
 
-    private final FromDomainConverter fromDomainConverter = new FromDomainConverter();
-
     @Autowired
     public RegistrationJpaRepoWrapper(RegistrationJpaRepository registrationJpaRepository) {
 
@@ -24,7 +22,7 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
     @Override
     public PendingRegistration create(PendingRegistration.Draft pendingRegistration) {
 
-        var entity = fromDomainConverter.convert(pendingRegistration);
+        var entity = RegistrationJpa.fromDomain(pendingRegistration);
         var saved = registrationJpaRepository.save(entity);
         return saved.toDomain();
     }
