@@ -4,47 +4,46 @@ import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.security.Authentication;
-import com.google.common.collect.ImmutableList;
+import org.inferred.freebuilder.FreeBuilder;
 
 import java.util.List;
 
 import static java.util.Collections.singletonList;
 
-public class PersonalAuthentication implements Authentication {
+@FreeBuilder
+public interface PersonalAuthentication extends Authentication {
 
-    private final Person holder;
-    private final ImmutableList<VerificationMean> means;
-
-    public PersonalAuthentication(
+    static PersonalAuthentication of(
             Person holder,
             Iterable<VerificationMean> means
     ) {
-        this.holder = holder;
-        this.means = ImmutableList.copyOf(means);
+        return new Builder()
+                .setHolder(holder)
+                .addAllMeans(means)
+                .build();
     }
 
-    public Person getHolder() {
-        return holder;
-    }
+    Person getHolder();
 
     // impl java.security.Principal
 
     @Override
-    public String getName() {
+    default String getName() {
 
-        return holder.getName();
+        return getHolder().getName();
     }
 
     // impl ch.patchcode.jback.secBase.secModelImpl.Principal
 
     @Override
-    public List<VerificationMean> getMeans() {
-        return means;
-    }
+    List<VerificationMean> getMeans();
 
     @Override
-    public List<Authority> getBasicPrivileges() {
+    default List<Authority> getBasicPrivileges() {
 
         return singletonList(Authority.CAN_CREATE_CLIENT_PERSON);
+    }
+
+    class Builder extends PersonalAuthentication_Builder {
     }
 }

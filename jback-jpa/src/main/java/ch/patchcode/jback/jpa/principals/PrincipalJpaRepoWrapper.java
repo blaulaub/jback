@@ -40,7 +40,7 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
 
         var principal = persist(personalAuthentication);
         var means = persist(principal, personalAuthentication.getMeans());
-        return new PersonalAuthentication(principal.getSelf().toDomain(), toDomain(means));
+        return PersonalAuthentication.of(principal.getSelf().toDomain(), toDomain(means));
     }
 
     private List<VerificationMeanJpa> persist(PrincipalJpa principal, List<VerificationMean> means) {
