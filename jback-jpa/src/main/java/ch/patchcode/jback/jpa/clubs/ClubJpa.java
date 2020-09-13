@@ -53,12 +53,12 @@ public class ClubJpa {
         this.contact = contact;
     }
 
-    public static Club toDomain(ClubJpa club) {
+    public Club toDomain() {
         Club.Builder builder = new Club.Builder()
-                .setId(club.getId())
-                .setName(club.getName())
-                .setContact(club.getContact().toDomain());
-        Optional.ofNullable(club.getUri()).map(URI::create).ifPresent(builder::setUrl);
+                .setId(getId())
+                .setName(getName());
+        Optional.ofNullable(getContact()).map(PersonJpa::toDomain).ifPresent(builder::setContact);
+        Optional.ofNullable(getUri()).map(URI::create).ifPresent(builder::setUrl);
         return builder.build();
     }
 }

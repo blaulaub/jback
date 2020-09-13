@@ -26,7 +26,7 @@ class PersonJpaRepoWrapperTest {
 
     @Test
     @Transactional
-    void save_and_findById() {
+    void create_and_findById() {
 
         // arrange
         var draft = new Person.Draft.Builder()
