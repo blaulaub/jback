@@ -46,7 +46,7 @@ public abstract class VerificationMeanJpa {
 
     public static VerificationMeanJpa fromDomain(PrincipalJpa principal, VerificationMean mean) {
 
-        return mean.accept(new VerificationMean.VerificationMeanVisitor<VerificationMeanJpa>() {
+        return mean.accept(new VerificationMean.VerificationMeanVisitor<>() {
             @Override
             public VerificationMeanJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
                 VerificationMeanJpa.ConsoleVerification consoleVerification = new VerificationMeanJpa.ConsoleVerification();
@@ -74,7 +74,7 @@ public abstract class VerificationMeanJpa {
 
     public VerificationMean toDomain() {
 
-        return this.accept(new VerificationMeanJpa.Visitor<VerificationMean>() {
+        return this.accept(new VerificationMeanJpa.Visitor<>() {
 
             @Override
             public VerificationMean visit(VerificationMeanJpa.ConsoleVerification consoleVerification) {

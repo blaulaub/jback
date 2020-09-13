@@ -68,21 +68,6 @@ public class PersonJpa {
         this.authorities = authorities;
     }
 
-    public static PersonJpa fromDomain(Person person) {
-
-        var entity = new PersonJpa();
-        entity.setFirstName(person.getFirstName());
-        entity.setLastName(person.getLastName());
-
-        person.getAddress()
-                .map(Address::getLines)
-                .map(lines -> IntStream.range(0, lines.size())
-                        .mapToObj(idx -> AddressLine.of(idx, lines.get(idx)))
-                        .collect(toList()))
-                .ifPresent(entity::setAddressLines);
-        return entity;
-    }
-
     public Person toDomain() {
 
         Person.Builder builder = new Person.Builder()

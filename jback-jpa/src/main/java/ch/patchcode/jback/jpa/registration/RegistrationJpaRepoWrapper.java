@@ -22,6 +22,9 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
         this.registrationJpaRepository = registrationJpaRepository;
     }
 
+    // TODO call this create
+    // TODO take a draft as input
+    // TODO return entity as output
     @Override
     public PendingRegistration.Id save(PendingRegistration pendingRegistration) {
 

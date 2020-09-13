@@ -3,6 +3,7 @@ package ch.patchcode.jback.jpa.registration;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationMean;
 
+// TODO consider inlining into JPA
 public class ToRegistrationConverter implements VerificationMean.VerificationMeanVisitor<RegistrationJpa> {
 
     public RegistrationJpa convert(PendingRegistration pendingRegistration) {

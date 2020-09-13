@@ -5,6 +5,7 @@ import ch.patchcode.jback.secBase.VerificationMean;
 
 import java.time.Instant;
 
+// TODO consider inlining into JPA
 public class ToPendingRegistrationConverter implements RegistrationJpa.Visitor<PendingRegistration.Builder> {
 
     public PendingRegistration convert(RegistrationJpa registration) {

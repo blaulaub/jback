@@ -1,8 +1,11 @@
 package ch.patchcode.jback.jpa.clubs;
 
+import ch.patchcode.jback.core.clubs.Club;
 import ch.patchcode.jback.jpa.persons.PersonJpa;
 
 import javax.persistence.*;
+import java.net.URI;
+import java.util.Optional;
 import java.util.UUID;
 
 @Entity(name = ClubJpa.ENTITY_NAME)
@@ -48,5 +51,14 @@ public class ClubJpa {
 
     public void setContact(PersonJpa contact) {
         this.contact = contact;
+    }
+
+    public static Club toDomain(ClubJpa club) {
+        Club.Builder builder = new Club.Builder()
+                .setId(club.getId())
+                .setName(club.getName())
+                .setContact(club.getContact().toDomain());
+        Optional.ofNullable(club.getUri()).map(URI::create).ifPresent(builder::setUrl);
+        return builder.build();
     }
 }
