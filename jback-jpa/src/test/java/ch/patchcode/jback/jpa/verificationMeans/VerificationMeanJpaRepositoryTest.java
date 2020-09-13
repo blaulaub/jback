@@ -18,10 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = {JpaTestConfiguration.class})
 class VerificationMeanJpaRepositoryTest {
 
-    private final VerificationMeanJpaRepository verificationMeanRepository;
-
-    // not under test, but we also need these for related entities
     private final PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository;
+    private final VerificationMeanJpaRepository repo;
 
     private PersonalAuthenticationJpa principal;
 
@@ -30,7 +28,7 @@ class VerificationMeanJpaRepositoryTest {
             VerificationMeanJpaRepository verificationMeanRepository,
             PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository) {
 
-        this.verificationMeanRepository = verificationMeanRepository;
+        this.repo = verificationMeanRepository;
         this.personalAuthenticationJpaRepository = personalAuthenticationJpaRepository;
     }
 
@@ -42,28 +40,80 @@ class VerificationMeanJpaRepositoryTest {
 
     @Test
     @Transactional
-    void save_and_findById() {
+    void consoleVerification_save_and_findById() {
 
         // arrange
-        var mean = smsVerificationOf("+491806672255", principal);
+        var mean = consoleVerification();
 
         // act
-        var id = verificationMeanRepository.save(mean).getId();
-        var verificationMean = verificationMeanRepository.findById(id);
+        var id = repo.save(mean).getId();
+        var verificationMean = repo.findById(id);
 
         // assert
         assertTrue(verificationMean.isPresent());
         assertAll(
                 () -> assertEquals(principal, verificationMean.get().getPersonalAuthentication()),
-                () -> assertTrue(mean.getClass().isAssignableFrom(verificationMean.get().getClass()))
+                () -> assertTrue(verificationMean.get() instanceof VerificationMeanJpa.ConsoleVerification)
+        );
+    }
+
+    @Test
+    @Transactional
+    void smsVerification_save_and_findById() {
+
+        // arrange
+        var mean = smsVerificationOf("+491806672255");
+
+        // act
+        var id = repo.save(mean).getId();
+        var verificationMean = repo.findById(id);
+
+        // assert
+        assertTrue(verificationMean.isPresent());
+        assertAll(
+                () -> assertEquals(principal, verificationMean.get().getPersonalAuthentication()),
+                () -> assertTrue(verificationMean.get() instanceof VerificationMeanJpa.SmsVerification)
         );
         assertEquals(mean.getPhoneNumber(), ((VerificationMeanJpa.SmsVerification) verificationMean.get()).getPhoneNumber());
     }
 
-    private VerificationMeanJpa.SmsVerification smsVerificationOf(String phoneNumber, PersonalAuthenticationJpa principal) {
+    @Test
+    @Transactional
+    void emailVerification_save_and_findById() {
+
+        // arrange
+        var mean = emailVerificationOf("admin@google.com");
+
+        // act
+        var id = repo.save(mean).getId();
+        var verificationMean = repo.findById(id);
+
+        // assert
+        assertTrue(verificationMean.isPresent());
+        assertAll(
+                () -> assertEquals(principal, verificationMean.get().getPersonalAuthentication()),
+                () -> assertTrue(verificationMean.get() instanceof VerificationMeanJpa.EmailVerification)
+        );
+        assertEquals(mean.getEmail(), ((VerificationMeanJpa.EmailVerification) verificationMean.get()).getEmail());
+    }
+
+    private VerificationMeanJpa.ConsoleVerification consoleVerification() {
+        var consoleVerification = new VerificationMeanJpa.ConsoleVerification();
+        consoleVerification.setPersonalAuthentication(principal);
+        return consoleVerification;
+    }
+
+    private VerificationMeanJpa.SmsVerification smsVerificationOf(String phoneNumber) {
         var smsVerification = new VerificationMeanJpa.SmsVerification();
         smsVerification.setPhoneNumber(phoneNumber);
         smsVerification.setPersonalAuthentication(principal);
         return smsVerification;
+    }
+
+    private VerificationMeanJpa.EmailVerification emailVerificationOf(String email) {
+        var emailVerification = new VerificationMeanJpa.EmailVerification();
+        emailVerification.setEmail(email);
+        emailVerification.setPersonalAuthentication(principal);
+        return emailVerification;
     }
 }
