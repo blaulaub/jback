@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 import static ch.patchcode.jback.jpa.util.SomeData.somePendingRegistrationDraft;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ToRegistrationConverterTest {
+class FromDomainConverterTest {
 
-    private final ToRegistrationConverter converter = new ToRegistrationConverter();
+    private final FromDomainConverter converter = new FromDomainConverter();
 
     @Test
-    void convert_verificationByConsole_works() {
+    void verificationByConsole_fromDomain_works() {
 
         // arrange
         PendingRegistration.Draft pending = SomeData.somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
@@ -30,7 +30,7 @@ class ToRegistrationConverterTest {
     }
 
     @Test
-    void convert_verificationBySms_works() {
+    void verificationBySms_fromDomain_works() {
 
         // arrange
         var pending = SomeData.somePendingRegistrationDraft(
@@ -50,7 +50,7 @@ class ToRegistrationConverterTest {
     }
 
     @Test
-    void convert_verificationByEmail_works() {
+    void verificationByEmail_fromDomain_works() {
 
         // arrange
         var pending = SomeData.somePendingRegistrationDraft(

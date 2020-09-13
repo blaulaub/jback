@@ -1,8 +1,10 @@
 package ch.patchcode.jback.jpa.registration;
 
 import ch.patchcode.jback.secBase.PendingRegistration;
+import ch.patchcode.jback.secBase.VerificationMean;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity(name = RegistrationJpa.ENTITY_NAME)
@@ -63,9 +65,21 @@ public abstract class RegistrationJpa {
         this.expiresAt = expiresAt;
     }
 
-    public PendingRegistration toDomain() {
+    public abstract PendingRegistration toDomain();
 
-        return new ToDomainConverter().convert(this);
+    /**
+     * Helper method from the base class, providing a preconfigured {@link PendingRegistration.Builder}
+     * aiding child classes to implement {@link #toDomain()}
+     */
+    final protected PendingRegistration.Builder toDomainBaseBuilder() {
+
+        var builder = new PendingRegistration.Builder();
+        builder.setId(PendingRegistration.Id.of(getId()));
+        builder.setFirstName(getFirstName());
+        builder.setLastName(getLastName());
+        builder.setVerificationCode(getVerificationCode());
+        builder.setExpiresAt(Instant.ofEpochMilli(getExpiresAt()));
+        return builder;
     }
 
     @Entity
@@ -76,6 +90,14 @@ public abstract class RegistrationJpa {
         public <R> R accept(Visitor<R> registrationHandler) {
 
             return registrationHandler.visit(this);
+        }
+
+        @Override
+        public PendingRegistration toDomain() {
+
+            return toDomainBaseBuilder()
+                    .setVerificationMean(new VerificationMean.VerificationByConsole())
+                    .build();
         }
     }
 
@@ -98,6 +120,16 @@ public abstract class RegistrationJpa {
 
             return registrationHandler.visit(this);
         }
+
+        @Override
+        public PendingRegistration toDomain() {
+
+            return toDomainBaseBuilder()
+                    .setVerificationMean(new VerificationMean.VerificationByEmail.Builder()
+                            .setEmailAddress(getEmail())
+                            .build())
+                    .build();
+        }
     }
 
     @Entity
@@ -119,6 +151,16 @@ public abstract class RegistrationJpa {
 
             return registrationHandler.visit(this);
         }
+
+        @Override
+        public PendingRegistration toDomain() {
+
+            return toDomainBaseBuilder()
+                    .setVerificationMean(new VerificationMean.VerificationBySms.Builder()
+                            .setPhoneNumber(getPhoneNumber())
+                            .build())
+                    .build();
+        }
     }
 
     interface Visitor<R> {
@@ -129,4 +171,5 @@ public abstract class RegistrationJpa {
 
         R visit(SmsRegistrationJpa registrationBySms);
     }
+
 }
