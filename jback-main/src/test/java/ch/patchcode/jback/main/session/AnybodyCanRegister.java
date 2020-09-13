@@ -1,5 +1,6 @@
 package ch.patchcode.jback.main.session;
 
+import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.VerificationCode;
 import ch.patchcode.jback.main.MainTestConfiguration;
 import ch.patchcode.jback.main.fakes.FixVerificationCodeProvider;
@@ -32,7 +33,8 @@ class AnybodyCanRegister {
     void afterRegistration_userIsAuthenticated() throws Exception {
 
         // post registration
-        var pendingRegistration = api.registrationPostData(someInitialRegistrationData())
+        InitialRegistrationData initialData = someInitialRegistrationData();
+        var pendingRegistration = api.registrationPostData(initialData)
                 .checkResultIsSuccess()
                 .andReturnBody();
 
@@ -50,7 +52,7 @@ class AnybodyCanRegister {
         // assert
         assertTrue(sessionInfo.isAuthenticated());
         assertEquals(
-                pendingRegistration.getPendingRegistrationId().toString(),
+                initialData.getFirstName() + " " + initialData.getLastName(),
                 sessionInfo.getPrincipalName());
     }
 }

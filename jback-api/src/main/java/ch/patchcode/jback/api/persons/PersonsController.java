@@ -73,11 +73,7 @@ public class PersonsController {
 
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Authentication) context.getAuthentication();
-
         var person = personService.createClient(draft.toDomain(), callerAuth);
-        // TODO after we have a person, make sure the session's authentication's principal is permanent
-        // TODO (i.e., at the end the person must be the owner or client of some permanent prinicipal)
-
         return fromDomain(person);
     }
 }

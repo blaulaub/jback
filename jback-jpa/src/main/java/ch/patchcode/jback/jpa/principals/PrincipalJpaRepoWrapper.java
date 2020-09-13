@@ -1,6 +1,7 @@
 package ch.patchcode.jback.jpa.principals;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
+import ch.patchcode.jback.jpa.persons.PersonJpaRepository;
 import ch.patchcode.jback.jpa.verificationMeans.VerificationMeanJpa;
 import ch.patchcode.jback.jpa.verificationMeans.VerificationMeanJpaRepository;
 import ch.patchcode.jback.secBase.VerificationMean;
@@ -9,6 +10,7 @@ import ch.patchcode.jback.security.authentications.PersonalAuthenticationReposit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
@@ -19,15 +21,17 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
 
     private final PrincipalJpaRepository principalJpaRepository;
     private final VerificationMeanJpaRepository verificationMeanJpaRepository;
+    private final PersonJpaRepository personJpaRepository;
 
     @Autowired
     public PrincipalJpaRepoWrapper(
             PrincipalJpaRepository principalJpaRepository,
-            VerificationMeanJpaRepository verificationMeanJpaRepository
-    ) {
+            VerificationMeanJpaRepository verificationMeanJpaRepository,
+            PersonJpaRepository personJpaRepository) {
 
         this.principalJpaRepository = principalJpaRepository;
         this.verificationMeanJpaRepository = verificationMeanJpaRepository;
+        this.personJpaRepository = personJpaRepository;
     }
 
     @Override
@@ -52,7 +56,7 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
     private PrincipalJpa persist(PersonalAuthentication personalAuthentication) {
 
         var draft = new PrincipalJpa();
-        draft.setSelf(PersonJpa.fromDomain(personalAuthentication.getHolder()));
+        draft.setSelf(personJpaRepository.findById(personalAuthentication.getHolder().getId()).orElseThrow(EntityNotFoundException::new));
         draft.setAuthorities(emptyList());
         draft.setClients(emptyList());
         return principalJpaRepository.save(draft);

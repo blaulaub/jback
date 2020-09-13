@@ -14,10 +14,7 @@ public interface Authentication extends org.springframework.security.core.Authen
     // impl java.security.Principal
 
     @Override
-    default String getName() {
-
-        return null;
-    }
+    String getName();
 
     // impl org.springframework.security.core.Authentication
 

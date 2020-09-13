@@ -30,7 +30,7 @@ public class PersonJpa {
     private String lastName;
 
     @ElementCollection
-    @OrderBy("address.order")
+    @OrderBy("address.line")
     private List<AddressLine> addressLines;
 
     @ElementCollection
@@ -100,24 +100,24 @@ public class PersonJpa {
     public static class AddressLine {
 
         @Column(unique = true)
-        private int order;
+        private int line;
 
         private String value;
 
-        public static AddressLine of(int order, String value) {
+        public static AddressLine of(int line, String value) {
 
             var result = new AddressLine();
-            result.setOrder(order);
+            result.setLine(line);
             result.setValue(value);
             return result;
         }
 
-        public int getOrder() {
-            return order;
+        public int getLine() {
+            return line;
         }
 
-        public void setOrder(int order) {
-            this.order = order;
+        public void setLine(int line) {
+            this.line = line;
         }
 
         public String getValue() {

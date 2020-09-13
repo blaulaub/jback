@@ -51,7 +51,7 @@ public class CreatedPersonBecomesSessionUser {
                 .checkResultIsSuccess();
 
         // create person
-        var createdPerson = api.personsPostNewPerson(newPerson)
+        var createdPerson = api.personsPostNewMe(newPerson)
                 .checkResultIsSuccess()
                 .andReturnBody();
 

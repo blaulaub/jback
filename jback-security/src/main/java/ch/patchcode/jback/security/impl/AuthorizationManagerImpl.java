@@ -2,6 +2,7 @@ package ch.patchcode.jback.security.impl;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.*;
+import ch.patchcode.jback.secBase.secModelImpl.Principal;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
@@ -64,6 +65,13 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
                 throw new BadCredentialsException("Invalid code provided for " + registrationId.getId());
             }
         });
+    }
+
+    @Override
+    public void addClient(Principal principal, Person person) {
+
+        // TODO implement
+        throw new RuntimeException("not implemented");
     }
 
     @Override

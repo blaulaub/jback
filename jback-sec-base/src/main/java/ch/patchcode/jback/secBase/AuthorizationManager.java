@@ -1,6 +1,9 @@
 package ch.patchcode.jback.secBase;
 
-public interface AuthorizationManager {
+import ch.patchcode.jback.secBase.secModelImpl.Person;
+import ch.patchcode.jback.secBase.secModelImpl.Principal;
+
+public interface AuthorizationManager<TPerson extends Person> {
 
     /**
      * Let any user register when submitting some data, providing him with a {@see PendingRegistration.Id}.
@@ -23,4 +26,12 @@ public interface AuthorizationManager {
      * @param verificationCode the code confirming the registration
      */
     void authenticate(PendingRegistration.Id registrationId, VerificationCode verificationCode);
+
+    /**
+     * Make the person a client of the given principal.
+     *
+     * @param principal
+     * @param person
+     */
+    void addClient(Principal principal, TPerson person);
 }

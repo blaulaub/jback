@@ -5,6 +5,7 @@ import ch.patchcode.jback.secBase.InitialRegistrationData;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationCode;
 import ch.patchcode.jback.secBase.VerificationMean;
+import ch.patchcode.jback.secBase.secModelImpl.Principal;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,13 @@ public class AuthorizationManagerFake implements AuthorizationManager {
     public void authenticate(PendingRegistration.Id registrationId, VerificationCode verificationCode) {
 
         // do nothing
+    }
+
+    @Override
+    public void addClient(Principal principal, Person person) {
+
+        // TODO implement when necessary
+        throw new RuntimeException("not implemented");
     }
 
     @Override

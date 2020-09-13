@@ -27,6 +27,14 @@ public class PersonalAuthentication implements Authentication {
         return holder;
     }
 
+    // impl java.security.Principal
+
+    @Override
+    public String getName() {
+
+        return holder.getName();
+    }
+
     // impl ch.patchcode.jback.secBase.secModelImpl.Principal
 
     @Override
