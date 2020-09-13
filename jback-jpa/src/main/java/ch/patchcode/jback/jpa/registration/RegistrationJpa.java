@@ -67,6 +67,11 @@ public abstract class RegistrationJpa {
 
     public abstract PendingRegistration toDomain();
 
+    public static RegistrationJpa fromDomain(PendingRegistration.Draft draft) {
+
+        return new FromDomainConverter().convert(draft);
+    }
+
     /**
      * Helper method from the base class, providing a preconfigured {@link PendingRegistration.Builder}
      * aiding child classes to implement {@link #toDomain()}
