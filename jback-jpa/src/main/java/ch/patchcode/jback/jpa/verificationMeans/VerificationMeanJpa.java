@@ -1,6 +1,6 @@
 package ch.patchcode.jback.jpa.verificationMeans;
 
-import ch.patchcode.jback.jpa.principals.PrincipalJpa;
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
 import ch.patchcode.jback.secBase.VerificationMean;
 
 import javax.persistence.*;
@@ -23,13 +23,13 @@ public abstract class VerificationMeanJpa {
     }
 
     @ManyToOne
-    private PrincipalJpa principal;
+    private PersonalAuthenticationJpa principal;
 
-    public PrincipalJpa getPrincipal() {
+    public PersonalAuthenticationJpa getPrincipal() {
         return principal;
     }
 
-    public void setPrincipal(PrincipalJpa principal) {
+    public void setPrincipal(PersonalAuthenticationJpa principal) {
         this.principal = principal;
     }
 
@@ -44,7 +44,7 @@ public abstract class VerificationMeanJpa {
         R visit(SmsVerification smsVerification);
     }
 
-    public static VerificationMeanJpa fromDomain(PrincipalJpa principal, VerificationMean mean) {
+    public static VerificationMeanJpa fromDomain(PersonalAuthenticationJpa principal, VerificationMean mean) {
 
         return mean.accept(new VerificationMean.VerificationMeanVisitor<>() {
             @Override

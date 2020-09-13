@@ -1,4 +1,4 @@
-package ch.patchcode.jback.jpa.principals;
+package ch.patchcode.jback.jpa.personalAuthentications;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
 
@@ -6,11 +6,11 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
-@Entity(name = PrincipalJpa.ENTITY_NAME)
-@Table(name = PrincipalJpa.ENTITY_NAME)
-public class PrincipalJpa {
+@Entity(name = PersonalAuthenticationJpa.ENTITY_NAME)
+@Table(name = PersonalAuthenticationJpa.ENTITY_NAME)
+public class PersonalAuthenticationJpa {
 
-    public static final String ENTITY_NAME = "Principals";
+    public static final String ENTITY_NAME = "PersonalAuthentications";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

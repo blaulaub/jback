@@ -1,4 +1,4 @@
-package ch.patchcode.jback.jpa.principals;
+package ch.patchcode.jback.jpa.personalAuthentications;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
 import ch.patchcode.jback.jpa.persons.PersonJpaRepository;
@@ -17,19 +17,19 @@ import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository {
+public class PersonalAuthenticationJpaRepoWrapper implements PersonalAuthenticationRepository {
 
-    private final PrincipalJpaRepository principalJpaRepository;
+    private final PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository;
     private final VerificationMeanJpaRepository verificationMeanJpaRepository;
     private final PersonJpaRepository personJpaRepository;
 
     @Autowired
-    public PrincipalJpaRepoWrapper(
-            PrincipalJpaRepository principalJpaRepository,
+    public PersonalAuthenticationJpaRepoWrapper(
+            PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository,
             VerificationMeanJpaRepository verificationMeanJpaRepository,
             PersonJpaRepository personJpaRepository) {
 
-        this.principalJpaRepository = principalJpaRepository;
+        this.personalAuthenticationJpaRepository = personalAuthenticationJpaRepository;
         this.verificationMeanJpaRepository = verificationMeanJpaRepository;
         this.personJpaRepository = personJpaRepository;
     }
@@ -42,7 +42,7 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
         return PersonalAuthentication.of(principal.getSelf().toDomain(), toDomain(means));
     }
 
-    private List<VerificationMeanJpa> persist(PrincipalJpa principal, List<VerificationMean> means) {
+    private List<VerificationMeanJpa> persist(PersonalAuthenticationJpa principal, List<VerificationMean> means) {
 
         return verificationMeanJpaRepository.saveAll(means.stream()
                 .map(it -> VerificationMeanJpa.fromDomain(principal, it))
@@ -53,14 +53,14 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
         return persisted.stream().map(VerificationMeanJpa::toDomain).collect(toList());
     }
 
-    private PrincipalJpa persist(PersonalAuthentication.Draft draft) {
+    private PersonalAuthenticationJpa persist(PersonalAuthentication.Draft draft) {
 
         PersonJpa self = personJpaRepository.findById(draft.getHolder().getId()).orElseThrow(EntityNotFoundException::new);
 
-        var entity = new PrincipalJpa();
+        var entity = new PersonalAuthenticationJpa();
         entity.setSelf(self);
         entity.setAuthorities(emptyList());
         entity.setClients(emptyList());
-        return principalJpaRepository.save(entity);
+        return personalAuthenticationJpaRepository.save(entity);
     }
 }

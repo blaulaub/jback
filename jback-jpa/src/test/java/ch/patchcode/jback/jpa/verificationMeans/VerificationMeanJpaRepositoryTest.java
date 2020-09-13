@@ -1,8 +1,8 @@
 package ch.patchcode.jback.jpa.verificationMeans;
 
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
-import ch.patchcode.jback.jpa.principals.PrincipalJpa;
-import ch.patchcode.jback.jpa.principals.PrincipalJpaRepository;
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,12 @@ class VerificationMeanJpaRepositoryTest {
     private final VerificationMeanJpaRepository verificationMeanRepository;
 
     // not under test, but we also need these for related entities
-    private final PrincipalJpaRepository principalRepository;
+    private final PersonalAuthenticationJpaRepository principalRepository;
 
     @Autowired
     public VerificationMeanJpaRepositoryTest(
             VerificationMeanJpaRepository verificationMeanRepository,
-            PrincipalJpaRepository principalRepository
+            PersonalAuthenticationJpaRepository principalRepository
     ) {
         this.verificationMeanRepository = verificationMeanRepository;
         this.principalRepository = principalRepository;
@@ -36,7 +36,7 @@ class VerificationMeanJpaRepositoryTest {
     void save_and_findById() {
 
         // arrange
-        var principal = principalRepository.save(new PrincipalJpa());
+        var principal = principalRepository.save(new PersonalAuthenticationJpa());
         var smsPhoneNumber = "+491806672255";
 
         // act
@@ -50,7 +50,7 @@ class VerificationMeanJpaRepositoryTest {
         assertEquals(smsPhoneNumber, ((VerificationMeanJpa.SmsVerification) verificationMean.get()).getPhoneNumber());
     }
 
-    private VerificationMeanJpa.SmsVerification smsVerificationOf(String phoneNumber, PrincipalJpa principal) {
+    private VerificationMeanJpa.SmsVerification smsVerificationOf(String phoneNumber, PersonalAuthenticationJpa principal) {
         var smsVerification = new VerificationMeanJpa.SmsVerification();
         smsVerification.setPhoneNumber(phoneNumber);
         smsVerification.setPrincipal(principal);

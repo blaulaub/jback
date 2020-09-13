@@ -1,4 +1,4 @@
-package ch.patchcode.jback.jpa.principals;
+package ch.patchcode.jback.jpa.personalAuthentications;
 
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
 import ch.patchcode.jback.jpa.persons.PersonJpa;
@@ -20,16 +20,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {JpaTestConfiguration.class})
-class PrincipalJpaRepositoryTest {
+class PersonalAuthenticationJpaRepositoryTest {
 
-    private final PrincipalJpaRepository principalRepository;
+    private final PersonalAuthenticationJpaRepository principalRepository;
 
     // not under test, but we also need these for related entities
     private final PersonJpaRepository personRepository;
 
     @Autowired
-    public PrincipalJpaRepositoryTest(
-            PrincipalJpaRepository principalRepository,
+    public PersonalAuthenticationJpaRepositoryTest(
+            PersonalAuthenticationJpaRepository principalRepository,
             PersonJpaRepository personRepository
     ) {
         this.principalRepository = principalRepository;

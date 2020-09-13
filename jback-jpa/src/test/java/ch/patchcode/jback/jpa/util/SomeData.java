@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.util;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
-import ch.patchcode.jback.jpa.principals.PrincipalJpa;
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
 import ch.patchcode.jback.jpa.registration.RegistrationJpa;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationMean;
@@ -38,11 +38,11 @@ public class SomeData {
         return registration;
     }
 
-    public static PrincipalJpa principalOf(
+    public static PersonalAuthenticationJpa principalOf(
             List<PersonJpa> persons,
             List<String> authorities
     ) {
-        var principal = new PrincipalJpa();
+        var principal = new PersonalAuthenticationJpa();
         principal.setClients(persons);
         principal.setAuthorities(authorities);
         return principal;
