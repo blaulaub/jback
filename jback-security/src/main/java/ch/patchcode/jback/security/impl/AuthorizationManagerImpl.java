@@ -77,7 +77,10 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     @Override
     public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
 
-        PersonalAuthentication personalAuthentication = PersonalAuthentication.of(person, means);
+        var personalAuthentication = new PersonalAuthentication.Draft.Builder()
+                .setHolder(person)
+                .addAllMeans(means)
+                .build();
         return personalAuthenticationRepository.create(personalAuthentication);
     }
 }

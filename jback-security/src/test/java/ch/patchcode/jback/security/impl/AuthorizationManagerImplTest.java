@@ -115,12 +115,13 @@ class AuthorizationManagerImplTest {
 
         // assert
         var auth = SecurityContextHolder.getContext().getAuthentication();
-        assertNotNull(auth);
         assertTrue(auth instanceof TemporaryAuthentication);
 
         var tempAuth = (TemporaryAuthentication) auth;
-        assertEquals(pendingRegistration.getFirstName(), tempAuth.getFirstName());
-        assertEquals(pendingRegistration.getLastName(), tempAuth.getLastName());
+        assertAll(
+                () -> assertEquals(pendingRegistration.getFirstName(), tempAuth.getFirstName()),
+                () -> assertEquals(pendingRegistration.getLastName(), tempAuth.getLastName())
+        );
     }
 
     @Test
@@ -130,15 +131,23 @@ class AuthorizationManagerImplTest {
         Person person = new Person.Builder().buildPartial();
         List<VerificationMean> means = emptyList();
         when(personalAuthenticationRepository.create(any()))
-                .thenAnswer((Answer<PersonalAuthentication>) invocation
-                        -> (PersonalAuthentication) invocation.getArguments()[0]);
+                .thenAnswer((Answer<PersonalAuthentication>) invocation -> {
+                    var draft = (PersonalAuthentication.Draft) invocation.getArguments()[0];
+                    return PersonalAuthentication.of(draft.getHolder(), draft.getMeans());
+                });
 
         // act
         var auth = manager.createAuthorizationFor(person, means);
 
         // assert
-        assertEquals(person, auth.getHolder());
-        assertIterableEquals(means, auth.getMeans());
-        verify(personalAuthenticationRepository, times(1)).create(eq(auth));
+        assertAll(
+                () -> assertEquals(person, auth.getHolder()),
+                () -> assertIterableEquals(means, auth.getMeans())
+        );
+
+        verify(personalAuthenticationRepository, times(1)).create(eq(new PersonalAuthentication.Draft.Builder()
+                .setHolder(person)
+                .addAllMeans(means)
+                .build()));
     }
 }

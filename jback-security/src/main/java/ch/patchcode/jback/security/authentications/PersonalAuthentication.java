@@ -46,4 +46,15 @@ public interface PersonalAuthentication extends Authentication {
 
     class Builder extends PersonalAuthentication_Builder {
     }
+
+    @FreeBuilder
+    interface Draft {
+
+        Person getHolder();
+
+        List<VerificationMean> getMeans();
+
+        class Builder extends PersonalAuthentication_Draft_Builder {
+        }
+    }
 }

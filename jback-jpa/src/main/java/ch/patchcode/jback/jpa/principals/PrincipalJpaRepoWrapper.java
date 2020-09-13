@@ -34,12 +34,11 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
         this.personJpaRepository = personJpaRepository;
     }
 
-    // TODO create should be based on a draft, not on the domain entitiy
     @Override
-    public PersonalAuthentication create(PersonalAuthentication personalAuthentication) {
+    public PersonalAuthentication create(PersonalAuthentication.Draft draft) {
 
-        var principal = persist(personalAuthentication);
-        var means = persist(principal, personalAuthentication.getMeans());
+        var principal = persist(draft);
+        var means = persist(principal, draft.getMeans());
         return PersonalAuthentication.of(principal.getSelf().toDomain(), toDomain(means));
     }
 
@@ -54,12 +53,14 @@ public class PrincipalJpaRepoWrapper implements PersonalAuthenticationRepository
         return persisted.stream().map(VerificationMeanJpa::toDomain).collect(toList());
     }
 
-    private PrincipalJpa persist(PersonalAuthentication personalAuthentication) {
+    private PrincipalJpa persist(PersonalAuthentication.Draft draft) {
 
-        var draft = new PrincipalJpa();
-        draft.setSelf(personJpaRepository.findById(personalAuthentication.getHolder().getId()).orElseThrow(EntityNotFoundException::new));
-        draft.setAuthorities(emptyList());
-        draft.setClients(emptyList());
-        return principalJpaRepository.save(draft);
+        PersonJpa self = personJpaRepository.findById(draft.getHolder().getId()).orElseThrow(EntityNotFoundException::new);
+
+        var entity = new PrincipalJpa();
+        entity.setSelf(self);
+        entity.setAuthorities(emptyList());
+        entity.setClients(emptyList());
+        return principalJpaRepository.save(entity);
     }
 }
