@@ -15,8 +15,6 @@ public abstract class RegistrationJpa {
 
     public static final String ENTITY_NAME = "Registrations";
 
-    public abstract <R> R accept(Visitor<R> registrationHandler);
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -92,12 +90,6 @@ public abstract class RegistrationJpa {
     public static class ConsoleRegistrationJpa extends RegistrationJpa {
 
         @Override
-        public <R> R accept(Visitor<R> registrationHandler) {
-
-            return registrationHandler.visit(this);
-        }
-
-        @Override
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
@@ -118,12 +110,6 @@ public abstract class RegistrationJpa {
 
         public void setEmail(String email) {
             this.email = email;
-        }
-
-        @Override
-        public <R> R accept(Visitor<R> registrationHandler) {
-
-            return registrationHandler.visit(this);
         }
 
         @Override
@@ -152,12 +138,6 @@ public abstract class RegistrationJpa {
         }
 
         @Override
-        public <R> R accept(Visitor<R> registrationHandler) {
-
-            return registrationHandler.visit(this);
-        }
-
-        @Override
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
@@ -167,14 +147,4 @@ public abstract class RegistrationJpa {
                     .build();
         }
     }
-
-    interface Visitor<R> {
-
-        R visit(ConsoleRegistrationJpa registrationByConsole);
-
-        R visit(EmailRegistrationJpa registrationByEmail);
-
-        R visit(SmsRegistrationJpa registrationBySms);
-    }
-
 }
