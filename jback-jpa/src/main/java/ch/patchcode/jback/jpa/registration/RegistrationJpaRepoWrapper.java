@@ -14,7 +14,6 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
     private final RegistrationJpaRepository registrationJpaRepository;
 
     private final ToRegistrationConverter toRegistrationConverter = new ToRegistrationConverter();
-    private final ToPendingRegistrationConverter toPendingRegistrationConverter = new ToPendingRegistrationConverter();
 
     @Autowired
     public RegistrationJpaRepoWrapper(RegistrationJpaRepository registrationJpaRepository) {
@@ -22,21 +21,18 @@ public class RegistrationJpaRepoWrapper implements PendingRegistrationRepository
         this.registrationJpaRepository = registrationJpaRepository;
     }
 
-    // TODO call this create
-    // TODO take a draft as input
-    // TODO return entity as output
     @Override
-    public PendingRegistration.Id save(PendingRegistration pendingRegistration) {
+    public PendingRegistration create(PendingRegistration.Draft pendingRegistration) {
 
         var entity = toRegistrationConverter.convert(pendingRegistration);
         var saved = registrationJpaRepository.save(entity);
-        return PendingRegistration.Id.of(saved.getId());
+        return saved.toDomain();
     }
 
     @Override
     public Optional<PendingRegistration> findById(UUID id) {
 
-        return registrationJpaRepository.findById(id).map(toPendingRegistrationConverter::convert);
+        return registrationJpaRepository.findById(id).map(RegistrationJpa::toDomain);
     }
 
     @Override

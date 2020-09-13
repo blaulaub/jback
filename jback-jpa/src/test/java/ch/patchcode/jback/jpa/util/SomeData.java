@@ -12,14 +12,14 @@ import java.util.List;
 
 public class SomeData {
 
-    public static PendingRegistration somePendingRegistration() {
+    public static PendingRegistration.Draft somePendingRegistrationDraft() {
 
-        return somePendingRegistration(new VerificationMean.VerificationByConsole());
+        return somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
     }
 
-    public static PendingRegistration somePendingRegistration(VerificationMean verificationMean) {
+    public static PendingRegistration.Draft somePendingRegistrationDraft(VerificationMean verificationMean) {
 
-        return new PendingRegistration.Builder()
+        return new PendingRegistration.Draft.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
                 .setExpiresAt(Instant.now().plus(Duration.ofMinutes(5)))

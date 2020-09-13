@@ -1,10 +1,11 @@
 package ch.patchcode.jback.jpa.registration;
 
+import ch.patchcode.jback.jpa.util.SomeData;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationMean;
 import org.junit.jupiter.api.Test;
 
-import static ch.patchcode.jback.jpa.util.SomeData.somePendingRegistration;
+import static ch.patchcode.jback.jpa.util.SomeData.somePendingRegistrationDraft;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ToRegistrationConverterTest {
@@ -15,7 +16,7 @@ class ToRegistrationConverterTest {
     void convert_verificationByConsole_works() {
 
         // arrange
-        PendingRegistration pending = somePendingRegistration(new VerificationMean.VerificationByConsole());
+        PendingRegistration.Draft pending = SomeData.somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
 
         // act
         var registration = converter.convert(pending);
@@ -32,7 +33,7 @@ class ToRegistrationConverterTest {
     void convert_verificationBySms_works() {
 
         // arrange
-        var pending = somePendingRegistration(
+        var pending = SomeData.somePendingRegistrationDraft(
                 new VerificationMean.VerificationBySms.Builder().setPhoneNumber("+41234567890").build()
         );
 
@@ -52,7 +53,7 @@ class ToRegistrationConverterTest {
     void convert_verificationByEmail_works() {
 
         // arrange
-        var pending = somePendingRegistration(
+        var pending = SomeData.somePendingRegistrationDraft(
                 new VerificationMean.VerificationByEmail.Builder().setEmailAddress("admin@google.com").build()
         );
 

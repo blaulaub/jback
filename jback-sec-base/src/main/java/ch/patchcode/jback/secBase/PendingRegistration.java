@@ -8,6 +8,8 @@ import java.util.UUID;
 @FreeBuilder
 public interface PendingRegistration {
 
+    Id getId();
+
     String getFirstName();
 
     String getLastName();
@@ -32,5 +34,21 @@ public interface PendingRegistration {
         }
 
         class Builder extends PendingRegistration_Id_Builder {}
+    }
+
+    @FreeBuilder
+    interface Draft {
+
+        String getFirstName();
+
+        String getLastName();
+
+        VerificationMean getVerificationMean();
+
+        String getVerificationCode();
+
+        Instant getExpiresAt();
+
+        class Builder extends PendingRegistration_Draft_Builder {}
     }
 }

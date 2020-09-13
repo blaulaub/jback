@@ -1,6 +1,7 @@
 package ch.patchcode.jback.jpa.registration;
 
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
+import ch.patchcode.jback.jpa.util.SomeData;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationMean;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static ch.patchcode.jback.jpa.util.SomeData.somePendingRegistration;
+import static ch.patchcode.jback.jpa.util.SomeData.somePendingRegistrationDraft;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -28,11 +29,11 @@ class RegistrationJpaRepoWrapperTest {
     void save_and_findById() {
 
         // arrange
-        PendingRegistration pending = somePendingRegistration(new VerificationMean.VerificationByConsole());
+        PendingRegistration.Draft pending = SomeData.somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
 
         // act
-        var id = wrapper.save(pending).getId();
-        var result = wrapper.findById(id);
+        var id = wrapper.create(pending).getId();
+        var result = wrapper.findById(id.getId());
 
         // assert
         assertTrue(result.isPresent());

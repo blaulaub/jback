@@ -1,5 +1,7 @@
 package ch.patchcode.jback.jpa.registration;
 
+import ch.patchcode.jback.secBase.PendingRegistration;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -59,6 +61,11 @@ public abstract class RegistrationJpa {
 
     public void setExpiresAt(Long expiresAt) {
         this.expiresAt = expiresAt;
+    }
+
+    public PendingRegistration toDomain() {
+
+        return new ToDomainConverter().convert(this);
     }
 
     @Entity

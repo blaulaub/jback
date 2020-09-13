@@ -99,6 +99,7 @@ class AuthorizationManagerImplTest {
         var registrationId = PendingRegistration.Id.of(UUID.randomUUID());
         var verificationCode = VerificationCode.of("blub");
         var pendingRegistration = new PendingRegistration.Builder()
+                .setId(registrationId)
                 .setVerificationCode(verificationCode.getVerificationCode())
                 .setExpiresAt(Instant.MAX)
                 .setFirstName("Tom")

@@ -6,7 +6,7 @@ import ch.patchcode.jback.secBase.VerificationMean;
 // TODO consider inlining into JPA
 public class ToRegistrationConverter implements VerificationMean.VerificationMeanVisitor<RegistrationJpa> {
 
-    public RegistrationJpa convert(PendingRegistration pendingRegistration) {
+    public RegistrationJpa convert(PendingRegistration.Draft pendingRegistration) {
 
         var result = pendingRegistration.getVerificationMean().accept(this);
         result.setFirstName(pendingRegistration.getFirstName());

@@ -6,11 +6,12 @@ import ch.patchcode.jback.secBase.VerificationMean;
 import java.time.Instant;
 
 // TODO consider inlining into JPA
-public class ToPendingRegistrationConverter implements RegistrationJpa.Visitor<PendingRegistration.Builder> {
+class ToDomainConverter implements RegistrationJpa.Visitor<PendingRegistration.Builder> {
 
-    public PendingRegistration convert(RegistrationJpa registration) {
+    PendingRegistration convert(RegistrationJpa registration) {
 
         var builder = registration.accept(this);
+        builder.setId(PendingRegistration.Id.of(registration.getId()));
         builder.setFirstName(registration.getFirstName());
         builder.setLastName(registration.getLastName());
         builder.setVerificationCode(registration.getVerificationCode());
