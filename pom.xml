@@ -28,6 +28,7 @@
         <module>jback-jpa</module>
         <module>jback-security</module>
         <module>jback-api</module>
+        <module>jback-angular</module>
         <module>jback-main</module>
     </modules>
 
