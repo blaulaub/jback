@@ -3,9 +3,9 @@ package ch.patchcode.jback.jpa.registration;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationMean;
 
-public class ToRegistrationConverter implements VerificationMean.VerificationMeanVisitor<Registration> {
+public class ToRegistrationConverter implements VerificationMean.VerificationMeanVisitor<RegistrationJpa> {
 
-    public Registration convert(PendingRegistration pendingRegistration) {
+    public RegistrationJpa convert(PendingRegistration pendingRegistration) {
 
         var result = pendingRegistration.getVerificationMean().accept(this);
         result.setFirstName(pendingRegistration.getFirstName());
@@ -16,24 +16,24 @@ public class ToRegistrationConverter implements VerificationMean.VerificationMea
     }
 
     @Override
-    public Registration visit(VerificationMean.VerificationByConsole verificationByConsole) {
+    public RegistrationJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
 
-        var result = new Registration.ConsoleRegistration();
+        var result = new RegistrationJpa.ConsoleRegistrationJpa();
         return result;
     }
 
     @Override
-    public Registration visit(VerificationMean.VerificationByEmail verificationByEmail) {
+    public RegistrationJpa visit(VerificationMean.VerificationByEmail verificationByEmail) {
 
-        var result = new Registration.EmailRegistration();
+        var result = new RegistrationJpa.EmailRegistrationJpa();
         result.setEmail(verificationByEmail.getEmailAddress());
         return result;
     }
 
     @Override
-    public Registration visit(VerificationMean.VerificationBySms verificationBySms) {
+    public RegistrationJpa visit(VerificationMean.VerificationBySms verificationBySms) {
 
-        var result = new Registration.SmsRegistration();
+        var result = new RegistrationJpa.SmsRegistrationJpa();
         result.setPhoneNumber(verificationBySms.getPhoneNumber());
         return result;
     }

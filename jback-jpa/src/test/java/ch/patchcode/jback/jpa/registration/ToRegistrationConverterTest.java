@@ -21,7 +21,7 @@ class ToRegistrationConverterTest {
         var registration = converter.convert(pending);
 
         // assert
-        assertTrue(registration instanceof Registration.ConsoleRegistration);
+        assertTrue(registration instanceof RegistrationJpa.ConsoleRegistrationJpa);
         assertEquals(pending.getFirstName(), registration.getFirstName());
         assertEquals(pending.getLastName(), registration.getLastName());
         assertEquals(pending.getVerificationCode(), registration.getVerificationCode());
@@ -40,12 +40,12 @@ class ToRegistrationConverterTest {
         var registration = converter.convert(pending);
 
         // assert
-        assertTrue(registration instanceof Registration.SmsRegistration);
+        assertTrue(registration instanceof RegistrationJpa.SmsRegistrationJpa);
         assertEquals(pending.getFirstName(), registration.getFirstName());
         assertEquals(pending.getLastName(), registration.getLastName());
         assertEquals(pending.getVerificationCode(), registration.getVerificationCode());
         assertEquals(pending.getExpiresAt().toEpochMilli(), registration.getExpiresAt());
-        assertEquals("+41234567890", ((Registration.SmsRegistration)registration).getPhoneNumber());
+        assertEquals("+41234567890", ((RegistrationJpa.SmsRegistrationJpa)registration).getPhoneNumber());
     }
 
     @Test
@@ -60,11 +60,11 @@ class ToRegistrationConverterTest {
         var registration = converter.convert(pending);
 
         // assert
-        assertTrue(registration instanceof Registration.EmailRegistration);
+        assertTrue(registration instanceof RegistrationJpa.EmailRegistrationJpa);
         assertEquals(pending.getFirstName(), registration.getFirstName());
         assertEquals(pending.getLastName(), registration.getLastName());
         assertEquals(pending.getVerificationCode(), registration.getVerificationCode());
         assertEquals(pending.getExpiresAt().toEpochMilli(), registration.getExpiresAt());
-        assertEquals("admin@google.com", ((Registration.EmailRegistration)registration).getEmail());
+        assertEquals("admin@google.com", ((RegistrationJpa.EmailRegistrationJpa)registration).getEmail());
     }
 }

@@ -5,9 +5,9 @@ import ch.patchcode.jback.secBase.VerificationMean;
 
 import java.time.Instant;
 
-public class ToPendingRegistrationConverter implements Registration.Visitor<PendingRegistration.Builder> {
+public class ToPendingRegistrationConverter implements RegistrationJpa.Visitor<PendingRegistration.Builder> {
 
-    public PendingRegistration convert(Registration registration) {
+    public PendingRegistration convert(RegistrationJpa registration) {
 
         var builder = registration.accept(this);
         builder.setFirstName(registration.getFirstName());
@@ -18,14 +18,14 @@ public class ToPendingRegistrationConverter implements Registration.Visitor<Pend
     }
 
     @Override
-    public PendingRegistration.Builder visit(Registration.ConsoleRegistration registrationByConsole) {
+    public PendingRegistration.Builder visit(RegistrationJpa.ConsoleRegistrationJpa registrationByConsole) {
 
         return new PendingRegistration.Builder()
                 .setVerificationMean(new VerificationMean.VerificationByConsole());
     }
 
     @Override
-    public PendingRegistration.Builder visit(Registration.EmailRegistration registrationByEmail) {
+    public PendingRegistration.Builder visit(RegistrationJpa.EmailRegistrationJpa registrationByEmail) {
 
         return new PendingRegistration.Builder()
                 .setVerificationMean(new VerificationMean.VerificationByEmail.Builder()
@@ -34,7 +34,7 @@ public class ToPendingRegistrationConverter implements Registration.Visitor<Pend
     }
 
     @Override
-    public PendingRegistration.Builder visit(Registration.SmsRegistration registrationBySms) {
+    public PendingRegistration.Builder visit(RegistrationJpa.SmsRegistrationJpa registrationBySms) {
 
         return new PendingRegistration.Builder()
                 .setVerificationMean(new VerificationMean.VerificationBySms.Builder()

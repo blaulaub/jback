@@ -21,10 +21,10 @@ public class ClubJpaRepoWrapper implements ClubRepository {
     @Override
     public Optional<Club> findOne(UUID id) {
 
-        return clubJpaRepository.findById(id).map(ClubJpaRepoWrapper::toClub);
+        return clubJpaRepository.findById(id).map(ClubJpaRepoWrapper::toDomain);
     }
 
-    public static Club toClub(ch.patchcode.jback.jpa.clubs.Club it) {
+    public static Club toDomain(ClubJpa it) {
         return new Club.Builder()
                 .setId(it.getId())
                 .setName(it.getName())

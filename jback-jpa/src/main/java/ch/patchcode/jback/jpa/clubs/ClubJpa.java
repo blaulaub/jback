@@ -5,8 +5,11 @@ import ch.patchcode.jback.jpa.persons.PersonJpa;
 import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
-public class Club {
+@Entity(name = ClubJpa.ENTITY_NAME)
+@Table(name = ClubJpa.ENTITY_NAME)
+public class ClubJpa {
+
+    public final static String ENTITY_NAME = "Clubs";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

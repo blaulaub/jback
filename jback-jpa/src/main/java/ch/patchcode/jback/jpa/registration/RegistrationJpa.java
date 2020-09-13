@@ -3,10 +3,13 @@ package ch.patchcode.jback.jpa.registration;
 import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
+@Entity(name = RegistrationJpa.ENTITY_NAME)
+@Table(name = RegistrationJpa.ENTITY_NAME)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-public abstract class Registration {
+public abstract class RegistrationJpa {
+
+    public static final String ENTITY_NAME = "Registrations";
 
     public abstract <R> R accept(Visitor<R> registrationHandler);
 
@@ -60,7 +63,7 @@ public abstract class Registration {
 
     @Entity
     @DiscriminatorValue("console")
-    public static class ConsoleRegistration extends Registration {
+    public static class ConsoleRegistrationJpa extends RegistrationJpa {
 
         @Override
         public <R> R accept(Visitor<R> registrationHandler) {
@@ -71,7 +74,7 @@ public abstract class Registration {
 
     @Entity
     @DiscriminatorValue("email")
-    public static class EmailRegistration extends Registration {
+    public static class EmailRegistrationJpa extends RegistrationJpa {
 
         private String email;
 
@@ -92,7 +95,7 @@ public abstract class Registration {
 
     @Entity
     @DiscriminatorValue("sms")
-    public static class SmsRegistration extends Registration {
+    public static class SmsRegistrationJpa extends RegistrationJpa {
 
         private String phoneNumber;
 
@@ -113,10 +116,10 @@ public abstract class Registration {
 
     interface Visitor<R> {
 
-        R visit(Registration.ConsoleRegistration registrationByConsole);
+        R visit(ConsoleRegistrationJpa registrationByConsole);
 
-        R visit(Registration.EmailRegistration registrationByEmail);
+        R visit(EmailRegistrationJpa registrationByEmail);
 
-        R visit(Registration.SmsRegistration registrationBySms);
+        R visit(SmsRegistrationJpa registrationBySms);
     }
 }

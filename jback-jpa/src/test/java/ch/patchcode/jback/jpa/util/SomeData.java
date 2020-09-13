@@ -2,7 +2,7 @@ package ch.patchcode.jback.jpa.util;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
 import ch.patchcode.jback.jpa.principals.PrincipalJpa;
-import ch.patchcode.jback.jpa.registration.Registration;
+import ch.patchcode.jback.jpa.registration.RegistrationJpa;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationMean;
 
@@ -28,9 +28,9 @@ public class SomeData {
                 .build();
     }
 
-    public static Registration someRegistration() {
+    public static RegistrationJpa someRegistration() {
         
-        Registration registration = new Registration.ConsoleRegistration();
+        RegistrationJpa registration = new RegistrationJpa.ConsoleRegistrationJpa();
         registration.setFirstName("Tom");
         registration.setLastName("Sawyer");
         registration.setVerificationCode("1234");
