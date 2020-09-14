@@ -21,6 +21,11 @@
             <artifactId>jback-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>ch.patchcode</groupId>
+            <artifactId>jback-angular</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- for now use derby at runtime -->
         <dependency>
