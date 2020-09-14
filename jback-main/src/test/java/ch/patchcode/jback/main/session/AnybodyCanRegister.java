@@ -18,8 +18,7 @@ import static ch.patchcode.jback.main.util.SomeData.someInitialRegistrationData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextConfiguration(classes = {MainTestConfiguration.class})
+@MainTestConfiguration.Apply
 class AnybodyCanRegister {
 
     private final RestApi api;

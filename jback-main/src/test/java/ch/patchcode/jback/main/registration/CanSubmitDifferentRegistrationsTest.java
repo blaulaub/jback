@@ -17,8 +17,7 @@ import org.springframework.test.context.ContextHierarchy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextConfiguration(classes = {MainTestConfiguration.class})
+@MainTestConfiguration.Apply
 public class CanSubmitDifferentRegistrationsTest {
 
     @LocalServerPort

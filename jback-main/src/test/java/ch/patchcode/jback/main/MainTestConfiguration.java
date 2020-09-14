@@ -6,19 +6,25 @@ import ch.patchcode.jback.jpa.JpaConfiguration;
 import ch.patchcode.jback.main.fakes.FakesConfiguration;
 import ch.patchcode.jback.security.SecurityConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.util.Properties;
 
 @Configuration
@@ -31,7 +37,6 @@ import java.util.Properties;
         FakesConfiguration.class,
         MainWebSecurityTestConfig.class
 })
-@PropertySource("classpath:/main.test.properties")
 public class MainTestConfiguration {
 
     @Bean
@@ -87,5 +92,13 @@ public class MainTestConfiguration {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.TYPE)
+    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+    @ContextConfiguration(classes = {MainTestConfiguration.class})
+    @ActiveProfiles("test")
+    public @interface Apply {
     }
 }
