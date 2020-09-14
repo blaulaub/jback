@@ -2,23 +2,29 @@ package ch.patchcode.jback.api.registration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
 /**
  * This is the record expected from people that want to register.
  * They have to provide their name, and some contact media.
  */
+@ApiModel("personal information for registration")
 @FreeBuilder
-public interface InitialRegistrationData {
+public abstract class InitialRegistrationData {
 
-    String getFirstName();
+    @ApiModelProperty
+    public abstract String getFirstName();
 
-    String getLastName();
+    @ApiModelProperty
+    public abstract String getLastName();
 
-    VerificationMean getVerificationMean();
+    @ApiModelProperty
+    public abstract VerificationMean getVerificationMean();
 
     @JsonCreator
-    static InitialRegistrationData create(
+    public static InitialRegistrationData create(
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName,
             @JsonProperty("verificationMean") VerificationMean verificationMean
@@ -31,7 +37,7 @@ public interface InitialRegistrationData {
                 .build();
     }
 
-    default ch.patchcode.jback.secBase.InitialRegistrationData toDomain() {
+    public ch.patchcode.jback.secBase.InitialRegistrationData toDomain() {
         return new ch.patchcode.jback.secBase.InitialRegistrationData.Builder()
                 .setFirstName(getFirstName())
                 .setLastName(getLastName())
@@ -39,6 +45,6 @@ public interface InitialRegistrationData {
                 .build();
     }
 
-    class Builder extends InitialRegistrationData_Builder {
+    public static class Builder extends InitialRegistrationData_Builder {
     }
 }

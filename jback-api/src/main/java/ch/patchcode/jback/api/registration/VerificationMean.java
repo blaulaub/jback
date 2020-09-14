@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.swagger.annotations.ApiModel;
 import org.inferred.freebuilder.FreeBuilder;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
@@ -13,6 +14,7 @@ import org.inferred.freebuilder.FreeBuilder;
         @Type(value = VerificationMean.VerificationByEmail.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationByEmail.TYPE),
         @Type(value = VerificationMean.VerificationBySms.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationBySms.TYPE)
 })
+@ApiModel
 public interface VerificationMean {
 
     String getType();
