@@ -40,13 +40,13 @@ import java.util.Properties;
 public class MainTestConfiguration {
 
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource(Environment env) {
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("password");
+        dataSource.setDriverClassName(env.getRequiredProperty("spring.datasource.driverClassName"));
+        dataSource.setUrl(env.getRequiredProperty("spring.datasource.url"));
+        dataSource.setUsername(env.getRequiredProperty("spring.datasource.username"));
+        dataSource.setPassword(env.getRequiredProperty("spring.datasource.password"));
 
         return dataSource;
     }
