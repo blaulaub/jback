@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { RegistrationService } from '../registration.service';
+
 import { InitialRegistrationData } from '../initial-registration-data';
 import { VerificationMean } from '../verification-mean';
 import { VerificationByEmail } from '../verification-by-email';
@@ -16,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   model = new InitialRegistrationData();
 
-  constructor() { }
+  constructor(private registrationService: RegistrationService) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +31,11 @@ export class RegisterComponent implements OnInit {
     return this.model.verificationMean instanceof VerificationByEmail;
   }
 
-  canSubmitAndContinue(): boolean {
+  canSubmit(): boolean {
     return this.model.isValid();
+  }
+
+  submit() {
+    this.registrationService.postInitialRegistrationData(this.model);
   }
 }

@@ -26,6 +26,6 @@
   <input [(ngModel)]="model.verificationMean.phoneNumber" placeholder="+41 44 444 44 44"/>
 </div>
 
-<button [disabled]="!canSubmitAndContinue()">
+<button [disabled]="!canSubmit()" (click)="submit()">
   Submit and Continue
 </button>
