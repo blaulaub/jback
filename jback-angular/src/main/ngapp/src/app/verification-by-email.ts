@@ -1,6 +1,6 @@
 import { VerificationMean } from './verification-mean'
 
-export class VerificationByEmail implements VerificationMean {
+export class VerificationByEmail extends VerificationMean {
 
   readonly type = "Email";
 

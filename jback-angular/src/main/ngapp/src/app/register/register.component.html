@@ -12,18 +12,18 @@
 <div>
   <label>Verification Method:</label>
   <select [(ngModel)]="verificationMethod">
-    <option *ngFor="let methodOption of methodOptions">{{ methodOption.type }}</option>
+    <option *ngFor="let methodOption of methodOptions" [ngValue]="methodOption">{{ methodOption.type }}</option>
   </select>
 </div>
 
-<div *ngIf="verificationMethod === 'Email'">
+<div *ngIf="isEmail()">
   <label>Email Address:</label>
-  <input [(ngModel)]="emailAddress" placeholder="email@address.com"/>
+  <input [(ngModel)]="verificationMethod.emailAddress" placeholder="email@address.com"/>
 </div>
 
-<div *ngIf="verificationMethod === 'SMS'">
+<div *ngIf="isSms()">
   <label>SMS Phone Number:</label>
-  <input [(ngModel)]="phoneNumber" placeholder="+41 44 444 44 44"/>
+  <input [(ngModel)]="verificationMethod.phoneNumber" placeholder="+41 44 444 44 44"/>
 </div>
 
 <button [disabled]="!canSubmitAndContinue()">

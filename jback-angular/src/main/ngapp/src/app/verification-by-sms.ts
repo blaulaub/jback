@@ -1,6 +1,6 @@
 import { VerificationMean } from './verification-mean'
 
-export class VerificationBySms implements VerificationMean {
+export class VerificationBySms extends VerificationMean {
 
   readonly type = "SMS";
 

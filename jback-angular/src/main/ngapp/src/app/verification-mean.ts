@@ -1,6 +1,6 @@
-export interface VerificationMean {
+export abstract class VerificationMean {
 
   type: string;
 
-  isValid(): boolean;
+  abstract isValid(): boolean;
 }
