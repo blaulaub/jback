@@ -1,4 +1,13 @@
-<p>register works!</p>
+
+<div>
+  <label>First Name:</label>
+  <input [(ngModel)]="firstName" placeholder="first name"/>
+</div>
+
+<div>
+  <label>Last Name:</label>
+  <input [(ngModel)]="firstName" placeholder="last name"/>
+</div>
 
 <div>
   <label>Verification Method:</label>
@@ -7,5 +16,16 @@
   </select>
 </div>
 
-<div>
+<div *ngIf="method === 'Email'">
+  <label>Email Address:</label>
+  <input [(ngModel)]="emailAddress" placeholder="email@address.com"/>
 </div>
+
+<div *ngIf="method === 'SMS'">
+  <label>SMS Phone Number:</label>
+  <input [(ngModel)]="phoneNumber" placeholder="+41 44 444 44 44"/>
+</div>
+
+<button>
+  Submit and Continue
+</button>
