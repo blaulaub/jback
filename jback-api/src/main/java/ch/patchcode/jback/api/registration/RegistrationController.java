@@ -49,7 +49,7 @@ public class RegistrationController {
     @PutMapping("{id}")
     public ResponseEntity<Void> putCompleteRegistration(
             @PathVariable("id") UUID id,
-            @RequestBody VerificationCode verificationCode
+            @RequestBody @ApiParam VerificationCode verificationCode
     ) {
 
         authorizationManager.authenticate(PendingRegistration.Id.of(id), verificationCode.toDomain());
