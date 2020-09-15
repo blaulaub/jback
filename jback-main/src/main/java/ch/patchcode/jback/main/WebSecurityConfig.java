@@ -20,7 +20,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // get API session is open to anybody
                 .antMatchers(HttpMethod.GET, "/api/v1/session").permitAll()
                 // API registration is open to anybody
-                .antMatchers("/api/v1/registration").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/registration").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/v1/registration/*").permitAll()
                 // API is open to authenticated (only)
                 .antMatchers("/api/v1/**").authenticated()
                 .antMatchers("/api/v1/**").denyAll()
