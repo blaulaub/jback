@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 
@@ -10,7 +11,7 @@ import { InitialRegistrationData } from './initial-registration-data';
 })
 export class RegistrationService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   postInitialRegistrationData(data: InitialRegistrationData) {
     console.log(data);
