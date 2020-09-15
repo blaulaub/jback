@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { InitialRegistrationData } from '../initial-registration-data';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -9,8 +11,7 @@ export class RegisterComponent implements OnInit {
 
   readonly methodOptions = [ "Email", "SMS" ];
 
-  firstName: string;
-  lastName: string;
+  data: InitialRegistrationData = { firstName: null, lastName: null };
   verificationMethod: string;
   emailAddress: string;
   phoneNumber: string;
@@ -32,8 +33,8 @@ export class RegisterComponent implements OnInit {
   }
 
   canSubmitAndContinue(): boolean {
-    return this.notNullOrEmpty(this.firstName) &&
-      this.notNullOrEmpty(this.lastName) &&
+    return this.notNullOrEmpty(this.data.firstName) &&
+      this.notNullOrEmpty(this.data.lastName) &&
       this.verificationMethodValid();
   }
 
