@@ -12,7 +12,7 @@ import { VerificationBySms } from '../verification-by-sms';
 })
 export class RegisterComponent implements OnInit {
 
-  readonly methodOptions = [ new VerificationByEmail(), new VerificationBySms() ];
+  readonly verificationMeans = [ new VerificationByEmail(), new VerificationBySms() ];
 
   model = new InitialRegistrationData();
 
