@@ -1,4 +1,4 @@
-export interface InitialRegistrationData {
-  firstName: string;
-  lastName: string;
+export class InitialRegistrationData {
+  firstName = "";
+  lastName = "";
 }

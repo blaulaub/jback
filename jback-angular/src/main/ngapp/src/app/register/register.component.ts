@@ -11,7 +11,7 @@ export class RegisterComponent implements OnInit {
 
   readonly methodOptions = [ "Email", "SMS" ];
 
-  data: InitialRegistrationData = { firstName: null, lastName: null };
+  data = new InitialRegistrationData();
   verificationMethod: string;
   emailAddress: string;
   phoneNumber: string;
