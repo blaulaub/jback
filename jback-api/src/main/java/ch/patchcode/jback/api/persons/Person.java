@@ -3,6 +3,7 @@ package ch.patchcode.jback.api.persons;
 import ch.patchcode.jback.api.common.Address;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
@@ -51,18 +52,21 @@ public interface Person {
     class Builder extends Person_Builder {
     }
 
+    @ApiModel
     @FreeBuilder
-    interface Draft {
+    abstract class Draft {
 
-        String getFirstName();
+        @ApiModelProperty
+        public abstract String getFirstName();
 
-        String getLastName();
+        @ApiModelProperty
+        public abstract String getLastName();
 
         @ApiModelProperty(dataType = "ch.patchcode.jback.api.common.Address")
-        Optional<Address> getAddress();
+        public abstract Optional<Address> getAddress();
 
         @JsonCreator
-        static Draft of(
+        public static Draft of(
                 @JsonProperty("firstName") String firstName,
                 @JsonProperty("lastName") String lastName,
                 @JsonProperty("address") Address address
@@ -74,7 +78,7 @@ public interface Person {
             return builder.build();
         }
 
-        default ch.patchcode.jback.core.persons.Person.Draft toDomain() {
+        public ch.patchcode.jback.core.persons.Person.Draft toDomain() {
 
             var builder = new ch.patchcode.jback.core.persons.Person.Draft.Builder();
             builder.setFirstName(getFirstName());
@@ -83,7 +87,7 @@ public interface Person {
             return builder.build();
         }
 
-        class Builder extends Person_Draft_Builder {
+        public static class Builder extends Person_Draft_Builder {
         }
     }
 }

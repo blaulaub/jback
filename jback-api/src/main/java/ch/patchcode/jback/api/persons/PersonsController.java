@@ -4,6 +4,7 @@ import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.security.Authentication;
 import ch.patchcode.jback.security.AuthorizationManager;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,7 +50,9 @@ public class PersonsController {
      */
     @PostMapping("me")
     @PreAuthorize("hasAuthority('CAN_CREATE_OWN_PERSON')")
-    public Person createOwnPerson(@RequestBody Person.Draft draft) {
+    public Person createOwnPerson(
+            @RequestBody @ApiParam Person.Draft draft
+    ) {
 
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Authentication) context.getAuthentication();
@@ -69,7 +72,9 @@ public class PersonsController {
      */
     @PostMapping
     @PreAuthorize("hasAuthority('CAN_CREATE_CLIENT_PERSON')")
-    public Person createClientPerson(@RequestBody Person.Draft draft) {
+    public Person createClientPerson(
+            @RequestBody @ApiParam Person.Draft draft
+    ) {
 
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Authentication) context.getAuthentication();
