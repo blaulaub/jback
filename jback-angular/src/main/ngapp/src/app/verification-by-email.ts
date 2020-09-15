@@ -2,7 +2,7 @@ import { VerificationMean } from './verification-mean'
 
 export class VerificationByEmail extends VerificationMean {
 
-  readonly type = "Email";
+  readonly type = "email";
 
   emailAddress = "";
 

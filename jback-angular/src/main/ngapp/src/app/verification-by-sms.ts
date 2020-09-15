@@ -2,7 +2,7 @@ import { VerificationMean } from './verification-mean'
 
 export class VerificationBySms extends VerificationMean {
 
-  readonly type = "SMS";
+  readonly type = "sms";
 
   phoneNumber = "";
 
