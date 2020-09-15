@@ -11,17 +11,17 @@
 
 <div>
   <label>Verification Method:</label>
-  <select [(ngModel)]="method">
+  <select [(ngModel)]="verificationMethod">
     <option *ngFor="let methodOption of methodOptions">{{ methodOption }}</option>
   </select>
 </div>
 
-<div *ngIf="method === 'Email'">
+<div *ngIf="verificationMethod === 'Email'">
   <label>Email Address:</label>
   <input [(ngModel)]="emailAddress" placeholder="email@address.com"/>
 </div>
 
-<div *ngIf="method === 'SMS'">
+<div *ngIf="verificationMethod === 'SMS'">
   <label>SMS Phone Number:</label>
   <input [(ngModel)]="phoneNumber" placeholder="+41 44 444 44 44"/>
 </div>
