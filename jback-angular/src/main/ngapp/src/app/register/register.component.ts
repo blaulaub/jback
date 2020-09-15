@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from '../registration/registration.service';
 
-import { InitialRegistrationData } from '../initial-registration-data';
-import { VerificationMean } from '../verification-mean';
-import { VerificationByEmail } from '../verification-by-email';
-import { VerificationBySms } from '../verification-by-sms';
+import { InitialRegistrationData } from '../registration/initial-registration-data';
+import { VerificationMean } from '../registration/verification-mean';
+import { VerificationByEmail } from '../registration/verification-by-email';
+import { VerificationBySms } from '../registration/verification-by-sms';
 
 @Component({
   selector: 'app-register',
