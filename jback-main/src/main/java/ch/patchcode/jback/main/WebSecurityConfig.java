@@ -13,6 +13,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        http.csrf().disable();
+
         // who can access what (the order here is important)
         http.authorizeRequests()
                 // get API session is open to anybody
