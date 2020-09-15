@@ -7,13 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  methodOptions = [ "Email", "SMS" ];
+  readonly methodOptions = [ "Email", "SMS" ];
 
+  firstName: string;
+  lastName: string;
   method: string;
+  emailAddress: string;
+  phoneNumber: string;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  canSubmitAndContinue(): boolean {
+    return true;
   }
 
 }

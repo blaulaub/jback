@@ -6,7 +6,7 @@
 
 <div>
   <label>Last Name:</label>
-  <input [(ngModel)]="firstName" placeholder="last name"/>
+  <input [(ngModel)]="lastName" placeholder="last name"/>
 </div>
 
 <div>
@@ -26,6 +26,6 @@
   <input [(ngModel)]="phoneNumber" placeholder="+41 44 444 44 44"/>
 </div>
 
-<button>
+<button [disabled]="!canSubmitAndContinue()">
   Submit and Continue
 </button>
