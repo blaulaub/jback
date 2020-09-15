@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    this.registrationService.postInitialRegistrationData(this.model);
+    this.registrationService.postInitialRegistrationData(this.model)
+      .subscribe(result => console.log(result));
   }
 }
