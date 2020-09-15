@@ -21,4 +21,14 @@ export class CompleteComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
   }
+
+  canComplete(): boolean {
+    return typeof this.code === "string" && this.code !== "";
+  }
+
+  complete() {
+    // TODO now send this somewhere
+    console.error("not implemented");
+  }
+
 }

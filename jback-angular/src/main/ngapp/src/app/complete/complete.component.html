@@ -3,6 +3,6 @@
   <input [(ngModel)]="code" placeholder="code"/>
 </div>
 
-<button>
+<button [disabled]="!canComplete()" (click)="complete()">
   Confirm
 </button>
