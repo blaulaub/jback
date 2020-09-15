@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { InitialRegistrationData } from '../initial-registration-data';
+import { VerificationByEmail } from '../verification-by-email';
+import { VerificationBySms } from '../verification-by-sms';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,7 @@ import { InitialRegistrationData } from '../initial-registration-data';
 })
 export class RegisterComponent implements OnInit {
 
-  readonly methodOptions = [ "Email", "SMS" ];
+  readonly methodOptions = [ new VerificationByEmail(), new VerificationBySms() ];
 
   data = new InitialRegistrationData();
   verificationMethod: string;

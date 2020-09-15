@@ -12,7 +12,7 @@
 <div>
   <label>Verification Method:</label>
   <select [(ngModel)]="verificationMethod">
-    <option *ngFor="let methodOption of methodOptions">{{ methodOption }}</option>
+    <option *ngFor="let methodOption of methodOptions">{{ methodOption.type }}</option>
   </select>
 </div>
 
