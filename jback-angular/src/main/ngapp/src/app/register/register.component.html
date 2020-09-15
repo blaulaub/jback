@@ -1,29 +1,29 @@
 
 <div>
   <label>First Name:</label>
-  <input [(ngModel)]="data.firstName" placeholder="first name"/>
+  <input [(ngModel)]="model.firstName" placeholder="first name"/>
 </div>
 
 <div>
   <label>Last Name:</label>
-  <input [(ngModel)]="data.lastName" placeholder="last name"/>
+  <input [(ngModel)]="model.lastName" placeholder="last name"/>
 </div>
 
 <div>
   <label>Verification Method:</label>
-  <select [(ngModel)]="data.verificationMean">
+  <select [(ngModel)]="model.verificationMean">
     <option *ngFor="let methodOption of methodOptions" [ngValue]="methodOption">{{ methodOption.type }}</option>
   </select>
 </div>
 
 <div *ngIf="isEmail()">
   <label>Email Address:</label>
-  <input [(ngModel)]="data.verificationMean.emailAddress" placeholder="email@address.com"/>
+  <input [(ngModel)]="model.verificationMean.emailAddress" placeholder="email@address.com"/>
 </div>
 
 <div *ngIf="isSms()">
   <label>SMS Phone Number:</label>
-  <input [(ngModel)]="data.verificationMean.phoneNumber" placeholder="+41 44 444 44 44"/>
+  <input [(ngModel)]="model.verificationMean.phoneNumber" placeholder="+41 44 444 44 44"/>
 </div>
 
 <button [disabled]="!canSubmitAndContinue()">

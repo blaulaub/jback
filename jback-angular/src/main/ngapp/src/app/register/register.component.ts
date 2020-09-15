@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   readonly methodOptions = [ new VerificationByEmail(), new VerificationBySms() ];
 
-  data = new InitialRegistrationData();
+  model = new InitialRegistrationData();
 
   constructor() { }
 
@@ -22,14 +22,14 @@ export class RegisterComponent implements OnInit {
   }
 
   isSms() : boolean {
-    return this.data.verificationMean instanceof VerificationBySms;
+    return this.model.verificationMean instanceof VerificationBySms;
   }
 
   isEmail() : boolean {
-    return this.data.verificationMean instanceof VerificationByEmail;
+    return this.model.verificationMean instanceof VerificationByEmail;
   }
 
   canSubmitAndContinue(): boolean {
-    return this.data.isValid();
+    return this.model.isValid();
   }
 }
