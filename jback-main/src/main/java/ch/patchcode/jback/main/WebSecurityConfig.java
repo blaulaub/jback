@@ -27,9 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/*").denyAll()
                 // swagger is open (that looks like wide open)
                 .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
-                .antMatchers("/v2/api-docs/**").permitAll()
+                .antMatchers("/swagger-resources/*").permitAll()
+                .antMatchers("/webjars/springfox-swagger-ui/*").permitAll()
+                .antMatchers("/v2/api-docs/*").permitAll()
                 // otherwise the SPA takes over
                 .anyRequest().permitAll();
 
