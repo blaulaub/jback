@@ -26,11 +26,13 @@ public class TemporaryAuthentication implements Authentication {
         this.mean = registration.getVerificationMean();
     }
 
+    @Override
     public String getFirstName() {
 
         return firstName;
     }
 
+    @Override
     public String getLastName() {
 
         return lastName;

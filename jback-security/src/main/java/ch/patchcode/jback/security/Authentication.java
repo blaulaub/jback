@@ -3,13 +3,25 @@ package ch.patchcode.jback.security;
 import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.security.authorities.ApiAuthority;
+import ch.patchcode.jback.util.WithFirstAndLastName;
 
 import java.util.Collection;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public interface Authentication extends org.springframework.security.core.Authentication, ch.patchcode.jback.secBase.secModelImpl.Principal {
+public interface Authentication extends
+        org.springframework.security.core.Authentication,
+        ch.patchcode.jback.secBase.secModelImpl.Principal,
+        WithFirstAndLastName {
+
+    // impl ch.patchcode.jback.util.WithFirstAndLastName
+
+    @Override
+    String getFirstName();
+
+    @Override
+    String getLastName();
 
     // impl java.security.Principal
 

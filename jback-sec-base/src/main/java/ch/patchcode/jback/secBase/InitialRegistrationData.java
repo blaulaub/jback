@@ -1,5 +1,6 @@
 package ch.patchcode.jback.secBase;
 
+import ch.patchcode.jback.util.WithFirstAndLastName;
 import org.inferred.freebuilder.FreeBuilder;
 
 /**
@@ -7,10 +8,12 @@ import org.inferred.freebuilder.FreeBuilder;
  * They have to provide their name, and some contact media.
  */
 @FreeBuilder
-public interface InitialRegistrationData {
+public interface InitialRegistrationData extends WithFirstAndLastName {
 
+    @Override
     String getFirstName();
 
+    @Override
     String getLastName();
 
     VerificationMean getVerificationMean();

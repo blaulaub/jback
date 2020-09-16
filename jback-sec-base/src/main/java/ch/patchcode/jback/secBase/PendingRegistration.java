@@ -1,17 +1,20 @@
 package ch.patchcode.jback.secBase;
 
+import ch.patchcode.jback.util.WithFirstAndLastName;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @FreeBuilder
-public interface PendingRegistration {
+public interface PendingRegistration extends WithFirstAndLastName {
 
     Id getId();
 
+    @Override
     String getFirstName();
 
+    @Override
     String getLastName();
 
     VerificationMean getVerificationMean();
@@ -37,10 +40,12 @@ public interface PendingRegistration {
     }
 
     @FreeBuilder
-    interface Draft {
+    interface Draft extends WithFirstAndLastName {
 
+        @Override
         String getFirstName();
 
+        @Override
         String getLastName();
 
         VerificationMean getVerificationMean();

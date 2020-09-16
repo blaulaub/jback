@@ -25,6 +25,20 @@ public interface PersonalAuthentication extends Authentication {
 
     Person getHolder();
 
+    // impl ch.patchcode.jback.util.WithFirstAndLastName
+
+    @Override
+    default String getFirstName() {
+
+        return getHolder().getFirstName();
+    }
+
+    @Override
+    default String getLastName() {
+
+        return getHolder().getLastName();
+    }
+
     // impl java.security.Principal
 
     @Override
