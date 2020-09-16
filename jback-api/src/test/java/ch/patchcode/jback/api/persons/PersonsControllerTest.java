@@ -52,7 +52,7 @@ class PersonsControllerTest {
                 .andExpect(jsonPath("$.lastName").value(person.getLastName()));
         // TODO this array match is ugly
         result
-                .andExpect(jsonPath("$.address.lines[0]").value(person.getAddress().get().getLines().get(0)))
-                .andExpect(jsonPath("$.address.lines[1]").value(person.getAddress().get().getLines().get(1)));
+                .andExpect(jsonPath("$.address[0]").value(person.getAddress().get().getLines().get(0)))
+                .andExpect(jsonPath("$.address[1]").value(person.getAddress().get().getLines().get(1)));
     }
 }

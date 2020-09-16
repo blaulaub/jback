@@ -54,7 +54,7 @@ class ClubsControllerTest {
                 .andExpect(jsonPath("$.contact.lastName").value(club.getContact().get().getLastName()));
         // TODO this array match is ugly
         result
-                .andExpect(jsonPath("$.contact.address.lines[0]").value(club.getContact().get().getAddress().get().getLines().get(0)))
-                .andExpect(jsonPath("$.contact.address.lines[1]").value(club.getContact().get().getAddress().get().getLines().get(1)));
+                .andExpect(jsonPath("$.contact.address[0]").value(club.getContact().get().getAddress().get().getLines().get(0)))
+                .andExpect(jsonPath("$.contact.address[1]").value(club.getContact().get().getAddress().get().getLines().get(1)));
     }
 }

@@ -1,13 +1,12 @@
 package ch.patchcode.jback.api.persons;
 
-import ch.patchcode.jback.api.common.Address;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 @FreeBuilder
@@ -19,21 +18,20 @@ public interface Person {
 
     String getLastName();
 
-    @ApiModelProperty(dataType = "ch.patchcode.jback.api.common.Address")
-    Optional<Address> getAddress();
+    List<String> getAddress();
 
     @JsonCreator
     static Person of(
             @JsonProperty("id") UUID id,
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName,
-            @JsonProperty("address") Address address
+            @JsonProperty("address") List<String> address
     ) {
         Builder builder = new Builder();
         builder.setId(id);
         builder.setFirstName(firstName);
         builder.setLastName(lastName);
-        Optional.ofNullable(address).ifPresent(builder::setAddress);
+        builder.addAllAddress(address);
         return builder.build();
     }
 
@@ -44,7 +42,7 @@ public interface Person {
         builder.setId(person.getId())
                 .setFirstName(person.getFirstName())
                 .setLastName(person.getLastName());
-        person.getAddress().map(Address::fromDomain).ifPresent(builder::setAddress);
+        person.getAddress().map(ch.patchcode.jback.core.common.Address::getLines).ifPresent(builder::addAllAddress);
 
         return builder.build();
     }
@@ -62,19 +60,18 @@ public interface Person {
         @ApiModelProperty
         public abstract String getLastName();
 
-        @ApiModelProperty(dataType = "ch.patchcode.jback.api.common.Address")
-        public abstract Optional<Address> getAddress();
+        public abstract List<String> getAddress();
 
         @JsonCreator
         public static Draft of(
                 @JsonProperty("firstName") String firstName,
                 @JsonProperty("lastName") String lastName,
-                @JsonProperty("address") Address address
+                @JsonProperty("address") List<String> address
         ) {
             var builder = new Builder();
             builder.setFirstName(firstName);
             builder.setLastName(lastName);
-            Optional.ofNullable(address).ifPresent(it -> builder.setAddress(address));
+            builder.addAllAddress(address);
             return builder.build();
         }
 
@@ -83,7 +80,9 @@ public interface Person {
             var builder = new ch.patchcode.jback.core.persons.Person.Draft.Builder();
             builder.setFirstName(getFirstName());
             builder.setLastName(getLastName());
-            getAddress().map(Address::toDomain).ifPresent(builder::setAddress);
+            builder.setAddress(new ch.patchcode.jback.core.common.Address.Builder()
+                    .addAllLines(getAddress())
+                    .build());
             return builder.build();
         }
 
