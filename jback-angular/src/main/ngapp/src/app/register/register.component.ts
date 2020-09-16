@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { RegistrationService } from '../registration/registration.service';
 
@@ -6,6 +7,7 @@ import { InitialRegistrationData } from '../registration/initial-registration-da
 import { VerificationMean } from '../registration/verification-mean';
 import { VerificationByEmail } from '../registration/verification-by-email';
 import { VerificationBySms } from '../registration/verification-by-sms';
+import { PendingRegistrationInfo } from '../registration/pending-registration-info';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +20,10 @@ export class RegisterComponent implements OnInit {
 
   model = new InitialRegistrationData();
 
-  constructor(private registrationService: RegistrationService) { }
+  constructor(
+    private registrationService: RegistrationService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -37,6 +42,10 @@ export class RegisterComponent implements OnInit {
 
   submit() {
     this.registrationService.postInitialRegistrationData(this.model)
-      .subscribe(result => console.log(result));
+      .subscribe(result => this.navigateTo(result));
+  }
+
+  private navigateTo(info: PendingRegistrationInfo) {
+    this.router.navigate(["complete", info.pendingRegistrationId]);
   }
 }
