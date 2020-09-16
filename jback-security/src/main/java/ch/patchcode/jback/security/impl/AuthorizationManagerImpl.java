@@ -9,6 +9,8 @@ import ch.patchcode.jback.security.authentications.PersonalAuthenticationReposit
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorizationManagerImpl implements AuthorizationManager {
+
+    private final static Logger LOG = LoggerFactory.getLogger(AuthorizationManagerImpl.class);
 
     private final RegistrationService registrationService;
     private final PersonalAuthenticationRepository personalAuthenticationRepository;
@@ -50,6 +54,8 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
         confirmationResult.accept(new ConfirmationResult.Visitor<Void>() {
             @Override
             public Void caseConfirmed() {
+
+                LOG.debug("change security context to TemporaryAuthentication");
                 SecurityContextHolder.getContext()
                         .setAuthentication(new TemporaryAuthentication(pendingRegistration));
                 return null;
