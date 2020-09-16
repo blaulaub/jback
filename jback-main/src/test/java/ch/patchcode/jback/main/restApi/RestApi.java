@@ -62,4 +62,15 @@ public class RestApi {
                 Person.class
         ));
     }
+
+    /**
+     * Posts a {@link Person.Draft} to {@code /api/v1/persons/me}.
+     */
+    public PersonPostNewPerson personsPostNewMe(Person.Draft newPerson) throws Exception {
+        return new PersonPostNewPerson(restSession.post(
+                "/api/v1/persons/me",
+                newPerson,
+                Person.class
+        ));
+    }
 }

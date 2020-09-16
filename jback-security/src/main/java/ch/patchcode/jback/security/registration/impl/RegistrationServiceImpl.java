@@ -35,6 +35,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             PendingRegistrationRepository pendingRegistrationRepository,
             VerificationCodeProvider verificationCodeProvider
     ) {
+
         this.consoleVerificationService = consoleVerificationService;
         this.emailVerificationService = emailVerificationService;
         this.smsVerificationService = smsVerificationService;
@@ -45,7 +46,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public PendingRegistration.Id setupRegistration(InitialRegistrationData data) {
 
-        var pendingRegistration = new PendingRegistration.Builder()
+        var draft = new PendingRegistration.Draft.Builder()
                 .setFirstName(data.getFirstName())
                 .setLastName(data.getLastName())
                 .setVerificationMean(data.getVerificationMean())
@@ -53,10 +54,12 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .setExpiresAt(Instant.now().plus(Duration.ofMinutes(30)))
                 .build();
 
-        var verificationMeanVisitor = new MyVerificationMeanVisitor(pendingRegistration);
+        PendingRegistration registration = pendingRegistrationRepository.create(draft);
+
+        var verificationMeanVisitor = new RegistrationSender(registration);
         verificationMeanVisitor.visit();
 
-        return pendingRegistrationRepository.save(pendingRegistration);
+        return registration.getId();
     }
 
     @Override
@@ -93,11 +96,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         pendingRegistrationRepository.removeById(id);
     }
 
-    private class MyVerificationMeanVisitor implements VerificationMean.VerificationMeanVisitor<Void> {
+    private class RegistrationSender implements VerificationMean.VerificationMeanVisitor<Void> {
 
         private final PendingRegistration pendingRegistration;
 
-        public MyVerificationMeanVisitor(PendingRegistration pendingRegistration) {
+        public RegistrationSender(PendingRegistration pendingRegistration) {
+
             this.pendingRegistration = pendingRegistration;
         }
 
@@ -107,18 +111,21 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         @Override
         public Void visit(VerificationMean.VerificationByConsole verificationByConsole) {
+
             consoleVerificationService.sendOut(pendingRegistration);
             return null;
         }
 
         @Override
         public Void visit(VerificationMean.VerificationByEmail verificationByEmail) {
+
             emailVerificationService.sendOut(pendingRegistration);
             return null;
         }
 
         @Override
         public Void visit(VerificationMean.VerificationBySms verificationBySms) {
+
             smsVerificationService.sendOut(pendingRegistration);
             return null;
         }

@@ -32,6 +32,11 @@ public interface Person extends ch.patchcode.jback.secBase.secModelImpl.Person {
     @Override
     List<Authority> getExtraPrivileges();
 
+    default String getName() {
+
+        return getFirstName() + " " + getLastName();
+    }
+
     class Builder extends Person_Builder {
     }
 
@@ -43,6 +48,10 @@ public interface Person extends ch.patchcode.jback.secBase.secModelImpl.Person {
         String getLastName();
 
         Optional<Address> getAddress();
+
+        List<Role> getRoles();
+
+        List<Authority> getExtraPrivileges();
 
         class Builder extends Person_Draft_Builder {
         }

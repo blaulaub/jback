@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface PendingRegistrationRepository {
 
-    PendingRegistration.Id save(PendingRegistration pendingRegistration);
+    PendingRegistration create(PendingRegistration.Draft pendingRegistration);
 
     Optional<PendingRegistration> findById(UUID id);
 

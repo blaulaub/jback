@@ -1,6 +1,7 @@
 package ch.patchcode.jback.jpa.verificationMeans;
 
-import ch.patchcode.jback.jpa.principals.PrincipalJpa;
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
+import ch.patchcode.jback.secBase.VerificationMean;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -22,14 +23,14 @@ public abstract class VerificationMeanJpa {
     }
 
     @ManyToOne
-    private PrincipalJpa principal;
+    private PersonalAuthenticationJpa personalAuthentication;
 
-    public PrincipalJpa getPrincipal() {
-        return principal;
+    public PersonalAuthenticationJpa getPersonalAuthentication() {
+        return personalAuthentication;
     }
 
-    public void setPrincipal(PrincipalJpa principal) {
-        this.principal = principal;
+    public void setPersonalAuthentication(PersonalAuthenticationJpa personalAuthentication) {
+        this.personalAuthentication = personalAuthentication;
     }
 
     public abstract <R> R accept(VerificationMeanJpa.Visitor<R> registrationHandler);
@@ -41,6 +42,59 @@ public abstract class VerificationMeanJpa {
         R visit(EmailVerification emailVerification);
 
         R visit(SmsVerification smsVerification);
+    }
+
+    public static VerificationMeanJpa fromDomain(PersonalAuthenticationJpa principal, VerificationMean mean) {
+
+        return mean.accept(new VerificationMean.VerificationMeanVisitor<>() {
+            @Override
+            public VerificationMeanJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
+                VerificationMeanJpa.ConsoleVerification consoleVerification = new VerificationMeanJpa.ConsoleVerification();
+                consoleVerification.setPersonalAuthentication(principal);
+                return consoleVerification;
+            }
+
+            @Override
+            public VerificationMeanJpa visit(VerificationMean.VerificationByEmail verificationByEmail) {
+                VerificationMeanJpa.EmailVerification emailVerification = new VerificationMeanJpa.EmailVerification();
+                emailVerification.setPersonalAuthentication(principal);
+                emailVerification.setEmail(verificationByEmail.getEmailAddress());
+                return emailVerification;
+            }
+
+            @Override
+            public VerificationMeanJpa visit(VerificationMean.VerificationBySms verificationBySms) {
+                VerificationMeanJpa.SmsVerification smsVerification = new VerificationMeanJpa.SmsVerification();
+                smsVerification.setPersonalAuthentication(principal);
+                smsVerification.setPhoneNumber(verificationBySms.getPhoneNumber());
+                return smsVerification;
+            }
+        });
+    }
+
+    public VerificationMean toDomain() {
+
+        return this.accept(new VerificationMeanJpa.Visitor<>() {
+
+            @Override
+            public VerificationMean visit(VerificationMeanJpa.ConsoleVerification consoleVerification) {
+                return new VerificationMean.VerificationByConsole();
+            }
+
+            @Override
+            public VerificationMean visit(VerificationMeanJpa.EmailVerification emailVerification) {
+                return new VerificationMean.VerificationByEmail.Builder()
+                        .setEmailAddress(emailVerification.getEmail())
+                        .build();
+            }
+
+            @Override
+            public VerificationMean visit(VerificationMeanJpa.SmsVerification smsVerification) {
+                return new VerificationMean.VerificationBySms.Builder()
+                        .setPhoneNumber(smsVerification.getPhoneNumber())
+                        .build();
+            }
+        });
     }
 
     @Entity

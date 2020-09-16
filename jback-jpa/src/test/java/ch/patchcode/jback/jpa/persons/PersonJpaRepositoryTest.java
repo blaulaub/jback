@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import javax.transaction.Transactional;
+
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { JpaTestConfiguration.class })
@@ -23,15 +26,18 @@ class PersonJpaRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void save_and_findById() {
 
         // arrange
         var input = new PersonJpa();
         input.setFirstName("Tom");
         input.setLastName("Sawyer");
-        input.setAddress1("Technoparkstrasse 1");
-        input.setAddress2("8051 Zürich");
-        input.setAddress5("Switzerland");
+        input.setAddressLines(asList(
+                PersonJpa.AddressLine.of(1, "Technoparkstrasse 1"),
+                PersonJpa.AddressLine.of(2,"8051 Zürich"),
+                PersonJpa.AddressLine.of(3,"Switzerland")
+        ));
 
         // act
         var id = personJpaRepository.save(input).getId();
@@ -41,8 +47,9 @@ class PersonJpaRepositoryTest {
         assertTrue(output.isPresent());
         assertEquals("Tom", output.get().getFirstName());
         assertEquals("Sawyer", output.get().getLastName());
-        assertEquals("Technoparkstrasse 1", output.get().getAddress1());
-        assertEquals("8051 Zürich", output.get().getAddress2());
-        assertEquals("Switzerland", output.get().getAddress5());
+        assertIterableEquals(
+                asList("Technoparkstrasse 1", "8051 Zürich", "Switzerland"),
+                output.get().getAddressLines().stream().map(PersonJpa.AddressLine::getValue).collect(toList())
+        );
     }
 }

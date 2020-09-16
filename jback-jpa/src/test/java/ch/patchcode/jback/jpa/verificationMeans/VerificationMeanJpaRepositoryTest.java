@@ -1,8 +1,9 @@
 package ch.patchcode.jback.jpa.verificationMeans;
 
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
-import ch.patchcode.jback.jpa.principals.PrincipalJpa;
-import ch.patchcode.jback.jpa.principals.PrincipalJpaRepository;
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpaRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,43 +18,102 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = {JpaTestConfiguration.class})
 class VerificationMeanJpaRepositoryTest {
 
-    private final VerificationMeanJpaRepository verificationMeanRepository;
+    private final PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository;
+    private final VerificationMeanJpaRepository repo;
 
-    // not under test, but we also need these for related entities
-    private final PrincipalJpaRepository principalRepository;
+    private PersonalAuthenticationJpa principal;
 
     @Autowired
     public VerificationMeanJpaRepositoryTest(
             VerificationMeanJpaRepository verificationMeanRepository,
-            PrincipalJpaRepository principalRepository
-    ) {
-        this.verificationMeanRepository = verificationMeanRepository;
-        this.principalRepository = principalRepository;
+            PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository) {
+
+        this.repo = verificationMeanRepository;
+        this.personalAuthenticationJpaRepository = personalAuthenticationJpaRepository;
+    }
+
+    @BeforeEach
+    void setUp() {
+
+        principal = personalAuthenticationJpaRepository.save(new PersonalAuthenticationJpa());
     }
 
     @Test
     @Transactional
-    void save_and_findById() {
+    void consoleVerification_save_and_findById() {
 
         // arrange
-        var principal = principalRepository.save(new PrincipalJpa());
-        var smsPhoneNumber = "+491806672255";
+        var mean = consoleVerification();
 
         // act
-        var id = verificationMeanRepository.save(smsVerificationOf(smsPhoneNumber, principal)).getId();
-        var verificationMean = verificationMeanRepository.findById(id);
+        var id = repo.save(mean).getId();
+        var verificationMean = repo.findById(id);
 
         // assert
         assertTrue(verificationMean.isPresent());
-        assertEquals(principal, verificationMean.get().getPrincipal());
-        assertTrue(verificationMean.get() instanceof VerificationMeanJpa.SmsVerification);
-        assertEquals(smsPhoneNumber, ((VerificationMeanJpa.SmsVerification) verificationMean.get()).getPhoneNumber());
+        assertAll(
+                () -> assertEquals(principal, verificationMean.get().getPersonalAuthentication()),
+                () -> assertTrue(verificationMean.get() instanceof VerificationMeanJpa.ConsoleVerification)
+        );
     }
 
-    private VerificationMeanJpa.SmsVerification smsVerificationOf(String phoneNumber, PrincipalJpa principal) {
+    @Test
+    @Transactional
+    void smsVerification_save_and_findById() {
+
+        // arrange
+        var mean = smsVerificationOf("+491806672255");
+
+        // act
+        var id = repo.save(mean).getId();
+        var verificationMean = repo.findById(id);
+
+        // assert
+        assertTrue(verificationMean.isPresent());
+        assertAll(
+                () -> assertEquals(principal, verificationMean.get().getPersonalAuthentication()),
+                () -> assertTrue(verificationMean.get() instanceof VerificationMeanJpa.SmsVerification)
+        );
+        assertEquals(mean.getPhoneNumber(), ((VerificationMeanJpa.SmsVerification) verificationMean.get()).getPhoneNumber());
+    }
+
+    @Test
+    @Transactional
+    void emailVerification_save_and_findById() {
+
+        // arrange
+        var mean = emailVerificationOf("admin@google.com");
+
+        // act
+        var id = repo.save(mean).getId();
+        var verificationMean = repo.findById(id);
+
+        // assert
+        assertTrue(verificationMean.isPresent());
+        assertAll(
+                () -> assertEquals(principal, verificationMean.get().getPersonalAuthentication()),
+                () -> assertTrue(verificationMean.get() instanceof VerificationMeanJpa.EmailVerification)
+        );
+        assertEquals(mean.getEmail(), ((VerificationMeanJpa.EmailVerification) verificationMean.get()).getEmail());
+    }
+
+    private VerificationMeanJpa.ConsoleVerification consoleVerification() {
+        var consoleVerification = new VerificationMeanJpa.ConsoleVerification();
+        consoleVerification.setPersonalAuthentication(principal);
+        return consoleVerification;
+    }
+
+    private VerificationMeanJpa.SmsVerification smsVerificationOf(String phoneNumber) {
         var smsVerification = new VerificationMeanJpa.SmsVerification();
         smsVerification.setPhoneNumber(phoneNumber);
-        smsVerification.setPrincipal(principal);
+        smsVerification.setPersonalAuthentication(principal);
         return smsVerification;
+    }
+
+    private VerificationMeanJpa.EmailVerification emailVerificationOf(String email) {
+        var emailVerification = new VerificationMeanJpa.EmailVerification();
+        emailVerification.setEmail(email);
+        emailVerification.setPersonalAuthentication(principal);
+        return emailVerification;
     }
 }

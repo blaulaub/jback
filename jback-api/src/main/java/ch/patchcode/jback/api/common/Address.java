@@ -4,25 +4,27 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
+import java.util.List;
+
 @FreeBuilder
 public interface Address {
 
-    String[] getLines();
+    List<String> getLines();
 
     @JsonCreator
-    static Address of(@JsonProperty("lines") String[] lines) {
-        return new Builder().setLines(lines).build();
+    static Address of(@JsonProperty("lines") List<String> lines) {
+        return new Builder().addAllLines(lines).build();
     }
 
     static Address fromDomain(ch.patchcode.jback.core.common.Address address) {
         return new Builder()
-                .setLines(address.getLines().clone())
+                .addAllLines(address.getLines())
                 .build();
     }
 
     default ch.patchcode.jback.core.common.Address toDomain() {
         return new ch.patchcode.jback.core.common.Address.Builder()
-                .setLines(getLines().clone())
+                .addAllLines(getLines())
                 .build();
     }
 

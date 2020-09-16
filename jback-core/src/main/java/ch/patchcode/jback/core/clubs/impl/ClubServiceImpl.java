@@ -21,6 +21,6 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public Optional<Club> getClub(UUID id) {
-        return clubRepository.findOne(id);
+        return clubRepository.findById(id);
     }
 }

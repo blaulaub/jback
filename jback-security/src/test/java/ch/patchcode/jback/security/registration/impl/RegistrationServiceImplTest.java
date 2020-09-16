@@ -58,20 +58,24 @@ class RegistrationServiceImplTest {
     void beginRegistration_viaConsole_invokesConsoleVerification() {
 
         // arrange
+        VerificationMean.VerificationByConsole mean = new VerificationMean.VerificationByConsole();
         var data = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationMean.VerificationByConsole())
+                .setVerificationMean(mean)
                 .build();
-        var expectedId = PendingRegistration.Id.of(UUID.randomUUID());
-        when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
+        var pending = new PendingRegistration.Builder()
+                .setId(PendingRegistration.Id.of(UUID.randomUUID()))
+                .setVerificationMean(mean)
+                .buildPartial();
+        when(pendingRegistrationRepository.create(any())).thenReturn(pending);
 
         // act
         var id = service.setupRegistration(data);
 
         // assert
-        assertEquals(expectedId.getId(), id.getId());
-        verify(pendingRegistrationRepository, times(1)).save(any());
+        assertEquals(pending.getId(), id);
+        verify(pendingRegistrationRepository, times(1)).create(any());
         verify(consoleVerificationService, times(1)).sendOut(any());
         verify(emailVerificationService, times(0)).sendOut(any());
         verify(smsVerificationService, times(0)).sendOut(any());
@@ -81,20 +85,24 @@ class RegistrationServiceImplTest {
     void beginRegistration_viaEmail_invokesEmailVerification() {
 
         // arrange
+        VerificationMean.VerificationByEmail mean = new VerificationMean.VerificationByEmail.Builder().buildPartial();
         InitialRegistrationData data = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationMean.VerificationByEmail.Builder().buildPartial())
+                .setVerificationMean(mean)
                 .build();
-        var expectedId = PendingRegistration.Id.of(UUID.randomUUID());
-        when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
+        var pending = new PendingRegistration.Builder()
+                .setId(PendingRegistration.Id.of(UUID.randomUUID()))
+                .setVerificationMean(mean)
+                .buildPartial();
+        when(pendingRegistrationRepository.create(any())).thenReturn(pending);
 
         // act
         var id = service.setupRegistration(data);
 
         // assert
-        assertEquals(expectedId.getId(), id.getId());
-        verify(pendingRegistrationRepository, times(1)).save(any());
+        assertEquals(pending.getId(), id);
+        verify(pendingRegistrationRepository, times(1)).create(any());
         verify(consoleVerificationService, times(0)).sendOut(any());
         verify(emailVerificationService, times(1)).sendOut(any());
         verify(smsVerificationService, times(0)).sendOut(any());
@@ -104,20 +112,24 @@ class RegistrationServiceImplTest {
     void beginRegistration_viaSms_invokesSmsVerification() {
 
         // arrange
+        VerificationMean.VerificationBySms mean = new VerificationMean.VerificationBySms.Builder().buildPartial();
         InitialRegistrationData data = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationMean.VerificationBySms.Builder().buildPartial())
+                .setVerificationMean(mean)
                 .build();
-        var expectedId = PendingRegistration.Id.of(UUID.randomUUID());
-        when(pendingRegistrationRepository.save(any())).thenReturn(expectedId);
+        var pending = new PendingRegistration.Builder()
+                .setId(PendingRegistration.Id.of(UUID.randomUUID()))
+                .setVerificationMean(mean)
+                .buildPartial();
+        when(pendingRegistrationRepository.create(any())).thenReturn(pending);
 
         // act
         var id = service.setupRegistration(data);
 
         // assert
-        assertEquals(expectedId.getId(), id.getId());
-        verify(pendingRegistrationRepository, times(1)).save(any());
+        assertEquals(pending.getId(), id);
+        verify(pendingRegistrationRepository, times(1)).create(any());
         verify(consoleVerificationService, times(0)).sendOut(any());
         verify(emailVerificationService, times(0)).sendOut(any());
         verify(smsVerificationService, times(1)).sendOut(any());
@@ -145,6 +157,7 @@ class RegistrationServiceImplTest {
         UUID id = UUID.randomUUID();
         String code = "1234";
         PendingRegistration pendingRegistration = PendingRegistration.Builder.from(somePendingRegistration())
+                .setId(PendingRegistration.Id.of(id))
                 .setVerificationCode(code)
                 .setExpiresAt(Instant.now().minus(Duration.ofMinutes(1)))
                 .build();
@@ -164,6 +177,7 @@ class RegistrationServiceImplTest {
         UUID id = UUID.randomUUID();
         String code = "1234";
         PendingRegistration pendingRegistration = PendingRegistration.Builder.from(somePendingRegistration())
+                .setId(PendingRegistration.Id.of(id))
                 .setVerificationCode(code)
                 .setExpiresAt(Instant.MAX)
                 .build();
@@ -183,6 +197,7 @@ class RegistrationServiceImplTest {
         UUID id = UUID.randomUUID();
         String code = "1234";
         PendingRegistration pendingRegistration = PendingRegistration.Builder.from(somePendingRegistration())
+                .setId(PendingRegistration.Id.of(id))
                 .setVerificationCode(code)
                 .setExpiresAt(Instant.MAX)
                 .build();

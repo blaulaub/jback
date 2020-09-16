@@ -49,8 +49,10 @@ class PersonsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id.toString()))
                 .andExpect(jsonPath("$.firstName").value(person.getFirstName()))
-                .andExpect(jsonPath("$.lastName").value(person.getLastName()))
-                .andExpect(jsonPath("$.address.lines", contains(person.getAddress().map(Address::getLines).get())));
-
+                .andExpect(jsonPath("$.lastName").value(person.getLastName()));
+        // TODO this array match is ugly
+        result
+                .andExpect(jsonPath("$.address.lines[0]").value(person.getAddress().get().getLines().get(0)))
+                .andExpect(jsonPath("$.address.lines[1]").value(person.getAddress().get().getLines().get(1)));
     }
 }

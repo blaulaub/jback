@@ -21,4 +21,16 @@ public interface Club {
     class Builder extends Club_Builder {
     }
 
+    @FreeBuilder
+    interface Draft {
+
+        String getName();
+
+        Optional<Person> getContact();
+
+        Optional<URI> getUrl();
+
+        class Builder extends Club_Draft_Builder {
+        }
+    }
 }

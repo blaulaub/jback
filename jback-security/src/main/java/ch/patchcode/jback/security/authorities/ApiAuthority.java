@@ -5,7 +5,9 @@ import org.springframework.security.core.GrantedAuthority;
 
 public enum ApiAuthority implements GrantedAuthority {
 
-    CAN_CREATE_PERSON;
+    CAN_CREATE_OWN_PERSON,
+
+    CAN_CREATE_CLIENT_PERSON;
 
     @Override
     public String getAuthority() {
@@ -14,9 +16,15 @@ public enum ApiAuthority implements GrantedAuthority {
 
     public static ApiAuthority of(Authority authority) {
         return authority.accept(new Authority.Visitor<ApiAuthority>() {
+
             @Override
-            public ApiAuthority caseCanCreatePerson() {
-                return CAN_CREATE_PERSON;
+            public ApiAuthority caseCanCreateOwnPerson() {
+                return CAN_CREATE_OWN_PERSON;
+            }
+
+            @Override
+            public ApiAuthority caseCanCreateClientPerson() {
+                return CAN_CREATE_CLIENT_PERSON;
             }
         });
     }

@@ -1,10 +1,15 @@
 package ch.patchcode.jback.jpa.persons;
 
 import ch.patchcode.jback.core.common.Address;
+import ch.patchcode.jback.core.persons.Person;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity(name = PersonJpa.ENTITY_NAME)
 @Table(name = PersonJpa.ENTITY_NAME)
@@ -24,15 +29,9 @@ public class PersonJpa {
 
     private String lastName;
 
-    private String address1;
-
-    private String address2;
-
-    private String address3;
-
-    private String address4;
-
-    private String address5;
+    @ElementCollection
+    @OrderBy("address.line")
+    private List<AddressLine> addressLines;
 
     @ElementCollection
     private List<String> authorities;
@@ -53,44 +52,12 @@ public class PersonJpa {
         this.lastName = lastName;
     }
 
-    public String getAddress1() {
-        return address1;
+    public List<AddressLine> getAddressLines() {
+        return addressLines;
     }
 
-    public void setAddress1(String address1) {
-        this.address1 = address1;
-    }
-
-    public String getAddress2() {
-        return address2;
-    }
-
-    public void setAddress2(String address2) {
-        this.address2 = address2;
-    }
-
-    public String getAddress3() {
-        return address3;
-    }
-
-    public void setAddress3(String address3) {
-        this.address3 = address3;
-    }
-
-    public String getAddress4() {
-        return address4;
-    }
-
-    public void setAddress4(String address4) {
-        this.address4 = address4;
-    }
-
-    public String getAddress5() {
-        return address5;
-    }
-
-    public void setAddress5(String address5) {
-        this.address5 = address5;
+    public void setAddressLines(List<AddressLine> addressLines) {
+        this.addressLines = addressLines;
     }
 
     public List<String> getAuthorities() {
@@ -101,17 +68,63 @@ public class PersonJpa {
         this.authorities = authorities;
     }
 
-    public ch.patchcode.jback.core.persons.Person toDomain() {
-        return new ch.patchcode.jback.core.persons.Person.Builder()
+    public static PersonJpa fromDomain(Person.Draft draft) {
+
+        var person = new PersonJpa();
+        person.setFirstName(draft.getFirstName());
+        person.setLastName(draft.getLastName());
+        draft.getAddress()
+                .map(Address::getLines)
+                .map(lines -> IntStream.range(0, lines.size())
+                        .mapToObj(idx -> AddressLine.of(idx, lines.get(idx)))
+                        .collect(toList()))
+                .ifPresent(person::setAddressLines);
+        return person;
+    }
+
+    public Person toDomain() {
+
+        Person.Builder builder = new Person.Builder()
                 .setId(getId())
                 .setFirstName(getFirstName())
-                .setLastName(getLastName())
-                .setAddress(new Address.Builder().setLines(new String[]{
-                        getAddress1(),
-                        getAddress2(),
-                        getAddress3(),
-                        getAddress4(),
-                        getAddress5()
-                }).build()).build();
+                .setLastName(getLastName());
+        Optional.ofNullable(getAddressLines())
+                .map(it -> it.stream().map(AddressLine::getValue))
+                .map(it -> new Address.Builder().addAllLines(it).build())
+                .ifPresent(builder::setAddress);
+        return builder.build();
+    }
+
+    @Embeddable
+    public static class AddressLine {
+
+        @Column(unique = true)
+        private int line;
+
+        private String value;
+
+        public static AddressLine of(int line, String value) {
+
+            var result = new AddressLine();
+            result.setLine(line);
+            result.setValue(value);
+            return result;
+        }
+
+        public int getLine() {
+            return line;
+        }
+
+        public void setLine(int line) {
+            this.line = line;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
     }
 }

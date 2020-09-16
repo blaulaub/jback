@@ -1,10 +1,14 @@
 package ch.patchcode.jback.jpa.clubs;
 
-import ch.patchcode.jback.core.clubs.ClubRepository;
 import ch.patchcode.jback.core.clubs.Club;
+import ch.patchcode.jback.core.clubs.ClubRepository;
+import ch.patchcode.jback.core.persons.Person;
+import ch.patchcode.jback.jpa.persons.PersonJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import java.net.URI;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -12,23 +16,41 @@ import java.util.UUID;
 public class ClubJpaRepoWrapper implements ClubRepository {
 
     private final ClubJpaRepository clubJpaRepository;
+    private final PersonJpaRepository personJpaRepository;
 
     @Autowired
-    public ClubJpaRepoWrapper(ClubJpaRepository clubJpaRepository) {
+    public ClubJpaRepoWrapper(
+            ClubJpaRepository clubJpaRepository,
+            PersonJpaRepository personJpaRepository
+    ) {
         this.clubJpaRepository = clubJpaRepository;
+        this.personJpaRepository = personJpaRepository;
     }
 
     @Override
-    public Optional<Club> findOne(UUID id) {
+    public Optional<Club> findById(UUID id) {
 
-        return clubJpaRepository.findById(id).map(ClubJpaRepoWrapper::toClub);
+        return clubJpaRepository.findById(id).map(ClubJpa::toDomain);
     }
 
-    public static Club toClub(ch.patchcode.jback.jpa.clubs.Club it) {
-        return new Club.Builder()
-                .setId(it.getId())
-                .setName(it.getName())
-                .setContact(it.getContact().toDomain())
-                .build();
+    @Override
+    public Club create(Club.Draft draft) {
+
+        return clubJpaRepository.save(fromDomain(draft)).toDomain();
+    }
+
+    private ClubJpa fromDomain(Club.Draft draft) {
+
+        ClubJpa club = new ClubJpa();
+        club.setName(draft.getName());
+        draft.getContact()
+                .map(Person::getId)
+                .map(personJpaRepository::findById)
+                .map(it -> it.orElseThrow(EntityNotFoundException::new))
+                .ifPresent(club::setContact);
+        draft.getUrl()
+                .map(URI::toString)
+                .ifPresent(club::setUri);
+        return club;
     }
 }

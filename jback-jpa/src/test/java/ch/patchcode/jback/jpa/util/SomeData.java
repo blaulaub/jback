@@ -1,8 +1,8 @@
 package ch.patchcode.jback.jpa.util;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
-import ch.patchcode.jback.jpa.principals.PrincipalJpa;
-import ch.patchcode.jback.jpa.registration.Registration;
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
+import ch.patchcode.jback.jpa.registration.RegistrationJpa;
 import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationMean;
 
@@ -12,14 +12,14 @@ import java.util.List;
 
 public class SomeData {
 
-    public static PendingRegistration somePendingRegistration() {
+    public static PendingRegistration.Draft somePendingRegistrationDraft() {
 
-        return somePendingRegistration(new VerificationMean.VerificationByConsole());
+        return somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
     }
 
-    public static PendingRegistration somePendingRegistration(VerificationMean verificationMean) {
+    public static PendingRegistration.Draft somePendingRegistrationDraft(VerificationMean verificationMean) {
 
-        return new PendingRegistration.Builder()
+        return new PendingRegistration.Draft.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
                 .setExpiresAt(Instant.now().plus(Duration.ofMinutes(5)))
@@ -28,9 +28,9 @@ public class SomeData {
                 .build();
     }
 
-    public static Registration someRegistration() {
+    public static RegistrationJpa someRegistration() {
         
-        Registration registration = new Registration.ConsoleRegistration();
+        RegistrationJpa registration = new RegistrationJpa.ConsoleRegistrationJpa();
         registration.setFirstName("Tom");
         registration.setLastName("Sawyer");
         registration.setVerificationCode("1234");
@@ -38,12 +38,12 @@ public class SomeData {
         return registration;
     }
 
-    public static PrincipalJpa principalOf(
+    public static PersonalAuthenticationJpa principalOf(
             List<PersonJpa> persons,
             List<String> authorities
     ) {
-        var principal = new PrincipalJpa();
-        principal.setPersons(persons);
+        var principal = new PersonalAuthenticationJpa();
+        principal.setClients(persons);
         principal.setAuthorities(authorities);
         return principal;
     }

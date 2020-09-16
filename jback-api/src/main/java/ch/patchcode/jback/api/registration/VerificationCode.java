@@ -2,23 +2,27 @@ package ch.patchcode.jback.api.registration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
+@ApiModel
 @FreeBuilder
-public interface VerificationCode {
+public abstract class VerificationCode {
 
-    String getVerificationCode();
+    @ApiModelProperty
+    public abstract String getVerificationCode();
 
     @JsonCreator
-    static VerificationCode of(@JsonProperty("verificationCode") String verificationCode) {
+    public static VerificationCode of(@JsonProperty("verificationCode") String verificationCode) {
 
         return new Builder().setVerificationCode(verificationCode).build();
     }
 
-    default ch.patchcode.jback.secBase.VerificationCode toDomain() {
+    public ch.patchcode.jback.secBase.VerificationCode toDomain() {
 
         return  ch.patchcode.jback.secBase.VerificationCode.of(getVerificationCode());
     }
 
-    class Builder extends VerificationCode_Builder {}
+    public static class Builder extends VerificationCode_Builder {}
 }

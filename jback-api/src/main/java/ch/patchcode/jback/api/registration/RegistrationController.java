@@ -1,7 +1,10 @@
 package ch.patchcode.jback.api.registration;
 
 import ch.patchcode.jback.secBase.PendingRegistration;
-import ch.patchcode.jback.secBase.SecurityManager;
+import ch.patchcode.jback.security.AuthorizationManager;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,32 +19,42 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/api/v1/registration")
+@Api
 public class RegistrationController {
 
     private final static Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
 
-    private final SecurityManager securityManager;
+    private final AuthorizationManager authorizationManager;
 
     @Autowired
-    public RegistrationController(SecurityManager securityManager) {
+    public RegistrationController(AuthorizationManager authorizationManager) {
 
-        this.securityManager = securityManager;
+        this.authorizationManager = authorizationManager;
     }
 
     @PostMapping
-    public PendingRegistrationInfo postInitialRegistration(@RequestBody InitialRegistrationData data) {
+    @ApiOperation(
+            httpMethod = "POST",
+            value = "submit personal information for registration",
+            response = PendingRegistrationInfo.class
+    )
+    public PendingRegistrationInfo postInitialRegistration(
+            @RequestBody @ApiParam InitialRegistrationData data
+    ) {
 
-        var id = securityManager.setupRegistration(data.toDomain()).getId();
+        LOG.debug("processing registration request for {}", data);
+        var id = authorizationManager.setupRegistration(data.toDomain()).getId();
         return PendingRegistrationInfo.of(id);
     }
 
     @PutMapping("{id}")
     public ResponseEntity<Void> putCompleteRegistration(
             @PathVariable("id") UUID id,
-            @RequestBody VerificationCode verificationCode
+            @RequestBody @ApiParam VerificationCode verificationCode
     ) {
 
-        securityManager.authenticate(PendingRegistration.Id.of(id), verificationCode.toDomain());
+        LOG.debug("processing registration code for {}", id);
+        authorizationManager.authenticate(PendingRegistration.Id.of(id), verificationCode.toDomain());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -5,11 +5,13 @@ import ch.patchcode.jback.secBase.VerificationMean;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.UUID;
 
 public class SomeData {
 
     public static PendingRegistration somePendingRegistration() {
         return new PendingRegistration.Builder()
+                .setId(PendingRegistration.Id.of(UUID.randomUUID()))
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
                 .setVerificationCode("1234")

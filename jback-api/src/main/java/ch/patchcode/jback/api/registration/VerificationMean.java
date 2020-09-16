@@ -5,36 +5,45 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes({
         @Type(value = VerificationMean.VerificationByConsole.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationByConsole.TYPE),
         @Type(value = VerificationMean.VerificationByEmail.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationByEmail.TYPE),
         @Type(value = VerificationMean.VerificationBySms.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationBySms.TYPE)
 })
-public interface VerificationMean {
+@ApiModel(subTypes = {
+        VerificationMean.VerificationByConsole.class,
+        VerificationMean.VerificationByEmail.class,
+        VerificationMean.VerificationBySms.class
+})
+public abstract class VerificationMean {
 
-    String getType();
+    @ApiModelProperty
+    public abstract String getType();
 
-    ch.patchcode.jback.secBase.VerificationMean toDomain();
+    public abstract ch.patchcode.jback.secBase.VerificationMean toDomain();
 
     /**
      * Registration by console, i.e., the user will be expected to
      * respond with a verification printed on the console. Obviously
      * only for development or debugging, not for anything practical.
      */
+    @ApiModel
     @FreeBuilder
-    interface VerificationByConsole extends VerificationMean {
+    public static abstract class VerificationByConsole extends VerificationMean {
 
-        String TYPE = "console";
+        public static final String TYPE = "console";
 
         @JsonCreator
-        static VerificationByConsole create() {
+        public static VerificationByConsole create() {
             return new Builder().build();
         }
 
-        class Builder extends VerificationMean_VerificationByConsole_Builder {
+        public static class Builder extends VerificationMean_VerificationByConsole_Builder {
             @Override
             public VerificationByConsole build() {
                 setType(TYPE);
@@ -42,7 +51,7 @@ public interface VerificationMean {
             }
         }
 
-        default ch.patchcode.jback.secBase.VerificationMean.VerificationByConsole toDomain() {
+        public ch.patchcode.jback.secBase.VerificationMean.VerificationByConsole toDomain() {
             return new ch.patchcode.jback.secBase.VerificationMean.VerificationByConsole();
         }
     }
@@ -51,19 +60,21 @@ public interface VerificationMean {
      * Registration by email, i.e., the user will be expected to
      * respond with a verification code sent by email.
      */
+    @ApiModel
     @FreeBuilder
-    interface VerificationByEmail extends VerificationMean {
+    public static abstract class VerificationByEmail extends VerificationMean {
 
-        String TYPE = "email";
+        public static final String TYPE = "email";
 
-        String getEmailAddress();
+        @ApiModelProperty
+        public abstract String getEmailAddress();
 
         @JsonCreator
-        static VerificationByEmail create(@JsonProperty("emailAddress") String emailAddress) {
+        public static VerificationByEmail create(@JsonProperty("emailAddress") String emailAddress) {
             return new Builder().setEmailAddress(emailAddress).build();
         }
 
-        class Builder extends VerificationMean_VerificationByEmail_Builder {
+        public static class Builder extends VerificationMean_VerificationByEmail_Builder {
             @Override
             public VerificationByEmail build() {
                 setType(TYPE);
@@ -71,7 +82,7 @@ public interface VerificationMean {
             }
         }
 
-        default ch.patchcode.jback.secBase.VerificationMean.VerificationByEmail toDomain() {
+        public ch.patchcode.jback.secBase.VerificationMean.VerificationByEmail toDomain() {
             return new ch.patchcode.jback.secBase.VerificationMean.VerificationByEmail.Builder()
                     .setEmailAddress(getEmailAddress())
                     .build();
@@ -82,19 +93,21 @@ public interface VerificationMean {
      * Registration by SMS, i.e., the user will be expected to
      * respond with a verification code sent by SMS.
      */
+    @ApiModel
     @FreeBuilder
-    interface VerificationBySms extends VerificationMean {
+    public static abstract class VerificationBySms extends VerificationMean {
 
-        String TYPE = "sms";
+        public static final String TYPE = "sms";
 
-        String getPhoneNumber();
+        @ApiModelProperty
+        public abstract String getPhoneNumber();
 
         @JsonCreator
         static VerificationBySms create(@JsonProperty("phoneNumber") String phoneNumber) {
             return new VerificationBySms.Builder().setPhoneNumber(phoneNumber).build();
         }
 
-        class Builder extends VerificationMean_VerificationBySms_Builder {
+        public static class Builder extends VerificationMean_VerificationBySms_Builder {
             @Override
             public VerificationBySms build() {
                 setType(TYPE);
@@ -102,7 +115,7 @@ public interface VerificationMean {
             }
         }
 
-        default ch.patchcode.jback.secBase.VerificationMean.VerificationBySms toDomain() {
+        public ch.patchcode.jback.secBase.VerificationMean.VerificationBySms toDomain() {
             return new ch.patchcode.jback.secBase.VerificationMean.VerificationBySms.Builder()
                     .setPhoneNumber(getPhoneNumber())
                     .build();

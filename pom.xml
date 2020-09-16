@@ -21,12 +21,14 @@
     </properties>
 
     <modules>
+        <module>jback-util</module>
         <module>jback-sec-model</module>
         <module>jback-sec-base</module>
         <module>jback-core</module>
         <module>jback-jpa</module>
         <module>jback-security</module>
         <module>jback-api</module>
+        <module>jback-angular</module>
         <module>jback-main</module>
     </modules>
 
