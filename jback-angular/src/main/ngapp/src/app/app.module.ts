@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CompleteComponent } from './complete/complete.component';
+import { CreateMeComponent } from './create-me/create-me.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    CompleteComponent
+    CompleteComponent,
+    CreateMeComponent
   ],
   imports: [
     BrowserModule,
