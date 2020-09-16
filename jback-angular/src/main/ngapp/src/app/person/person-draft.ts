@@ -6,13 +6,14 @@ export class PersonDraft {
 
     address: string[] = [];
   
-    private notNullOrEmpty(str: string): boolean {
+    private static notNullOrEmpty(str: string): boolean {
       return typeof str === "string" && str !== "";
     }
   
-    isValid(): boolean {
-      return this.notNullOrEmpty(this.firstName) &&
-        this.notNullOrEmpty(this.lastName);
+    static isValid(draft: PersonDraft): boolean {
+      return PersonDraft.notNullOrEmpty(draft.firstName) &&
+        PersonDraft.notNullOrEmpty(draft.lastName) &&
+        draft.address.every(line => PersonDraft.notNullOrEmpty(line));
     }
   }
   

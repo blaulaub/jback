@@ -8,6 +8,15 @@
   <input [(ngModel)]="model.lastName" placeholder="last name"/>
 </div>
 
+<div>
+  <div *ngFor="let line of model.address; let i = index;trackBy:trackByIdx">
+    <label>Address Line {{ i }}:</label>
+    <input [(ngModel)]="model.address[i]" placeholder="address line {{ i }}"/>
+    <label *ngIf="model.address.length > 1" (click)="removeLine(i)">(remove line)</label>
+  </div>
+  <label (click)="addLine()">(add line)</label>
+</div>
+
 <button [disabled]="!canSubmit()" (click)="submit()">
   Submit
 </button>

@@ -10,7 +10,11 @@ import { PersonDraft } from '../person/person-draft';
 })
 export class CreateMeComponent implements OnInit {
 
-  model = new PersonDraft();
+  model: PersonDraft = {
+    firstName: null,
+    lastName: null,
+    address: [ null ]
+  };
 
   constructor(private personService: PersonService) { }
 
@@ -18,11 +22,23 @@ export class CreateMeComponent implements OnInit {
   }
 
   canSubmit(): boolean {
-    return this.model.isValid();
+    return PersonDraft.isValid(this.model);
   }
 
   submit() {
     this.personService.postCreateOwnPerson(this.model)
       .subscribe(result => console.log(result));
+  }
+
+  trackByIdx(index: number, obj: any): any {
+    return index;
+  }
+
+  addLine() {
+    this.model.address.push(null);
+  }
+
+  removeLine(i: number) {
+    this.model.address.splice(i, 1);
   }
 }
