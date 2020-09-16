@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { RegistrationService } from '../registration/registration.service';
 
@@ -18,6 +18,7 @@ export class CompleteComponent implements OnInit {
 
   constructor(
     private registrationService: RegistrationService,
+    private router: Router,
     private route: ActivatedRoute
   ) { }
 
@@ -31,6 +32,6 @@ export class CompleteComponent implements OnInit {
 
   complete() {
     this.registrationService.putVerificationCode(this.id, this.model)
-      .subscribe(result => console.log(result));
+      .subscribe(() => this.router.navigate(["createMe"]));
   }
 }

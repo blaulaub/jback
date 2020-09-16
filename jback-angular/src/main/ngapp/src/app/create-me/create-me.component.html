@@ -1,0 +1,13 @@
+<div>
+  <label>First Name:</label>
+  <input [(ngModel)]="model.firstName" placeholder="first name"/>
+</div>
+
+<div>
+  <label>Last Name:</label>
+  <input [(ngModel)]="model.lastName" placeholder="last name"/>
+</div>
+
+<button [disabled]="!canSubmit()" (click)="submit()">
+  Submit
+</button>
