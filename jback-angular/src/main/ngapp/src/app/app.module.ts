@@ -8,13 +8,15 @@ import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CompleteComponent } from './complete/complete.component';
 import { CreateMeComponent } from './create-me/create-me.component';
+import { FrontPageComponent } from './front-page/front-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     CompleteComponent,
-    CreateMeComponent
+    CreateMeComponent,
+    FrontPageComponent
   ],
   imports: [
     BrowserModule,
