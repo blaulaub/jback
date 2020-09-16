@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { PersonService } from '../person/person.service';
 import { PersonDraft } from '../person/person-draft';
 
 @Component({
@@ -11,7 +12,7 @@ export class CreateMeComponent implements OnInit {
 
   model = new PersonDraft();
 
-  constructor() { }
+  constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +22,7 @@ export class CreateMeComponent implements OnInit {
   }
 
   submit() {
-    console.log("creating me");
+    this.personService.postCreateOwnPerson(this.model)
+      .subscribe(result => console.log(result));
   }
 }
