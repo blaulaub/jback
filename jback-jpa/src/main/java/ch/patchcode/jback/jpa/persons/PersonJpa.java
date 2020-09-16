@@ -30,7 +30,7 @@ public class PersonJpa {
     private String lastName;
 
     @ElementCollection
-    @OrderBy("address.line")
+    @OrderBy("line")
     private List<AddressLine> addressLines;
 
     @ElementCollection
