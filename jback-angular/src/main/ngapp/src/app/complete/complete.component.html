@@ -1,6 +1,6 @@
 <div>
   <label>Code:</label>
-  <input [(ngModel)]="code" placeholder="code"/>
+  <input [(ngModel)]="model.verificationCode" placeholder="code"/>
 </div>
 
 <button [disabled]="!canComplete()" (click)="complete()">

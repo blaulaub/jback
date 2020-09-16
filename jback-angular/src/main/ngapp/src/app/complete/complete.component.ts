@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+
+import { RegistrationService } from '../registration/registration.service';
+
+import { VerificationCode } from '../registration/verification-code';
 
 @Component({
   selector: 'app-complete',
@@ -11,11 +14,11 @@ export class CompleteComponent implements OnInit {
 
   private id: string;
 
-  code: string;
+  model = new VerificationCode();
 
   constructor(
-    private route: ActivatedRoute,
-    private location: Location
+    private registrationService: RegistrationService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -23,12 +26,11 @@ export class CompleteComponent implements OnInit {
   }
 
   canComplete(): boolean {
-    return typeof this.code === "string" && this.code !== "";
+    return this.model.isValid();
   }
 
   complete() {
-    // TODO now send this somewhere
-    console.error("not implemented");
+    this.registrationService.putVerificationCode(this.id, this.model)
+      .subscribe(result => console.log(result));
   }
-
 }

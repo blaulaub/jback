@@ -2,9 +2,9 @@ import { VerificationMean } from './verification-mean';
 
 export class InitialRegistrationData {
 
-  firstName = null;
+  firstName: string = null;
 
-  lastName = null;
+  lastName: string = null;
 
   verificationMean: VerificationMean = null;
 
