@@ -98,7 +98,6 @@ public class PersonJpa {
     @Embeddable
     public static class AddressLine {
 
-        @Column(unique = true)
         private int line;
 
         private String value;
