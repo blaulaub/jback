@@ -23,7 +23,12 @@ public interface User<
     TPrincipal getPrincipal();
 
     /**
-     * @return the person currently impersonated by the user
+     * @return the role currently taken by the user
      */
-    TPerson getPerson();
+    TRole getRole();
+
+    default TPerson getPerson() {
+
+        return getRole().getPerson();
+    }
 }

@@ -8,5 +8,5 @@ public interface User extends ch.patchcode.jback.secModel.User<Organisation, Per
     Principal getPrincipal();
 
     @Override
-    Person getPerson();
+    Role getRole();
 }

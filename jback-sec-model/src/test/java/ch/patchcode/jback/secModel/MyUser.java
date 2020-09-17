@@ -9,7 +9,7 @@ public class MyUser implements User<MyOrganisation, MyPerson, MyPrincipal, MyPri
     }
 
     @Override
-    public MyPerson getPerson() {
+    public MyRole getRole() {
 
         return null;
     }
