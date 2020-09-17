@@ -2,7 +2,7 @@ package ch.patchcode.jback.security.registration;
 
 import ch.patchcode.jback.secBase.ConfirmationResult;
 import ch.patchcode.jback.secBase.InitialRegistrationData;
-import ch.patchcode.jback.secBase.PendingRegistration;
+import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 
 import java.util.Optional;
 import java.util.UUID;

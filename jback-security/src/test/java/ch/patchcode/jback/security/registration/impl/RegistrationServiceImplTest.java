@@ -2,12 +2,12 @@ package ch.patchcode.jback.security.registration.impl;
 
 import ch.patchcode.jback.secBase.ConfirmationResult;
 import ch.patchcode.jback.secBase.InitialRegistrationData;
-import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.security.registration.*;
 import ch.patchcode.jback.security.registration.VerificationService.ConsoleVerificationService;
 import ch.patchcode.jback.security.registration.VerificationService.EmailVerificationService;
 import ch.patchcode.jback.security.registration.VerificationService.SmsVerificationService;
+import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
