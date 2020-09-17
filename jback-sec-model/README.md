@@ -5,16 +5,18 @@
 This packages defines the basic entities of the security model of
 our system:
 
-* **Principal** is what can be authenticated
-* **Person** is who is authorized to do something
+* **Principal** is someone who can be authenticated (by, e.g., a password)
+* **Person** is someone who bears a natural identity (with, e.g., a name, or birthdate)
 * **Privileges** is what is allowed to be done
-* **Organisation** is a body of persons
+* **Organisation** is a body of persons, formed for a self-given purpose
 * **Role** is what a person plays in an organisation
 
 We separate principals and persons, because in our system persons
-can be parents and children, where one ore more parents authenticate
-on behalf of one or more children. To handle that split in practice,
-another entity is defined:
+can be both parents and children, where one or more parents may authenticate
+on behalf of one or more children. Principals handle security concerns,
+Persons handle domain concerns.
+
+To better deal with that split in practice, another entity is defined:
 
 * **User** is the combination of both a principal and a person
 
