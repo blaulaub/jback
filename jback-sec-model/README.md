@@ -11,10 +11,10 @@ our system:
 * **Organisation** is a body of persons, formed for a self-given purpose
 * **Role** is what a person plays in an organisation
 
-We separate principals and persons, because in our system persons
+We distinguish between `Principal` and `Person`, because in our system persons
 can be both parents and children, where one or more parents may authenticate
-on behalf of one or more children. Principals handle security concerns,
-Persons handle domain concerns.
+on behalf of one or more children. Principals are for placing security concerns,
+persons are for placing domain concerns.
 
 To better deal with that split in practice, another entity is defined:
 
