@@ -1,6 +1,6 @@
 digraph G {
 
-  node [ shape=box, fontname = "helvetica" ];
+  node [ shape="box", fontname="helvetica" ];
 
   "jback-main" -> "jback-api";
   "jback-main" -> "jback-core";
