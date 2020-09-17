@@ -1,0 +1,24 @@
+digraph G {
+
+  node [ shape=box, fontname = "helvetica" ];
+
+  "jback-main" -> "jback-api";
+  "jback-main" -> "jback-core";
+  "jback-main" -> "jback-jpa";
+  "jback-main" -> "jback-sec-base";
+  "jback-main" -> "jback-security";
+  "jback-jpa" -> "jback-core";
+  "jback-jpa" -> "jback-sec-base";
+  "jback-jpa" -> "jback-security";
+  "jback-api" -> "jback-core";
+  "jback-api" -> "jback-sec-base";
+  "jback-api" -> "jback-security";
+  "jback-api" -> "jback-util";
+  "jback-security" -> "jback-core";
+  "jback-security" -> "jback-sec-base";
+  "jback-security" -> "jback-util";
+  "jback-core" -> "jback-sec-base";
+  "jback-core" -> "jback-util";
+  "jback-sec-base" -> "jback-sec-model";
+  "jback-sec-base" -> "jback-util";
+}
