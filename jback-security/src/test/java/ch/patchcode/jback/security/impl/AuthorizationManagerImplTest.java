@@ -2,7 +2,6 @@ package ch.patchcode.jback.security.impl;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.ConfirmationResult;
-import ch.patchcode.jback.secBase.VerificationCode;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
@@ -10,6 +9,7 @@ import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
+import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
