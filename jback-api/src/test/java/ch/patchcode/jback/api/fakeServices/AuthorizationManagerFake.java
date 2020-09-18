@@ -28,14 +28,14 @@ public class AuthorizationManagerFake implements AuthorizationManager {
     }
 
     @Override
-    public void addClient(Principal<VerificationMean> principal, Person person) {
+    public void addClient(Principal<VerificationMean> principal, Person<VerificationMean> person) {
 
         // TODO implement when necessary
         throw new RuntimeException("not implemented");
     }
 
     @Override
-    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
+    public PersonalAuthentication createAuthorizationFor(Person<VerificationMean> person, Iterable<VerificationMean> means) {
 
         // TODO implement when necessary
         throw new RuntimeException("not implemented");

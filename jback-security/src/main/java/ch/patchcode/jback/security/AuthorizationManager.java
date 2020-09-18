@@ -8,7 +8,7 @@ import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 
-public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<Person, InitialRegistrationData, VerificationMean> {
+public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<Person<VerificationMean>, InitialRegistrationData, VerificationMean> {
 
     // from ch.patchcode.jback.secBase.AuthorizationManager
 
@@ -25,7 +25,7 @@ public interface AuthorizationManager extends ch.patchcode.jback.secBase.Authori
     void authenticate(PendingRegistration.Id registrationId, VerificationCode verificationCode);
 
     @Override
-    void addClient(Principal<VerificationMean> principal, Person person);
+    void addClient(Principal<VerificationMean> principal, Person<VerificationMean> person);
 
-    PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means);
+    PersonalAuthentication createAuthorizationFor(Person<VerificationMean> person, Iterable<VerificationMean> means);
 }

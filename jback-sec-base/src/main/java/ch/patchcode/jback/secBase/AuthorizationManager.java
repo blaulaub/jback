@@ -4,7 +4,7 @@ import ch.patchcode.jback.secBase.secModelImpl.Person;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
 
 public interface AuthorizationManager<
-        TPerson extends Person,
+        TPerson extends Person<TVerificationMean>,
         TInitialRegistrationData extends InitialRegistrationData,
         TVerificationMean extends VerificationMean> {
 
