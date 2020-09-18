@@ -34,7 +34,7 @@ class ClubServiceImplTest {
 
         // arrange
         var id = UUID.randomUUID();
-        var expected = Optional.of(new Club.Builder<VerificationMean>().buildPartial());
+        var expected = Optional.of(new Club.Builder<>().buildPartial());
         when(clubRepository.findById(eq(id))).thenReturn(expected);
 
         // act

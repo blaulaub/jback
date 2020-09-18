@@ -2,7 +2,6 @@ package ch.patchcode.jback.api.fakeServices;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.core.persons.PersonService;
-import ch.patchcode.jback.secBase.secModelImpl.Principal;
 import ch.patchcode.jback.security.Authentication;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.springframework.stereotype.Service;
