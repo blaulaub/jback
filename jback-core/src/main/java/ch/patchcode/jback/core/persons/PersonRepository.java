@@ -1,11 +1,13 @@
 package ch.patchcode.jback.core.persons;
 
+import ch.patchcode.jback.secBase.VerificationMean;
+
 import java.util.Optional;
 import java.util.UUID;
 
-public interface PersonRepository {
+public interface PersonRepository<TVerificationMean extends VerificationMean> {
 
-    Optional<Person> findById(UUID id);
+    Optional<Person<TVerificationMean>> findById(UUID id);
 
-    Person create(Person.Draft draft);
+    Person<TVerificationMean> create(Person.Draft<TVerificationMean> draft);
 }
