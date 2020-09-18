@@ -28,21 +28,17 @@ public interface Club {
 
     @JsonCreator
     static Club create(
-            @JsonProperty("id") UUID id,
-            @JsonProperty("name") String name,
-            @JsonProperty("url") Optional<URI> url,
-            @JsonProperty("contact") Optional<Person> contact
+            @JsonProperty(value = "id", required = true) UUID id,
+            @JsonProperty(value = "name", required = true) String name,
+            @JsonProperty("url") URI url,
+            @JsonProperty("contact") Person contact
     ) {
 
-        Builder builder = new Builder();
-
-        builder.setId(id)
+        return new Builder()
+                .setId(id)
                 .setName(name)
-                .setUrl(url);
-
-        contact.ifPresent(builder::setContact);
-
-        return builder.build();
+                .setUrl(Optional.ofNullable(url))
+                .setContact(Optional.ofNullable(contact)).build();
     }
 
     UUID getId();

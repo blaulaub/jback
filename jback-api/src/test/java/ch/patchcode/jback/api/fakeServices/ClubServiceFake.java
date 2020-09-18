@@ -12,7 +12,7 @@ import java.util.UUID;
 @Service
 public class ClubServiceFake implements ClubService {
 
-    private Map<UUID, Club> clubs = new HashMap<>();
+    private final Map<UUID, Club> clubs = new HashMap<>();
 
     public void putClub(Club club) {
 
