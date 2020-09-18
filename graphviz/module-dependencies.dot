@@ -10,7 +10,6 @@ digraph G {
   "jback-jpa" -> "jback-core";
   "jback-jpa" -> "jback-security";
   "jback-api" -> "jback-core";
-  "jback-api" -> "jback-sec-base";
   "jback-api" -> "jback-security";
   "jback-api" -> "jback-util";
   "jback-security" -> "jback-core";
