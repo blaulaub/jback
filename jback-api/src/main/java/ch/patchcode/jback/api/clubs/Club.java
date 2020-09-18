@@ -1,6 +1,7 @@
 package ch.patchcode.jback.api.clubs;
 
 import ch.patchcode.jback.api.persons.Person;
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @FreeBuilder
 public interface Club {
 
-    static Club from(ch.patchcode.jback.core.clubs.Club club) {
+    static Club from(ch.patchcode.jback.core.clubs.Club<VerificationMean> club) {
 
         Builder builder = new Builder();
 

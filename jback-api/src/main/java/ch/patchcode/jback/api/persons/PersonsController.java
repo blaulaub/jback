@@ -4,6 +4,7 @@ import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.security.Authentication;
 import ch.patchcode.jback.security.AuthorizationManager;
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,12 +19,12 @@ import static ch.patchcode.jback.api.persons.Person.fromDomain;
 @RequestMapping("/api/v1/persons")
 public class PersonsController {
 
-    private final PersonService personService;
+    private final PersonService<VerificationMean> personService;
     private final AuthorizationManager authorizationManager;
 
     @Autowired
     public PersonsController(
-            PersonService personService,
+            PersonService<VerificationMean> personService,
             AuthorizationManager authorizationManager
     ) {
 

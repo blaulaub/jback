@@ -1,6 +1,7 @@
 package ch.patchcode.jback.core.persons;
 
 import ch.patchcode.jback.core.common.Address;
+import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
 import ch.patchcode.jback.secBase.secModelImpl.Role;
@@ -12,7 +13,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Person extends ch.patchcode.jback.secBase.secModelImpl.Person, WithFirstAndLastName {
+public interface Person<TVerificationMean extends VerificationMean> extends
+        ch.patchcode.jback.secBase.secModelImpl.Person<TVerificationMean>,
+        WithFirstAndLastName {
 
     UUID getId();
 
@@ -27,10 +30,10 @@ public interface Person extends ch.patchcode.jback.secBase.secModelImpl.Person, 
     // from secModel Person
 
     @Override
-    List<Principal> getPrincipals();
+    List<Principal<TVerificationMean>> getPrincipals();
 
     @Override
-    List<Role> getRoles();
+    List<Role<TVerificationMean>> getRoles();
 
     @Override
     List<Authority> getExtraPrivileges();
@@ -40,11 +43,11 @@ public interface Person extends ch.patchcode.jback.secBase.secModelImpl.Person, 
         return getFirstName() + " " + getLastName();
     }
 
-    class Builder extends Person_Builder {
+    class Builder<TVerificationMean extends VerificationMean> extends Person_Builder<TVerificationMean> {
     }
 
     @FreeBuilder
-    interface Draft extends WithFirstAndLastName {
+    interface Draft<TVerificationMean extends VerificationMean> extends WithFirstAndLastName {
 
         @Override
         String getFirstName();
@@ -54,11 +57,11 @@ public interface Person extends ch.patchcode.jback.secBase.secModelImpl.Person, 
 
         Optional<Address> getAddress();
 
-        List<Role> getRoles();
+        List<Role<TVerificationMean>> getRoles();
 
         List<Authority> getExtraPrivileges();
 
-        class Builder extends Person_Draft_Builder {
+        class Builder<TVerificationMean extends VerificationMean> extends Person_Draft_Builder<TVerificationMean> {
         }
     }
 }

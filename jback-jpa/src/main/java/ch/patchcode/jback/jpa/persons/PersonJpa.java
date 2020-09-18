@@ -2,6 +2,7 @@ package ch.patchcode.jback.jpa.persons;
 
 import ch.patchcode.jback.core.common.Address;
 import ch.patchcode.jback.core.persons.Person;
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 
 import javax.persistence.*;
 import java.util.List;
@@ -68,7 +69,7 @@ public class PersonJpa {
         this.authorities = authorities;
     }
 
-    public static PersonJpa fromDomain(Person.Draft draft) {
+    public static PersonJpa fromDomain(Person.Draft<VerificationMean> draft) {
 
         var person = new PersonJpa();
         person.setFirstName(draft.getFirstName());
@@ -82,9 +83,9 @@ public class PersonJpa {
         return person;
     }
 
-    public Person toDomain() {
+    public Person<VerificationMean> toDomain() {
 
-        Person.Builder builder = new Person.Builder()
+        var builder = new Person.Builder<VerificationMean>()
                 .setId(getId())
                 .setFirstName(getFirstName())
                 .setLastName(getLastName());

@@ -1,5 +1,6 @@
 package ch.patchcode.jback.api.persons;
 
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import ch.patchcode.jback.util.WithFirstAndLastName;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -38,7 +39,7 @@ public interface Person extends WithFirstAndLastName {
         return builder.build();
     }
 
-    static Person fromDomain(ch.patchcode.jback.core.persons.Person person) {
+    static Person fromDomain(ch.patchcode.jback.core.persons.Person<VerificationMean> person) {
 
         Builder builder = new Builder();
 
@@ -80,9 +81,9 @@ public interface Person extends WithFirstAndLastName {
             return builder.build();
         }
 
-        public ch.patchcode.jback.core.persons.Person.Draft toDomain() {
+        public ch.patchcode.jback.core.persons.Person.Draft<VerificationMean> toDomain() {
 
-            var builder = new ch.patchcode.jback.core.persons.Person.Draft.Builder();
+            var builder = new ch.patchcode.jback.core.persons.Person.Draft.Builder<VerificationMean>();
             builder.setFirstName(getFirstName());
             builder.setLastName(getLastName());
             builder.setAddress(new ch.patchcode.jback.core.common.Address.Builder()

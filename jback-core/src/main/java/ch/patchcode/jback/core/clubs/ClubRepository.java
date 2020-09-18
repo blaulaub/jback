@@ -1,11 +1,13 @@
 package ch.patchcode.jback.core.clubs;
 
+import ch.patchcode.jback.secBase.VerificationMean;
+
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ClubRepository {
+public interface ClubRepository<TVerificationMean extends VerificationMean> {
 
-    Optional<Club> findById(UUID id);
+    Optional<Club<TVerificationMean>> findById(UUID id);
 
-    Club create(Club.Draft draft);
+    Club<TVerificationMean> create(Club.Draft<TVerificationMean> draft);
 }

@@ -1,21 +1,22 @@
 package ch.patchcode.jback.core.persons;
 
+import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public interface PersonService {
+public interface PersonService<TVerificationMean extends VerificationMean> {
 
-    Optional<Person> getPerson(UUID id);
+    Optional<Person<TVerificationMean>> getPerson(UUID id);
 
     /**
      * Creates a new {@link Person}, usually with empty {@link Person#getPrincipals()}.
      */
-    Person create(Person.Draft draft);
+    Person<TVerificationMean> create(Person.Draft<TVerificationMean> draft);
 
     /**
      * Creates a new {@link Person}, with {@link Person#getPrincipals()} containing the given principal.
      */
-    Person createClient(Person.Draft draft, Principal principal);
+    Person<TVerificationMean> createClient(Person.Draft<TVerificationMean> draft, Principal<TVerificationMean> principal);
 }
