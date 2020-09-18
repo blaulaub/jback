@@ -7,8 +7,8 @@ public enum ConfirmationResult {
      */
     CONFIRMED {
         @Override
-        public <R> R accept(Visitor<R> visitor) {
-            return visitor.caseConfirmed();
+        public void accept(Visitor visitor) {
+            visitor.caseConfirmed();
         }
     },
 
@@ -17,8 +17,8 @@ public enum ConfirmationResult {
      */
     NOT_FOUND {
         @Override
-        public <R> R accept(Visitor<R> visitor) {
-            return visitor.caseNotFound();
+        public void accept(Visitor visitor) {
+            visitor.caseNotFound();
         }
     },
 
@@ -27,19 +27,19 @@ public enum ConfirmationResult {
      */
     MISMATCH {
         @Override
-        public <R> R accept(Visitor<R> visitor) {
-            return visitor.caseMismatch();
+        public void accept(Visitor visitor) {
+            visitor.caseMismatch();
         }
     };
 
-    public abstract <R> R accept(Visitor<R> visitor);
+    public abstract void accept(Visitor visitor);
 
-    public interface Visitor<R> {
+    public interface Visitor {
 
-        R caseConfirmed();
+        void caseConfirmed();
 
-        R caseNotFound();
+        void caseNotFound();
 
-        R caseMismatch();
+        void caseMismatch();
     }
 }

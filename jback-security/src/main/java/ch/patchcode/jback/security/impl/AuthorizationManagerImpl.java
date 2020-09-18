@@ -6,8 +6,8 @@ import ch.patchcode.jback.secBase.VerificationCode;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
-import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
+import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
@@ -55,23 +55,22 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
                 verificationCode.getVerificationCode()
         );
 
-        confirmationResult.accept(new ConfirmationResult.Visitor<Void>() {
+        confirmationResult.accept(new ConfirmationResult.Visitor() {
             @Override
-            public Void caseConfirmed() {
+            public void caseConfirmed() {
 
                 LOG.debug("change security context to TemporaryAuthentication");
                 SecurityContextHolder.getContext()
                         .setAuthentication(new TemporaryAuthentication(pendingRegistration));
-                return null;
             }
 
             @Override
-            public Void caseNotFound() {
+            public void caseNotFound() {
                 throw new NoPendingRegistrationException(registrationId);
             }
 
             @Override
-            public Void caseMismatch() {
+            public void caseMismatch() {
                 throw new BadCredentialsException("Invalid code provided for " + registrationId.getId());
             }
         });
