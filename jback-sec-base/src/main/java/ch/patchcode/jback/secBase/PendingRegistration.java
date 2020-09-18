@@ -9,8 +9,6 @@ import java.util.UUID;
 @FreeBuilder
 public interface PendingRegistration extends WithFirstAndLastName {
 
-    Id getId();
-
     @Override
     String getFirstName();
 
@@ -24,19 +22,6 @@ public interface PendingRegistration extends WithFirstAndLastName {
     Instant getExpiresAt();
 
     class Builder extends PendingRegistration_Builder {
-    }
-
-    @FreeBuilder
-    interface Id {
-
-        UUID getId();
-
-        static Id of(UUID id) {
-
-            return new Builder().setId(id).build();
-        }
-
-        class Builder extends PendingRegistration_Id_Builder {}
     }
 
     @FreeBuilder

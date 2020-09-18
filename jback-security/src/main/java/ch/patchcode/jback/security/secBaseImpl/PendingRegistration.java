@@ -3,11 +3,11 @@ package ch.patchcode.jback.security.secBaseImpl;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @FreeBuilder
 public interface PendingRegistration extends ch.patchcode.jback.secBase.PendingRegistration {
 
-    @Override
     Id getId();
 
     @Override
@@ -32,6 +32,19 @@ public interface PendingRegistration extends ch.patchcode.jback.secBase.PendingR
         VerificationMean getVerificationMean();
 
         class Builder extends PendingRegistration_Draft_Builder {}
+    }
+
+    @FreeBuilder
+    interface Id {
+
+        UUID getId();
+
+        static Id of(UUID id) {
+
+            return new Builder().setId(id).build();
+        }
+
+        class Builder extends PendingRegistration_Id_Builder {}
     }
 
     class Builder extends PendingRegistration_Builder {

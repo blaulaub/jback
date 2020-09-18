@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security;
 
-import ch.patchcode.jback.secBase.PendingRegistration;
+import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import org.springframework.security.core.AuthenticationException;
 
 public class NoPendingRegistrationException extends AuthenticationException {

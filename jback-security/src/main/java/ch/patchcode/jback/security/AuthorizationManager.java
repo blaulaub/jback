@@ -10,19 +10,29 @@ import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 
 public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<Person<VerificationMean>, InitialRegistrationData, VerificationMean> {
 
-    // from ch.patchcode.jback.secBase.AuthorizationManager
-
     /**
-     * {@inheritDoc}
+     * Let any user register when submitting some data, providing him with a {@see PendingRegistration.Id}.
+     * <p>
+     * This will trigger some workflow that should eventually complete the {@see PendingRegistration}.
+     *
+     * @param initialRegistrationData with the basic, required details for a registration
+     * @return the ID of the now pending registration
      */
-    @Override
     PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData);
 
     /**
-     * {@inheritDoc}
+     * Let any user conclude hist pending authentication.
+     * <p>
+     * This allows any user who started registration by calling {@see #setupRegistration} to prove his identity
+     * via some verification code, and thus gain some additional privileges (usually the privilege to continue
+     * or finish the next steps of the enrollment).
+     *
+     * @param registrationId   the ID of the currently pending registration
+     * @param verificationCode the code confirming the registration
      */
-    @Override
     void authenticate(PendingRegistration.Id registrationId, VerificationCode verificationCode);
+
+    // from ch.patchcode.jback.secBase.AuthorizationManager
 
     @Override
     void addClient(Principal<VerificationMean> principal, Person<VerificationMean> person);

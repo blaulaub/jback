@@ -33,7 +33,7 @@ public abstract class VerificationMeanJpa {
         this.personalAuthentication = personalAuthentication;
     }
 
-    public abstract <R> R accept(Visitor registrationHandler);
+    public abstract <R> R accept(Visitor<R> registrationHandler);
 
     public interface Visitor<R> {
 
@@ -74,7 +74,7 @@ public abstract class VerificationMeanJpa {
 
     public VerificationMean toDomain() {
 
-        return this.accept(new Visitor() {
+        return this.accept(new Visitor<>() {
 
             @Override
             public VerificationMean visit(VerificationMeanJpa.ConsoleVerification consoleVerification) {
@@ -102,7 +102,7 @@ public abstract class VerificationMeanJpa {
     public static class ConsoleVerification extends VerificationMeanJpa {
 
         @Override
-        public <R> R accept(Visitor verificationVisitor) {
+        public <R> R accept(Visitor<R> verificationVisitor) {
 
             return verificationVisitor.visit(this);
         }
@@ -123,7 +123,7 @@ public abstract class VerificationMeanJpa {
         }
 
         @Override
-        public <R> R accept(Visitor verificationVisitor) {
+        public <R> R accept(Visitor<R> verificationVisitor) {
 
             return verificationVisitor.visit(this);
         }
@@ -144,7 +144,7 @@ public abstract class VerificationMeanJpa {
         }
 
         @Override
-        public <R> R accept(Visitor verificationVisitor) {
+        public <R> R accept(Visitor<R> verificationVisitor) {
 
             return verificationVisitor.visit(this);
         }
