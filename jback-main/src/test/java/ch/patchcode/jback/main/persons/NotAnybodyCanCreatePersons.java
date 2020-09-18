@@ -23,7 +23,7 @@ public class NotAnybodyCanCreatePersons {
     }
 
     @Test
-    void withoutAuthorization_creatingPerson_fails() throws Exception {
+    void withoutAuthorization_creatingPerson_fails() {
 
         Person.Draft newPerson = new Person.Draft.Builder()
                 .setFirstName("Tom")
