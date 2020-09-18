@@ -1,8 +1,8 @@
 package ch.patchcode.jback.jpa.persons;
 
-import ch.patchcode.jback.core.common.Address;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.transaction.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {JpaTestConfiguration.class})
@@ -29,7 +30,7 @@ class PersonJpaRepoWrapperTest {
     void create_and_findById() {
 
         // arrange
-        var draft = new Person.Draft.Builder()
+        var draft = new Person.Draft.Builder<VerificationMean>()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
                 // TODO: address

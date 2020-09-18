@@ -10,11 +10,11 @@ public interface User<TVerificationMean extends VerificationMean> extends ch.pat
         Role<TVerificationMean>,
         User<TVerificationMean>> {
 
-    // from secModel.Principal
+    // from secModel.User
 
     @Override
     Principal<TVerificationMean> getPrincipal();
 
     @Override
-    Role getRole();
+    Role<TVerificationMean> getRole();
 }

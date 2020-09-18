@@ -1,9 +1,11 @@
 package ch.patchcode.jback.core.clubs;
 
+import ch.patchcode.jback.secBase.VerificationMean;
+
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ClubService {
+public interface ClubService<TVerificationMean extends VerificationMean> {
 
-    Optional<Club> getClub(UUID id);
+    Optional<Club<TVerificationMean>> getClub(UUID id);
 }
