@@ -96,7 +96,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         pendingRegistrationRepository.removeById(id);
     }
 
-    private class RegistrationSender implements VerificationMean.VerificationMeanVisitor<Void> {
+    private class RegistrationSender implements VerificationMean.Visitor<Void> {
 
         private final PendingRegistration pendingRegistration;
 

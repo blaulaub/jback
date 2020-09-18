@@ -150,7 +150,7 @@ public abstract class RegistrationJpa {
         }
     }
 
-    private static class FromDomainConverter implements VerificationMean.VerificationMeanVisitor<RegistrationJpa> {
+    private static class FromDomainConverter implements VerificationMean.Visitor<RegistrationJpa> {
 
         public RegistrationJpa convert(PendingRegistration.Draft pendingRegistration) {
 
