@@ -30,10 +30,6 @@ public class NotAnybodyCanCreatePersons {
                 .setLastName("Sawyer")
                 .build();
 
-        assertThrows(RestSession.ForbiddenException.class, () -> {
-            api.personsPostNewPerson(newPerson)
-                    .checkResultIsSuccess()
-                    .andReturnBody();
-        });
+        assertThrows(RestSession.ForbiddenException.class, () -> api.personsPostNewPerson(newPerson));
     }
 }

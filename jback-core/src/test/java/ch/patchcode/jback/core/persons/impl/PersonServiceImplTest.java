@@ -2,6 +2,7 @@ package ch.patchcode.jback.core.persons.impl;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.core.persons.PersonRepository;
+import ch.patchcode.jback.secBase.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,10 +19,10 @@ import static org.mockito.MockitoAnnotations.initMocks;
 class PersonServiceImplTest {
 
     @Mock
-    private PersonRepository personRepository;
+    private PersonRepository<VerificationMean> personRepository;
 
     @InjectMocks
-    private PersonServiceImpl service;
+    private PersonServiceImpl<VerificationMean> service;
 
     @BeforeEach
     void setUp() {
@@ -33,7 +34,7 @@ class PersonServiceImplTest {
 
         // arrange
         var id = UUID.randomUUID();
-        var expected = Optional.of(new Person.Builder().buildPartial());
+        var expected = Optional.of(new Person.Builder<>().buildPartial());
         when(personRepository.findById(eq(id))).thenReturn(expected);
 
         // act

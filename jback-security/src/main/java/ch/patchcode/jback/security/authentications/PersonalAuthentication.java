@@ -14,7 +14,7 @@ import static java.util.Collections.singletonList;
 public interface PersonalAuthentication extends Authentication {
 
     static PersonalAuthentication of(
-            Person holder,
+            Person<VerificationMean> holder,
             Iterable<VerificationMean> means
     ) {
         return new Builder()
@@ -23,7 +23,7 @@ public interface PersonalAuthentication extends Authentication {
                 .build();
     }
 
-    Person getHolder();
+    Person<VerificationMean> getHolder();
 
     // impl ch.patchcode.jback.util.WithFirstAndLastName
 
@@ -64,7 +64,7 @@ public interface PersonalAuthentication extends Authentication {
     @FreeBuilder
     interface Draft {
 
-        Person getHolder();
+        Person<VerificationMean> getHolder();
 
         List<VerificationMean> getMeans();
 

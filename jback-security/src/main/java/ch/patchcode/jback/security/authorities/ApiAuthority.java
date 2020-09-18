@@ -15,7 +15,7 @@ public enum ApiAuthority implements GrantedAuthority {
     }
 
     public static ApiAuthority of(Authority authority) {
-        return authority.accept(new Authority.Visitor<ApiAuthority>() {
+        return authority.accept(new Authority.Visitor<>() {
 
             @Override
             public ApiAuthority caseCanCreateOwnPerson() {
