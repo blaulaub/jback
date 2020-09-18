@@ -1,16 +1,24 @@
 package ch.patchcode.jback.secBase.secModelImpl;
 
+import ch.patchcode.jback.secBase.VerificationMean;
+
 import java.util.List;
 
-public interface Person extends ch.patchcode.jback.secModel.Person<Organisation, Person, Principal, Authority, Role, User> {
+public interface Person<TVerificationMean extends VerificationMean> extends ch.patchcode.jback.secModel.Person<
+        Organisation,
+        Person<TVerificationMean>,
+        Principal<TVerificationMean>,
+        Authority,
+        Role<TVerificationMean>,
+        User<TVerificationMean>> {
 
     // from secModel.Principal
 
     @Override
-    List<Principal> getPrincipals();
+    List<Principal<TVerificationMean>> getPrincipals();
 
     @Override
-    List<Role> getRoles();
+    List<Role<TVerificationMean>> getRoles();
 
     @Override
     List<Authority> getExtraPrivileges();

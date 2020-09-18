@@ -2,15 +2,15 @@ package ch.patchcode.jback.security.impl;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.ConfirmationResult;
-import ch.patchcode.jback.secBase.InitialRegistrationData;
 import ch.patchcode.jback.secBase.VerificationCode;
-import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
+import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -52,7 +52,7 @@ class AuthorizationManagerImplTest {
     void setupRegistration_calls_registrationService() {
 
         // arrange
-        InitialRegistrationData data = new InitialRegistrationData.Builder().buildPartial();
+        var data = new InitialRegistrationData.Builder().buildPartial();
 
         var expectedId = PendingRegistration.Id.of(UUID.randomUUID());
         when(registrationService.setupRegistration(eq(data))).thenReturn(expectedId);

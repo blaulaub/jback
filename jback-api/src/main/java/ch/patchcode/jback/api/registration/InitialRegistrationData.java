@@ -37,8 +37,8 @@ public abstract class InitialRegistrationData {
                 .build();
     }
 
-    public ch.patchcode.jback.secBase.InitialRegistrationData toDomain() {
-        return new ch.patchcode.jback.secBase.InitialRegistrationData.Builder()
+    public ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData toDomain() {
+        return new ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData.Builder()
                 .setFirstName(getFirstName())
                 .setLastName(getLastName())
                 .setVerificationMean(getVerificationMean().toDomain())

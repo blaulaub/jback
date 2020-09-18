@@ -2,8 +2,8 @@ package ch.patchcode.jback.jpa.registration;
 
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
 import ch.patchcode.jback.jpa.util.SomeData;
-import ch.patchcode.jback.secBase.PendingRegistration;
-import ch.patchcode.jback.secBase.VerificationMean;
+import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

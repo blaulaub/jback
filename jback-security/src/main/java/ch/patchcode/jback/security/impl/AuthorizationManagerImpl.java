@@ -1,7 +1,8 @@
 package ch.patchcode.jback.security.impl;
 
 import ch.patchcode.jback.core.persons.Person;
-import ch.patchcode.jback.secBase.*;
+import ch.patchcode.jback.secBase.ConfirmationResult;
+import ch.patchcode.jback.secBase.VerificationCode;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
@@ -9,6 +10,9 @@ import ch.patchcode.jback.security.authentications.PersonalAuthenticationReposit
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
+import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
+import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

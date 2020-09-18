@@ -14,12 +14,12 @@ import java.util.UUID;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    private final AuthorizationManager<Person> authorizationManager;
+    private final AuthorizationManager<Person, ?, ?> authorizationManager;
     private final PersonRepository personRepository;
 
     @Autowired
     public PersonServiceImpl(
-            AuthorizationManager<Person> authorizationManager,
+            AuthorizationManager<Person, ?, ?> authorizationManager,
             PersonRepository personRepository) {
 
         this.authorizationManager = authorizationManager;

@@ -1,9 +1,9 @@
 package ch.patchcode.jback.security.authentications;
 
 import ch.patchcode.jback.core.persons.Person;
-import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.security.Authentication;
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.util.List;

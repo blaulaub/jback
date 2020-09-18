@@ -3,7 +3,10 @@ package ch.patchcode.jback.secBase;
 import ch.patchcode.jback.secBase.secModelImpl.Person;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
 
-public interface AuthorizationManager<TPerson extends Person> {
+public interface AuthorizationManager<
+        TPerson extends Person,
+        TInitialRegistrationData extends InitialRegistrationData,
+        TVerificationMean extends VerificationMean> {
 
     /**
      * Let any user register when submitting some data, providing him with a {@see PendingRegistration.Id}.
@@ -13,7 +16,7 @@ public interface AuthorizationManager<TPerson extends Person> {
      * @param initialRegistrationData with the basic, required details for a registration
      * @return the ID of the now pending registration
      */
-    PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData);
+    PendingRegistration.Id setupRegistration(TInitialRegistrationData initialRegistrationData);
 
     /**
      * Let any user conclude hist pending authentication.
@@ -33,5 +36,5 @@ public interface AuthorizationManager<TPerson extends Person> {
      * @param principal
      * @param person
      */
-    void addClient(Principal principal, TPerson person);
+    void addClient(Principal<TVerificationMean> principal, TPerson person);
 }
