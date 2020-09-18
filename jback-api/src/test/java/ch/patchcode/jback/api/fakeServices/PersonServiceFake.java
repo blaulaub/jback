@@ -3,6 +3,7 @@ package ch.patchcode.jback.api.fakeServices;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
+import ch.patchcode.jback.security.Authentication;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class PersonServiceFake implements PersonService<VerificationMean> {
+public class PersonServiceFake implements PersonService<VerificationMean, Authentication> {
 
     private final Map<UUID, Person<VerificationMean>> persons = new HashMap<>();
 
@@ -34,7 +35,7 @@ public class PersonServiceFake implements PersonService<VerificationMean> {
     }
 
     @Override
-    public Person<VerificationMean> createClient(Person.Draft<VerificationMean> draft, Principal<VerificationMean> principal) {
+    public Person<VerificationMean> createClient(Person.Draft<VerificationMean> draft, Authentication principal) {
 
         return createBuilderFrom(draft)
                 .addPrincipals(principal)

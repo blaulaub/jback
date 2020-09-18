@@ -19,12 +19,12 @@ import static ch.patchcode.jback.api.persons.Person.fromDomain;
 @RequestMapping("/api/v1/persons")
 public class PersonsController {
 
-    private final PersonService<VerificationMean> personService;
+    private final PersonService<VerificationMean, Authentication> personService;
     private final AuthorizationManager authorizationManager;
 
     @Autowired
     public PersonsController(
-            PersonService<VerificationMean> personService,
+            PersonService<VerificationMean, Authentication> personService,
             AuthorizationManager authorizationManager
     ) {
 

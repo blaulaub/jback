@@ -3,6 +3,7 @@ package ch.patchcode.jback.security.impl;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.ConfirmationResult;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
+import ch.patchcode.jback.security.Authentication;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
@@ -77,7 +78,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public void addClient(Principal<VerificationMean> principal, Person<VerificationMean> person) {
+    public void addClient(Authentication principal, Person<VerificationMean> person) {
 
         // TODO implement
         throw new RuntimeException("not implemented");

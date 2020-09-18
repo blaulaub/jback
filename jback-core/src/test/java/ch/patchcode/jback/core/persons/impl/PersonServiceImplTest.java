@@ -22,7 +22,7 @@ class PersonServiceImplTest {
     private PersonRepository<VerificationMean> personRepository;
 
     @InjectMocks
-    private PersonServiceImpl<VerificationMean> service;
+    private PersonServiceImpl<VerificationMean, ?> service;
 
     @BeforeEach
     void setUp() {

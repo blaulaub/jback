@@ -6,7 +6,9 @@ import ch.patchcode.jback.secBase.secModelImpl.Principal;
 public interface AuthorizationManager<
         TPerson extends Person<TVerificationMean>,
         TInitialRegistrationData extends InitialRegistrationData,
-        TVerificationMean extends VerificationMean> {
+        TVerificationMean extends VerificationMean,
+        TPrincipal extends Principal<TVerificationMean>
+        > {
 
     /**
      * Make the person a client of the given principal.
@@ -14,5 +16,5 @@ public interface AuthorizationManager<
      * @param principal
      * @param person
      */
-    void addClient(Principal<TVerificationMean> principal, TPerson person);
+    void addClient(TPrincipal principal, TPerson person);
 }

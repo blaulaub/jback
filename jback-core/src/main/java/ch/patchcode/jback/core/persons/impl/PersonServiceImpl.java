@@ -13,14 +13,17 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class PersonServiceImpl<TVerificationMean extends VerificationMean> implements PersonService<TVerificationMean> {
+public class PersonServiceImpl<
+        TVerificationMean extends VerificationMean,
+        TPrincipal extends Principal<TVerificationMean>
+        > implements PersonService<TVerificationMean, TPrincipal> {
 
-    private final AuthorizationManager<Person<TVerificationMean>, ?, TVerificationMean> authorizationManager;
+    private final AuthorizationManager<Person<TVerificationMean>, ?, TVerificationMean, TPrincipal> authorizationManager;
     private final PersonRepository<TVerificationMean> personRepository;
 
     @Autowired
     public PersonServiceImpl(
-            AuthorizationManager<Person<TVerificationMean>, ?, TVerificationMean> authorizationManager,
+            AuthorizationManager<Person<TVerificationMean>, ?, TVerificationMean, TPrincipal> authorizationManager,
             PersonRepository<TVerificationMean> personRepository) {
 
         this.authorizationManager = authorizationManager;
@@ -50,7 +53,7 @@ public class PersonServiceImpl<TVerificationMean extends VerificationMean> imple
     @Override
     public Person<TVerificationMean> createClient(
             Person.Draft<TVerificationMean> draft,
-            Principal<TVerificationMean> principal
+            TPrincipal principal
     ) {
 
         var person = personRepository.create(draft);

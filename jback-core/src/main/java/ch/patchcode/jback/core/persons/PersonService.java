@@ -6,7 +6,10 @@ import ch.patchcode.jback.secBase.secModelImpl.Principal;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface PersonService<TVerificationMean extends VerificationMean> {
+public interface PersonService<
+        TVerificationMean extends VerificationMean,
+        TPrincipal extends Principal<TVerificationMean>
+        > {
 
     Optional<Person<TVerificationMean>> getPerson(UUID id);
 
@@ -18,5 +21,5 @@ public interface PersonService<TVerificationMean extends VerificationMean> {
     /**
      * Creates a new {@link Person}, with {@link Person#getPrincipals()} containing the given principal.
      */
-    Person<TVerificationMean> createClient(Person.Draft<TVerificationMean> draft, Principal<TVerificationMean> principal);
+    Person<TVerificationMean> createClient(Person.Draft<TVerificationMean> draft, TPrincipal principal);
 }

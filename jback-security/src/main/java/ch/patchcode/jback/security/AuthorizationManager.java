@@ -8,7 +8,12 @@ import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 
-public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<Person<VerificationMean>, InitialRegistrationData, VerificationMean> {
+public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<
+        Person<VerificationMean>,
+        InitialRegistrationData,
+        VerificationMean,
+        Authentication
+        > {
 
     /**
      * Let any user register when submitting some data, providing him with a {@see PendingRegistration.Id}.
@@ -35,7 +40,7 @@ public interface AuthorizationManager extends ch.patchcode.jback.secBase.Authori
     // from ch.patchcode.jback.secBase.AuthorizationManager
 
     @Override
-    void addClient(Principal<VerificationMean> principal, Person<VerificationMean> person);
+    void addClient(Authentication principal, Person<VerificationMean> person);
 
     PersonalAuthentication createAuthorizationFor(Person<VerificationMean> person, Iterable<VerificationMean> means);
 }
