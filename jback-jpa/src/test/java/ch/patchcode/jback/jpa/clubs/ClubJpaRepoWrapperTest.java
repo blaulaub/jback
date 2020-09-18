@@ -5,6 +5,7 @@ import ch.patchcode.jback.core.common.Address;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
 import ch.patchcode.jback.jpa.persons.PersonJpaRepoWrapper;
+import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +26,7 @@ class ClubJpaRepoWrapperTest {
 
     private final ClubJpaRepoWrapper wrapper;
 
-    private Person contact;
+    private Person<VerificationMean> contact;
 
     @Autowired
     public ClubJpaRepoWrapperTest(
@@ -39,7 +40,7 @@ class ClubJpaRepoWrapperTest {
     @BeforeEach
     void setUp() {
 
-        Person.Draft personDraft = new Person.Draft.Builder()
+        var personDraft = new Person.Draft.Builder<VerificationMean>()
                 .setFirstName("Ernst")
                 .setLastName("Graf")
                 .setAddress(new Address.Builder()
@@ -54,7 +55,7 @@ class ClubJpaRepoWrapperTest {
     void create_and_findById() {
 
         // arrange
-        var draft = new Club.Draft.Builder()
+        var draft = new Club.Draft.Builder<VerificationMean>()
                 .setName("Young Boys")
                 .setContact(contact)
                 .setUrl(URI.create("https://www.bscyb.ch/"))
