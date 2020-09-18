@@ -2,7 +2,6 @@ package ch.patchcode.jback.api.persons;
 
 import ch.patchcode.jback.api.ApiTestConfiguration;
 import ch.patchcode.jback.api.fakeServices.PersonServiceFake;
-import ch.patchcode.jback.core.common.Address;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.UUID;
 
 import static ch.patchcode.jback.api.util.SomeData.somePersonBuilder;
-import static org.hamcrest.Matchers.contains;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

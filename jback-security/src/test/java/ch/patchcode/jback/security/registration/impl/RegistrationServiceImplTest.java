@@ -22,7 +22,6 @@ import java.util.UUID;
 
 import static ch.patchcode.jback.security.util.SomeData.somePendingRegistration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 

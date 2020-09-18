@@ -2,8 +2,6 @@ package ch.patchcode.jback.api.clubs;
 
 import ch.patchcode.jback.api.ApiTestConfiguration;
 import ch.patchcode.jback.api.fakeServices.ClubServiceFake;
-import ch.patchcode.jback.core.common.Address;
-import ch.patchcode.jback.core.persons.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,11 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static ch.patchcode.jback.api.util.SomeData.someClubBuilder;
-import static org.hamcrest.Matchers.contains;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

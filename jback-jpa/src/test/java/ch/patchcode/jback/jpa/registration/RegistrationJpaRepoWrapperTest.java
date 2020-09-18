@@ -1,7 +1,6 @@
 package ch.patchcode.jback.jpa.registration;
 
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
-import ch.patchcode.jback.jpa.util.SomeData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,7 @@ class RegistrationJpaRepoWrapperTest {
     void save_and_findById() {
 
         // arrange
-        PendingRegistration.Draft pending = SomeData.somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
+        PendingRegistration.Draft pending = somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
 
         // act
         var id = wrapper.create(pending).getId();

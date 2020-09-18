@@ -1,6 +1,5 @@
 package ch.patchcode.jback.api.trainings;
 
-import ch.patchcode.jback.api.common.Address;
 import ch.patchcode.jback.api.dojos.Dojo;
 import ch.patchcode.jback.api.persons.Person;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,9 +13,13 @@ import java.util.UUID;
 public interface Training {
 
     UUID getId();
+
     Dojo getDojo();
+
     String getDiscipline();
+
     ZonedDateTime getBegin();
+
     ZonedDateTime getEnd();
 
     @ApiModelProperty(dataType = "ch.patchcode.jback.api.persons.Person")

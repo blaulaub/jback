@@ -1,6 +1,5 @@
 package ch.patchcode.jback.main;
 
-import ch.patchcode.jback.secBase.PendingRegistration;
 import ch.patchcode.jback.security.registration.VerificationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
