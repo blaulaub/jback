@@ -4,6 +4,7 @@ import ch.patchcode.jback.api.ApiConfiguration;
 import ch.patchcode.jback.core.CoreConfiguration;
 import ch.patchcode.jback.jpa.JpaConfiguration;
 import ch.patchcode.jback.main.fakes.FakesConfiguration;
+import ch.patchcode.jback.presentation.PresentationConfiguration;
 import ch.patchcode.jback.security.SecurityConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,6 +33,7 @@ import java.util.Properties;
 @Import({
         ApiConfiguration.class,
         JpaConfiguration.class,
+        PresentationConfiguration.class,
         CoreConfiguration.class,
         SecurityConfiguration.class,
         FakesConfiguration.class,

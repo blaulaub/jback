@@ -1,9 +1,9 @@
 package ch.patchcode.jback.api.clubs;
 
 import ch.patchcode.jback.api.exceptions.NotFoundException;
-import ch.patchcode.jback.core.clubs.ClubService;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.presentation.clubs.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +15,12 @@ import java.util.UUID;
 @RequestMapping("/api/v1/clubs")
 public class ClubsController {
 
-    private final ClubService<VerificationMean> clubService;
+    private final ClubService clubService;
 
     @Autowired
-    public ClubsController(ClubService<VerificationMean> clubService) {
+    public ClubsController(
+            @Qualifier("presentation.clubService") ClubService clubService
+    ) {
 
         this.clubService = clubService;
     }
