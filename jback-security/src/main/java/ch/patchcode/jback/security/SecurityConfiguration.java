@@ -1,5 +1,7 @@
 package ch.patchcode.jback.security;
 
+import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
+import ch.patchcode.jback.security.impl.AuthorizationManagerImpl;
 import ch.patchcode.jback.security.registration.PendingRegistrationRepository;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.registration.VerificationService;
@@ -24,6 +26,18 @@ import java.util.Random;
 public class SecurityConfiguration {
 
     private static final Random RND = new Random();
+
+    @Bean
+    public AuthorizationManager getAuthorizationManager(
+            RegistrationService registrationService,
+            PersonalAuthenticationRepository personalAuthenticationRepository
+    ) {
+
+        return new AuthorizationManagerImpl(
+                registrationService,
+                personalAuthenticationRepository
+        );
+    }
 
     @Bean
     public RegistrationService getRegistrationService(
@@ -52,5 +66,4 @@ public class SecurityConfiguration {
 
         return new FourDigitCodeProvider(RND);
     }
-
 }

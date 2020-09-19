@@ -1,8 +1,8 @@
 package ch.patchcode.jback.security.impl;
 
 import ch.patchcode.jback.core.persons.Person;
-import ch.patchcode.jback.security.Principal;
 import ch.patchcode.jback.security.AuthorizationManager;
+import ch.patchcode.jback.security.Principal;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.registration.RegistrationService;
@@ -11,10 +11,9 @@ import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
+import javax.inject.Inject;
+
 public class AuthorizationManagerImpl implements AuthorizationManager {
 
     private final static Logger LOG = LoggerFactory.getLogger(AuthorizationManagerImpl.class);
@@ -22,7 +21,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     private final RegistrationService registrationService;
     private final PersonalAuthenticationRepository personalAuthenticationRepository;
 
-    @Autowired
+    @Inject
     public AuthorizationManagerImpl(
             RegistrationService registrationService,
             PersonalAuthenticationRepository personalAuthenticationRepository
