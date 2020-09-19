@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>ch.patchcode</groupId>
-            <artifactId>jback-core</artifactId>
+            <artifactId>jback-core-spring</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
