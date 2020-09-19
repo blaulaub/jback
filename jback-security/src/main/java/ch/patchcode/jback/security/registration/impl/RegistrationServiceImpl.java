@@ -10,15 +10,13 @@ import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service
 public class RegistrationServiceImpl implements RegistrationService {
 
     private final ConsoleVerificationService consoleVerificationService;
@@ -27,7 +25,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final PendingRegistrationRepository pendingRegistrationRepository;
     private final VerificationCodeProvider verificationCodeProvider;
 
-    @Autowired
+    @Inject
     public RegistrationServiceImpl(
             ConsoleVerificationService consoleVerificationService,
             EmailVerificationService emailVerificationService,
