@@ -1,4 +1,4 @@
-package ch.patchcode.jback.security.authorities;
+package ch.patchcode.jback.presentation;
 
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import org.springframework.security.core.GrantedAuthority;

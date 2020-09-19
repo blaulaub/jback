@@ -1,7 +1,5 @@
 package ch.patchcode.jback.presentation;
 
-import ch.patchcode.jback.security.authorities.ApiAuthority;
-
 import java.util.Collection;
 
 import static java.util.stream.Collectors.toList;
