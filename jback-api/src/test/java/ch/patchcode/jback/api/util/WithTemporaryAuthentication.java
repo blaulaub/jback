@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.util;
 
-import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
+import ch.patchcode.jback.presentation.impl.TemporaryAuthentication;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;

@@ -3,8 +3,6 @@ package ch.patchcode.jback.presentation.impl;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.secBase.ConfirmationResult;
-import ch.patchcode.jback.security.authentications.PersonalAuthentication;
-import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
@@ -75,7 +73,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     @Override
     public PersonalAuthentication createAuthorizationFor(Person<VerificationMean> person, Iterable<VerificationMean> means) {
 
-        return authorizationManager.createAuthorizationFor(person, means);
+        return PersonalAuthentication.fromDomain(authorizationManager.createAuthorizationFor(person, means));
     }
 
 }

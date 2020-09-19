@@ -1,7 +1,7 @@
 package ch.patchcode.jback.security.authentications;
 
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
-import ch.patchcode.jback.security.Authentication;
+import ch.patchcode.jback.security.Principal;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 
@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
  * This is the most stupid form of an authenticated user (beside the anonymous user). What we have here is
  * someone who can verify his identity via something given by {@link #getMeans()}.
  */
-public class TemporaryAuthentication implements Authentication {
+public class TemporaryAuthentication implements Principal {
 
     private final String firstName;
     private final String lastName;

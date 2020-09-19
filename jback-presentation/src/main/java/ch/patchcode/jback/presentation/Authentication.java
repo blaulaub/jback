@@ -1,32 +1,14 @@
-package ch.patchcode.jback.security;
+package ch.patchcode.jback.presentation;
 
-import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.security.authorities.ApiAuthority;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
-import ch.patchcode.jback.util.WithFirstAndLastName;
 
 import java.util.Collection;
-import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 public interface Authentication extends
-        org.springframework.security.core.Authentication,
-        ch.patchcode.jback.secBase.secModelImpl.Principal<VerificationMean>,
-        WithFirstAndLastName {
-
-    // impl ch.patchcode.jback.util.WithFirstAndLastName
-
-    @Override
-    String getFirstName();
-
-    @Override
-    String getLastName();
-
-    // impl java.security.Principal
-
-    @Override
-    String getName();
+        ch.patchcode.jback.security.Principal,
+        org.springframework.security.core.Authentication {
 
     // impl org.springframework.security.core.Authentication
 
@@ -65,12 +47,4 @@ public interface Authentication extends
 
         throw new IllegalArgumentException("immutable");
     }
-
-    // impl ch.patchcode.jback.secBase.secModelImpl.Principal
-
-    @Override
-    List<VerificationMean> getMeans();
-
-    @Override
-    List<Authority> getBasicPrivileges();
 }

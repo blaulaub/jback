@@ -2,7 +2,7 @@ package ch.patchcode.jback.security.authentications;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
-import ch.patchcode.jback.security.Authentication;
+import ch.patchcode.jback.security.Principal;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import static java.util.Collections.singletonList;
 
 @FreeBuilder
-public interface PersonalAuthentication extends Authentication {
+public interface PersonalAuthentication extends Principal {
 
     static PersonalAuthentication of(
             Person<VerificationMean> holder,
