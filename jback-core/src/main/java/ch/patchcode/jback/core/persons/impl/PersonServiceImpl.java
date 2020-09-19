@@ -6,13 +6,11 @@ import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.secBase.AuthorizationManager;
 import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service
 public class PersonServiceImpl<
         TVerificationMean extends VerificationMean,
         TPrincipal extends Principal<TVerificationMean>
@@ -21,7 +19,7 @@ public class PersonServiceImpl<
     private final AuthorizationManager<Person<TVerificationMean>, TVerificationMean, TPrincipal> authorizationManager;
     private final PersonRepository<TVerificationMean> personRepository;
 
-    @Autowired
+    @Inject
     public PersonServiceImpl(
             AuthorizationManager<Person<TVerificationMean>, TVerificationMean, TPrincipal> authorizationManager,
             PersonRepository<TVerificationMean> personRepository) {
