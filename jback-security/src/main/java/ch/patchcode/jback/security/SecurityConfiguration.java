@@ -1,7 +1,12 @@
 package ch.patchcode.jback.security;
 
+import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
+import ch.patchcode.jback.security.verificationCodes.impl.FourDigitCodeProvider;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Random;
 
 /**
  * Spring configuration that automatically contains all services (and other
@@ -12,5 +17,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan
 public class SecurityConfiguration {
+
+    private static final Random RND = new Random();
+
+    @Bean
+    public VerificationCodeProvider getVerificationCodeProvider() {
+
+        return new FourDigitCodeProvider(RND);
+    }
 
 }

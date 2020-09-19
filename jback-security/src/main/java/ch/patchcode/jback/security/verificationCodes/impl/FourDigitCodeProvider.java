@@ -1,18 +1,21 @@
 package ch.patchcode.jback.security.verificationCodes.impl;
 
 import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
-import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.Random;
 
-@Service
 public class FourDigitCodeProvider implements VerificationCodeProvider {
 
-    private static final Random RND = new Random();
+    private final Random rnd;
 
-    @Override
+    public FourDigitCodeProvider(Random rnd) {
+        this.rnd = rnd;
+    }
+
+    @Inject
     public String generateRandomCode() {
 
-        return String.format("%04d", RND.nextInt(10000));
+        return String.format("%04d", rnd.nextInt(10000));
     }
 }
