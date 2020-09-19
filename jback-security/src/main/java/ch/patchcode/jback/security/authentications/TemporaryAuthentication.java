@@ -26,14 +26,6 @@ public class TemporaryAuthentication implements Principal {
         this.mean = mean;
     }
 
-    public static TemporaryAuthentication of(PendingRegistration registration) {
-
-        return new TemporaryAuthentication(
-                registration.getFirstName(),
-                registration.getLastName(),
-                registration.getVerificationMean());
-    }
-
     @Override
     public String getFirstName() {
 
