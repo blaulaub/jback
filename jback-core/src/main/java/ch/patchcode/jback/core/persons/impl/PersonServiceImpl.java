@@ -18,12 +18,12 @@ public class PersonServiceImpl<
         TPrincipal extends Principal<TVerificationMean>
         > implements PersonService<TVerificationMean, TPrincipal> {
 
-    private final AuthorizationManager<Person<TVerificationMean>, ?, TVerificationMean, TPrincipal> authorizationManager;
+    private final AuthorizationManager<Person<TVerificationMean>, TVerificationMean, TPrincipal> authorizationManager;
     private final PersonRepository<TVerificationMean> personRepository;
 
     @Autowired
     public PersonServiceImpl(
-            AuthorizationManager<Person<TVerificationMean>, ?, TVerificationMean, TPrincipal> authorizationManager,
+            AuthorizationManager<Person<TVerificationMean>, TVerificationMean, TPrincipal> authorizationManager,
             PersonRepository<TVerificationMean> personRepository) {
 
         this.authorizationManager = authorizationManager;

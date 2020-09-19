@@ -2,7 +2,6 @@ package ch.patchcode.jback.api.fakeServices;
 
 import ch.patchcode.jback.presentation.clubs.Club;
 import ch.patchcode.jback.presentation.clubs.ClubService;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

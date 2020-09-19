@@ -8,7 +8,6 @@ import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 
 public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<
         Person<VerificationMean>,
-        InitialRegistrationData,
         VerificationMean,
         Principal
         > {
