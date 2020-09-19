@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.registration;
 
-import ch.patchcode.jback.security.AuthorizationManager;
+import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,9 @@ public class RegistrationController {
     private final AuthorizationManager authorizationManager;
 
     @Autowired
-    public RegistrationController(AuthorizationManager authorizationManager) {
+    public RegistrationController(
+            @Qualifier("presentation.authorizationManager") AuthorizationManager authorizationManager
+    ) {
 
         this.authorizationManager = authorizationManager;
     }

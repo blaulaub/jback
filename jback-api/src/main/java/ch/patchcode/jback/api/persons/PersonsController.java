@@ -2,11 +2,12 @@ package ch.patchcode.jback.api.persons;
 
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
+import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.security.Authentication;
-import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class PersonsController {
     @Autowired
     public PersonsController(
             PersonService<VerificationMean, Authentication> personService,
-            AuthorizationManager authorizationManager
+            @Qualifier("presentation.authorizationManager") AuthorizationManager authorizationManager
     ) {
 
         this.personService = personService;

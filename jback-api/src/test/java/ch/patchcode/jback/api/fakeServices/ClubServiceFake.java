@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service
+@Service("presentation.clubService")
 public class ClubServiceFake implements ClubService {
 
     private final Map<UUID, Club> clubs = new HashMap<>();
