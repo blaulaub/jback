@@ -3,7 +3,6 @@ package ch.patchcode.jback.presentation.impl;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.secBase.ConfirmationResult;
-import ch.patchcode.jback.security.NoPendingRegistrationException;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;

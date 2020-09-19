@@ -1,4 +1,4 @@
-package ch.patchcode.jback.security;
+package ch.patchcode.jback.presentation.impl;
 
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import org.springframework.security.core.AuthenticationException;
