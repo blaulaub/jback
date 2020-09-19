@@ -4,9 +4,7 @@ import ch.patchcode.jback.security.registration.VerificationService.ConsoleVerif
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
-@Service
 public class ConsoleVerificationServiceImpl implements ConsoleVerificationService {
 
     private final static Logger LOG = LoggerFactory.getLogger(ConsoleVerificationServiceImpl.class);
