@@ -19,11 +19,19 @@ public class TemporaryAuthentication implements Authentication {
     private final String lastName;
     private final VerificationMean mean;
 
-    public TemporaryAuthentication(PendingRegistration registration) {
+    public TemporaryAuthentication(String firstName, String lastName, VerificationMean mean) {
 
-        this.firstName = registration.getFirstName();
-        this.lastName = registration.getLastName();
-        this.mean = registration.getVerificationMean();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mean = mean;
+    }
+
+    public static TemporaryAuthentication of(PendingRegistration registration) {
+
+        return new TemporaryAuthentication(
+                registration.getFirstName(),
+                registration.getLastName(),
+                registration.getVerificationMean());
     }
 
     @Override

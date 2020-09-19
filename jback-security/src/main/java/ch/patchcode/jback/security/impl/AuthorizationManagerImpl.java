@@ -2,7 +2,6 @@ package ch.patchcode.jback.security.impl;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.ConfirmationResult;
-import ch.patchcode.jback.secBase.secModelImpl.Principal;
 import ch.patchcode.jback.security.Authentication;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.NoPendingRegistrationException;
@@ -62,7 +61,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
 
                 LOG.debug("change security context to TemporaryAuthentication");
                 SecurityContextHolder.getContext()
-                        .setAuthentication(new TemporaryAuthentication(pendingRegistration));
+                        .setAuthentication(TemporaryAuthentication.of(pendingRegistration));
             }
 
             @Override

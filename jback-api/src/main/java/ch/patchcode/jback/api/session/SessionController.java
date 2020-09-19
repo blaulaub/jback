@@ -1,5 +1,6 @@
 package ch.patchcode.jback.api.session;
 
+import ch.patchcode.jback.util.WithFirstAndLastName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -24,9 +25,18 @@ public class SessionController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        return new SessionInfo.Builder()
+        SessionInfo.Builder builder = new SessionInfo.Builder()
                 .setAuthenticated(auth.isAuthenticated())
-                .setPrincipalName(auth.getName())
+                .setPrincipalName(auth.getName());
+
+        if (auth instanceof WithFirstAndLastName) {
+            var w = (WithFirstAndLastName) auth;
+            builder
+                    .setFirstName(w.getFirstName())
+                    .setLastName(w.getLastName());
+        }
+
+        return builder
                 .build();
     }
 
