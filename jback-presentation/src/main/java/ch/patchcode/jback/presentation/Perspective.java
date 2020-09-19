@@ -1,4 +1,4 @@
-package ch.patchcode.jback.secBase;
+package ch.patchcode.jback.presentation;
 
 /**
  * Some distinct perspective on the app domain.
