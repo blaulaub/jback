@@ -4,18 +4,16 @@ import ch.patchcode.jback.core.clubs.Club;
 import ch.patchcode.jback.core.clubs.ClubRepository;
 import ch.patchcode.jback.core.clubs.ClubService;
 import ch.patchcode.jback.secBase.VerificationMean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service
 public class ClubServiceImpl<TVerificationMeant extends VerificationMean> implements ClubService<TVerificationMeant> {
 
     private final ClubRepository<TVerificationMeant> clubRepository;
 
-    @Autowired
+    @Inject
     public ClubServiceImpl(ClubRepository<TVerificationMeant> clubRepository) {
         this.clubRepository = clubRepository;
     }
