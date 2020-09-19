@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>ch.patchcode</groupId>
-            <artifactId>jback-security</artifactId>
+            <artifactId>jback-security-spring</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

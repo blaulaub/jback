@@ -28,6 +28,7 @@
         <module>jback-core-spring</module>
         <module>jback-jpa</module>
         <module>jback-security</module>
+        <module>jback-security-spring</module>
         <module>jback-presentation</module>
         <module>jback-api</module>
         <module>jback-angular</module>
