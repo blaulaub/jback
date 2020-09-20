@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.stubbing.Answer;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static java.util.Collections.emptyList;
@@ -97,5 +98,37 @@ class AuthorizationManagerImplTest {
 
         // assert
         assertEquals(TryLoginResult.UNKNOWN_USER, result);
+    }
+
+    @Test
+    void tryLogin_withUnknownUserIdentification_fails() {
+
+        // arrange
+        LoginData data = new LoginData.Builder()
+                .setUserIdentification("johnDoe")
+                .buildPartial();
+
+        // act
+        var result = manager.tryLogin(data);
+
+        // assert
+        assertEquals(TryLoginResult.UNKNOWN_USER, result);
+    }
+
+    @Test
+    void tryLogin_withKnownUserIdentification_doesNotReturnUnknownUser() {
+
+        // arrange
+        LoginData data = new LoginData.Builder()
+                .setUserIdentification("Mama")
+                .buildPartial();
+        when(personalAuthenticationRepository.findByUserIdentification("Mama"))
+                .thenReturn(Optional.of(new PersonalAuthentication.Builder().buildPartial()));
+
+        // act
+        var result = manager.tryLogin(data);
+
+        // assert
+        assertNotEquals(TryLoginResult.UNKNOWN_USER, result);
     }
 }

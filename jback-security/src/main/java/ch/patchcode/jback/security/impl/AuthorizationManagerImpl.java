@@ -59,7 +59,19 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     @Override
     public TryLoginResult tryLogin(LoginData data) {
 
-        // TODO implement
-        return TryLoginResult.UNKNOWN_USER;
+        var userIdentification = data.getUserIdentification();
+
+        // TODO its probably too much to have lookup logic in the repository
+        var auth = personalAuthenticationRepository.findByUserIdentification(userIdentification);
+
+        if (auth.isPresent()) {
+
+            // TODO where is the case that returns SUCCESS?
+            return TryLoginResult.NEED_CONFIRMATION_CODE;
+        } else {
+
+            return TryLoginResult.UNKNOWN_USER;
+        }
+
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+import java.util.Optional;
+
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
@@ -33,6 +35,13 @@ public class PersonalAuthenticationJpaRepoWrapper implements PersonalAuthenticat
 
         var principal = persist(draft);
         return principal.toDomain();
+    }
+
+    @Override
+    public Optional<PersonalAuthentication> findByUserIdentification(String userIdentification) {
+
+        // TODO need to convert and lookup instead
+        return Optional.empty();
     }
 
     private PersonalAuthenticationJpa persist(PersonalAuthentication.Draft draft) {
