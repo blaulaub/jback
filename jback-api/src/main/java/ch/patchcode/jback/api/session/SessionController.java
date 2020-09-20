@@ -1,5 +1,8 @@
 package ch.patchcode.jback.api.session;
 
+import ch.patchcode.jback.presentation.Perspective;
+import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
+import ch.patchcode.jback.presentation.impl.TemporaryAuthentication;
 import ch.patchcode.jback.util.WithFirstAndLastName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +37,15 @@ public class SessionController {
             builder
                     .setFirstName(w.getFirstName())
                     .setLastName(w.getLastName());
+        }
+
+        // TODO if-else-if and static mapping based on type is not the ultimate solution
+        if (auth instanceof PersonalAuthentication) {
+            builder.setPerspective(Perspective.MEMBER);
+        } else if (auth instanceof TemporaryAuthentication) {
+            builder.setPerspective(Perspective.ENROLLING);
+        } else {
+            builder.setPerspective(Perspective.GUEST);
         }
 
         return builder

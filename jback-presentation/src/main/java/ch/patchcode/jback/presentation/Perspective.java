@@ -9,5 +9,20 @@ package ch.patchcode.jback.presentation;
  * usually have to pick a distinct role, and thus gain a distinct
  * perspective.
  */
-public interface Perspective {
+public enum Perspective {
+
+    /**
+     * For unauthenticated strangers, visitors, guests.
+     */
+    GUEST,
+
+    /**
+     * For someone who started enrolling.
+     */
+    ENROLLING,
+
+    /**
+     * For any regular member.
+     */
+    MEMBER
 }

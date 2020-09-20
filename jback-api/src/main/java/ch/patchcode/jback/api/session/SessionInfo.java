@@ -1,5 +1,6 @@
 package ch.patchcode.jback.api.session;
 
+import ch.patchcode.jback.presentation.Perspective;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.inferred.freebuilder.FreeBuilder;
@@ -13,6 +14,8 @@ public interface SessionInfo {
 
     String getPrincipalName();
 
+    Perspective getPerspective();
+
     Optional<String> getFirstName();
 
     Optional<String> getLastName();
@@ -20,14 +23,16 @@ public interface SessionInfo {
     @JsonCreator
     static SessionInfo of(
             @JsonProperty(value = "authenticated", required = true) boolean authenticated,
-            @JsonProperty("principalName") String principalName,
+            @JsonProperty(value = "principalName", required = true) String principalName,
+            @JsonProperty(value = "principalName", required = true) Perspective perspective,
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName
     ) {
 
         Builder builder = new Builder();
         builder.setAuthenticated(authenticated);
-        Optional.ofNullable(principalName).ifPresent(builder::setPrincipalName);
+        builder.setPrincipalName(principalName);
+        builder.setPerspective(perspective);
         Optional.ofNullable(firstName).ifPresent(builder::setFirstName);
         Optional.ofNullable(lastName).ifPresent(builder::setLastName);
         return builder.build();
