@@ -4,6 +4,7 @@ import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.LoginData;
 import ch.patchcode.jback.security.Principal;
+import ch.patchcode.jback.security.TryLoginResult;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.registration.RegistrationService;
@@ -56,9 +57,9 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public void tryLogin(LoginData data) {
+    public TryLoginResult tryLogin(LoginData data) {
 
         // TODO implement
-        throw new RuntimeException("not implemented");
+        return TryLoginResult.UNKNOWN_USER;
     }
 }

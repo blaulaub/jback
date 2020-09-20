@@ -1,6 +1,8 @@
 package ch.patchcode.jback.security.impl;
 
 import ch.patchcode.jback.core.persons.Person;
+import ch.patchcode.jback.security.LoginData;
+import ch.patchcode.jback.security.TryLoginResult;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.registration.RegistrationService;
@@ -80,5 +82,20 @@ class AuthorizationManagerImplTest {
                 .setHolder(person)
                 .addAllMeans(means)
                 .build()));
+    }
+
+    @Test
+    void tryLogin_withEmptyUserIdentification_fails() {
+
+        // arrange
+        LoginData data = new LoginData.Builder()
+                .setUserIdentification("")
+                .buildPartial();
+
+        // act
+        var result = manager.tryLogin(data);
+
+        // assert
+        assertEquals(TryLoginResult.UNKNOWN_USER, result);
     }
 }

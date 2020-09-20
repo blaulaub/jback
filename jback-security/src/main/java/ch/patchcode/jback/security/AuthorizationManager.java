@@ -29,5 +29,5 @@ public interface AuthorizationManager extends ch.patchcode.jback.secBase.Authori
 
     PersonalAuthentication createAuthorizationFor(Person<VerificationMean> person, Iterable<VerificationMean> means);
 
-    void tryLogin(LoginData data);
+    TryLoginResult tryLogin(LoginData data);
 }
