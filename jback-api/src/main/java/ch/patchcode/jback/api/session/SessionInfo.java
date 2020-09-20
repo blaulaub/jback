@@ -24,7 +24,7 @@ public interface SessionInfo {
     static SessionInfo of(
             @JsonProperty(value = "authenticated", required = true) boolean authenticated,
             @JsonProperty(value = "principalName", required = true) String principalName,
-            @JsonProperty(value = "principalName", required = true) Perspective perspective,
+            @JsonProperty(value = "perspective", required = true) Perspective perspective,
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName
     ) {
