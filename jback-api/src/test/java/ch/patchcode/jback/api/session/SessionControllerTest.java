@@ -1,6 +1,7 @@
 package ch.patchcode.jback.api.session;
 
 import ch.patchcode.jback.api.ApiTestConfiguration;
+import ch.patchcode.jback.api.util.WithPersonalAuthentication;
 import ch.patchcode.jback.api.util.WithTemporaryAuthentication;
 import ch.patchcode.jback.presentation.Perspective;
 import org.junit.jupiter.api.Test;
@@ -51,7 +52,21 @@ class SessionControllerTest {
     }
 
     @Test
-    @WithTemporaryAuthentication(firstName = "Tom", lastName = "Sawyer")
+    @WithPersonalAuthentication(firstName = "Tom", lastName = "Sawyer")
+    void getSessionInfo_withPersonalAuthentication_hasFirstAndLastName() throws Exception {
+
+        // act
+        var result = mvc.perform(get("/api/v1/session"));
+
+        // assert
+        result
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName").value("Tom"))
+                .andExpect(jsonPath("$.lastName").value("Sawyer"));
+    }
+
+    @Test
+    @WithTemporaryAuthentication()
     void getSessionInfo_withTemporaryAuthentication_hasPerspectiveEnrolling() throws Exception {
 
         // act
@@ -61,5 +76,18 @@ class SessionControllerTest {
         result
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.perspective").value(Perspective.ENROLLING.toString()));
+    }
+
+    @Test
+    @WithPersonalAuthentication()
+    void getSessionInfo_withPersonalAuthentication_hasPerspectiveMember() throws Exception {
+
+        // act
+        var result = mvc.perform(get("/api/v1/session"));
+
+        // assert
+        result
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.perspective").value(Perspective.MEMBER.toString()));
     }
 }

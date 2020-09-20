@@ -15,9 +15,9 @@ import java.lang.annotation.*;
 @WithSecurityContext(factory = WithTemporaryAuthentication.Factory.class)
 public @interface WithTemporaryAuthentication {
 
-    String firstName();
+    String firstName() default "John";
 
-    String lastName();
+    String lastName() default "Doe";
 
     class Factory implements WithSecurityContextFactory<WithTemporaryAuthentication> {
 
