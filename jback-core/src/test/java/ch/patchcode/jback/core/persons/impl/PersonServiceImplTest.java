@@ -1,7 +1,7 @@
 package ch.patchcode.jback.core.persons.impl;
 
-import ch.patchcode.jback.core.persons.Person;
-import ch.patchcode.jback.core.persons.PersonRepository;
+import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.core.entities.PersonRepository;
 import ch.patchcode.jback.secBase.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

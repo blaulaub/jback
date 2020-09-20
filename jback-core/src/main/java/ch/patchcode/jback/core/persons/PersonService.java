@@ -1,5 +1,6 @@
 package ch.patchcode.jback.core.persons;
 
+import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
 

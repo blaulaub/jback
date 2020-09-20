@@ -1,10 +1,10 @@
 package ch.patchcode.jback.core;
 
-import ch.patchcode.jback.core.clubs.ClubRepository;
 import ch.patchcode.jback.core.clubs.ClubService;
 import ch.patchcode.jback.core.clubs.impl.ClubServiceImpl;
-import ch.patchcode.jback.core.persons.Person;
-import ch.patchcode.jback.core.persons.PersonRepository;
+import ch.patchcode.jback.core.entities.ClubRepository;
+import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.core.entities.PersonRepository;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.core.persons.impl.PersonServiceImpl;
 import ch.patchcode.jback.secBase.AuthorizationManager;

@@ -1,4 +1,4 @@
-package ch.patchcode.jback.core.clubs;
+package ch.patchcode.jback.core.entities;
 
 import ch.patchcode.jback.secBase.VerificationMean;
 

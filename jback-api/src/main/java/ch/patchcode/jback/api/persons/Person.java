@@ -39,14 +39,14 @@ public interface Person extends WithFirstAndLastName {
         return builder.build();
     }
 
-    static Person fromDomain(ch.patchcode.jback.core.persons.Person<VerificationMean> person) {
+    static Person fromDomain(ch.patchcode.jback.core.entities.Person<VerificationMean> person) {
 
         Builder builder = new Builder();
 
         builder.setId(person.getId())
                 .setFirstName(person.getFirstName())
                 .setLastName(person.getLastName());
-        person.getAddress().map(ch.patchcode.jback.core.common.Address::getLines).ifPresent(builder::addAllAddress);
+        person.getAddress().map(ch.patchcode.jback.core.entities.Address::getLines).ifPresent(builder::addAllAddress);
 
         return builder.build();
     }
@@ -81,12 +81,12 @@ public interface Person extends WithFirstAndLastName {
             return builder.build();
         }
 
-        public ch.patchcode.jback.core.persons.Person.Draft<VerificationMean> toDomain() {
+        public ch.patchcode.jback.core.entities.Person.Draft<VerificationMean> toDomain() {
 
-            var builder = new ch.patchcode.jback.core.persons.Person.Draft.Builder<VerificationMean>();
+            var builder = new ch.patchcode.jback.core.entities.Person.Draft.Builder<VerificationMean>();
             builder.setFirstName(getFirstName());
             builder.setLastName(getLastName());
-            builder.setAddress(new ch.patchcode.jback.core.common.Address.Builder()
+            builder.setAddress(new ch.patchcode.jback.core.entities.Address.Builder()
                     .addAllLines(getAddress())
                     .build());
             return builder.build();

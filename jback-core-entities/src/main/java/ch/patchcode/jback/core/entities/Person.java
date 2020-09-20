@@ -1,6 +1,5 @@
-package ch.patchcode.jback.core.persons;
+package ch.patchcode.jback.core.entities;
 
-import ch.patchcode.jback.core.common.Address;
 import ch.patchcode.jback.secBase.VerificationMean;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.secBase.secModelImpl.Principal;
@@ -27,7 +26,7 @@ public interface Person<TVerificationMean extends VerificationMean> extends
 
     Optional<Address> getAddress();
 
-    // from secModel Person
+    // from secModel ch.patchcode.jback.core.entities.Person
 
     @Override
     List<Principal<TVerificationMean>> getPrincipals();

@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.fakeServices;
 
-import ch.patchcode.jback.core.persons.Person;
+import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.security.entities.Principal;
 import ch.patchcode.jback.security.entities.VerificationMean;

@@ -1,6 +1,6 @@
 package ch.patchcode.jback.jpa.clubs;
 
-import ch.patchcode.jback.core.clubs.Club;
+import ch.patchcode.jback.core.entities.Club;
 import ch.patchcode.jback.jpa.persons.PersonJpa;
 import ch.patchcode.jback.security.entities.VerificationMean;
 

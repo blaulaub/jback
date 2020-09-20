@@ -16,7 +16,7 @@
 
 <div>
   <div *ngFor="let line of model.address; let i = index;trackBy:trackByIdx">
-    <label>Address Line {{ i }}:</label>
+    <label>ch.patchcode.jback.core.entities.Address Line {{ i }}:</label>
     <input [(ngModel)]="model.address[i]" placeholder="address line {{ i }}"/>
     <label *ngIf="model.address.length > 1" (click)="removeLine(i)">(remove line)</label>
   </div>

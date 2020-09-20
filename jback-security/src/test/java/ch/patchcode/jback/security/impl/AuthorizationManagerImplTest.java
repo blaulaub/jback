@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security.impl;
 
-import ch.patchcode.jback.core.persons.Person;
+import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.security.LoginData;
 import ch.patchcode.jback.security.TryLoginResult;
 import ch.patchcode.jback.security.entities.PersonalAuthentication;

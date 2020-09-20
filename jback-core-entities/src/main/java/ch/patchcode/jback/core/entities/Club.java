@@ -1,6 +1,5 @@
-package ch.patchcode.jback.core.clubs;
+package ch.patchcode.jback.core.entities;
 
-import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.secBase.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 

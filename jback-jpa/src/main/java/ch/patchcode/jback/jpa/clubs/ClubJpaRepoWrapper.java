@@ -1,8 +1,8 @@
 package ch.patchcode.jback.jpa.clubs;
 
-import ch.patchcode.jback.core.clubs.Club;
-import ch.patchcode.jback.core.clubs.ClubRepository;
-import ch.patchcode.jback.core.persons.Person;
+import ch.patchcode.jback.core.entities.Club;
+import ch.patchcode.jback.core.entities.ClubRepository;
+import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.jpa.persons.PersonJpaRepository;
 import ch.patchcode.jback.security.entities.VerificationMean;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package ch.patchcode.jback.jpa.clubs;
 
-import ch.patchcode.jback.core.clubs.Club;
-import ch.patchcode.jback.core.common.Address;
-import ch.patchcode.jback.core.persons.Person;
+import ch.patchcode.jback.core.entities.Club;
+import ch.patchcode.jback.core.entities.Address;
+import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
 import ch.patchcode.jback.jpa.persons.PersonJpaRepoWrapper;
 import ch.patchcode.jback.security.entities.VerificationMean;
@@ -44,7 +44,7 @@ class ClubJpaRepoWrapperTest {
                 .setFirstName("Ernst")
                 .setLastName("Graf")
                 .setAddress(new Address.Builder()
-                        .addLines("Berner Sport Club Young Boys", "Postfach 61", "3000 Bern 22")
+                        .addLines("Berner Sport ch.patchcode.jback.core.entities.Club Young Boys", "Postfach 61", "3000 Bern 22")
                         .build())
                 .buildPartial();
         contact = personRepoWrapper.create(personDraft);

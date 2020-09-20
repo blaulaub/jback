@@ -1,6 +1,6 @@
 package ch.patchcode.jback.presentation.clubs;
 
-import ch.patchcode.jback.core.persons.Person;
+import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.security.entities.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Club extends ch.patchcode.jback.core.clubs.Club<VerificationMean> {
+public interface Club extends ch.patchcode.jback.core.entities.Club<VerificationMean> {
 
     @Override
     UUID getId();
@@ -23,7 +23,7 @@ public interface Club extends ch.patchcode.jback.core.clubs.Club<VerificationMea
     @Override
     Optional<URI> getUrl();
 
-    static Club fromDomain(ch.patchcode.jback.core.clubs.Club<VerificationMean> club) {
+    static Club fromDomain(ch.patchcode.jback.core.entities.Club<VerificationMean> club) {
 
         return new Builder()
                 .setId(club.getId())

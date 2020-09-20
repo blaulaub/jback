@@ -1,7 +1,7 @@
 package ch.patchcode.jback.core.clubs.impl;
 
-import ch.patchcode.jback.core.clubs.Club;
-import ch.patchcode.jback.core.clubs.ClubRepository;
+import ch.patchcode.jback.core.entities.Club;
+import ch.patchcode.jback.core.entities.ClubRepository;
 import ch.patchcode.jback.secBase.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
