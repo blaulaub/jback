@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SessionService } from '../session/session.service';
 
@@ -13,13 +14,23 @@ export class FrontPageComponent implements OnInit {
 
   perspective: keyof typeof Perspective;
 
-  constructor(private sessionService: SessionService) { }
+  constructor(
+    private sessionService: SessionService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
+    this.updatePerspective();
+  }
+
+  private updatePerspective() {
     this.sessionService.getSessionInfo()
-    .subscribe(result => {
-      this.perspective = result.perspective;
-    })
+      .subscribe(result => this.perspective = result.perspective);
+  }
+
+  logout() {
+    this.sessionService.postLogout()
+      .subscribe(() => this.updatePerspective())
   }
 
   userIsGuest(): boolean {

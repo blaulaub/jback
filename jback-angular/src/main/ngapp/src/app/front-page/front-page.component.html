@@ -17,3 +17,7 @@ This is the front page of JBack.
 <div *ngIf="userIsMember()">
     Now that you registered, it is time for us to put more stuff in this site...
 </div>
+
+<div *ngIf="userIsEnrolling() || userIsMember()">
+    <a [routerLink]="" (click)="logout()">Logout</a>
+</div>

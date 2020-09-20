@@ -15,4 +15,8 @@ export class SessionService {
   getSessionInfo(): Observable<SessionInfo> {
     return this.http.get<SessionInfo>("/api/v1/session");
   }
+
+  postLogout(): Observable<void> {
+    return this.http.post<void>("/api/v1/session/logout", null);
+  }
 }
