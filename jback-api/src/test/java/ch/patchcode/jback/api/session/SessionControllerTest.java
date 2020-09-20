@@ -38,6 +38,18 @@ class SessionControllerTest {
     }
 
     @Test
+    void getSessionInfo_hasPerspectiveGuest() throws Exception {
+
+        // act
+        var result = mvc.perform(get("/api/v1/session"));
+
+        // assert
+        result
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.perspective").value(Perspective.GUEST.toString()));
+    }
+
+    @Test
     @WithTemporaryAuthentication(firstName = "Tom", lastName = "Sawyer")
     void getSessionInfo_withTemporaryAuthentication_hasFirstAndLastName() throws Exception {
 
