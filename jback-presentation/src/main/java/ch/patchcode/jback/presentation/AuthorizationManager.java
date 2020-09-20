@@ -33,4 +33,11 @@ public interface AuthorizationManager {
 
     PersonalAuthentication createAuthorizationFor(Person<VerificationMean> person, Iterable<VerificationMean> means);
 
+    TryLoginResult tryLogin(LoginData data);
+
+    enum TryLoginResult {
+        SUCCESS,
+        NEED_CONFIRMATION_CODE,
+        UNKNOWN_USER
+    }
 }

@@ -1,6 +1,5 @@
 package ch.patchcode.jback.api.session;
 
-import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.VerificationMean;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,6 +26,13 @@ public abstract class LoginData {
         return new LoginData.Builder()
                 .setUserIdentification(userIdentification)
                 .setVerificationMean(verificationMean)
+                .build();
+    }
+
+    public ch.patchcode.jback.presentation.LoginData toDomain() {
+        return new ch.patchcode.jback.presentation.LoginData.Builder()
+                .setUserIdentification(getUserIdentification())
+                .setVerificationMean(getVerificationMean().toDomain())
                 .build();
     }
 

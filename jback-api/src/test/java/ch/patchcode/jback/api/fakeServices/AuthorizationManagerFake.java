@@ -2,6 +2,7 @@ package ch.patchcode.jback.api.fakeServices;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.presentation.AuthorizationManager;
+import ch.patchcode.jback.presentation.LoginData;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
@@ -31,5 +32,12 @@ public class AuthorizationManagerFake implements AuthorizationManager {
 
         // do nothing
         return null;
+    }
+
+    @Override
+    public TryLoginResult tryLogin(LoginData data) {
+
+        // do nothing special - reject
+        return TryLoginResult.UNKNOWN_USER;
     }
 }
