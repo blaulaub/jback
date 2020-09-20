@@ -1,7 +1,7 @@
 package ch.patchcode.jback.api.registration;
 
 import ch.patchcode.jback.presentation.AuthorizationManager;
-import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
+import ch.patchcode.jback.security.entities.PendingRegistration;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

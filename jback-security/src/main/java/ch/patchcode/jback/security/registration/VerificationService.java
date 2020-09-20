@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security.registration;
 
-import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
+import ch.patchcode.jback.security.entities.PendingRegistration;
 
 public interface VerificationService {
 

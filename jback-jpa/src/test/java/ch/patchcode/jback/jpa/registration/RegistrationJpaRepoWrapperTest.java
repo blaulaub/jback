@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.registration;
 
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
-import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
+import ch.patchcode.jback.security.entities.PendingRegistration;
 import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

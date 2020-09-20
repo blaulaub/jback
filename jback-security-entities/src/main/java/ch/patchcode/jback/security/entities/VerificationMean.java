@@ -53,5 +53,4 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
 
         R visit(VerificationMean.VerificationBySms verificationBySms);
     }
-
 }

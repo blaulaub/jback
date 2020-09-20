@@ -10,7 +10,7 @@ import ch.patchcode.jback.security.entities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
+import ch.patchcode.jback.security.entities.PendingRegistration;
 import ch.patchcode.jback.security.entities.VerificationMean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

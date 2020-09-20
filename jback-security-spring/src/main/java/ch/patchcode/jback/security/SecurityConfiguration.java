@@ -4,7 +4,7 @@ import ch.patchcode.jback.security.entities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.authentications.impl.PersonalAuthenticationServiceImpl;
 import ch.patchcode.jback.security.impl.AuthorizationManagerImpl;
-import ch.patchcode.jback.security.registration.PendingRegistrationRepository;
+import ch.patchcode.jback.security.entities.PendingRegistrationRepository;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.registration.VerificationService;
 import ch.patchcode.jback.security.registration.impl.ConsoleVerificationServiceImpl;

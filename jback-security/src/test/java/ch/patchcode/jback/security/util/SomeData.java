@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security.util;
 
-import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
+import ch.patchcode.jback.security.entities.PendingRegistration;
 import ch.patchcode.jback.security.entities.VerificationMean;
 
 import java.time.Duration;
