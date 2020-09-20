@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { PersonService } from '../person/person.service';
 import { PersonDraft } from '../person/person-draft';
 import { SessionService } from '../session/session.service';
-import { SessionInfo } from '../session/session-info';
 
 @Component({
   selector: 'app-create-me',
@@ -20,7 +20,8 @@ export class CreateMeComponent implements OnInit {
 
   constructor(
     private personService: PersonService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -37,7 +38,7 @@ export class CreateMeComponent implements OnInit {
 
   submit() {
     this.personService.postCreateOwnPerson(this.model)
-      .subscribe(result => console.log(result));
+      .subscribe(() => this.router.navigate(["frontpage"]));
   }
 
   trackByIdx(index: number, obj: any): any {
