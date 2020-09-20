@@ -5,6 +5,7 @@ import ch.patchcode.jback.security.LoginData;
 import ch.patchcode.jback.security.TryLoginResult;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
+import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
@@ -28,6 +29,9 @@ class AuthorizationManagerImplTest {
 
     @Mock
     private RegistrationService registrationService;
+
+    @Mock
+    private PersonalAuthenticationService personalAuthenticationService;
 
     @Mock
     private PersonalAuthenticationRepository personalAuthenticationRepository;
@@ -122,7 +126,7 @@ class AuthorizationManagerImplTest {
         LoginData data = new LoginData.Builder()
                 .setUserIdentification("Mama")
                 .buildPartial();
-        when(personalAuthenticationRepository.findByUserIdentification("Mama"))
+        when(personalAuthenticationService.findByUserIdentification("Mama"))
                 .thenReturn(Optional.of(new PersonalAuthentication.Builder().buildPartial()));
 
         // act
