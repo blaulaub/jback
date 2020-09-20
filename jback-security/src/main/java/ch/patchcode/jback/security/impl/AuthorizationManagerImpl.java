@@ -2,6 +2,7 @@ package ch.patchcode.jback.security.impl;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.security.AuthorizationManager;
+import ch.patchcode.jback.security.LoginData;
 import ch.patchcode.jback.security.Principal;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
@@ -52,5 +53,12 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
                 .addAllMeans(means)
                 .build();
         return personalAuthenticationRepository.create(personalAuthentication);
+    }
+
+    @Override
+    public void tryLogin(LoginData data) {
+
+        // TODO implement
+        throw new RuntimeException("not implemented");
     }
 }

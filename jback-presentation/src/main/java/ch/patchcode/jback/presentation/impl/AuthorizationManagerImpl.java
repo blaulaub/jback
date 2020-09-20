@@ -81,8 +81,10 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     @Override
     public TryLoginResult tryLogin(LoginData data) {
 
+        // maybe we can just delegate it further...
+        authorizationManager.tryLogin(data.toDomain());
+
         // TODO implement
         throw new RuntimeException("not implemented");
     }
-
 }

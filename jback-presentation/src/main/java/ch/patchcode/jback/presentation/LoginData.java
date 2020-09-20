@@ -10,6 +10,14 @@ public interface LoginData {
 
     VerificationMean getVerificationMean();
 
+    default ch.patchcode.jback.security.LoginData toDomain() {
+
+        return new ch.patchcode.jback.security.LoginData.Builder()
+                .setUserIdentification(getUserIdentification())
+                .setVerificationMean(getVerificationMean())
+                .build();
+    }
+
     class Builder extends LoginData_Builder {
     }
 }

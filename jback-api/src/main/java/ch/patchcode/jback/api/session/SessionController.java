@@ -81,5 +81,4 @@ public class SessionController {
         }
         SecurityContextHolder.getContext().setAuthentication(null);
     }
-
 }
