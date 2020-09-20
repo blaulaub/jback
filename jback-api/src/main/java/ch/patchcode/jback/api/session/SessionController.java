@@ -52,6 +52,12 @@ public class SessionController {
                 .build();
     }
 
+    @PostMapping("login")
+    public void login(LoginData data) {
+        // TODO implement
+        throw new RuntimeException("not implemented");
+    }
+
     @PostMapping("logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
 
