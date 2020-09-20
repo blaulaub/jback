@@ -1,7 +1,19 @@
 <h1>Welcome!</h1>
 
-This is the front page of JBack. You can do a number of things... currently only one:
+This is the front page of JBack.
 
-<ul>
-    <li><a routerLink="/register">Register</a> to get a user account. Becoming a registered user allows you to use advanced features of this site.</li>
-</ul>
+<div *ngIf="userIsGuest()">
+    You can do a number of things... currently only one:
+
+    <ul>
+        <li><a routerLink="/register">Register</a> to get a user account. Becoming a registered user allows you to use advanced features of this site.</li>
+    </ul>
+</div>
+
+<div *ngIf="userIsEnrolling()">
+    We have received a valid confirmation code from you, but you are not fully enrolled yet. You can <li><a routerLink="/createMe">complete enrollement here</a>.
+</div>
+
+<div *ngIf="userIsMember()">
+    Now that you registered, it is time for us to put more stuff in this site...
+</div>
