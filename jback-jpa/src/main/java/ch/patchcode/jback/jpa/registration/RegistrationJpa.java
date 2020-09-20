@@ -1,6 +1,6 @@
 package ch.patchcode.jback.jpa.registration;
 
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 
 import javax.persistence.*;

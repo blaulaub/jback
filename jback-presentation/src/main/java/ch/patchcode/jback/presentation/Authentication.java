@@ -1,11 +1,13 @@
 package ch.patchcode.jback.presentation;
 
+import ch.patchcode.jback.security.entities.Principal;
+
 import java.util.Collection;
 
 import static java.util.stream.Collectors.toList;
 
 public interface Authentication extends
-        ch.patchcode.jback.security.Principal,
+        Principal,
         org.springframework.security.core.Authentication {
 
     // impl org.springframework.security.core.Authentication

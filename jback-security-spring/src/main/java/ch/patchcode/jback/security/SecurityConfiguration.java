@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security;
 
-import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
+import ch.patchcode.jback.security.entities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.authentications.impl.PersonalAuthenticationServiceImpl;
 import ch.patchcode.jback.security.impl.AuthorizationManagerImpl;

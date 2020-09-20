@@ -1,9 +1,8 @@
 package ch.patchcode.jback.security.authentications;
 
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
-import ch.patchcode.jback.security.Principal;
-import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.Principal;
+import ch.patchcode.jback.security.entities.VerificationMean;
 
 import java.util.List;
 

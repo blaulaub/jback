@@ -1,7 +1,7 @@
 package ch.patchcode.jback.security.authentications.impl;
 
-import ch.patchcode.jback.security.authentications.PersonalAuthentication;
-import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
+import ch.patchcode.jback.security.entities.PersonalAuthentication;
+import ch.patchcode.jback.security.entities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 
 import javax.inject.Inject;

@@ -1,12 +1,12 @@
 package ch.patchcode.jback.presentation.impl;
 
 import ch.patchcode.jback.secBase.ConfirmationResult;
-import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
+import ch.patchcode.jback.security.entities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

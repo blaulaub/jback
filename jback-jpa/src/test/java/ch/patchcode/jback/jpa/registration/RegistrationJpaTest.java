@@ -2,7 +2,7 @@ package ch.patchcode.jback.jpa.registration;
 
 import ch.patchcode.jback.jpa.util.SomeData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

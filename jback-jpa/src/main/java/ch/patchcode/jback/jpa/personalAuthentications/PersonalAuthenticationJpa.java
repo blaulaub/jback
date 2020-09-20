@@ -2,7 +2,7 @@ package ch.patchcode.jback.jpa.personalAuthentications;
 
 import ch.patchcode.jback.jpa.persons.PersonJpa;
 import ch.patchcode.jback.jpa.verificationMeans.VerificationMeanJpa;
-import ch.patchcode.jback.security.authentications.PersonalAuthentication;
+import ch.patchcode.jback.security.entities.PersonalAuthentication;
 
 import javax.persistence.*;
 import java.util.List;

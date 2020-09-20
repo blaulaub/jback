@@ -2,7 +2,7 @@ package ch.patchcode.jback.jpa.clubs;
 
 import ch.patchcode.jback.core.clubs.Club;
 import ch.patchcode.jback.jpa.persons.PersonJpa;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 
 import javax.persistence.*;
 import java.net.URI;

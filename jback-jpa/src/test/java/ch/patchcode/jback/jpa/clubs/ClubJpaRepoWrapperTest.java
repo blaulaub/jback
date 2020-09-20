@@ -5,7 +5,7 @@ import ch.patchcode.jback.core.common.Address;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
 import ch.patchcode.jback.jpa.persons.PersonJpaRepoWrapper;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

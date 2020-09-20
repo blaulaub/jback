@@ -8,7 +8,7 @@ import ch.patchcode.jback.security.registration.VerificationService.EmailVerific
 import ch.patchcode.jback.security.registration.VerificationService.SmsVerificationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
 
 import javax.inject.Inject;

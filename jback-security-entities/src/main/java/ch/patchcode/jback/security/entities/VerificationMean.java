@@ -1,4 +1,4 @@
-package ch.patchcode.jback.security.secBaseImpl;
+package ch.patchcode.jback.security.entities;
 
 import org.inferred.freebuilder.FreeBuilder;
 

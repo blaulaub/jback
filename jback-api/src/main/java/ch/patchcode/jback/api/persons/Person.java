@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.persons;
 
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 import ch.patchcode.jback.util.WithFirstAndLastName;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

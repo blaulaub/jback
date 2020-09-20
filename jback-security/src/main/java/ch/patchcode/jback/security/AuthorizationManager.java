@@ -1,10 +1,11 @@
 package ch.patchcode.jback.security;
 
 import ch.patchcode.jback.core.persons.Person;
-import ch.patchcode.jback.security.authentications.PersonalAuthentication;
+import ch.patchcode.jback.security.entities.PersonalAuthentication;
+import ch.patchcode.jback.security.entities.Principal;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 
 public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<
         Person<VerificationMean>,

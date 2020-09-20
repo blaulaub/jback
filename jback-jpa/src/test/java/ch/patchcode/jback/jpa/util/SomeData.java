@@ -4,7 +4,7 @@ import ch.patchcode.jback.jpa.persons.PersonJpa;
 import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
 import ch.patchcode.jback.jpa.registration.RegistrationJpa;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 
 import java.time.Duration;
 import java.time.Instant;

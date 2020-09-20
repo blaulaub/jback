@@ -3,7 +3,7 @@ package ch.patchcode.jback.api.util;
 import ch.patchcode.jback.core.common.Address;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.presentation.clubs.Club;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 
 import java.net.URI;
 import java.util.UUID;

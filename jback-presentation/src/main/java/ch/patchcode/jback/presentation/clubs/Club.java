@@ -1,7 +1,7 @@
 package ch.patchcode.jback.presentation.clubs;
 
 import ch.patchcode.jback.core.persons.Person;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.net.URI;

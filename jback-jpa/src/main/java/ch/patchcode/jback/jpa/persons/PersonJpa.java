@@ -2,7 +2,7 @@ package ch.patchcode.jback.jpa.persons;
 
 import ch.patchcode.jback.core.common.Address;
 import ch.patchcode.jback.core.persons.Person;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 
 import javax.persistence.*;
 import java.util.List;

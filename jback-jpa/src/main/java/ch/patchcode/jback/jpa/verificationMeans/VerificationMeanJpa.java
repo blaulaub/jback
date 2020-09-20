@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.verificationMeans;
 
 import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 
 import javax.persistence.*;
 import java.util.UUID;

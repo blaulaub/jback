@@ -5,10 +5,10 @@ import org.inferred.freebuilder.FreeBuilder;
 
 @FreeBuilder
 public interface PersonalAuthentication extends
-        ch.patchcode.jback.security.authentications.PersonalAuthentication,
+        ch.patchcode.jback.security.entities.PersonalAuthentication,
         Authentication {
 
-    static PersonalAuthentication fromDomain(ch.patchcode.jback.security.authentications.PersonalAuthentication auth) {
+    static PersonalAuthentication fromDomain(ch.patchcode.jback.security.entities.PersonalAuthentication auth) {
         return new Builder()
                 .setHolder(auth.getHolder())
                 .addAllMeans(auth.getMeans())

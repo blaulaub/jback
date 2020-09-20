@@ -2,7 +2,7 @@ package ch.patchcode.jback.jpa.persons;
 
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.jpa.JpaTestConfiguration;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

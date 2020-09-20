@@ -1,7 +1,6 @@
-package ch.patchcode.jback.security;
+package ch.patchcode.jback.security.entities;
 
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
 import ch.patchcode.jback.util.WithFirstAndLastName;
 
 import java.util.List;

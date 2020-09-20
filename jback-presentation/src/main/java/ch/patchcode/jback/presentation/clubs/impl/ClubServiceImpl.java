@@ -2,7 +2,7 @@ package ch.patchcode.jback.presentation.clubs.impl;
 
 import ch.patchcode.jback.presentation.clubs.Club;
 import ch.patchcode.jback.presentation.clubs.ClubService;
-import ch.patchcode.jback.security.secBaseImpl.VerificationMean;
+import ch.patchcode.jback.security.entities.VerificationMean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
