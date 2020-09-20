@@ -2,6 +2,7 @@ package ch.patchcode.jback.api.session;
 
 import ch.patchcode.jback.api.ApiTestConfiguration;
 import ch.patchcode.jback.api.util.WithTemporaryAuthentication;
+import ch.patchcode.jback.presentation.Perspective;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -47,5 +48,18 @@ class SessionControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value("Tom"))
                 .andExpect(jsonPath("$.lastName").value("Sawyer"));
+    }
+
+    @Test
+    @WithTemporaryAuthentication(firstName = "Tom", lastName = "Sawyer")
+    void getSessionInfo_withTemporaryAuthentication_hasPerspectiveEnrolling() throws Exception {
+
+        // act
+        var result = mvc.perform(get("/api/v1/session"));
+
+        // assert
+        result
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.perspective").value(Perspective.ENROLLING.toString()));
     }
 }
