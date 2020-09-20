@@ -3,6 +3,7 @@ package ch.patchcode.jback.api.fakeServices;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.LoginData;
+import ch.patchcode.jback.presentation.TryLoginResult;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;

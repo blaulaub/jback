@@ -3,6 +3,7 @@ package ch.patchcode.jback.presentation.impl;
 import ch.patchcode.jback.core.persons.Person;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.LoginData;
+import ch.patchcode.jback.presentation.TryLoginResult;
 import ch.patchcode.jback.secBase.ConfirmationResult;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;

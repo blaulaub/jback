@@ -35,9 +35,4 @@ public interface AuthorizationManager {
 
     TryLoginResult tryLogin(LoginData data);
 
-    enum TryLoginResult {
-        SUCCESS,
-        NEED_CONFIRMATION_CODE,
-        UNKNOWN_USER
-    }
 }

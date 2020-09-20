@@ -68,10 +68,7 @@ public class SessionController {
     @PostMapping("login")
     public LoginResponse login(LoginData data) {
 
-        authorizationManager.tryLogin(data.toDomain());
-
-        // TODO implement
-        throw new RuntimeException("not implemented");
+        return LoginResponse.fromDomain(authorizationManager.tryLogin(data.toDomain()));
     }
 
     @PostMapping("logout")
