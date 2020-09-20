@@ -1,11 +1,14 @@
 package ch.patchcode.jback.api.session;
 
+import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.Perspective;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
 import ch.patchcode.jback.presentation.impl.TemporaryAuthentication;
 import ch.patchcode.jback.util.WithFirstAndLastName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -22,6 +25,16 @@ import javax.servlet.http.HttpServletResponse;
 public class SessionController {
 
     private final static Logger LOG = LoggerFactory.getLogger(SessionController.class);
+
+    private final AuthorizationManager authorizationManager;
+
+    @Autowired
+    public SessionController(
+            @Qualifier("presentation.authorizationManager") AuthorizationManager authorizationManager
+    ) {
+
+        this.authorizationManager = authorizationManager;
+    }
 
     @GetMapping
     public SessionInfo getSessionInfo() {
@@ -53,7 +66,8 @@ public class SessionController {
     }
 
     @PostMapping("login")
-    public void login(LoginData data) {
+    public LoginResponse login(LoginData data) {
+
         // TODO implement
         throw new RuntimeException("not implemented");
     }
