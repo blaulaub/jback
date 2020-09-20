@@ -7,6 +7,7 @@ import ch.patchcode.jback.security.Principal;
 import ch.patchcode.jback.security.TryLoginResult;
 import ch.patchcode.jback.security.authentications.PersonalAuthentication;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
+import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.PendingRegistration;
@@ -21,15 +22,18 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     private final static Logger LOG = LoggerFactory.getLogger(AuthorizationManagerImpl.class);
 
     private final RegistrationService registrationService;
+    private final PersonalAuthenticationService personalAuthenticationService;
     private final PersonalAuthenticationRepository personalAuthenticationRepository;
 
     @Inject
     public AuthorizationManagerImpl(
             RegistrationService registrationService,
+            PersonalAuthenticationService personalAuthenticationService,
             PersonalAuthenticationRepository personalAuthenticationRepository
     ) {
 
         this.registrationService = registrationService;
+        this.personalAuthenticationService = personalAuthenticationService;
         this.personalAuthenticationRepository = personalAuthenticationRepository;
     }
 
@@ -61,9 +65,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
 
         var userIdentification = data.getUserIdentification();
 
-        // TODO its probably too much to have lookup logic in the repository
-        var auth = personalAuthenticationRepository.findByUserIdentification(userIdentification);
-
+        var auth = personalAuthenticationService.findByUserIdentification(userIdentification);
         if (auth.isPresent()) {
 
             // TODO where is the case that returns SUCCESS?

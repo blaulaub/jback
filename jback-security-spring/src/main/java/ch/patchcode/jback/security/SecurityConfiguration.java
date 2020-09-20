@@ -1,6 +1,8 @@
 package ch.patchcode.jback.security;
 
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationRepository;
+import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
+import ch.patchcode.jback.security.authentications.impl.PersonalAuthenticationServiceImpl;
 import ch.patchcode.jback.security.impl.AuthorizationManagerImpl;
 import ch.patchcode.jback.security.registration.PendingRegistrationRepository;
 import ch.patchcode.jback.security.registration.RegistrationService;
@@ -30,13 +32,23 @@ public class SecurityConfiguration {
     @Bean
     public AuthorizationManager getAuthorizationManager(
             RegistrationService registrationService,
+            PersonalAuthenticationService personalAuthenticationService,
             PersonalAuthenticationRepository personalAuthenticationRepository
     ) {
 
         return new AuthorizationManagerImpl(
                 registrationService,
+                personalAuthenticationService,
                 personalAuthenticationRepository
         );
+    }
+
+    @Bean
+    public PersonalAuthenticationService getPersonalAuthenticationService(
+            PersonalAuthenticationRepository personalAuthenticationRepository
+    ) {
+
+        return new PersonalAuthenticationServiceImpl(personalAuthenticationRepository);
     }
 
     @Bean
