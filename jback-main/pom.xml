@@ -31,6 +31,16 @@
             <artifactId>jback-jpa-wrapper</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>ch.patchcode</groupId>
+            <artifactId>jback-jpa-entities-spring</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
 
         <!-- for now use derby at runtime -->
         <dependency>
@@ -65,15 +75,6 @@
         </dependency>
 
         <!-- for testing use JPA-Hibernate-H2 -->
-        <dependency>
-            <groupId>ch.patchcode</groupId>
-            <artifactId>jback-jpa</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

@@ -2,7 +2,8 @@ package ch.patchcode.jback.main;
 
 import ch.patchcode.jback.api.ApiConfiguration;
 import ch.patchcode.jback.core.CoreConfiguration;
-import ch.patchcode.jback.jpa.JpaConfiguration;
+import ch.patchcode.jback.jpa.entities.spring.JpaEntitiesConfiguration;
+import ch.patchcode.jback.jpa.wrappers.JpaWrapperConfiguration;
 import ch.patchcode.jback.presentation.PresentationConfiguration;
 import ch.patchcode.jback.security.SecurityConfiguration;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +17,8 @@ import org.springframework.context.annotation.Import;
 @ComponentScan(basePackages = {"ch.patchcode.jback.main"})
 @Import({
         ApiConfiguration.class,
-        JpaConfiguration.class,
+        JpaWrapperConfiguration.class,
+        JpaEntitiesConfiguration.class,
         PresentationConfiguration.class,
         CoreConfiguration.class,
         SecurityConfiguration.class

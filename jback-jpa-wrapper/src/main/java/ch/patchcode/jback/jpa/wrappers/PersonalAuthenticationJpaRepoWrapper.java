@@ -1,10 +1,10 @@
 package ch.patchcode.jback.jpa.wrappers;
 
-import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
-import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpaRepository;
-import ch.patchcode.jback.jpa.persons.PersonJpa;
-import ch.patchcode.jback.jpa.persons.PersonJpaRepository;
-import ch.patchcode.jback.jpa.verificationMeans.VerificationMeanJpa;
+import ch.patchcode.jback.jpa.entities.PersonalAuthenticationJpa;
+import ch.patchcode.jback.jpa.entities.PersonalAuthenticationJpaRepository;
+import ch.patchcode.jback.jpa.entities.PersonJpa;
+import ch.patchcode.jback.jpa.entities.PersonJpaRepository;
+import ch.patchcode.jback.jpa.entities.VerificationMeanJpa;
 import ch.patchcode.jback.security.entities.PersonalAuthentication;
 import ch.patchcode.jback.security.entities.PersonalAuthenticationRepository;
 import org.springframework.beans.factory.annotation.Autowired;

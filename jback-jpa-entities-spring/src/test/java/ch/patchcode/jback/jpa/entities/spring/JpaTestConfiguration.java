@@ -1,6 +1,5 @@
-package ch.patchcode.jback.jpa.wrappers;
+package ch.patchcode.jback.jpa.entities.spring;
 
-import ch.patchcode.jback.jpa.entities.spring.JpaEntitiesConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -17,9 +16,9 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@Import({ JpaWrapperConfiguration.class, JpaEntitiesConfiguration.class})
-@PropertySource("classpath:/jpa.wrapper.test.properties")
-public class JpaWrapperTestConfiguration {
+@Import(JpaEntitiesConfiguration.class)
+@PropertySource("classpath:/jpa-entities-spring.test.properties")
+public class JpaTestConfiguration {
 
     @Bean
     public DataSource dataSource() {
