@@ -1,9 +1,8 @@
-package ch.patchcode.jback.jpa.clubs;
+package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.core.entities.Club;
 import ch.patchcode.jback.core.entities.Address;
 import ch.patchcode.jback.core.entities.Person;
-import ch.patchcode.jback.jpa.JpaTestConfiguration;
 import ch.patchcode.jback.jpa.persons.PersonJpaRepoWrapper;
 import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +18,7 @@ import java.net.URI;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {JpaTestConfiguration.class})
+@ContextConfiguration(classes = {JpaWrapperTestConfiguration.class})
 class ClubJpaRepoWrapperTest {
 
     private final PersonJpaRepoWrapper personRepoWrapper;
