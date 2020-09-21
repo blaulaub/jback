@@ -1,7 +1,9 @@
-package ch.patchcode.jback.jpa.persons;
+package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.core.entities.PersonRepository;
+import ch.patchcode.jback.jpa.persons.PersonJpa;
+import ch.patchcode.jback.jpa.persons.PersonJpaRepository;
 import ch.patchcode.jback.security.entities.VerificationMean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

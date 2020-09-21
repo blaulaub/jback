@@ -1,7 +1,6 @@
-package ch.patchcode.jback.jpa.persons;
+package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.core.entities.Person;
-import ch.patchcode.jback.jpa.JpaTestConfiguration;
 import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {JpaTestConfiguration.class})
+@ContextConfiguration(classes = {JpaWrapperTestConfiguration.class})
 class PersonJpaRepoWrapperTest {
 
     private final PersonJpaRepoWrapper wrapper;

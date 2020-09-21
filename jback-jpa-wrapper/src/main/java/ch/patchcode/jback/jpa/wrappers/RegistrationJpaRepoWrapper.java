@@ -1,5 +1,7 @@
-package ch.patchcode.jback.jpa.registration;
+package ch.patchcode.jback.jpa.wrappers;
 
+import ch.patchcode.jback.jpa.registration.RegistrationJpa;
+import ch.patchcode.jback.jpa.registration.RegistrationJpaRepository;
 import ch.patchcode.jback.security.entities.PendingRegistrationRepository;
 import ch.patchcode.jback.security.entities.PendingRegistration;
 import org.springframework.beans.factory.annotation.Autowired;

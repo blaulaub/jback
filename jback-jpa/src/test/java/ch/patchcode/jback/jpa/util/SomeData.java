@@ -1,8 +1,7 @@
 package ch.patchcode.jback.jpa.util;
 
-import ch.patchcode.jback.jpa.persons.PersonJpa;
 import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
-import ch.patchcode.jback.jpa.registration.RegistrationJpa;
+import ch.patchcode.jback.jpa.persons.PersonJpa;
 import ch.patchcode.jback.security.entities.PendingRegistration;
 import ch.patchcode.jback.security.entities.VerificationMean;
 
@@ -11,11 +10,6 @@ import java.time.Instant;
 import java.util.List;
 
 public class SomeData {
-
-    public static PendingRegistration.Draft somePendingRegistrationDraft() {
-
-        return somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
-    }
 
     public static PendingRegistration.Draft somePendingRegistrationDraft(VerificationMean verificationMean) {
 
@@ -26,16 +20,6 @@ public class SomeData {
                 .setVerificationCode("1234")
                 .setVerificationMean(verificationMean)
                 .build();
-    }
-
-    public static RegistrationJpa someRegistration() {
-        
-        RegistrationJpa registration = new RegistrationJpa.ConsoleRegistrationJpa();
-        registration.setFirstName("Tom");
-        registration.setLastName("Sawyer");
-        registration.setVerificationCode("1234");
-        registration.setExpiresAt(Instant.now().toEpochMilli());
-        return registration;
     }
 
     public static PersonalAuthenticationJpa principalOf(

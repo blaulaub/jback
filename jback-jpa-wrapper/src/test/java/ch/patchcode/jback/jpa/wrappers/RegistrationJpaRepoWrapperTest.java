@@ -1,6 +1,5 @@
-package ch.patchcode.jback.jpa.registration;
+package ch.patchcode.jback.jpa.wrappers;
 
-import ch.patchcode.jback.jpa.JpaTestConfiguration;
 import ch.patchcode.jback.security.entities.PendingRegistration;
 import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.Test;
@@ -9,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static ch.patchcode.jback.jpa.util.SomeData.somePendingRegistrationDraft;
+import static ch.patchcode.jback.jpa.wrappers.SomeData.somePendingRegistrationDraft;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {JpaTestConfiguration.class})
+@ContextConfiguration(classes = {JpaWrapperTestConfiguration.class})
 class RegistrationJpaRepoWrapperTest {
 
     private final RegistrationJpaRepoWrapper wrapper;

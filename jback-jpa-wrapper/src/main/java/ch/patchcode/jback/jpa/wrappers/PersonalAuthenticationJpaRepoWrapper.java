@@ -1,5 +1,7 @@
-package ch.patchcode.jback.jpa.personalAuthentications;
+package ch.patchcode.jback.jpa.wrappers;
 
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpa;
+import ch.patchcode.jback.jpa.personalAuthentications.PersonalAuthenticationJpaRepository;
 import ch.patchcode.jback.jpa.persons.PersonJpa;
 import ch.patchcode.jback.jpa.persons.PersonJpaRepository;
 import ch.patchcode.jback.jpa.verificationMeans.VerificationMeanJpa;

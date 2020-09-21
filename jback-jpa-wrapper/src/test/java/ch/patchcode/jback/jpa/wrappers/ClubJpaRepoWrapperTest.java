@@ -3,7 +3,6 @@ package ch.patchcode.jback.jpa.wrappers;
 import ch.patchcode.jback.core.entities.Club;
 import ch.patchcode.jback.core.entities.Address;
 import ch.patchcode.jback.core.entities.Person;
-import ch.patchcode.jback.jpa.persons.PersonJpaRepoWrapper;
 import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
