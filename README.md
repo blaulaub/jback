@@ -35,3 +35,24 @@ for DB, so it will run stand-alone.)
 # Requirements
 
 Not so clear (but maybe check [here](jback-main/src/test)).
+
+# Compile Duration
+
+| Module                    | Clean-Compile | Clean-Install |
+|---------------------------|---------------|---------------|
+| jback-angular             | 55            | 88            |
+| jback-api                 | 28            | 45            |
+| jback-core                |               | 19            |
+| jback-core-entities       |               | 21            |
+| jback-core-spring         |               | 13            |
+| jback-jpa-entities        |               | 19            |
+| jback-jpa-entities-spring |               | 31            |
+| jback-jpa-wrapper         |               | 29            |
+| jback-main                |               | 52            |
+| jback-presentation        |               | 23            |
+| jback-sec-base            |               | 15            |
+| jback-sec-model           |               |  7            |
+| jback-security            |               | 15            |
+| jback-security-entities   |               | 12            |
+| jback-security-spring     |               |  8            |
+| jback-security-util       |               |  7            |
