@@ -4,13 +4,20 @@ digraph G {
 
   "jback-main" -> "jback-api";
   "jback-main" -> "jback-core-spring";
-  "jback-main" -> "jback-jpa";
+  "jback-main" -> "jback-jpa-entities-spring";
+  "jback-main" -> "jback-jpa-wrapper";
   "jback-main" -> "jback-presentation";
   "jback-main" -> "jback-security";
   "jback-main" -> "jback-security-entities";
   "jback-main" -> "jback-security-spring";
-  "jback-jpa" -> "jback-core-entities";
-  "jback-jpa" -> "jback-security-entities";
+  "jback-jpa-wrapper" -> "jback-core-entities";
+  "jback-jpa-wrapper" -> "jback-jpa-entities";
+  "jback-jpa-wrapper" -> "jback-jpa-entities-spring";
+  "jback-jpa-wrapper" -> "jback-security-entities";
+  "jback-jpa-entities-spring" -> "jback-jpa-entities";
+  "jback-jpa-entities-spring" -> "jback-security-entities";
+  "jback-jpa-entities" -> "jback-core-entities";
+  "jback-jpa-entities" -> "jback-security-entities";
   "jback-api" -> "jback-core";
   "jback-api" -> "jback-core-entities";
   "jback-api" -> "jback-presentation";
