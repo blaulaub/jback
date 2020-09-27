@@ -1,4 +1,4 @@
-export interface ch.patchcode.jback.core.entities.Person {
+export interface Person {
 
     id: string;
 
