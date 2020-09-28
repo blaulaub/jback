@@ -1,4 +1,4 @@
-package ch.patchcode.jback.secBase;
+package ch.patchcode.jback.security.registration;
 
 public enum ConfirmationResult {
 

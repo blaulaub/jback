@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security.registration.impl;
 
-import ch.patchcode.jback.secBase.ConfirmationResult;
+import ch.patchcode.jback.security.registration.ConfirmationResult;
 import ch.patchcode.jback.security.entities.PendingRegistrationRepository;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.registration.VerificationService.ConsoleVerificationService;

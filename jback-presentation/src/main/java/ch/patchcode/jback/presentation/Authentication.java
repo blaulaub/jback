@@ -10,6 +10,8 @@ public interface Authentication extends
         Principal,
         org.springframework.security.core.Authentication {
 
+    // impl ch.patchcode.jback.secBase.secModelImpl.Principal
+
     // impl org.springframework.security.core.Authentication
 
     @Override

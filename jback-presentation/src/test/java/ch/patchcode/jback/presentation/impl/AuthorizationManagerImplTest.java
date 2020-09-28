@@ -1,6 +1,6 @@
 package ch.patchcode.jback.presentation.impl;
 
-import ch.patchcode.jback.secBase.ConfirmationResult;
+import ch.patchcode.jback.security.registration.ConfirmationResult;
 import ch.patchcode.jback.security.entities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.security.registration.RegistrationService;
