@@ -15,11 +15,14 @@
 
     <dependencies>
 
+        <!-- these are the entities we store in the DB -->
         <dependency>
             <groupId>ch.patchcode</groupId>
             <artifactId>jback-jpa-entities</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!-- these are the domain entities (core and security domain) -->
         <dependency>
             <groupId>ch.patchcode</groupId>
             <artifactId>jback-core-entities</artifactId>
@@ -31,6 +34,13 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <!-- the module comes with a spring context configuration -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <!-- we use our spring repositories to back testing -->
         <dependency>
             <groupId>ch.patchcode</groupId>
             <artifactId>jback-jpa-entities-spring</artifactId>
@@ -68,14 +78,6 @@
             <artifactId>spring-tx</artifactId>
             <version>5.2.8.RELEASE</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
