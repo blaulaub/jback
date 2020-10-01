@@ -31,7 +31,7 @@ public interface AuthorizationManager {
      */
     PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData);
 
-    PersonalAuthentication createAuthorizationFor(Person<VerificationMean> person, Iterable<VerificationMean> means);
+    PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means);
 
     TryLoginResult tryLogin(LoginData data);
 

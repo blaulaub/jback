@@ -2,7 +2,6 @@ package ch.patchcode.jback.presentation.clubs.impl;
 
 import ch.patchcode.jback.presentation.clubs.Club;
 import ch.patchcode.jback.presentation.clubs.ClubService;
-import ch.patchcode.jback.security.entities.VerificationMean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +11,10 @@ import java.util.UUID;
 @Service("presentation.clubService")
 public class ClubServiceImpl implements ClubService {
 
-    private final ch.patchcode.jback.core.clubs.ClubService<VerificationMean> clubService;
+    private final ch.patchcode.jback.core.clubs.ClubService clubService;
 
     @Autowired
-    public ClubServiceImpl(ch.patchcode.jback.core.clubs.ClubService<VerificationMean> clubService) {
+    public ClubServiceImpl(ch.patchcode.jback.core.clubs.ClubService clubService) {
 
         this.clubService = clubService;
     }

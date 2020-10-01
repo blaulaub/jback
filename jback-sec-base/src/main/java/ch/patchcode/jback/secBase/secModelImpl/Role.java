@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface Role<TVerificationMean extends VerificationMean> extends ch.patchcode.jback.secModel.Role<
         Organisation,
-        Person<TVerificationMean>,
+        Person,
         Principal<TVerificationMean>,
         Authority,
         Role<TVerificationMean>,
@@ -15,7 +15,7 @@ public interface Role<TVerificationMean extends VerificationMean> extends ch.pat
     // from secModel.Principal
 
     @Override
-    Person<TVerificationMean> getPerson();
+    Person getPerson();
 
     @Override
     List<Authority> getPrivileges();

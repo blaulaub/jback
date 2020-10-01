@@ -24,21 +24,18 @@ import org.springframework.context.annotation.Configuration;
 public class CoreConfiguration {
 
     @Bean
-    public <
-            TVerificationMean extends VerificationMean,
+    public <TVerificationMean extends VerificationMean,
             TPrincipal extends Principal<TVerificationMean>>
     PersonService<TVerificationMean, TPrincipal> getPersonService(
-            AuthorizationManager<Person<TVerificationMean>, TVerificationMean, TPrincipal> authorizationManager,
-            PersonRepository<TVerificationMean> personRepository) {
+            AuthorizationManager<Person, TVerificationMean, TPrincipal> authorizationManager,
+            PersonRepository personRepository) {
 
-        return new PersonServiceImpl<>(authorizationManager, personRepository);
+        return new PersonServiceImpl(authorizationManager, personRepository);
     }
 
     @Bean
-    public <
-            TVerificationMean extends VerificationMean>
-    ClubService<TVerificationMean> getClubService(ClubRepository<TVerificationMean> clubRepository) {
+    public ClubService getClubService(ClubRepository clubRepository) {
 
-        return new ClubServiceImpl<>(clubRepository);
+        return new ClubServiceImpl(clubRepository);
     }
 }

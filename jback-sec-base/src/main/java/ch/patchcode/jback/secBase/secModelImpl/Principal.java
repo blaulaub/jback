@@ -4,7 +4,7 @@ import ch.patchcode.jback.secBase.VerificationMean;
 
 import java.util.List;
 
-public interface Principal<TVerificationMean extends VerificationMean> extends ch.patchcode.jback.secModel.Principal<Authority> {
+public interface Principal<TVerificationMean extends VerificationMean> extends ch.patchcode.jback.secModel.Principal<Person, Authority> {
 
     /**
      * List of means the principal can be verified by.

@@ -19,7 +19,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 class PersonServiceImplTest {
 
     @Mock
-    private PersonRepository<VerificationMean> personRepository;
+    private PersonRepository personRepository;
 
     @InjectMocks
     private PersonServiceImpl<VerificationMean, ?> service;
@@ -34,7 +34,7 @@ class PersonServiceImplTest {
 
         // arrange
         var id = UUID.randomUUID();
-        var expected = Optional.of(new Person.Builder<>().buildPartial());
+        var expected = Optional.of(new Person.Builder().buildPartial());
         when(personRepository.findById(eq(id))).thenReturn(expected);
 
         // act

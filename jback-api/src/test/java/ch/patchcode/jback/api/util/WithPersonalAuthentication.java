@@ -31,7 +31,7 @@ public @interface WithPersonalAuthentication {
             return new SecurityContext() {
 
                 private final PersonalAuthentication auth = new PersonalAuthentication.Builder()
-                        .setHolder(new Person.Builder<VerificationMean>()
+                        .setHolder(new Person.Builder()
                                 .setId(UUID.fromString(annotation.uuid()))
                                 .setFirstName(annotation.firstName())
                                 .setLastName(annotation.lastName())

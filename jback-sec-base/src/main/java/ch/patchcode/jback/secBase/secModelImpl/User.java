@@ -4,7 +4,7 @@ import ch.patchcode.jback.secBase.VerificationMean;
 
 public interface User<TVerificationMean extends VerificationMean> extends ch.patchcode.jback.secModel.User<
         Organisation,
-        Person<TVerificationMean>,
+        Person,
         Principal<TVerificationMean>,
         Authority,
         Role<TVerificationMean>,

@@ -16,13 +16,13 @@ public class PersonServiceImpl<
         TPrincipal extends Principal<TVerificationMean>
         > implements PersonService<TVerificationMean, TPrincipal> {
 
-    private final AuthorizationManager<Person<TVerificationMean>, TVerificationMean, TPrincipal> authorizationManager;
-    private final PersonRepository<TVerificationMean> personRepository;
+    private final AuthorizationManager<Person, TVerificationMean, TPrincipal> authorizationManager;
+    private final PersonRepository personRepository;
 
     @Inject
     public PersonServiceImpl(
-            AuthorizationManager<Person<TVerificationMean>, TVerificationMean, TPrincipal> authorizationManager,
-            PersonRepository<TVerificationMean> personRepository) {
+            AuthorizationManager<Person, TVerificationMean, TPrincipal> authorizationManager,
+            PersonRepository personRepository) {
 
         this.authorizationManager = authorizationManager;
         this.personRepository = personRepository;
@@ -32,7 +32,7 @@ public class PersonServiceImpl<
      * {@inheritDoc}
      */
     @Override
-    public Optional<Person<TVerificationMean>> getPerson(UUID id) {
+    public Optional<Person> getPerson(UUID id) {
         return personRepository.findById(id);
     }
 
@@ -40,7 +40,7 @@ public class PersonServiceImpl<
      * {@inheritDoc}
      */
     @Override
-    public Person<TVerificationMean> create(Person.Draft<TVerificationMean> draft) {
+    public Person create(Person.Draft draft) {
 
         return personRepository.create(draft);
     }
@@ -49,8 +49,8 @@ public class PersonServiceImpl<
      * {@inheritDoc}
      */
     @Override
-    public Person<TVerificationMean> createClient(
-            Person.Draft<TVerificationMean> draft,
+    public Person createClient(
+            Person.Draft draft,
             TPrincipal principal
     ) {
 

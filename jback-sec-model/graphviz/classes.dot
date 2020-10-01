@@ -5,8 +5,8 @@ digraph G {
   "User" -> "Principal";
   "User" -> "Role";
   "Principal" -> "Privilege";
+  "Principal" -> "Person";
   "Role" -> "Person";
   "Role" -> "Organisation";
   "Role" -> "Privilege";
-  "Person" -> "Principal";
 }

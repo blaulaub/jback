@@ -1,6 +1,5 @@
 package ch.patchcode.jback.core.entities;
 
-import ch.patchcode.jback.secBase.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.net.URI;
@@ -8,29 +7,29 @@ import java.util.Optional;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Club<TVerificationMean extends VerificationMean> {
+public interface Club {
 
     UUID getId();
 
     String getName();
 
-    Optional<Person<TVerificationMean>> getContact();
+    Optional<Person> getContact();
 
     Optional<URI> getUrl();
 
-    class Builder<TVerificationMean extends VerificationMean> extends Club_Builder<TVerificationMean> {
+    class Builder extends Club_Builder {
     }
 
     @FreeBuilder
-    interface Draft<TVerificationMean extends VerificationMean> {
+    interface Draft {
 
         String getName();
 
-        Optional<Person<TVerificationMean>> getContact();
+        Optional<Person> getContact();
 
         Optional<URI> getUrl();
 
-        class Builder<TVerificationMean extends VerificationMean> extends Club_Draft_Builder<TVerificationMean> {
+        class Builder extends Club_Draft_Builder {
         }
     }
 }

@@ -7,7 +7,14 @@ import java.util.List;
  * <p>
  * An authorized principal can then impersonate a person, inheriting that person's details, roles and privileges.
  */
-public interface Principal<TPrivilege extends Privilege> {
+public interface Principal<TPerson extends Person, TPrivilege extends Privilege> {
+
+    /**
+     * Zero, one or more persons that this principal can impersonate.
+     *
+     * @return list of principals that can take control over this person
+     */
+    List<TPerson> getPersons();
 
     /**
      * Zero or more privileges that the (or usually: any) principal always has. E.g., a principal should be able to create at

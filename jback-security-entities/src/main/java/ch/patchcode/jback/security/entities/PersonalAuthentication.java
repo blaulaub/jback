@@ -12,7 +12,7 @@ import static java.util.Collections.singletonList;
 public interface PersonalAuthentication extends Principal {
 
     static PersonalAuthentication of(
-            Person<VerificationMean> holder,
+            Person holder,
             Iterable<VerificationMean> means
     ) {
         return new Builder()
@@ -21,7 +21,7 @@ public interface PersonalAuthentication extends Principal {
                 .build();
     }
 
-    Person<VerificationMean> getHolder();
+    Person getHolder();
 
     // impl ch.patchcode.jback.util.WithFirstAndLastName
 
@@ -62,7 +62,7 @@ public interface PersonalAuthentication extends Principal {
     @FreeBuilder
     interface Draft {
 
-        Person<VerificationMean> getHolder();
+        Person getHolder();
 
         List<VerificationMean> getMeans();
 

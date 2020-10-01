@@ -1,7 +1,6 @@
 package ch.patchcode.jback.jpa.entities;
 
 import ch.patchcode.jback.core.entities.Club;
-import ch.patchcode.jback.security.entities.VerificationMean;
 
 import javax.persistence.*;
 import java.net.URI;
@@ -53,8 +52,8 @@ public class ClubJpa {
         this.contact = contact;
     }
 
-    public Club<VerificationMean> toDomain() {
-        var builder = new Club.Builder<VerificationMean>()
+    public Club toDomain() {
+        var builder = new Club.Builder()
                 .setId(getId())
                 .setName(getName());
         Optional.ofNullable(getContact()).map(PersonJpa::toDomain).ifPresent(builder::setContact);

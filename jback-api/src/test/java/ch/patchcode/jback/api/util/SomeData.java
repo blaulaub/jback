@@ -3,7 +3,6 @@ package ch.patchcode.jback.api.util;
 import ch.patchcode.jback.core.entities.Address;
 import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.presentation.clubs.Club;
-import ch.patchcode.jback.security.entities.VerificationMean;
 
 import java.net.URI;
 import java.util.UUID;
@@ -23,12 +22,12 @@ public class SomeData {
                 .build();
     }
 
-    public static Person.Builder<VerificationMean> somePersonBuilder() {
+    public static Person.Builder somePersonBuilder() {
         return Person.Builder.from(somePerson());
     }
 
-    public static Person<VerificationMean> somePerson() {
-        return new Person.Builder<VerificationMean>()
+    public static Person somePerson() {
+        return new Person.Builder()
                 .setId(UUID.randomUUID())
                 .setFirstName("Tom")
                 .setLastName("Sawyer")

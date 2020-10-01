@@ -1,7 +1,6 @@
 package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.core.entities.Person;
-import ch.patchcode.jback.security.entities.VerificationMean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ class PersonJpaRepoWrapperTest {
     void create_and_findById() {
 
         // arrange
-        var draft = new Person.Draft.Builder<VerificationMean>()
+        var draft = new Person.Draft.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
                 // TODO: address

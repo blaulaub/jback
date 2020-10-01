@@ -6,7 +6,6 @@ import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.jpa.entities.ClubJpa;
 import ch.patchcode.jback.jpa.entities.ClubJpaRepository;
 import ch.patchcode.jback.jpa.entities.PersonJpaRepository;
-import ch.patchcode.jback.security.entities.VerificationMean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ClubJpaRepoWrapper implements ClubRepository<VerificationMean> {
+public class ClubJpaRepoWrapper implements ClubRepository {
 
     private final ClubJpaRepository clubJpaRepository;
     private final PersonJpaRepository personJpaRepository;
@@ -31,18 +30,18 @@ public class ClubJpaRepoWrapper implements ClubRepository<VerificationMean> {
     }
 
     @Override
-    public Optional<Club<VerificationMean>> findById(UUID id) {
+    public Optional<Club> findById(UUID id) {
 
         return clubJpaRepository.findById(id).map(ClubJpa::toDomain);
     }
 
     @Override
-    public Club<VerificationMean> create(Club.Draft<VerificationMean> draft) {
+    public Club create(Club.Draft draft) {
 
         return clubJpaRepository.save(fromDomain(draft)).toDomain();
     }
 
-    private ClubJpa fromDomain(Club.Draft<VerificationMean> draft) {
+    private ClubJpa fromDomain(Club.Draft draft) {
 
         ClubJpa club = new ClubJpa();
         club.setName(draft.getName());

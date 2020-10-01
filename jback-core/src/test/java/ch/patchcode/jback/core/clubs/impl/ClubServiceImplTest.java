@@ -2,7 +2,6 @@ package ch.patchcode.jback.core.clubs.impl;
 
 import ch.patchcode.jback.core.entities.Club;
 import ch.patchcode.jback.core.entities.ClubRepository;
-import ch.patchcode.jback.secBase.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,10 +18,10 @@ import static org.mockito.MockitoAnnotations.initMocks;
 class ClubServiceImplTest {
 
     @Mock
-    private ClubRepository<VerificationMean> clubRepository;
+    private ClubRepository clubRepository;
 
     @InjectMocks
-    private ClubServiceImpl<VerificationMean> service;
+    private ClubServiceImpl service;
 
     @BeforeEach
     void SetUp() {
@@ -34,7 +33,7 @@ class ClubServiceImplTest {
 
         // arrange
         var id = UUID.randomUUID();
-        var expected = Optional.of(new Club.Builder<>().buildPartial());
+        var expected = Optional.of(new Club.Builder().buildPartial());
         when(clubRepository.findById(eq(id))).thenReturn(expected);
 
         // act

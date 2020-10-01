@@ -1,11 +1,13 @@
 package ch.patchcode.jback.security.authentications;
 
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
+import ch.patchcode.jback.secBase.secModelImpl.Person;
 import ch.patchcode.jback.security.entities.Principal;
 import ch.patchcode.jback.security.entities.VerificationMean;
 
 import java.util.List;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
 /**
@@ -51,6 +53,13 @@ public class TemporaryAuthentication implements Principal {
     public List<VerificationMean> getMeans() {
 
         return singletonList(this.mean);
+    }
+
+    @Override
+    public List<Person> getPersons() {
+
+        // no person exists yet
+        return emptyList();
     }
 
     @Override

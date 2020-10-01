@@ -8,7 +8,7 @@ import ch.patchcode.jback.security.entities.PendingRegistration;
 import ch.patchcode.jback.security.entities.VerificationMean;
 
 public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<
-        Person<VerificationMean>,
+        Person,
         VerificationMean,
         Principal
         > {
@@ -26,9 +26,9 @@ public interface AuthorizationManager extends ch.patchcode.jback.secBase.Authori
     // from ch.patchcode.jback.secBase.AuthorizationManager
 
     @Override
-    void addClient(Principal principal, Person<VerificationMean> person);
+    void addClient(Principal principal, Person person);
 
-    PersonalAuthentication createAuthorizationFor(Person<VerificationMean> person, Iterable<VerificationMean> means);
+    PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means);
 
     TryLoginResult tryLogin(LoginData data);
 }

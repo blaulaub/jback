@@ -14,36 +14,35 @@ import java.util.UUID;
 @Service
 public class PersonServiceFake implements PersonService<VerificationMean, Principal> {
 
-    private final Map<UUID, Person<VerificationMean>> persons = new HashMap<>();
+    private final Map<UUID, Person> persons = new HashMap<>();
 
-    public void putPerson(Person<VerificationMean> person) {
+    public void putPerson(Person person) {
 
         persons.put(person.getId(), person);
     }
 
     @Override
-    public Optional<Person<VerificationMean>> getPerson(UUID id) {
+    public Optional<Person> getPerson(UUID id) {
 
         return Optional.ofNullable(persons.get(id));
     }
 
     @Override
-    public Person<VerificationMean> create(Person.Draft<VerificationMean> draft) {
+    public Person create(Person.Draft draft) {
 
         return createBuilderFrom(draft).build();
     }
 
     @Override
-    public Person<VerificationMean> createClient(Person.Draft<VerificationMean> draft, Principal principal) {
+    public Person createClient(Person.Draft draft, Principal principal) {
 
         return createBuilderFrom(draft)
-                .addPrincipals(principal)
                 .build();
     }
 
-    private Person.Builder<VerificationMean> createBuilderFrom(Person.Draft<VerificationMean> draft) {
+    private Person.Builder createBuilderFrom(Person.Draft draft) {
 
-        var builder = new Person.Builder<VerificationMean>();
+        var builder = new Person.Builder();
         builder.setId(UUID.randomUUID());
         builder.setFirstName(draft.getFirstName());
         builder.setLastName(draft.getLastName());

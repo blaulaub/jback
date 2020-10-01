@@ -66,7 +66,7 @@ class AuthorizationManagerImplTest {
     void createAuthorizationFor() {
 
         // arrange
-        var person = new Person.Builder<VerificationMean>().buildPartial();
+        var person = new Person.Builder().buildPartial();
         List<VerificationMean> means = emptyList();
         when(personalAuthenticationRepository.create(any()))
                 .thenAnswer((Answer<PersonalAuthentication>) invocation -> {

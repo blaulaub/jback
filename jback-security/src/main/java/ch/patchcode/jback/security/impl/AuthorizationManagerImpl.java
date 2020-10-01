@@ -44,14 +44,14 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public void addClient(Principal principal, Person<VerificationMean> person) {
+    public void addClient(Principal principal, Person person) {
 
         // TODO implement
         throw new RuntimeException("not implemented");
     }
 
     @Override
-    public PersonalAuthentication createAuthorizationFor(Person<VerificationMean> person, Iterable<VerificationMean> means) {
+    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
 
         var personalAuthentication = new PersonalAuthentication.Draft.Builder()
                 .setHolder(person)

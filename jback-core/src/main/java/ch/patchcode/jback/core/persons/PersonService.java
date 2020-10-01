@@ -12,15 +12,15 @@ public interface PersonService<
         TPrincipal extends Principal<TVerificationMean>
         > {
 
-    Optional<Person<TVerificationMean>> getPerson(UUID id);
+    Optional<Person> getPerson(UUID id);
 
     /**
-     * Creates a new {@link Person}, usually with empty {@link Person#getPrincipals()}.
+     * Creates a new {@link Person}.
      */
-    Person<TVerificationMean> create(Person.Draft<TVerificationMean> draft);
+    Person create(Person.Draft draft);
 
     /**
-     * Creates a new {@link Person}, with {@link Person#getPrincipals()} containing the given principal.
+     * Creates a new {@link Person} under the given principal.
      */
-    Person<TVerificationMean> createClient(Person.Draft<TVerificationMean> draft, TPrincipal principal);
+    Person createClient(Person.Draft draft, TPrincipal principal);
 }

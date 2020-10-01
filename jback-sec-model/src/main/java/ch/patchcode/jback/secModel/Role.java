@@ -7,8 +7,8 @@ import java.util.List;
  */
 public interface Role<
         TOrganisation extends Organisation,
-        TPerson extends Person<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
-        TPrincipal extends Principal<TPrivilege>,
+        TPerson extends Person,
+        TPrincipal extends Principal<TPerson, TPrivilege>,
         TPrivilege extends Privilege,
         TRole extends Role<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>,
         TUser extends User<TOrganisation, TPerson, TPrincipal, TPrivilege, TRole, TUser>
