@@ -8,10 +8,4 @@ public class MyPerson implements Person<MyOrganisation, MyPerson, MyPrincipal, M
     public List<MyPrincipal> getPrincipals() {
         return null;
     }
-
-    @Override
-    public List<MyPrivilege> getExtraPrivileges() {
-
-        return null;
-    }
 }

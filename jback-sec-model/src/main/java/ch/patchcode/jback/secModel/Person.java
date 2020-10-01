@@ -20,12 +20,4 @@ public interface Person<
      * @return list of principals that can take control over this person
      */
     List<TPrincipal> getPrincipals();
-
-    /**
-     * A person may have privileges separate to those stemming from roles. E.g., a person may get the privilege to define new
-     * organisations.
-     *
-     * @return list of privileges in addition to those implied by roles
-     */
-    List<TPrivilege> getExtraPrivileges();
 }

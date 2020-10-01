@@ -31,9 +31,6 @@ public interface Person<TVerificationMean extends VerificationMean> extends
     @Override
     List<Principal<TVerificationMean>> getPrincipals();
 
-    @Override
-    List<Authority> getExtraPrivileges();
-
     default String getName() {
 
         return getFirstName() + " " + getLastName();

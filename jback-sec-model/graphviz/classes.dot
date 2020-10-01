@@ -2,12 +2,11 @@ digraph G {
 
   node [ shape="box", fontname="helvetica" ];
 
-  "Person" -> "Principal";
-  "Person" -> "Privilege";
+  "User" -> "Principal";
+  "User" -> "Role";
   "Principal" -> "Privilege";
   "Role" -> "Person";
   "Role" -> "Organisation";
   "Role" -> "Privilege";
-  "User" -> "Principal";
-  "User" -> "Role";
+  "Person" -> "Principal";
 }
