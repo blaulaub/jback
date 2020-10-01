@@ -22,14 +22,6 @@ public interface Person<
     List<TPrincipal> getPrincipals();
 
     /**
-     * A person may have zero or more roles. A role usually links a person to an organisation and defines the person's role within
-     * that organisation.
-     *
-     * @return list of roles, with role-based privileges
-     */
-    List<TRole> getRoles();
-
-    /**
      * A person may have privileges separate to those stemming from roles. E.g., a person may get the privilege to define new
      * organisations.
      *

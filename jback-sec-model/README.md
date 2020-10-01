@@ -6,12 +6,14 @@ This packages defines the basic entities of the security model of
 our system:
 
 * **Principal** is someone who can be authenticated (by, e.g., a password)
-* **ch.patchcode.jback.core.entities.Person** is someone who bears a natural identity (with, e.g., a name, or birthdate)
+* **Person** is someone who bears a natural identity (with, e.g., a name, or birthdate)
 * **Privileges** is what is allowed to be done
 * **Organisation** is a body of persons, formed for a self-given purpose
 * **Role** is what a person plays in an organisation
 
-We distinguish between `Principal` and `ch.patchcode.jback.core.entities.Person`, because in our system persons
+![classes.svg](graphviz/classes.svg)
+
+We distinguish between `Principal` and `Person`, because in our system persons
 can be both parents and children, where one or more parents may authenticate
 on behalf of one or more children. Principals are for placing security concerns,
 persons are for placing domain concerns.

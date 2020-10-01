@@ -18,8 +18,5 @@ public interface Person<TVerificationMean extends VerificationMean> extends ch.p
     List<Principal<TVerificationMean>> getPrincipals();
 
     @Override
-    List<Role<TVerificationMean>> getRoles();
-
-    @Override
     List<Authority> getExtraPrivileges();
 }

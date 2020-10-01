@@ -10,12 +10,6 @@ public class MyPerson implements Person<MyOrganisation, MyPerson, MyPrincipal, M
     }
 
     @Override
-    public List<MyRole> getRoles() {
-
-        return null;
-    }
-
-    @Override
     public List<MyPrivilege> getExtraPrivileges() {
 
         return null;
