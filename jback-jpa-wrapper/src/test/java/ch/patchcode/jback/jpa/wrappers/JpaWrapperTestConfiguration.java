@@ -1,6 +1,6 @@
 package ch.patchcode.jback.jpa.wrappers;
 
-import ch.patchcode.jback.jpa.entities.spring.JpaEntitiesConfiguration;
+import ch.patchcode.jback.jpa.entitiesSpring.JpaEntitiesConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

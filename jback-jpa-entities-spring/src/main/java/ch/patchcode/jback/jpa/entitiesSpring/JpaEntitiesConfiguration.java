@@ -1,4 +1,4 @@
-package ch.patchcode.jback.jpa.entities.spring;
+package ch.patchcode.jback.jpa.entitiesSpring;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

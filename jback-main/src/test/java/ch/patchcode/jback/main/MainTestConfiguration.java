@@ -2,7 +2,7 @@ package ch.patchcode.jback.main;
 
 import ch.patchcode.jback.api.ApiConfiguration;
 import ch.patchcode.jback.core.CoreConfiguration;
-import ch.patchcode.jback.jpa.entities.spring.JpaEntitiesConfiguration;
+import ch.patchcode.jback.jpa.entitiesSpring.JpaEntitiesConfiguration;
 import ch.patchcode.jback.jpa.wrappers.JpaWrapperConfiguration;
 import ch.patchcode.jback.main.fakes.FakesConfiguration;
 import ch.patchcode.jback.presentation.PresentationConfiguration;

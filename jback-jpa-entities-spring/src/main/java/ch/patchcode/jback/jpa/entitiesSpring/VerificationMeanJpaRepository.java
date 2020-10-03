@@ -1,4 +1,4 @@
-package ch.patchcode.jback.jpa.entities.spring;
+package ch.patchcode.jback.jpa.entitiesSpring;
 
 import ch.patchcode.jback.jpa.entities.VerificationMeanJpa;
 import org.springframework.data.jpa.repository.JpaRepository;
