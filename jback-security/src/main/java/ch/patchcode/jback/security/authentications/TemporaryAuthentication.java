@@ -2,8 +2,8 @@ package ch.patchcode.jback.security.authentications;
 
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.secBase.secModelImpl.Person;
-import ch.patchcode.jback.security.entities.Principal;
-import ch.patchcode.jback.security.entities.VerificationMean;
+import ch.patchcode.jback.securityEntities.Principal;
+import ch.patchcode.jback.securityEntities.VerificationMean;
 
 import java.util.List;
 

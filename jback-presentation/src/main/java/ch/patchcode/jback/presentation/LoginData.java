@@ -1,6 +1,6 @@
 package ch.patchcode.jback.presentation;
 
-import ch.patchcode.jback.security.entities.VerificationMean;
+import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
 @FreeBuilder

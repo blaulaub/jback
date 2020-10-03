@@ -1,4 +1,4 @@
-package ch.patchcode.jback.security.entities;
+package ch.patchcode.jback.securityEntities;
 
 import ch.patchcode.jback.util.WithFirstAndLastName;
 import org.inferred.freebuilder.FreeBuilder;

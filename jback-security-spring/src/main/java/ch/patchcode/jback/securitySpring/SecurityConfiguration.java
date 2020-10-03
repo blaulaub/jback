@@ -1,11 +1,11 @@
 package ch.patchcode.jback.securitySpring;
 
 import ch.patchcode.jback.security.AuthorizationManager;
-import ch.patchcode.jback.security.entities.PersonalAuthenticationRepository;
+import ch.patchcode.jback.securityEntities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.authentications.impl.PersonalAuthenticationServiceImpl;
 import ch.patchcode.jback.security.impl.AuthorizationManagerImpl;
-import ch.patchcode.jback.security.entities.PendingRegistrationRepository;
+import ch.patchcode.jback.securityEntities.PendingRegistrationRepository;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.registration.VerificationService;
 import ch.patchcode.jback.security.registration.impl.ConsoleVerificationServiceImpl;

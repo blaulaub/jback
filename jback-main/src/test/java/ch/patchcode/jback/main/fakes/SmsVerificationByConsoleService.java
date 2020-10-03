@@ -1,7 +1,7 @@
 package ch.patchcode.jback.main.fakes;
 
 import ch.patchcode.jback.security.registration.VerificationService.SmsVerificationService;
-import ch.patchcode.jback.security.entities.PendingRegistration;
+import ch.patchcode.jback.securityEntities.PendingRegistration;
 import org.springframework.stereotype.Service;
 
 @Service

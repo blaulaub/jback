@@ -25,7 +25,7 @@ public abstract class VerificationMean {
     @ApiModelProperty
     public abstract String getType();
 
-    public abstract ch.patchcode.jback.security.entities.VerificationMean toDomain();
+    public abstract ch.patchcode.jback.securityEntities.VerificationMean toDomain();
 
     /**
      * Registration by console, i.e., the user will be expected to
@@ -51,8 +51,8 @@ public abstract class VerificationMean {
             }
         }
 
-        public ch.patchcode.jback.security.entities.VerificationMean.VerificationByConsole toDomain() {
-            return new ch.patchcode.jback.security.entities.VerificationMean.VerificationByConsole();
+        public ch.patchcode.jback.securityEntities.VerificationMean.VerificationByConsole toDomain() {
+            return new ch.patchcode.jback.securityEntities.VerificationMean.VerificationByConsole();
         }
     }
 
@@ -82,8 +82,8 @@ public abstract class VerificationMean {
             }
         }
 
-        public ch.patchcode.jback.security.entities.VerificationMean.VerificationByEmail toDomain() {
-            return new ch.patchcode.jback.security.entities.VerificationMean.VerificationByEmail.Builder()
+        public ch.patchcode.jback.securityEntities.VerificationMean.VerificationByEmail toDomain() {
+            return new ch.patchcode.jback.securityEntities.VerificationMean.VerificationByEmail.Builder()
                     .setEmailAddress(getEmailAddress())
                     .build();
         }
@@ -115,8 +115,8 @@ public abstract class VerificationMean {
             }
         }
 
-        public ch.patchcode.jback.security.entities.VerificationMean.VerificationBySms toDomain() {
-            return new ch.patchcode.jback.security.entities.VerificationMean.VerificationBySms.Builder()
+        public ch.patchcode.jback.securityEntities.VerificationMean.VerificationBySms toDomain() {
+            return new ch.patchcode.jback.securityEntities.VerificationMean.VerificationBySms.Builder()
                     .setPhoneNumber(getPhoneNumber())
                     .build();
         }

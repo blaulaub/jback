@@ -1,14 +1,14 @@
 package ch.patchcode.jback.security.registration.impl;
 
 import ch.patchcode.jback.security.registration.ConfirmationResult;
-import ch.patchcode.jback.security.entities.PendingRegistrationRepository;
+import ch.patchcode.jback.securityEntities.PendingRegistrationRepository;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.registration.VerificationService.ConsoleVerificationService;
 import ch.patchcode.jback.security.registration.VerificationService.EmailVerificationService;
 import ch.patchcode.jback.security.registration.VerificationService.SmsVerificationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.security.entities.PendingRegistration;
-import ch.patchcode.jback.security.entities.VerificationMean;
+import ch.patchcode.jback.securityEntities.PendingRegistration;
+import ch.patchcode.jback.securityEntities.VerificationMean;
 import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
 
 import javax.inject.Inject;

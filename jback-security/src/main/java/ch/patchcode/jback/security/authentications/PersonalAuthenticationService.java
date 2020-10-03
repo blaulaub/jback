@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security.authentications;
 
-import ch.patchcode.jback.security.entities.PersonalAuthentication;
+import ch.patchcode.jback.securityEntities.PersonalAuthentication;
 
 import java.util.Optional;
 

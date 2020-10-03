@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.wrappers;
 
-import ch.patchcode.jback.security.entities.PendingRegistration;
-import ch.patchcode.jback.security.entities.VerificationMean;
+import ch.patchcode.jback.securityEntities.PendingRegistration;
+import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

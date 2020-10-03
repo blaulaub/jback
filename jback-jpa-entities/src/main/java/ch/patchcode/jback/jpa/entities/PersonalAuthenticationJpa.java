@@ -1,6 +1,6 @@
 package ch.patchcode.jback.jpa.entities;
 
-import ch.patchcode.jback.security.entities.PersonalAuthentication;
+import ch.patchcode.jback.securityEntities.PersonalAuthentication;
 
 import javax.persistence.*;
 import java.util.List;

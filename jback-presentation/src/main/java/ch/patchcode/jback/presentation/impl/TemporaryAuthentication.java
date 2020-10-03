@@ -1,8 +1,8 @@
 package ch.patchcode.jback.presentation.impl;
 
 import ch.patchcode.jback.presentation.Authentication;
-import ch.patchcode.jback.security.entities.PendingRegistration;
-import ch.patchcode.jback.security.entities.VerificationMean;
+import ch.patchcode.jback.securityEntities.PendingRegistration;
+import ch.patchcode.jback.securityEntities.VerificationMean;
 
 public class TemporaryAuthentication
         extends ch.patchcode.jback.security.authentications.TemporaryAuthentication

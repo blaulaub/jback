@@ -5,8 +5,8 @@ import ch.patchcode.jback.jpa.entities.PersonalAuthenticationJpaRepository;
 import ch.patchcode.jback.jpa.entities.PersonJpa;
 import ch.patchcode.jback.jpa.entities.PersonJpaRepository;
 import ch.patchcode.jback.jpa.entities.VerificationMeanJpa;
-import ch.patchcode.jback.security.entities.PersonalAuthentication;
-import ch.patchcode.jback.security.entities.PersonalAuthenticationRepository;
+import ch.patchcode.jback.securityEntities.PersonalAuthentication;
+import ch.patchcode.jback.securityEntities.PersonalAuthenticationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

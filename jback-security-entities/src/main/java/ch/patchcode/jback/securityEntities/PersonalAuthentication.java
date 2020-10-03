@@ -1,4 +1,4 @@
-package ch.patchcode.jback.security.entities;
+package ch.patchcode.jback.securityEntities;
 
 import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
