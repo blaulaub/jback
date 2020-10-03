@@ -2,7 +2,9 @@ package ch.patchcode.jback.main.registration;
 
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
-import ch.patchcode.jback.api.verification.VerificationMean;
+import ch.patchcode.jback.api.verification.VerificationByConsole;
+import ch.patchcode.jback.api.verification.VerificationByEmail;
+import ch.patchcode.jback.api.verification.VerificationBySms;
 import ch.patchcode.jback.main.MainTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class CanSubmitDifferentRegistrationsTest {
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationMean.VerificationByConsole.Builder().build())
+                .setVerificationMean(new VerificationByConsole.Builder().build())
                 .build();
 
         // act
@@ -52,7 +54,7 @@ public class CanSubmitDifferentRegistrationsTest {
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationMean.VerificationBySms.Builder().setPhoneNumber("+41234567890").build())
+                .setVerificationMean(new VerificationBySms.Builder().setPhoneNumber("+41234567890").build())
                 .build();
 
         // act
@@ -75,7 +77,7 @@ public class CanSubmitDifferentRegistrationsTest {
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationMean.VerificationByEmail.Builder().setEmailAddress("webmaster@google.com").build())
+                .setVerificationMean(new VerificationByEmail.Builder().setEmailAddress("webmaster@google.com").build())
                 .build();
 
         // act
