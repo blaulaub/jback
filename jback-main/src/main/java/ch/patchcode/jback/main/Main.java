@@ -5,7 +5,7 @@ import ch.patchcode.jback.core.CoreConfiguration;
 import ch.patchcode.jback.jpa.entities.spring.JpaEntitiesConfiguration;
 import ch.patchcode.jback.jpa.wrappers.JpaWrapperConfiguration;
 import ch.patchcode.jback.presentation.PresentationConfiguration;
-import ch.patchcode.jback.security.SecurityConfiguration;
+import ch.patchcode.jback.securitySpring.SecurityConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
