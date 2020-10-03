@@ -51,7 +51,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
+    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means) {
 
         var personalAuthentication = new PersonalAuthentication.Draft.Builder()
                 .setHolder(person)

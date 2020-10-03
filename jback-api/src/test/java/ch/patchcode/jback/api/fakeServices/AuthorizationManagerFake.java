@@ -30,7 +30,7 @@ public class AuthorizationManagerFake implements AuthorizationManager {
     }
 
     @Override
-    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
+    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means) {
 
         // do nothing
         return null;

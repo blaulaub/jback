@@ -64,7 +64,7 @@ public interface PersonalAuthentication extends Principal {
 
         Person getHolder();
 
-        List<VerificationMean> getMeans();
+        List<VerificationMean.Draft> getMeans();
 
         class Builder extends PersonalAuthentication_Draft_Builder {
         }

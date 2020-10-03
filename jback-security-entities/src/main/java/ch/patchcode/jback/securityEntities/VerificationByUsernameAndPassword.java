@@ -15,6 +15,14 @@ public abstract class VerificationByUsernameAndPassword implements VerificationM
         return registrationHandler.visit(this);
     }
 
+    @Override
+    public Draft toNewDraft() {
+        return new Draft.Builder()
+                .setUsername(this.getUsername())
+                .setPassword(this.getPassword())
+                .build();
+    }
+
     @FreeBuilder
     public abstract static class Draft implements VerificationMean.Draft {
 

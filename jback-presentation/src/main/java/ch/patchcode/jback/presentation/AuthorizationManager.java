@@ -32,7 +32,7 @@ public interface AuthorizationManager {
      */
     PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData);
 
-    PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means);
+    PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means);
 
     void addClient(Principal principal, Person person);
 

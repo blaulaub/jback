@@ -12,17 +12,19 @@ public class VerificationByConsole implements VerificationMean {
         return registrationHandler.visit(this);
     }
 
-    @FreeBuilder
-    public abstract static class Draft implements VerificationMean.Draft {
+
+    @Override
+    public Draft toNewDraft() {
+        return new Draft();
+    }
+
+    public static class Draft implements VerificationMean.Draft {
 
         // boring - there are no parameters :-)
 
         @Override
         public <R> R accept(Visitor<R> visitor) {
             return visitor.visit(this);
-        }
-
-        public static class Builder extends VerificationByConsole_Draft_Builder {
         }
     }
 }

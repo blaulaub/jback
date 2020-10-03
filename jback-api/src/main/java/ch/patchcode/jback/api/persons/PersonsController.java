@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 import static ch.patchcode.jback.api.persons.Person.fromDomain;
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/api/v1/persons")
@@ -59,7 +60,10 @@ public class PersonsController {
         var callerAuth = (Principal) context.getAuthentication();
 
         var person = personService.create(draft.toDomain());
-        var auth = authorizationManager.createAuthorizationFor(person, callerAuth.getMeans());
+        var auth = authorizationManager.createAuthorizationFor(
+                person,
+                callerAuth.getMeans().stream().map(it -> it.toNewDraft()).collect(toList())
+        );
         context.setAuthentication(auth);
 
         return fromDomain(person);

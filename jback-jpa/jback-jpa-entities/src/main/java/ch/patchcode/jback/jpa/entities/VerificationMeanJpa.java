@@ -45,18 +45,18 @@ public abstract class VerificationMeanJpa {
         R visit(UsernamePasswordVerification usernamePasswordVerification);
     }
 
-    public static VerificationMeanJpa fromDomain(PersonalAuthenticationJpa principal, VerificationMean mean) {
+    public static VerificationMeanJpa fromDomain(PersonalAuthenticationJpa principal, VerificationMean.Draft mean) {
 
-        return mean.accept(new VerificationMean.Visitor<>() {
+        return mean.accept(new VerificationMean.Draft.Visitor<>() {
             @Override
-            public VerificationMeanJpa visit(VerificationByConsole verificationByConsole) {
+            public VerificationMeanJpa visit(VerificationByConsole.Draft verificationByConsole) {
                 var consoleVerification = new VerificationMeanJpa.ConsoleVerification();
                 consoleVerification.setPersonalAuthentication(principal);
                 return consoleVerification;
             }
 
             @Override
-            public VerificationMeanJpa visit(VerificationByEmail verificationByEmail) {
+            public VerificationMeanJpa visit(VerificationByEmail.Draft verificationByEmail) {
                 var emailVerification = new VerificationMeanJpa.EmailVerification();
                 emailVerification.setPersonalAuthentication(principal);
                 emailVerification.setEmail(verificationByEmail.getEmailAddress());
@@ -64,7 +64,7 @@ public abstract class VerificationMeanJpa {
             }
 
             @Override
-            public VerificationMeanJpa visit(VerificationBySms verificationBySms) {
+            public VerificationMeanJpa visit(VerificationBySms.Draft verificationBySms) {
                 var smsVerification = new VerificationMeanJpa.SmsVerification();
                 smsVerification.setPersonalAuthentication(principal);
                 smsVerification.setPhoneNumber(verificationBySms.getPhoneNumber());
@@ -72,7 +72,7 @@ public abstract class VerificationMeanJpa {
             }
 
             @Override
-            public VerificationMeanJpa visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+            public VerificationMeanJpa visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
                 var passwordVerification = new VerificationMeanJpa.UsernamePasswordVerification();
                 passwordVerification.setUsername(verificationByUsernameAndPassword.getUsername());
                 passwordVerification.setPassword(verificationByUsernameAndPassword.getPassword());

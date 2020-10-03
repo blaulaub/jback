@@ -74,7 +74,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
+    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means) {
 
         return PersonalAuthentication.fromDomain(authorizationManager.createAuthorizationFor(person, means));
     }

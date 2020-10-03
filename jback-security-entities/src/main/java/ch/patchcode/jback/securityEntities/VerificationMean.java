@@ -4,6 +4,8 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
 
     <R> R accept(Visitor<R> registrationHandler);
 
+    Draft toNewDraft();
+
     interface Draft {
 
         <R> R accept(Visitor<R> visitor);

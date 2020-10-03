@@ -13,6 +13,13 @@ public abstract class VerificationBySms implements VerificationMean {
         return registrationHandler.visit(this);
     }
 
+    @Override
+    public Draft toNewDraft() {
+        return new Draft.Builder()
+                .setPhoneNumber(this.getPhoneNumber())
+                .build();
+    }
+
     @FreeBuilder
     public abstract static class Draft implements VerificationMean.Draft {
 
