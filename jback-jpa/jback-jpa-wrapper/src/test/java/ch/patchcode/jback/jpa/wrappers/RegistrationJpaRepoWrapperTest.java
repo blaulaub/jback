@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.securityEntities.PendingRegistration;
-import ch.patchcode.jback.securityEntities.VerificationMean;
+import ch.patchcode.jback.securityEntities.VerificationByConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ class RegistrationJpaRepoWrapperTest {
     void save_and_findById() {
 
         // arrange
-        PendingRegistration.Draft pending = somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
+        PendingRegistration.Draft pending = somePendingRegistrationDraft(new VerificationByConsole());
 
         // act
         var id = wrapper.create(pending).getId();

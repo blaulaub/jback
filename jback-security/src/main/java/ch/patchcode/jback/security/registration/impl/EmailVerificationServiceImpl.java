@@ -1,8 +1,7 @@
 package ch.patchcode.jback.security.registration.impl;
 
 import ch.patchcode.jback.security.registration.VerificationService;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
-import ch.patchcode.jback.securityEntities.VerificationMean;
+import ch.patchcode.jback.securityEntities.*;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -68,22 +67,22 @@ public class EmailVerificationServiceImpl implements VerificationService.EmailVe
         return pendingRegistration.getVerificationMean().accept(new VerificationMean.Visitor<String>() {
 
             @Override
-            public String visit(VerificationMean.VerificationByConsole verificationByConsole) {
+            public String visit(VerificationByConsole verificationByConsole) {
                 throw new IllegalArgumentException();
             }
 
             @Override
-            public String visit(VerificationMean.VerificationByEmail verificationByEmail) {
+            public String visit(VerificationByEmail verificationByEmail) {
                 return verificationByEmail.getEmailAddress();
             }
 
             @Override
-            public String visit(VerificationMean.VerificationBySms verificationBySms) {
+            public String visit(VerificationBySms verificationBySms) {
                 throw new IllegalArgumentException();
             }
 
             @Override
-            public String visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+            public String visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
 
                 throw new IllegalArgumentException();
             }

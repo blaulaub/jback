@@ -1,6 +1,7 @@
 package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.securityEntities.PendingRegistration;
+import ch.patchcode.jback.securityEntities.VerificationByConsole;
 import ch.patchcode.jback.securityEntities.VerificationMean;
 
 import java.time.Duration;
@@ -10,7 +11,7 @@ public class SomeData {
 
     public static PendingRegistration.Draft somePendingRegistrationDraft() {
 
-        return somePendingRegistrationDraft(new VerificationMean.VerificationByConsole());
+        return somePendingRegistrationDraft(new VerificationByConsole());
     }
 
     public static PendingRegistration.Draft somePendingRegistrationDraft(VerificationMean verificationMean) {

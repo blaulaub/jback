@@ -1,7 +1,7 @@
 package ch.patchcode.jback.api.util;
 
 import ch.patchcode.jback.presentation.impl.TemporaryAuthentication;
-import ch.patchcode.jback.securityEntities.VerificationMean;
+import ch.patchcode.jback.securityEntities.VerificationByConsole;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.test.context.support.WithSecurityContext;
@@ -29,7 +29,7 @@ public @interface WithTemporaryAuthentication {
                 private final TemporaryAuthentication auth = new TemporaryAuthentication(
                         annotation.firstName(),
                         annotation.lastName(),
-                        new VerificationMean.VerificationByConsole());
+                        new VerificationByConsole());
 
                 @Override
                 public Authentication getAuthentication() {

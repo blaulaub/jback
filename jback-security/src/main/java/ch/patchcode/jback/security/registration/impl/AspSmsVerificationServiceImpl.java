@@ -1,8 +1,7 @@
 package ch.patchcode.jback.security.registration.impl;
 
 import ch.patchcode.jback.security.registration.VerificationService;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
-import ch.patchcode.jback.securityEntities.VerificationMean;
+import ch.patchcode.jback.securityEntities.*;
 
 public class AspSmsVerificationServiceImpl implements VerificationService.SmsVerificationService {
 
@@ -29,22 +28,22 @@ public class AspSmsVerificationServiceImpl implements VerificationService.SmsVer
         return pendingRegistration.getVerificationMean().accept(new VerificationMean.Visitor<String>() {
 
             @Override
-            public String visit(VerificationMean.VerificationByConsole verificationByConsole) {
+            public String visit(VerificationByConsole verificationByConsole) {
                 throw new IllegalArgumentException();
             }
 
             @Override
-            public String visit(VerificationMean.VerificationByEmail verificationByEmail) {
+            public String visit(VerificationByEmail verificationByEmail) {
                 throw new IllegalArgumentException();
             }
 
             @Override
-            public String visit(VerificationMean.VerificationBySms verificationBySms) {
+            public String visit(VerificationBySms verificationBySms) {
                 return verificationBySms.getPhoneNumber();
             }
 
             @Override
-            public String visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+            public String visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
                 throw new IllegalArgumentException();
             }
         });

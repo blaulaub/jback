@@ -1,7 +1,6 @@
 package ch.patchcode.jback.jpa.entities;
 
-import ch.patchcode.jback.securityEntities.VerificationMean;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
+import ch.patchcode.jback.securityEntities.*;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -95,7 +94,7 @@ public abstract class RegistrationJpa {
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
-                    .setVerificationMean(new VerificationMean.VerificationByConsole())
+                    .setVerificationMean(new VerificationByConsole())
                     .build();
         }
     }
@@ -118,7 +117,7 @@ public abstract class RegistrationJpa {
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
-                    .setVerificationMean(new VerificationMean.VerificationByEmail.Builder()
+                    .setVerificationMean(new VerificationByEmail.Builder()
                             .setEmailAddress(getEmail())
                             .build())
                     .build();
@@ -143,7 +142,7 @@ public abstract class RegistrationJpa {
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
-                    .setVerificationMean(new VerificationMean.VerificationBySms.Builder()
+                    .setVerificationMean(new VerificationBySms.Builder()
                             .setPhoneNumber(getPhoneNumber())
                             .build())
                     .build();
@@ -163,13 +162,13 @@ public abstract class RegistrationJpa {
         }
 
         @Override
-        public RegistrationJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
+        public RegistrationJpa visit(VerificationByConsole verificationByConsole) {
 
             return new ConsoleRegistrationJpa();
         }
 
         @Override
-        public RegistrationJpa visit(VerificationMean.VerificationByEmail verificationByEmail) {
+        public RegistrationJpa visit(VerificationByEmail verificationByEmail) {
 
             var result = new EmailRegistrationJpa();
             result.setEmail(verificationByEmail.getEmailAddress());
@@ -177,7 +176,7 @@ public abstract class RegistrationJpa {
         }
 
         @Override
-        public RegistrationJpa visit(VerificationMean.VerificationBySms verificationBySms) {
+        public RegistrationJpa visit(VerificationBySms verificationBySms) {
 
             var result = new SmsRegistrationJpa();
             result.setPhoneNumber(verificationBySms.getPhoneNumber());
@@ -185,7 +184,7 @@ public abstract class RegistrationJpa {
         }
 
         @Override
-        public RegistrationJpa visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+        public RegistrationJpa visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
 
             // if there was username and password, then registration is already over
             throw new IllegalArgumentException();

@@ -1,14 +1,12 @@
 package ch.patchcode.jback.security.registration.impl;
 
 import ch.patchcode.jback.security.registration.ConfirmationResult;
-import ch.patchcode.jback.securityEntities.PendingRegistrationRepository;
+import ch.patchcode.jback.securityEntities.*;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.registration.VerificationService.ConsoleVerificationService;
 import ch.patchcode.jback.security.registration.VerificationService.EmailVerificationService;
 import ch.patchcode.jback.security.registration.VerificationService.SmsVerificationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
-import ch.patchcode.jback.securityEntities.VerificationMean;
 import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
 
 import javax.inject.Inject;
@@ -108,28 +106,28 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         @Override
-        public Void visit(VerificationMean.VerificationByConsole verificationByConsole) {
+        public Void visit(VerificationByConsole verificationByConsole) {
 
             consoleVerificationService.sendOut(pendingRegistration);
             return null;
         }
 
         @Override
-        public Void visit(VerificationMean.VerificationByEmail verificationByEmail) {
+        public Void visit(VerificationByEmail verificationByEmail) {
 
             emailVerificationService.sendOut(pendingRegistration);
             return null;
         }
 
         @Override
-        public Void visit(VerificationMean.VerificationBySms verificationBySms) {
+        public Void visit(VerificationBySms verificationBySms) {
 
             smsVerificationService.sendOut(pendingRegistration);
             return null;
         }
 
         @Override
-        public Void visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+        public Void visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
 
             // if there is username and password, it does not make sense to send out a verification code
             throw new IllegalArgumentException();

@@ -1,6 +1,6 @@
 package ch.patchcode.jback.jpa.entities;
 
-import ch.patchcode.jback.securityEntities.VerificationMean;
+import ch.patchcode.jback.securityEntities.*;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -49,14 +49,14 @@ public abstract class VerificationMeanJpa {
 
         return mean.accept(new VerificationMean.Visitor<>() {
             @Override
-            public VerificationMeanJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
+            public VerificationMeanJpa visit(VerificationByConsole verificationByConsole) {
                 var consoleVerification = new VerificationMeanJpa.ConsoleVerification();
                 consoleVerification.setPersonalAuthentication(principal);
                 return consoleVerification;
             }
 
             @Override
-            public VerificationMeanJpa visit(VerificationMean.VerificationByEmail verificationByEmail) {
+            public VerificationMeanJpa visit(VerificationByEmail verificationByEmail) {
                 var emailVerification = new VerificationMeanJpa.EmailVerification();
                 emailVerification.setPersonalAuthentication(principal);
                 emailVerification.setEmail(verificationByEmail.getEmailAddress());
@@ -64,7 +64,7 @@ public abstract class VerificationMeanJpa {
             }
 
             @Override
-            public VerificationMeanJpa visit(VerificationMean.VerificationBySms verificationBySms) {
+            public VerificationMeanJpa visit(VerificationBySms verificationBySms) {
                 var smsVerification = new VerificationMeanJpa.SmsVerification();
                 smsVerification.setPersonalAuthentication(principal);
                 smsVerification.setPhoneNumber(verificationBySms.getPhoneNumber());
@@ -72,7 +72,7 @@ public abstract class VerificationMeanJpa {
             }
 
             @Override
-            public VerificationMeanJpa visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+            public VerificationMeanJpa visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
                 var passwordVerification = new VerificationMeanJpa.UsernamePasswordVerification();
                 passwordVerification.setUsername(verificationByUsernameAndPassword.getUsername());
                 passwordVerification.setPassword(verificationByUsernameAndPassword.getPassword());
@@ -87,26 +87,26 @@ public abstract class VerificationMeanJpa {
 
             @Override
             public VerificationMean visit(VerificationMeanJpa.ConsoleVerification consoleVerification) {
-                return new VerificationMean.VerificationByConsole();
+                return new VerificationByConsole();
             }
 
             @Override
             public VerificationMean visit(VerificationMeanJpa.EmailVerification emailVerification) {
-                return new VerificationMean.VerificationByEmail.Builder()
+                return new VerificationByEmail.Builder()
                         .setEmailAddress(emailVerification.getEmail())
                         .build();
             }
 
             @Override
             public VerificationMean visit(VerificationMeanJpa.SmsVerification smsVerification) {
-                return new VerificationMean.VerificationBySms.Builder()
+                return new VerificationBySms.Builder()
                         .setPhoneNumber(smsVerification.getPhoneNumber())
                         .build();
             }
 
             @Override
             public VerificationMean visit(UsernamePasswordVerification usernamePasswordVerification) {
-                return new VerificationMean.VerificationByUsernameAndPassword.Builder()
+                return new VerificationByUsernameAndPassword.Builder()
                         .setUsername(usernamePasswordVerification.getUsername())
                         .setPassword(usernamePasswordVerification.getPassword())
                         .build();

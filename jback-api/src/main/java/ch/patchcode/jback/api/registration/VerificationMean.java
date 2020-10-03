@@ -51,8 +51,8 @@ public abstract class VerificationMean {
             }
         }
 
-        public ch.patchcode.jback.securityEntities.VerificationMean.VerificationByConsole toDomain() {
-            return new ch.patchcode.jback.securityEntities.VerificationMean.VerificationByConsole();
+        public ch.patchcode.jback.securityEntities.VerificationByConsole toDomain() {
+            return new ch.patchcode.jback.securityEntities.VerificationByConsole();
         }
     }
 
@@ -82,8 +82,8 @@ public abstract class VerificationMean {
             }
         }
 
-        public ch.patchcode.jback.securityEntities.VerificationMean.VerificationByEmail toDomain() {
-            return new ch.patchcode.jback.securityEntities.VerificationMean.VerificationByEmail.Builder()
+        public ch.patchcode.jback.securityEntities.VerificationByEmail toDomain() {
+            return new ch.patchcode.jback.securityEntities.VerificationByEmail.Builder()
                     .setEmailAddress(getEmailAddress())
                     .build();
         }
@@ -115,8 +115,8 @@ public abstract class VerificationMean {
             }
         }
 
-        public ch.patchcode.jback.securityEntities.VerificationMean.VerificationBySms toDomain() {
-            return new ch.patchcode.jback.securityEntities.VerificationMean.VerificationBySms.Builder()
+        public ch.patchcode.jback.securityEntities.VerificationBySms toDomain() {
+            return new ch.patchcode.jback.securityEntities.VerificationBySms.Builder()
                     .setPhoneNumber(getPhoneNumber())
                     .build();
         }

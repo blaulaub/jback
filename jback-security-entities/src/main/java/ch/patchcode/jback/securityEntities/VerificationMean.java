@@ -1,76 +1,32 @@
 package ch.patchcode.jback.securityEntities;
 
-import org.inferred.freebuilder.FreeBuilder;
-
 public interface VerificationMean extends ch.patchcode.jback.secBase.VerificationMean {
 
     <R> R accept(Visitor<R> registrationHandler);
 
-    class VerificationByConsole implements VerificationMean {
+    interface Draft {
 
-        // boring - there are no parameters :-)
+        <R> R accept(Visitor<R> visitor);
 
-        @Override
-        public <R> R accept(Visitor<R> registrationHandler) {
+        interface Visitor<R> {
 
-            return registrationHandler.visit(this);
-        }
-    }
+            R visit(VerificationByConsole.Draft draft);
 
-    @FreeBuilder
-    abstract class VerificationByEmail implements VerificationMean {
+            R visit(VerificationByEmail.Draft draft);
 
-        public abstract String getEmailAddress();
+            R visit(VerificationBySms.Draft draft);
 
-        @Override
-        public <R> R accept(Visitor<R> registrationHandler) {
-
-            return registrationHandler.visit(this);
-        }
-
-        public static class Builder extends VerificationMean_VerificationByEmail_Builder {
-        }
-    }
-
-    @FreeBuilder
-    abstract class VerificationBySms implements VerificationMean {
-
-        public abstract String getPhoneNumber();
-
-        @Override
-        public <R> R accept(Visitor<R> registrationHandler) {
-
-            return registrationHandler.visit(this);
-        }
-
-        public static class Builder extends VerificationMean_VerificationBySms_Builder {
-        }
-    }
-
-    @FreeBuilder
-    abstract class VerificationByUsernameAndPassword implements VerificationMean {
-
-        public abstract String getUsername();
-
-        public abstract String getPassword();
-
-        @Override
-        public <R> R accept(Visitor<R> registrationHandler) {
-
-            return registrationHandler.visit(this);
-        }
-
-        public static class Builder extends VerificationMean_VerificationByUsernameAndPassword_Builder {
+            R visit(VerificationByUsernameAndPassword.Draft draft);
         }
     }
 
     interface Visitor<R> {
 
-        R visit(VerificationMean.VerificationByConsole verificationByConsole);
+        R visit(VerificationByConsole verificationByConsole);
 
-        R visit(VerificationMean.VerificationByEmail verificationByEmail);
+        R visit(VerificationByEmail verificationByEmail);
 
-        R visit(VerificationMean.VerificationBySms verificationBySms);
+        R visit(VerificationBySms verificationBySms);
 
         R visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword);
     }
