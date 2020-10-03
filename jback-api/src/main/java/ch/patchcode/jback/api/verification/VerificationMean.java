@@ -23,4 +23,21 @@ public abstract class VerificationMean {
     public abstract String getType();
 
     public abstract ch.patchcode.jback.securityEntities.VerificationMean toDomain();
+
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
+    @JsonSubTypes({
+            @Type(value = VerificationByConsole.Draft.class, name = VerificationByConsole.TYPE),
+            @Type(value = VerificationByEmail.Draft.class, name = VerificationByEmail.TYPE),
+            @Type(value = VerificationBySms.Draft.class, name = VerificationBySms.TYPE)
+    })
+    @ApiModel(subTypes = {
+            VerificationByConsole.Draft.class,
+            VerificationByEmail.Draft.class,
+            VerificationBySms.Draft.class
+    })
+    public static abstract class Draft {
+
+        @ApiModelProperty
+        public abstract String getType();
+    }
 }

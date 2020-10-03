@@ -20,13 +20,13 @@ public abstract class VerificationBySms extends VerificationMean {
     public abstract String getPhoneNumber();
 
     @JsonCreator
-    static ch.patchcode.jback.api.verification.VerificationBySms create(@JsonProperty("phoneNumber") String phoneNumber) {
+    static VerificationBySms create(@JsonProperty("phoneNumber") String phoneNumber) {
         return new Builder().setPhoneNumber(phoneNumber).build();
     }
 
     public static class Builder extends VerificationBySms_Builder {
         @Override
-        public ch.patchcode.jback.api.verification.VerificationBySms build() {
+        public VerificationBySms build() {
             setType(TYPE);
             return super.build();
         }
@@ -36,5 +36,10 @@ public abstract class VerificationBySms extends VerificationMean {
         return new ch.patchcode.jback.securityEntities.VerificationBySms.Builder()
                 .setPhoneNumber(getPhoneNumber())
                 .build();
+    }
+
+    @ApiModel
+    @FreeBuilder
+    public abstract static class Draft extends VerificationMean.Draft {
     }
 }

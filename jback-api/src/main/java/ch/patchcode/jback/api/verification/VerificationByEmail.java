@@ -20,13 +20,13 @@ public abstract class VerificationByEmail extends VerificationMean {
     public abstract String getEmailAddress();
 
     @JsonCreator
-    public static ch.patchcode.jback.api.verification.VerificationByEmail create(@JsonProperty("emailAddress") String emailAddress) {
+    public static VerificationByEmail create(@JsonProperty("emailAddress") String emailAddress) {
         return new Builder().setEmailAddress(emailAddress).build();
     }
 
     public static class Builder extends VerificationByEmail_Builder {
         @Override
-        public ch.patchcode.jback.api.verification.VerificationByEmail build() {
+        public VerificationByEmail build() {
             setType(TYPE);
             return super.build();
         }
@@ -36,5 +36,10 @@ public abstract class VerificationByEmail extends VerificationMean {
         return new ch.patchcode.jback.securityEntities.VerificationByEmail.Builder()
                 .setEmailAddress(getEmailAddress())
                 .build();
+    }
+
+    @ApiModel
+    @FreeBuilder
+    public abstract static class Draft extends VerificationMean.Draft {
     }
 }

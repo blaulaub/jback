@@ -16,13 +16,13 @@ public abstract class VerificationByConsole extends VerificationMean {
     public static final String TYPE = "console";
 
     @JsonCreator
-    public static ch.patchcode.jback.api.verification.VerificationByConsole create() {
+    public static VerificationByConsole create() {
         return new Builder().build();
     }
 
     public static class Builder extends VerificationByConsole_Builder {
         @Override
-        public ch.patchcode.jback.api.verification.VerificationByConsole build() {
+        public VerificationByConsole build() {
             setType(TYPE);
             return super.build();
         }
@@ -30,5 +30,10 @@ public abstract class VerificationByConsole extends VerificationMean {
 
     public ch.patchcode.jback.securityEntities.VerificationByConsole toDomain() {
         return new ch.patchcode.jback.securityEntities.VerificationByConsole();
+    }
+
+    @ApiModel
+    @FreeBuilder
+    public abstract static class Draft extends VerificationMean.Draft {
     }
 }
