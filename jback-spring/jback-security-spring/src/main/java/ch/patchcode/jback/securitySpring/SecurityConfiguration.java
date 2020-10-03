@@ -3,6 +3,7 @@ package ch.patchcode.jback.securitySpring;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.registration.impl.AspSmsVerificationServiceImpl;
 import ch.patchcode.jback.security.registration.impl.AspSmsVerificationServiceImpl.AspSmsJsonApi;
+import ch.patchcode.jback.security.registration.impl.EmailVerificationServiceImpl;
 import ch.patchcode.jback.securityEntities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.authentications.impl.PersonalAuthenticationServiceImpl;
@@ -27,6 +28,12 @@ public class SecurityConfiguration {
 
     @Value("${ASP_SMS_API_USERNAME}") private String aspSmsApiUsername;
     @Value("${ASP_SMS_API_PASSWORD}") private String aspSmsApiPassword;
+
+    @Value("${SMTP_SERVER}") private String smtpServer;
+    @Value("${SMTP_PORT}") private int smtpPort;
+    @Value("${SMTP_USERNAME}") private String smtpUserName;
+    @Value("${SMTP_PASSWORD}") private String smtpPassword;
+    @Value("${SMTP_FROM}") private String smtpFrom;
 
     @Bean
     public AuthorizationManager getAuthorizationManager(
@@ -76,6 +83,12 @@ public class SecurityConfiguration {
     public VerificationService.SmsVerificationService getSmsVerificationService(AspSmsJsonApi aspSmsJsonApi) {
 
         return new AspSmsVerificationServiceImpl(aspSmsJsonApi);
+    }
+
+    @Bean
+    public VerificationService.EmailVerificationService getEmailVerificationService() {
+
+        return new EmailVerificationServiceImpl(smtpServer, smtpPort, smtpUserName, smtpPassword, smtpFrom);
     }
 
     @Bean
