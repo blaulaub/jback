@@ -46,7 +46,7 @@ public class RegistrationController {
     ) {
 
         LOG.debug("processing registration request for {}", data);
-        var id = authorizationManager.setupRegistration(data.toDomain()).getId();
+        var id = authorizationManager.setupRegistration(data.toDomain());
         return PendingRegistrationInfo.of(id);
     }
 
@@ -57,7 +57,7 @@ public class RegistrationController {
     ) {
 
         LOG.debug("processing registration code for {}", id);
-        authorizationManager.authenticate(PendingRegistration.Id.of(id), verificationCode.toDomain());
+        authorizationManager.authenticate(id, verificationCode.toDomain());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

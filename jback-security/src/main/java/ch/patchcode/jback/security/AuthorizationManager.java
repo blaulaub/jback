@@ -4,8 +4,9 @@ import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.securityEntities.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
 import ch.patchcode.jback.securityEntities.VerificationMean;
+
+import java.util.UUID;
 
 public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<
         Person,
@@ -21,7 +22,7 @@ public interface AuthorizationManager extends ch.patchcode.jback.secBase.Authori
      * @param initialRegistrationData with the basic, required details for a registration
      * @return the ID of the now pending registration
      */
-    PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData);
+    UUID setupRegistration(InitialRegistrationData initialRegistrationData);
 
     // from ch.patchcode.jback.secBase.AuthorizationManager
 

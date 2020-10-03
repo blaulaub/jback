@@ -31,7 +31,7 @@ class RegistrationJpaRepoWrapperTest {
 
         // act
         var id = wrapper.create(pending).getId();
-        var result = wrapper.findById(id.getId());
+        var result = wrapper.findById(id);
 
         // assert
         assertTrue(result.isPresent());

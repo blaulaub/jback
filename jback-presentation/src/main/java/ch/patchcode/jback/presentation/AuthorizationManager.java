@@ -4,9 +4,10 @@ import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
 import ch.patchcode.jback.securityEntities.VerificationMean;
+
+import java.util.UUID;
 
 public interface AuthorizationManager {
 
@@ -20,7 +21,7 @@ public interface AuthorizationManager {
      * @param registrationId   the ID of the currently pending registration
      * @param verificationCode the code confirming the registration
      */
-    void authenticate(PendingRegistration.Id registrationId, VerificationCode verificationCode);
+    void authenticate(UUID registrationId, VerificationCode verificationCode);
 
     /**
      * Let any user register when submitting some data, providing him with a {@see PendingRegistration.Id}.
@@ -30,7 +31,7 @@ public interface AuthorizationManager {
      * @param initialRegistrationData with the basic, required details for a registration
      * @return the ID of the now pending registration
      */
-    PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData);
+    UUID setupRegistration(InitialRegistrationData initialRegistrationData);
 
     PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means);
 

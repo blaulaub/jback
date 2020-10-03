@@ -7,7 +7,6 @@ import ch.patchcode.jback.presentation.TryLoginResult;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
 import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.springframework.stereotype.Service;
@@ -18,13 +17,13 @@ import java.util.UUID;
 public class AuthorizationManagerFake implements AuthorizationManager {
 
     @Override
-    public PendingRegistration.Id setupRegistration(InitialRegistrationData data) {
+    public UUID setupRegistration(InitialRegistrationData data) {
 
-        return PendingRegistration.Id.of(UUID.randomUUID());
+        return UUID.randomUUID();
     }
 
     @Override
-    public void authenticate(PendingRegistration.Id registrationId, VerificationCode verificationCode) {
+    public void authenticate(UUID registrationId, VerificationCode verificationCode) {
 
         // do nothing
     }

@@ -10,12 +10,12 @@ import ch.patchcode.jback.securityEntities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
 import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.util.UUID;
 
 public class AuthorizationManagerImpl implements AuthorizationManager {
 
@@ -38,7 +38,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData) {
+    public UUID setupRegistration(InitialRegistrationData initialRegistrationData) {
 
         return registrationService.setupRegistration(initialRegistrationData);
     }

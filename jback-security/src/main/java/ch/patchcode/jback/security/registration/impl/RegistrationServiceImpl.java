@@ -40,7 +40,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public PendingRegistration.Id setupRegistration(InitialRegistrationData data) {
+    public UUID setupRegistration(InitialRegistrationData data) {
 
         var draft = new PendingRegistration.Draft.Builder()
                 .setFirstName(data.getFirstName())

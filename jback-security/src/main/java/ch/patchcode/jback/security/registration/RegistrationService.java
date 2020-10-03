@@ -24,7 +24,7 @@ public interface RegistrationService {
      * @param data basic ch.patchcode.jback.sec.registration parameters
      * @return id of the new ch.patchcode.jback.sec.registration
      */
-    PendingRegistration.Id setupRegistration(InitialRegistrationData data);
+    UUID setupRegistration(InitialRegistrationData data);
 
     Optional<PendingRegistration> getRegistration(UUID id);
     /**

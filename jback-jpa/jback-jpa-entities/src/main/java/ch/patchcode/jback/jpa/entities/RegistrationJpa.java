@@ -78,7 +78,7 @@ public abstract class RegistrationJpa {
     final protected PendingRegistration.Builder toDomainBaseBuilder() {
 
         var builder = new PendingRegistration.Builder();
-        builder.setId(PendingRegistration.Id.of(getId()));
+        builder.setId(getId());
         builder.setFirstName(getFirstName());
         builder.setLastName(getLastName());
         builder.setVerificationCode(getVerificationCode());

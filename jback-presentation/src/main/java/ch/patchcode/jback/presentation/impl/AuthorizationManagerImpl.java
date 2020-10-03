@@ -8,7 +8,6 @@ import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.security.registration.ConfirmationResult;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
 import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.slf4j.Logger;
@@ -17,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service("presentation.authorizationManager")
 public class AuthorizationManagerImpl implements AuthorizationManager {
@@ -36,9 +37,9 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public void authenticate(PendingRegistration.Id registrationId, VerificationCode verificationCode) {
+    public void authenticate(UUID registrationId, VerificationCode verificationCode) {
 
-        var pendingRegistration = registrationService.getRegistration(registrationId.getId())
+        var pendingRegistration = registrationService.getRegistration(registrationId)
                 .orElseThrow(() -> new NoPendingRegistrationException(registrationId));
 
         var confirmationResult = registrationService.confirmRegistration(
@@ -62,13 +63,13 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
 
             @Override
             public void caseMismatch() {
-                throw new BadCredentialsException("Invalid code provided for " + registrationId.getId());
+                throw new BadCredentialsException("Invalid code provided for " + registrationId);
             }
         });
     }
 
     @Override
-    public PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData) {
+    public UUID setupRegistration(InitialRegistrationData initialRegistrationData) {
 
         return authorizationManager.setupRegistration(initialRegistrationData);
     }
