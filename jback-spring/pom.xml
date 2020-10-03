@@ -10,13 +10,14 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>jback-jpa</artifactId>
+    <artifactId>jback-spring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>jback-jpa-entities</module>
-        <module>jback-jpa-wrapper</module>
+        <module>jback-core-spring</module>
+        <module>jback-security-spring</module>
+        <module>jback-jpa-entities-spring</module>
     </modules>
 
 </project>

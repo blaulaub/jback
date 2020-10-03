@@ -26,12 +26,11 @@
         <module>jback-sec-base</module>
         <module>jback-core-entities</module>
         <module>jback-core</module>
-        <module>jback-core-spring</module>
         <module>jback-jpa</module>
         <module>jback-security-entities</module>
         <module>jback-security</module>
-        <module>jback-security-spring</module>
         <module>jback-presentation</module>
+        <module>jback-spring</module>
         <module>jback-api</module>
         <module>jback-angular</module>
         <module>jback-main</module>
