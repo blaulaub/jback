@@ -64,6 +64,7 @@ public class EmailVerificationServiceImpl implements VerificationService.EmailVe
     }
 
     private String getEmailAddress(PendingRegistration pendingRegistration) {
+
         return pendingRegistration.getVerificationMean().accept(new VerificationMean.Visitor<String>() {
 
             @Override
@@ -78,6 +79,12 @@ public class EmailVerificationServiceImpl implements VerificationService.EmailVe
 
             @Override
             public String visit(VerificationMean.VerificationBySms verificationBySms) {
+                throw new IllegalArgumentException();
+            }
+
+            @Override
+            public String visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+
                 throw new IllegalArgumentException();
             }
         });

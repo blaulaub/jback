@@ -41,6 +41,8 @@ public abstract class VerificationMeanJpa {
         R visit(EmailVerification emailVerification);
 
         R visit(SmsVerification smsVerification);
+
+        R visit(UsernamePasswordVerification usernamePasswordVerification);
     }
 
     public static VerificationMeanJpa fromDomain(PersonalAuthenticationJpa principal, VerificationMean mean) {
@@ -48,14 +50,14 @@ public abstract class VerificationMeanJpa {
         return mean.accept(new VerificationMean.Visitor<>() {
             @Override
             public VerificationMeanJpa visit(VerificationMean.VerificationByConsole verificationByConsole) {
-                VerificationMeanJpa.ConsoleVerification consoleVerification = new VerificationMeanJpa.ConsoleVerification();
+                var consoleVerification = new VerificationMeanJpa.ConsoleVerification();
                 consoleVerification.setPersonalAuthentication(principal);
                 return consoleVerification;
             }
 
             @Override
             public VerificationMeanJpa visit(VerificationMean.VerificationByEmail verificationByEmail) {
-                VerificationMeanJpa.EmailVerification emailVerification = new VerificationMeanJpa.EmailVerification();
+                var emailVerification = new VerificationMeanJpa.EmailVerification();
                 emailVerification.setPersonalAuthentication(principal);
                 emailVerification.setEmail(verificationByEmail.getEmailAddress());
                 return emailVerification;
@@ -63,10 +65,18 @@ public abstract class VerificationMeanJpa {
 
             @Override
             public VerificationMeanJpa visit(VerificationMean.VerificationBySms verificationBySms) {
-                VerificationMeanJpa.SmsVerification smsVerification = new VerificationMeanJpa.SmsVerification();
+                var smsVerification = new VerificationMeanJpa.SmsVerification();
                 smsVerification.setPersonalAuthentication(principal);
                 smsVerification.setPhoneNumber(verificationBySms.getPhoneNumber());
                 return smsVerification;
+            }
+
+            @Override
+            public VerificationMeanJpa visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+                var passwordVerification = new VerificationMeanJpa.UsernamePasswordVerification();
+                passwordVerification.setUsername(verificationByUsernameAndPassword.getUsername());
+                passwordVerification.setPassword(verificationByUsernameAndPassword.getPassword());
+                return passwordVerification;
             }
         });
     }
@@ -91,6 +101,14 @@ public abstract class VerificationMeanJpa {
             public VerificationMean visit(VerificationMeanJpa.SmsVerification smsVerification) {
                 return new VerificationMean.VerificationBySms.Builder()
                         .setPhoneNumber(smsVerification.getPhoneNumber())
+                        .build();
+            }
+
+            @Override
+            public VerificationMean visit(UsernamePasswordVerification usernamePasswordVerification) {
+                return new VerificationMean.VerificationByUsernameAndPassword.Builder()
+                        .setUsername(usernamePasswordVerification.getUsername())
+                        .setPassword(usernamePasswordVerification.getPassword())
                         .build();
             }
         });
@@ -140,6 +158,37 @@ public abstract class VerificationMeanJpa {
 
         public void setPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
+        }
+
+        @Override
+        public <R> R accept(Visitor<R> verificationVisitor) {
+
+            return verificationVisitor.visit(this);
+        }
+    }
+
+    @Entity
+    @DiscriminatorValue("password")
+    public static class UsernamePasswordVerification extends VerificationMeanJpa {
+
+        private String username;
+
+        private String password;
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
         }
 
         @Override

@@ -183,5 +183,12 @@ public abstract class RegistrationJpa {
             result.setPhoneNumber(verificationBySms.getPhoneNumber());
             return result;
         }
+
+        @Override
+        public RegistrationJpa visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+
+            // if there was username and password, then registration is already over
+            throw new IllegalArgumentException();
+        }
     }
 }

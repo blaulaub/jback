@@ -42,6 +42,11 @@ public class AspSmsVerificationServiceImpl implements VerificationService.SmsVer
             public String visit(VerificationMean.VerificationBySms verificationBySms) {
                 return verificationBySms.getPhoneNumber();
             }
+
+            @Override
+            public String visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+                throw new IllegalArgumentException();
+            }
         });
     }
 

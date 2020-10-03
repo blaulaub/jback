@@ -127,5 +127,12 @@ public class RegistrationServiceImpl implements RegistrationService {
             smsVerificationService.sendOut(pendingRegistration);
             return null;
         }
+
+        @Override
+        public Void visit(VerificationMean.VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+
+            // if there is username and password, it does not make sense to send out a verification code
+            throw new IllegalArgumentException();
+        }
     }
 }

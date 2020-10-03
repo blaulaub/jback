@@ -45,6 +45,22 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
         public static class Builder extends VerificationMean_VerificationBySms_Builder {}
     }
 
+    @FreeBuilder
+    abstract class VerificationByUsernameAndPassword implements VerificationMean {
+
+        public abstract String getUsername();
+
+        public abstract String getPassword();
+
+        @Override
+        public <R> R accept(Visitor<R> registrationHandler) {
+
+            return registrationHandler.visit(this);
+        }
+
+        public static class Builder extends VerificationMean_VerificationByUsernameAndPassword_Builder {}
+    }
+
     interface Visitor<R> {
 
         R visit(VerificationMean.VerificationByConsole verificationByConsole);
@@ -52,5 +68,7 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
         R visit(VerificationMean.VerificationByEmail verificationByEmail);
 
         R visit(VerificationMean.VerificationBySms verificationBySms);
+
+        R visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword);
     }
 }
