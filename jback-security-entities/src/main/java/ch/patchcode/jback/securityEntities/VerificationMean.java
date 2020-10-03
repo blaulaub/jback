@@ -6,7 +6,7 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
 
     <R> R accept(Visitor<R> registrationHandler);
 
-    class VerificationByConsole implements ch.patchcode.jback.secBase.VerificationMean.VerificationByConsole, VerificationMean {
+    class VerificationByConsole implements VerificationMean {
 
         // boring - there are no parameters :-)
 
@@ -18,7 +18,7 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
     }
 
     @FreeBuilder
-    abstract class VerificationByEmail implements ch.patchcode.jback.secBase.VerificationMean.VerificationByEmail, VerificationMean {
+    abstract class VerificationByEmail implements VerificationMean {
 
         public abstract String getEmailAddress();
 
@@ -32,7 +32,7 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
     }
 
     @FreeBuilder
-    abstract class VerificationBySms implements ch.patchcode.jback.secBase.VerificationMean.VerificationBySms, VerificationMean {
+    abstract class VerificationBySms implements VerificationMean {
 
         public abstract String getPhoneNumber();
 
