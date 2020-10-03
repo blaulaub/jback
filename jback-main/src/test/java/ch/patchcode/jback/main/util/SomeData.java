@@ -8,7 +8,7 @@ public class SomeData {
         return new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationByConsole.Builder().build())
+                .setVerificationMean(new VerificationByConsole.Draft.Builder().build())
                 .build();
     }
 }

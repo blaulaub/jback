@@ -6,15 +6,16 @@ import ch.patchcode.jback.securityEntities.VerificationMean;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.UUID;
 
 public class SomeData {
 
     public static PendingRegistration.Draft somePendingRegistrationDraft() {
 
-        return somePendingRegistrationDraft(new VerificationByConsole());
+        return somePendingRegistrationDraft(new VerificationByConsole.Draft());
     }
 
-    public static PendingRegistration.Draft somePendingRegistrationDraft(VerificationMean verificationMean) {
+    public static PendingRegistration.Draft somePendingRegistrationDraft(VerificationMean.Draft verificationMean) {
 
         return new PendingRegistration.Draft.Builder()
                 .setFirstName("Tom")

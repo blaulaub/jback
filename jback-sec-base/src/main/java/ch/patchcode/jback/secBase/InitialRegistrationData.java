@@ -10,5 +10,5 @@ public interface InitialRegistrationData {
 
     String getLastName();
 
-    VerificationMean getVerificationMean();
+    VerificationMean.Draft getVerificationMean();
 }

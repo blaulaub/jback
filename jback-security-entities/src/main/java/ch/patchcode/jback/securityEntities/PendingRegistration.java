@@ -17,7 +17,7 @@ public interface PendingRegistration extends ch.patchcode.jback.secBase.PendingR
     String getLastName();
 
     @Override
-    VerificationMean getVerificationMean();
+    VerificationMean.Draft getVerificationMean();
 
     @Override
     String getVerificationCode();
@@ -32,7 +32,7 @@ public interface PendingRegistration extends ch.patchcode.jback.secBase.PendingR
 
         String getLastName();
 
-        VerificationMean getVerificationMean();
+        VerificationMean.Draft getVerificationMean();
 
         String getVerificationCode();
 

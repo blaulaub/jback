@@ -25,25 +25,25 @@ public class AspSmsVerificationServiceImpl implements VerificationService.SmsVer
     }
 
     private String getPhoneNumber(PendingRegistration pendingRegistration) {
-        return pendingRegistration.getVerificationMean().accept(new VerificationMean.Visitor<String>() {
+        return pendingRegistration.getVerificationMean().accept(new VerificationMean.Draft.Visitor<String>() {
 
             @Override
-            public String visit(VerificationByConsole verificationByConsole) {
+            public String visit(VerificationByConsole.Draft verificationByConsole) {
                 throw new IllegalArgumentException();
             }
 
             @Override
-            public String visit(VerificationByEmail verificationByEmail) {
+            public String visit(VerificationByEmail.Draft verificationByEmail) {
                 throw new IllegalArgumentException();
             }
 
             @Override
-            public String visit(VerificationBySms verificationBySms) {
+            public String visit(VerificationBySms.Draft verificationBySms) {
                 return verificationBySms.getPhoneNumber();
             }
 
             @Override
-            public String visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+            public String visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
                 throw new IllegalArgumentException();
             }
         });

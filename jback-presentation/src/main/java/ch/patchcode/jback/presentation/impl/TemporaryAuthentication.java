@@ -8,16 +8,14 @@ public class TemporaryAuthentication
         extends ch.patchcode.jback.security.authentications.TemporaryAuthentication
         implements Authentication {
 
-
-    public static TemporaryAuthentication of(PendingRegistration registration) {
-
+    public static TemporaryAuthentication of(String firstName, String lastName, VerificationMean.Draft verificationMean) {
         return new TemporaryAuthentication(
-                registration.getFirstName(),
-                registration.getLastName(),
-                registration.getVerificationMean());
+                firstName,
+                lastName,
+                verificationMean);
     }
 
-    public TemporaryAuthentication(String firstName, String lastName, VerificationMean mean) {
+    public TemporaryAuthentication(String firstName, String lastName, VerificationMean.Draft mean) {
         super(firstName, lastName, mean);
     }
 }

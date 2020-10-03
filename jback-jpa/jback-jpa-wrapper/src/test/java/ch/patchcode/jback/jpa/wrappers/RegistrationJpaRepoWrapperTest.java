@@ -27,7 +27,7 @@ class RegistrationJpaRepoWrapperTest {
     void save_and_findById() {
 
         // arrange
-        PendingRegistration.Draft pending = somePendingRegistrationDraft(new VerificationByConsole());
+        PendingRegistration.Draft pending = somePendingRegistrationDraft(new VerificationByConsole.Draft());
 
         // act
         var id = wrapper.create(pending).getId();

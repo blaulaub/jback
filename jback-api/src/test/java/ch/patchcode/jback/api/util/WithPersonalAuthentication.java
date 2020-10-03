@@ -36,7 +36,9 @@ public @interface WithPersonalAuthentication {
                                 .setFirstName(annotation.firstName())
                                 .setLastName(annotation.lastName())
                                 .build())
-                        .addMeans(new VerificationByConsole())
+                        .addMeans(new VerificationByConsole.Builder()
+                                .setId(UUID.randomUUID())
+                                .build())
                         .build();
 
                 @Override

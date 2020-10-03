@@ -1,12 +1,16 @@
 package ch.patchcode.jback.securityEntities;
 
+import java.util.UUID;
+
 public interface VerificationMean extends ch.patchcode.jback.secBase.VerificationMean {
+
+    UUID getId();
 
     <R> R accept(Visitor<R> registrationHandler);
 
     Draft toNewDraft();
 
-    interface Draft {
+    interface Draft extends ch.patchcode.jback.secBase.VerificationMean.Draft {
 
         <R> R accept(Visitor<R> visitor);
 

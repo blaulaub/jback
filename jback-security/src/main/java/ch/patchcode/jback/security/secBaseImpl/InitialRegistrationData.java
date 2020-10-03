@@ -13,7 +13,7 @@ public interface InitialRegistrationData extends ch.patchcode.jback.secBase.Init
     String getLastName();
 
     @Override
-    VerificationMean getVerificationMean();
+    VerificationMean.Draft getVerificationMean();
 
     class Builder extends InitialRegistrationData_Builder {
     }

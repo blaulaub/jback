@@ -2,10 +2,10 @@ package ch.patchcode.jback.security.authentications;
 
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.secBase.secModelImpl.Person;
-import ch.patchcode.jback.securityEntities.Principal;
-import ch.patchcode.jback.securityEntities.VerificationMean;
+import ch.patchcode.jback.securityEntities.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -18,9 +18,9 @@ public class TemporaryAuthentication implements Principal {
 
     private final String firstName;
     private final String lastName;
-    private final VerificationMean mean;
+    private final VerificationMean.Draft mean;
 
-    public TemporaryAuthentication(String firstName, String lastName, VerificationMean mean) {
+    public TemporaryAuthentication(String firstName, String lastName, VerificationMean.Draft mean) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,7 +52,43 @@ public class TemporaryAuthentication implements Principal {
     @Override
     public List<VerificationMean> getMeans() {
 
-        return singletonList(this.mean);
+        var mean = this.mean.accept(
+                new VerificationMean.Draft.Visitor<VerificationMean>() {
+
+                    @Override
+                    public VerificationByConsole visit(VerificationByConsole.Draft draft) {
+                        return new VerificationByConsole.Builder()
+                                .setId(UUID.randomUUID())
+                                .build();
+                    }
+
+                    @Override
+                    public VerificationByEmail visit(VerificationByEmail.Draft draft) {
+                        return new VerificationByEmail.Builder()
+                                .setId(UUID.randomUUID())
+                                .setEmailAddress(draft.getEmailAddress())
+                                .build();
+                    }
+
+                    @Override
+                    public VerificationBySms visit(VerificationBySms.Draft draft) {
+                        return new VerificationBySms.Builder()
+                                .setId(UUID.randomUUID())
+                                .setPhoneNumber(draft.getPhoneNumber())
+                                .build();
+                    }
+
+                    @Override
+                    public VerificationByUsernameAndPassword visit(VerificationByUsernameAndPassword.Draft draft) {
+                        return new VerificationByUsernameAndPassword.Builder()
+                                .setId(UUID.randomUUID())
+                                .setUsername(draft.getUsername())
+                                .setPassword(draft.getPassword())
+                                .build();
+                    }
+                });
+
+        return singletonList(mean);
     }
 
     @Override

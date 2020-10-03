@@ -11,7 +11,7 @@ public interface PendingRegistration {
 
     String getLastName();
 
-    VerificationMean getVerificationMean();
+    VerificationMean.Draft getVerificationMean();
 
     String getVerificationCode();
 

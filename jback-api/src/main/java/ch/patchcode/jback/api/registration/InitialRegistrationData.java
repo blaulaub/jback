@@ -22,13 +22,13 @@ public abstract class InitialRegistrationData {
     public abstract String getLastName();
 
     @ApiModelProperty
-    public abstract VerificationMean getVerificationMean();
+    public abstract VerificationMean.Draft getVerificationMean();
 
     @JsonCreator
     public static InitialRegistrationData create(
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName,
-            @JsonProperty("verificationMean") VerificationMean verificationMean
+            @JsonProperty("verificationMean") VerificationMean.Draft verificationMean
     ) {
 
         return new Builder()

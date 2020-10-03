@@ -64,25 +64,25 @@ public class EmailVerificationServiceImpl implements VerificationService.EmailVe
 
     private String getEmailAddress(PendingRegistration pendingRegistration) {
 
-        return pendingRegistration.getVerificationMean().accept(new VerificationMean.Visitor<String>() {
+        return pendingRegistration.getVerificationMean().accept(new VerificationMean.Draft.Visitor<String>() {
 
             @Override
-            public String visit(VerificationByConsole verificationByConsole) {
+            public String visit(VerificationByConsole.Draft verificationByConsole) {
                 throw new IllegalArgumentException();
             }
 
             @Override
-            public String visit(VerificationByEmail verificationByEmail) {
+            public String visit(VerificationByEmail.Draft verificationByEmail) {
                 return verificationByEmail.getEmailAddress();
             }
 
             @Override
-            public String visit(VerificationBySms verificationBySms) {
+            public String visit(VerificationBySms.Draft verificationBySms) {
                 throw new IllegalArgumentException();
             }
 
             @Override
-            public String visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+            public String visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
 
                 throw new IllegalArgumentException();
             }

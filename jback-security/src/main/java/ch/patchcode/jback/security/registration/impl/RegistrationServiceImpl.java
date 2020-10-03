@@ -92,7 +92,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         pendingRegistrationRepository.removeById(id);
     }
 
-    private class RegistrationSender implements VerificationMean.Visitor<Void> {
+    private class RegistrationSender implements VerificationMean.Draft.Visitor<Void> {
 
         private final PendingRegistration pendingRegistration;
 
@@ -106,28 +106,28 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         @Override
-        public Void visit(VerificationByConsole verificationByConsole) {
+        public Void visit(VerificationByConsole.Draft verificationByConsole) {
 
             consoleVerificationService.sendOut(pendingRegistration);
             return null;
         }
 
         @Override
-        public Void visit(VerificationByEmail verificationByEmail) {
+        public Void visit(VerificationByEmail.Draft verificationByEmail) {
 
             emailVerificationService.sendOut(pendingRegistration);
             return null;
         }
 
         @Override
-        public Void visit(VerificationBySms verificationBySms) {
+        public Void visit(VerificationBySms.Draft verificationBySms) {
 
             smsVerificationService.sendOut(pendingRegistration);
             return null;
         }
 
         @Override
-        public Void visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+        public Void visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
 
             // if there is username and password, it does not make sense to send out a verification code
             throw new IllegalArgumentException();

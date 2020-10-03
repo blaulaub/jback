@@ -2,8 +2,13 @@ package ch.patchcode.jback.securityEntities;
 
 import org.inferred.freebuilder.FreeBuilder;
 
+import java.util.UUID;
+
 @FreeBuilder
 public abstract class VerificationBySms implements VerificationMean {
+
+    @Override
+    public abstract UUID getId();
 
     public abstract String getPhoneNumber();
 

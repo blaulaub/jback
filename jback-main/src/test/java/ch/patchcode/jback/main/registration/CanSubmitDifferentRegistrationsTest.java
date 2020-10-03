@@ -31,7 +31,7 @@ public class CanSubmitDifferentRegistrationsTest {
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationByConsole.Builder().build())
+                .setVerificationMean(new VerificationByConsole.Draft.Builder().build())
                 .build();
 
         // act
@@ -54,7 +54,7 @@ public class CanSubmitDifferentRegistrationsTest {
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationBySms.Builder().setPhoneNumber("+41234567890").build())
+                .setVerificationMean(new VerificationBySms.Draft.Builder().setPhoneNumber("+41234567890").build())
                 .build();
 
         // act
@@ -77,7 +77,7 @@ public class CanSubmitDifferentRegistrationsTest {
         var request = new InitialRegistrationData.Builder()
                 .setFirstName("Tom")
                 .setLastName("Sawyer")
-                .setVerificationMean(new VerificationByEmail.Builder().setEmailAddress("webmaster@google.com").build())
+                .setVerificationMean(new VerificationByEmail.Draft.Builder().setEmailAddress("webmaster@google.com").build())
                 .build();
 
         // act

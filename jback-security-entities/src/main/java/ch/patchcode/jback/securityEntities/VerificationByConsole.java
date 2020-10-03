@@ -2,9 +2,13 @@ package ch.patchcode.jback.securityEntities;
 
 import org.inferred.freebuilder.FreeBuilder;
 
-public class VerificationByConsole implements VerificationMean {
+import java.util.UUID;
 
-    // boring - there are no parameters :-)
+@FreeBuilder
+public abstract class VerificationByConsole implements VerificationMean {
+
+    @Override
+    public abstract UUID getId();
 
     @Override
     public <R> R accept(Visitor<R> registrationHandler) {
@@ -26,5 +30,8 @@ public class VerificationByConsole implements VerificationMean {
         public <R> R accept(Visitor<R> visitor) {
             return visitor.visit(this);
         }
+    }
+
+    public static class Builder extends VerificationByConsole_Builder {
     }
 }

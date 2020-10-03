@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.UUID;
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes({
         @Type(value = VerificationByConsole.class, name = VerificationByConsole.TYPE),
@@ -18,6 +20,9 @@ import io.swagger.annotations.ApiModelProperty;
         VerificationBySms.class
 })
 public abstract class VerificationMean {
+
+    @ApiModelProperty
+    public abstract UUID getId();
 
     @ApiModelProperty
     public abstract String getType();

@@ -52,8 +52,12 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
             public void caseConfirmed() {
 
                 LOG.debug("change security context to TemporaryAuthentication");
+
+                String firstName = pendingRegistration.getFirstName();
+                String lastName = pendingRegistration.getLastName();
+                VerificationMean.Draft verificationMean = pendingRegistration.getVerificationMean();
                 SecurityContextHolder.getContext()
-                        .setAuthentication(TemporaryAuthentication.of(pendingRegistration));
+                        .setAuthentication(TemporaryAuthentication.of(firstName, lastName, verificationMean));
             }
 
             @Override

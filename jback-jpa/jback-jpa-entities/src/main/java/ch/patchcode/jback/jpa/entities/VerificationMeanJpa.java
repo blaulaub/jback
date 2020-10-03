@@ -87,12 +87,15 @@ public abstract class VerificationMeanJpa {
 
             @Override
             public VerificationMean visit(VerificationMeanJpa.ConsoleVerification consoleVerification) {
-                return new VerificationByConsole();
+                return new VerificationByConsole.Builder()
+                        .setId(getId())
+                        .build();
             }
 
             @Override
             public VerificationMean visit(VerificationMeanJpa.EmailVerification emailVerification) {
                 return new VerificationByEmail.Builder()
+                        .setId(getId())
                         .setEmailAddress(emailVerification.getEmail())
                         .build();
             }
@@ -100,6 +103,7 @@ public abstract class VerificationMeanJpa {
             @Override
             public VerificationMean visit(VerificationMeanJpa.SmsVerification smsVerification) {
                 return new VerificationBySms.Builder()
+                        .setId(getId())
                         .setPhoneNumber(smsVerification.getPhoneNumber())
                         .build();
             }
@@ -107,6 +111,7 @@ public abstract class VerificationMeanJpa {
             @Override
             public VerificationMean visit(UsernamePasswordVerification usernamePasswordVerification) {
                 return new VerificationByUsernameAndPassword.Builder()
+                        .setId(getId())
                         .setUsername(usernamePasswordVerification.getUsername())
                         .setPassword(usernamePasswordVerification.getPassword())
                         .build();

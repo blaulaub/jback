@@ -1,8 +1,12 @@
 package ch.patchcode.jback.api.verification;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
+
+import java.util.UUID;
 
 /**
  * Registration by console, i.e., the user will be expected to
@@ -15,9 +19,17 @@ public abstract class VerificationByConsole extends VerificationMean {
 
     public static final String TYPE = "console";
 
+    @ApiModelProperty
+    @Override
+    public abstract UUID getId();
+
     @JsonCreator
-    public static VerificationByConsole create() {
-        return new Builder().build();
+    public static VerificationByConsole create(
+            @JsonProperty("id") UUID id
+    ) {
+        return new Builder()
+                .setId(id)
+                .build();
     }
 
     public static class Builder extends VerificationByConsole_Builder {
@@ -29,7 +41,9 @@ public abstract class VerificationByConsole extends VerificationMean {
     }
 
     public ch.patchcode.jback.securityEntities.VerificationByConsole toDomain() {
-        return new ch.patchcode.jback.securityEntities.VerificationByConsole();
+        return new ch.patchcode.jback.securityEntities.VerificationByConsole.Builder()
+                .setId(getId())
+                .build();
     }
 
     @ApiModel
@@ -40,6 +54,12 @@ public abstract class VerificationByConsole extends VerificationMean {
         public ch.patchcode.jback.securityEntities.VerificationByConsole.Draft toDomain() {
 
             return new ch.patchcode.jback.securityEntities.VerificationByConsole.Draft();
+        }
+
+        @JsonCreator
+        public static Draft create() {
+            return new Draft.Builder()
+                    .build();
         }
 
         public static class Builder extends VerificationByConsole_Draft_Builder {

@@ -94,7 +94,7 @@ public abstract class RegistrationJpa {
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
-                    .setVerificationMean(new VerificationByConsole())
+                    .setVerificationMean(new VerificationByConsole.Draft())
                     .build();
         }
     }
@@ -117,7 +117,7 @@ public abstract class RegistrationJpa {
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
-                    .setVerificationMean(new VerificationByEmail.Builder()
+                    .setVerificationMean(new VerificationByEmail.Draft.Builder()
                             .setEmailAddress(getEmail())
                             .build())
                     .build();
@@ -142,14 +142,14 @@ public abstract class RegistrationJpa {
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
-                    .setVerificationMean(new VerificationBySms.Builder()
+                    .setVerificationMean(new VerificationBySms.Draft.Builder()
                             .setPhoneNumber(getPhoneNumber())
                             .build())
                     .build();
         }
     }
 
-    private static class FromDomainConverter implements VerificationMean.Visitor<RegistrationJpa> {
+    private static class FromDomainConverter implements VerificationMean.Draft.Visitor<RegistrationJpa> {
 
         public RegistrationJpa convert(PendingRegistration.Draft pendingRegistration) {
 
@@ -162,13 +162,13 @@ public abstract class RegistrationJpa {
         }
 
         @Override
-        public RegistrationJpa visit(VerificationByConsole verificationByConsole) {
+        public RegistrationJpa visit(VerificationByConsole.Draft verificationByConsole) {
 
             return new ConsoleRegistrationJpa();
         }
 
         @Override
-        public RegistrationJpa visit(VerificationByEmail verificationByEmail) {
+        public RegistrationJpa visit(VerificationByEmail.Draft verificationByEmail) {
 
             var result = new EmailRegistrationJpa();
             result.setEmail(verificationByEmail.getEmailAddress());
@@ -176,7 +176,7 @@ public abstract class RegistrationJpa {
         }
 
         @Override
-        public RegistrationJpa visit(VerificationBySms verificationBySms) {
+        public RegistrationJpa visit(VerificationBySms.Draft verificationBySms) {
 
             var result = new SmsRegistrationJpa();
             result.setPhoneNumber(verificationBySms.getPhoneNumber());
@@ -184,7 +184,7 @@ public abstract class RegistrationJpa {
         }
 
         @Override
-        public RegistrationJpa visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword) {
+        public RegistrationJpa visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
 
             // if there was username and password, then registration is already over
             throw new IllegalArgumentException();

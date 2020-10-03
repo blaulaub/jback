@@ -29,7 +29,8 @@ public @interface WithTemporaryAuthentication {
                 private final TemporaryAuthentication auth = new TemporaryAuthentication(
                         annotation.firstName(),
                         annotation.lastName(),
-                        new VerificationByConsole());
+                        new VerificationByConsole.Draft()
+                );
 
                 @Override
                 public Authentication getAuthentication() {
