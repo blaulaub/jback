@@ -4,7 +4,6 @@ import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.security.entities.Principal;
-import ch.patchcode.jback.security.entities.VerificationMean;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,12 +19,12 @@ import static ch.patchcode.jback.api.persons.Person.fromDomain;
 @RequestMapping("/api/v1/persons")
 public class PersonsController {
 
-    private final PersonService<VerificationMean, Principal> personService;
+    private final PersonService personService;
     private final AuthorizationManager authorizationManager;
 
     @Autowired
     public PersonsController(
-            PersonService<VerificationMean, Principal> personService,
+            PersonService personService,
             @Qualifier("presentation.authorizationManager") AuthorizationManager authorizationManager
     ) {
 
@@ -80,7 +79,8 @@ public class PersonsController {
 
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Principal) context.getAuthentication();
-        var person = personService.createClient(draft.toDomain(), callerAuth);
+        var person = personService.create(draft.toDomain());
+        authorizationManager.addClient(callerAuth, person);
         return fromDomain(person);
     }
 }

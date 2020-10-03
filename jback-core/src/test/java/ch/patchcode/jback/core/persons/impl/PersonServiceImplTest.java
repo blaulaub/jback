@@ -2,7 +2,6 @@ package ch.patchcode.jback.core.persons.impl;
 
 import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.core.entities.PersonRepository;
-import ch.patchcode.jback.secBase.VerificationMean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -22,7 +21,7 @@ class PersonServiceImplTest {
     private PersonRepository personRepository;
 
     @InjectMocks
-    private PersonServiceImpl<VerificationMean, ?> service;
+    private PersonServiceImpl service;
 
     @BeforeEach
     void setUp() {

@@ -3,13 +3,9 @@ package ch.patchcode.jback.core;
 import ch.patchcode.jback.core.clubs.ClubService;
 import ch.patchcode.jback.core.clubs.impl.ClubServiceImpl;
 import ch.patchcode.jback.core.entities.ClubRepository;
-import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.core.entities.PersonRepository;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.core.persons.impl.PersonServiceImpl;
-import ch.patchcode.jback.secBase.AuthorizationManager;
-import ch.patchcode.jback.secBase.VerificationMean;
-import ch.patchcode.jback.secBase.secModelImpl.Principal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,13 +20,9 @@ import org.springframework.context.annotation.Configuration;
 public class CoreConfiguration {
 
     @Bean
-    public <TVerificationMean extends VerificationMean,
-            TPrincipal extends Principal<TVerificationMean>>
-    PersonService<TVerificationMean, TPrincipal> getPersonService(
-            AuthorizationManager<Person, TVerificationMean, TPrincipal> authorizationManager,
-            PersonRepository personRepository) {
+    public PersonService getPersonService(PersonRepository personRepository) {
 
-        return new PersonServiceImpl(authorizationManager, personRepository);
+        return new PersonServiceImpl(personRepository);
     }
 
     @Bean

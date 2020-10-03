@@ -5,6 +5,7 @@ import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.LoginData;
 import ch.patchcode.jback.presentation.TryLoginResult;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
+import ch.patchcode.jback.security.entities.Principal;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.entities.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
@@ -33,6 +34,12 @@ public class AuthorizationManagerFake implements AuthorizationManager {
 
         // do nothing
         return null;
+    }
+
+    @Override
+    public void addClient(Principal principal, Person person) {
+
+        // do nothing
     }
 
     @Override

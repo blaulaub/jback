@@ -4,6 +4,7 @@ import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.LoginData;
 import ch.patchcode.jback.presentation.TryLoginResult;
+import ch.patchcode.jback.security.entities.Principal;
 import ch.patchcode.jback.security.registration.ConfirmationResult;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
@@ -76,6 +77,12 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means) {
 
         return PersonalAuthentication.fromDomain(authorizationManager.createAuthorizationFor(person, means));
+    }
+
+    @Override
+    public void addClient(Principal principal, Person person) {
+
+        authorizationManager.addClient(principal, person);
     }
 
     @Override

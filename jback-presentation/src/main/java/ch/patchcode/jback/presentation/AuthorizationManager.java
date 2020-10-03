@@ -2,6 +2,7 @@ package ch.patchcode.jback.presentation;
 
 import ch.patchcode.jback.core.entities.Person;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
+import ch.patchcode.jback.security.entities.Principal;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.entities.PendingRegistration;
 import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
@@ -32,6 +33,8 @@ public interface AuthorizationManager {
     PendingRegistration.Id setupRegistration(InitialRegistrationData initialRegistrationData);
 
     PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean> means);
+
+    void addClient(Principal principal, Person person);
 
     TryLoginResult tryLogin(LoginData data);
 
