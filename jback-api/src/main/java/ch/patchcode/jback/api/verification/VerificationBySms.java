@@ -41,5 +41,24 @@ public abstract class VerificationBySms extends VerificationMean {
     @ApiModel
     @FreeBuilder
     public abstract static class Draft extends VerificationMean.Draft {
+
+        @ApiModelProperty
+        public abstract String getPhoneNumber();
+
+        @Override
+        public ch.patchcode.jback.securityEntities.VerificationBySms.Draft toDomain() {
+
+            return new ch.patchcode.jback.securityEntities.VerificationBySms.Draft.Builder()
+                    .setPhoneNumber(getPhoneNumber())
+                    .build();
+        }
+
+        public static class Builder extends VerificationBySms_Draft_Builder {
+            @Override
+            public VerificationBySms.Draft build() {
+                setType(TYPE);
+                return super.build();
+            }
+        }
     }
 }

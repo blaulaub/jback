@@ -41,5 +41,24 @@ public abstract class VerificationByEmail extends VerificationMean {
     @ApiModel
     @FreeBuilder
     public abstract static class Draft extends VerificationMean.Draft {
+
+        @ApiModelProperty
+        public abstract String getEmailAddress();
+
+        @Override
+        public ch.patchcode.jback.securityEntities.VerificationByEmail.Draft toDomain() {
+
+            return new ch.patchcode.jback.securityEntities.VerificationByEmail.Draft.Builder()
+                    .setEmailAddress(getEmailAddress())
+                    .build();
+        }
+
+        public static class Builder extends VerificationByEmail_Draft_Builder {
+            @Override
+            public Draft build() {
+                setType(TYPE);
+                return super.build();
+            }
+        }
     }
 }

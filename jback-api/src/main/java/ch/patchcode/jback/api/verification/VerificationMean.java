@@ -39,5 +39,7 @@ public abstract class VerificationMean {
 
         @ApiModelProperty
         public abstract String getType();
+
+        public abstract ch.patchcode.jback.securityEntities.VerificationMean.Draft toDomain();
     }
 }

@@ -35,5 +35,19 @@ public abstract class VerificationByConsole extends VerificationMean {
     @ApiModel
     @FreeBuilder
     public abstract static class Draft extends VerificationMean.Draft {
+
+        @Override
+        public ch.patchcode.jback.securityEntities.VerificationByConsole.Draft toDomain() {
+
+            return new ch.patchcode.jback.securityEntities.VerificationByConsole.Draft();
+        }
+
+        public static class Builder extends VerificationByConsole_Draft_Builder {
+            @Override
+            public Draft build() {
+                setType(TYPE);
+                return super.build();
+            }
+        }
     }
 }
