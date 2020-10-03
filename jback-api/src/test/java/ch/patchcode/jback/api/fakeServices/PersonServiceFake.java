@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.fakeServices;
 
-import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.core.persons.PersonService;
 import org.springframework.stereotype.Service;
 

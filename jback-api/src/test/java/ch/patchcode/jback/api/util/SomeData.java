@@ -1,7 +1,7 @@
 package ch.patchcode.jback.api.util;
 
-import ch.patchcode.jback.core.entities.Address;
-import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.coreEntities.Address;
+import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.presentation.clubs.Club;
 
 import java.net.URI;

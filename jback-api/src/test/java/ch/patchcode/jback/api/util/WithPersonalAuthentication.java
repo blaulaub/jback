@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.util;
 
-import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.springframework.security.core.Authentication;

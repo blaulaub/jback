@@ -1,4 +1,4 @@
-package ch.patchcode.jback.core.entities;
+package ch.patchcode.jback.coreEntities;
 
 import java.util.Optional;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package ch.patchcode.jback.core.entities;
+package ch.patchcode.jback.coreEntities;
 
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import ch.patchcode.jback.util.WithFirstAndLastName;
@@ -23,7 +23,7 @@ public interface Person extends
 
     Optional<Address> getAddress();
 
-    // from secModel ch.patchcode.jback.core.entities.Person
+    // from secModel ch.patchcode.jback.coreEntities.Person
 
     default String getName() {
 

@@ -1,8 +1,8 @@
 package ch.patchcode.jback.jpa.wrappers;
 
-import ch.patchcode.jback.core.entities.Club;
-import ch.patchcode.jback.core.entities.Address;
-import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.coreEntities.Club;
+import ch.patchcode.jback.coreEntities.Address;
+import ch.patchcode.jback.coreEntities.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,7 +41,7 @@ class ClubJpaRepoWrapperTest {
                 .setFirstName("Ernst")
                 .setLastName("Graf")
                 .setAddress(new Address.Builder()
-                        .addLines("Berner Sport ch.patchcode.jback.core.entities.Club Young Boys", "Postfach 61", "3000 Bern 22")
+                        .addLines("Berner Sport ch.patchcode.jback.coreEntities.Club Young Boys", "Postfach 61", "3000 Bern 22")
                         .build())
                 .buildPartial();
         contact = personRepoWrapper.create(personDraft);

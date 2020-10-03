@@ -1,6 +1,6 @@
 package ch.patchcode.jback.securityEntities;
 
-import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
 import org.inferred.freebuilder.FreeBuilder;
 

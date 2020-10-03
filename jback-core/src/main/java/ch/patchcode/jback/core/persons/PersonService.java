@@ -1,6 +1,6 @@
 package ch.patchcode.jback.core.persons;
 
-import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.coreEntities.Person;
 
 import java.util.Optional;
 import java.util.UUID;

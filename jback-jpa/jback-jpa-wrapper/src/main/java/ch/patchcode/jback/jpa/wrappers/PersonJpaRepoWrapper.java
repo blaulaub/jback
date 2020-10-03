@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.wrappers;
 
-import ch.patchcode.jback.core.entities.Person;
-import ch.patchcode.jback.core.entities.PersonRepository;
+import ch.patchcode.jback.coreEntities.Person;
+import ch.patchcode.jback.coreEntities.PersonRepository;
 import ch.patchcode.jback.jpa.entities.PersonJpa;
 import ch.patchcode.jback.jpa.entities.PersonJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

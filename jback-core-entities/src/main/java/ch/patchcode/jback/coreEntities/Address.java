@@ -1,4 +1,4 @@
-package ch.patchcode.jback.core.entities;
+package ch.patchcode.jback.coreEntities;
 
 import org.inferred.freebuilder.FreeBuilder;
 

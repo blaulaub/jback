@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security;
 
-import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.securityEntities.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;

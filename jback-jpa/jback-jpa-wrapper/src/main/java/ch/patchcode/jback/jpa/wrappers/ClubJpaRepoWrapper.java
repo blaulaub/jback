@@ -1,8 +1,8 @@
 package ch.patchcode.jback.jpa.wrappers;
 
-import ch.patchcode.jback.core.entities.Club;
-import ch.patchcode.jback.core.entities.ClubRepository;
-import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.coreEntities.Club;
+import ch.patchcode.jback.coreEntities.ClubRepository;
+import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.jpa.entities.ClubJpa;
 import ch.patchcode.jback.jpa.entities.ClubJpaRepository;
 import ch.patchcode.jback.jpa.entities.PersonJpaRepository;

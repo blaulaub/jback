@@ -1,7 +1,7 @@
 package ch.patchcode.jback.core.persons.impl;
 
-import ch.patchcode.jback.core.entities.Person;
-import ch.patchcode.jback.core.entities.PersonRepository;
+import ch.patchcode.jback.coreEntities.Person;
+import ch.patchcode.jback.coreEntities.PersonRepository;
 import ch.patchcode.jback.core.persons.PersonService;
 
 import javax.inject.Inject;

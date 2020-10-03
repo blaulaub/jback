@@ -1,5 +1,6 @@
 package ch.patchcode.jback.api.persons;
 
+import ch.patchcode.jback.coreEntities.Address;
 import ch.patchcode.jback.util.WithFirstAndLastName;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -38,14 +39,14 @@ public interface Person extends WithFirstAndLastName {
         return builder.build();
     }
 
-    static Person fromDomain(ch.patchcode.jback.core.entities.Person person) {
+    static Person fromDomain(ch.patchcode.jback.coreEntities.Person person) {
 
         Builder builder = new Builder();
 
         builder.setId(person.getId())
                 .setFirstName(person.getFirstName())
                 .setLastName(person.getLastName());
-        person.getAddress().map(ch.patchcode.jback.core.entities.Address::getLines).ifPresent(builder::addAllAddress);
+        person.getAddress().map(Address::getLines).ifPresent(builder::addAllAddress);
 
         return builder.build();
     }
@@ -80,12 +81,12 @@ public interface Person extends WithFirstAndLastName {
             return builder.build();
         }
 
-        public ch.patchcode.jback.core.entities.Person.Draft toDomain() {
+        public ch.patchcode.jback.coreEntities.Person.Draft toDomain() {
 
-            var builder = new ch.patchcode.jback.core.entities.Person.Draft.Builder();
+            var builder = new ch.patchcode.jback.coreEntities.Person.Draft.Builder();
             builder.setFirstName(getFirstName());
             builder.setLastName(getLastName());
-            builder.setAddress(new ch.patchcode.jback.core.entities.Address.Builder()
+            builder.setAddress(new Address.Builder()
                     .addAllLines(getAddress())
                     .build());
             return builder.build();

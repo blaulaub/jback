@@ -1,6 +1,6 @@
 package ch.patchcode.jback.jpa.entities;
 
-import ch.patchcode.jback.core.entities.Club;
+import ch.patchcode.jback.coreEntities.Club;
 
 import javax.persistence.*;
 import java.net.URI;

@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.entities;
 
-import ch.patchcode.jback.core.entities.Address;
-import ch.patchcode.jback.core.entities.Person;
+import ch.patchcode.jback.coreEntities.Address;
+import ch.patchcode.jback.coreEntities.Person;
 
 import javax.persistence.*;
 import java.util.List;
