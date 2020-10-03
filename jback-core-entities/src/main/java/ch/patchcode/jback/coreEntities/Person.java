@@ -1,7 +1,6 @@
 package ch.patchcode.jback.coreEntities;
 
 import ch.patchcode.jback.secBase.secModelImpl.Authority;
-import ch.patchcode.jback.util.WithFirstAndLastName;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.util.List;
@@ -9,16 +8,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Person extends
-        ch.patchcode.jback.secBase.secModelImpl.Person,
-        WithFirstAndLastName {
+public interface Person extends ch.patchcode.jback.secBase.secModelImpl.Person  {
 
     UUID getId();
 
-    @Override
     String getFirstName();
 
-    @Override
     String getLastName();
 
     Optional<Address> getAddress();
@@ -34,12 +29,10 @@ public interface Person extends
     }
 
     @FreeBuilder
-    interface Draft extends WithFirstAndLastName {
+    interface Draft {
 
-        @Override
         String getFirstName();
 
-        @Override
         String getLastName();
 
         Optional<Address> getAddress();

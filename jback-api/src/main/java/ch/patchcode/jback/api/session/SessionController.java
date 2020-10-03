@@ -4,7 +4,6 @@ import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.Perspective;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
 import ch.patchcode.jback.presentation.impl.TemporaryAuthentication;
-import ch.patchcode.jback.util.WithFirstAndLastName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,18 +44,19 @@ public class SessionController {
                 .setAuthenticated(auth.isAuthenticated())
                 .setPrincipalName(auth.getName());
 
-        if (auth instanceof WithFirstAndLastName) {
-            var w = (WithFirstAndLastName) auth;
-            builder
-                    .setFirstName(w.getFirstName())
-                    .setLastName(w.getLastName());
-        }
-
         // TODO if-else-if and static mapping based on type is not the ultimate solution
         if (auth instanceof PersonalAuthentication) {
-            builder.setPerspective(Perspective.MEMBER);
+            var personalAuth = (PersonalAuthentication) auth;
+            builder
+                    .setPerspective(Perspective.MEMBER)
+                    .setFirstName(personalAuth.getFirstName())
+                    .setLastName(personalAuth.getLastName());
         } else if (auth instanceof TemporaryAuthentication) {
-            builder.setPerspective(Perspective.ENROLLING);
+            var temporaryAuth = (TemporaryAuthentication) auth;
+            builder
+                    .setPerspective(Perspective.ENROLLING)
+                    .setFirstName(temporaryAuth.getFirstName())
+                    .setLastName(temporaryAuth.getLastName());
         } else {
             builder.setPerspective(Perspective.GUEST);
         }

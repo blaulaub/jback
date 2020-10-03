@@ -1,7 +1,6 @@
 package ch.patchcode.jback.api.persons;
 
 import ch.patchcode.jback.coreEntities.Address;
-import ch.patchcode.jback.util.WithFirstAndLastName;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -12,14 +11,12 @@ import java.util.List;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Person extends WithFirstAndLastName {
+public interface Person {
 
     UUID getId();
 
-    @Override
     String getFirstName();
 
-    @Override
     String getLastName();
 
     List<String> getAddress();
@@ -56,14 +53,12 @@ public interface Person extends WithFirstAndLastName {
 
     @ApiModel
     @FreeBuilder
-    abstract class Draft implements WithFirstAndLastName {
+    abstract class Draft {
 
         @ApiModelProperty
-        @Override
         public abstract String getFirstName();
 
         @ApiModelProperty
-        @Override
         public abstract String getLastName();
 
         public abstract List<String> getAddress();

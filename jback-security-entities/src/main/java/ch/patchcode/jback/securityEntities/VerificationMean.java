@@ -28,7 +28,8 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
             return registrationHandler.visit(this);
         }
 
-        public static class Builder extends VerificationMean_VerificationByEmail_Builder {}
+        public static class Builder extends VerificationMean_VerificationByEmail_Builder {
+        }
     }
 
     @FreeBuilder
@@ -42,7 +43,8 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
             return registrationHandler.visit(this);
         }
 
-        public static class Builder extends VerificationMean_VerificationBySms_Builder {}
+        public static class Builder extends VerificationMean_VerificationBySms_Builder {
+        }
     }
 
     @FreeBuilder
@@ -58,7 +60,8 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
             return registrationHandler.visit(this);
         }
 
-        public static class Builder extends VerificationMean_VerificationByUsernameAndPassword_Builder {}
+        public static class Builder extends VerificationMean_VerificationByUsernameAndPassword_Builder {
+        }
     }
 
     interface Visitor<R> {

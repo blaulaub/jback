@@ -20,12 +20,6 @@
             <artifactId>jback-sec-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>ch.patchcode</groupId>
-            <artifactId>jback-util</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
 
         <!-- non-transient (like code generators) -->
         <dependency>
