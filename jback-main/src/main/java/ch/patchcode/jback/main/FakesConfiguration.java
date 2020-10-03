@@ -12,10 +12,4 @@ public class FakesConfiguration {
 
         return fillIn::sendOut;
     }
-
-    @Bean
-    VerificationService.SmsVerificationService getSmsVerificationService(VerificationService.ConsoleVerificationService fillIn) {
-
-        return fillIn::sendOut;
-    }
 }
