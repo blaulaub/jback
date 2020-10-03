@@ -15,5 +15,5 @@ public interface PersonalAuthentication extends
                 .build();
     }
 
-    class Builder extends PersonalAuthentication_Builder {};
+    class Builder extends PersonalAuthentication_Builder {}
 }

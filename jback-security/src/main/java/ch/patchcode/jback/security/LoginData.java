@@ -10,5 +10,5 @@ public interface LoginData {
 
     VerificationMean getVerificationMean();
 
-    class Builder extends LoginData_Builder {};
+    class Builder extends LoginData_Builder {}
 }
