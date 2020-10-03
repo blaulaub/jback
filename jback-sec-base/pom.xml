@@ -14,16 +14,11 @@
     <packaging>jar</packaging>
 
     <dependencies>
+
         <dependency>
             <groupId>ch.patchcode</groupId>
             <artifactId>jback-sec-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.inferred</groupId>
-            <artifactId>freebuilder</artifactId>
-            <version>2.6.1</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>ch.patchcode</groupId>
@@ -31,6 +26,14 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- non-transient (like code generators) -->
+        <dependency>
+            <groupId>org.inferred</groupId>
+            <artifactId>freebuilder</artifactId>
+            <optional>true</optional>
+        </dependency>
+
     </dependencies>
 
 </project>

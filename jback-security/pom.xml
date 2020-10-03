@@ -42,10 +42,11 @@
             <version>1</version>
         </dependency>
 
+        <!-- non-transient (like code generators) -->
         <dependency>
             <groupId>org.inferred</groupId>
             <artifactId>freebuilder</artifactId>
-            <version>2.6.1</version>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>
