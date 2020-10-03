@@ -1,4 +1,4 @@
-package ch.patchcode.jback.api.registration;
+package ch.patchcode.jback.api.verification;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,9 +11,9 @@ import org.inferred.freebuilder.FreeBuilder;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes({
-        @Type(value = VerificationMean.VerificationByConsole.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationByConsole.TYPE),
-        @Type(value = VerificationMean.VerificationByEmail.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationByEmail.TYPE),
-        @Type(value = VerificationMean.VerificationBySms.class, name = ch.patchcode.jback.api.registration.VerificationMean.VerificationBySms.TYPE)
+        @Type(value = VerificationMean.VerificationByConsole.class, name = VerificationMean.VerificationByConsole.TYPE),
+        @Type(value = VerificationMean.VerificationByEmail.class, name = VerificationMean.VerificationByEmail.TYPE),
+        @Type(value = VerificationMean.VerificationBySms.class, name = VerificationMean.VerificationBySms.TYPE)
 })
 @ApiModel(subTypes = {
         VerificationMean.VerificationByConsole.class,

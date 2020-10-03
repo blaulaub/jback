@@ -1,7 +1,7 @@
 package ch.patchcode.jback.main.persons;
 
 import ch.patchcode.jback.api.persons.Person;
-import ch.patchcode.jback.api.registration.VerificationCode;
+import ch.patchcode.jback.api.verification.VerificationCode;
 import ch.patchcode.jback.main.MainTestConfiguration;
 import ch.patchcode.jback.main.fakes.FixVerificationCodeProvider;
 import ch.patchcode.jback.main.restApi.RestApi;

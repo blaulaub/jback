@@ -1,7 +1,7 @@
 package ch.patchcode.jback.main.util;
 
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
-import ch.patchcode.jback.api.registration.VerificationMean;
+import ch.patchcode.jback.api.verification.VerificationMean;
 
 public class SomeData {
     public static InitialRegistrationData someInitialRegistrationData() {

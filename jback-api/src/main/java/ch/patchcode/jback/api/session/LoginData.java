@@ -1,6 +1,6 @@
 package ch.patchcode.jback.api.session;
 
-import ch.patchcode.jback.api.registration.VerificationMean;
+import ch.patchcode.jback.api.verification.VerificationMean;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;

@@ -1,4 +1,4 @@
-package ch.patchcode.jback.api.registration;
+package ch.patchcode.jback.api.verification;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -2,7 +2,7 @@ package ch.patchcode.jback.main.registration;
 
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
-import ch.patchcode.jback.api.registration.VerificationMean;
+import ch.patchcode.jback.api.verification.VerificationMean;
 import ch.patchcode.jback.main.MainTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

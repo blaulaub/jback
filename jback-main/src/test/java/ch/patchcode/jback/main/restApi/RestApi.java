@@ -3,7 +3,7 @@ package ch.patchcode.jback.main.restApi;
 import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
-import ch.patchcode.jback.api.registration.VerificationCode;
+import ch.patchcode.jback.api.verification.VerificationCode;
 import ch.patchcode.jback.api.session.SessionInfo;
 import ch.patchcode.jback.main.util.RestSession;
 
