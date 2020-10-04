@@ -1,7 +1,7 @@
 package ch.patchcode.jback.api;
 
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
-import ch.patchcode.jback.presentation.Perspective;
+import ch.patchcode.jback.api.verification.VerificationCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,11 +11,13 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.List;
+import java.util.UUID;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -65,7 +67,21 @@ public class Api {
                         jsonPath("$.pendingRegistrationId").exists()));
     }
 
-    public static final class Call {
+    public Call putVerificationCode(UUID pendingRegistrationId, VerificationCode verificationCode) throws Exception {
+        return new Call(
+
+                // call
+                mvc.perform(put("/api/v1/registration/{id}", pendingRegistrationId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .content(mapper.writeValueAsString(verificationCode))),
+
+                // expect
+                asList(status().isOk())
+        );
+    }
+
+    public final class Call {
 
         private final ResultActions result;
         private final List<ResultMatcher> expectations;
@@ -88,6 +104,12 @@ public class Api {
                 assumeTrue(false);
             }
             return result;
+        }
+
+        public <T> T andAssumeGoodAndReturn(Class<T> clazz) throws Exception {
+
+            String body = this.andAssumeGoodAndReturn().andReturn().getResponse().getContentAsString();
+            return mapper.readValue(body, clazz);
         }
     }
 }

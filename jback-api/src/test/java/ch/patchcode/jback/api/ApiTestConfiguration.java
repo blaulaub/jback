@@ -4,11 +4,13 @@ import ch.patchcode.jback.core.CoreConfiguration;
 import ch.patchcode.jback.jpa.entitiesSpring.JpaEntitiesConfiguration;
 import ch.patchcode.jback.jpa.wrappers.JpaWrapperConfiguration;
 import ch.patchcode.jback.presentation.PresentationConfiguration;
+import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
 import ch.patchcode.jback.securitySpring.SecurityConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
@@ -33,6 +35,7 @@ import java.util.Properties;
 @Configuration
 @EnableAutoConfiguration
 @EnableWebMvc
+@ComponentScan
 @Import({
         ApiConfiguration.class,
         JpaWrapperConfiguration.class,
