@@ -12,7 +12,6 @@ digraph G {
   "jback-main" -> "jback-security-spring";
   "jback-jpa-wrapper" -> "jback-core-entities";
   "jback-jpa-wrapper" -> "jback-jpa-entities";
-  "jback-jpa-wrapper" -> "jback-jpa-entities-spring" [ style="dashed" ];
   "jback-jpa-wrapper" -> "jback-security-entities";
   "jback-jpa-entities-spring" -> "jback-jpa-entities";
   "jback-jpa-entities" -> "jback-core-entities";
