@@ -1,4 +1,4 @@
-package ch.patchcode.jback.api;
+package ch.patchcode.jback.test;
 
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.verification.VerificationCode;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static ch.patchcode.jback.api.ConstantVerificationCodeProvider.VERIFICATION_CODE;
+import static ch.patchcode.jback.test.ConstantVerificationCodeProvider.VERIFICATION_CODE;
 import static org.hamcrest.Matchers.equalTo;
 
 @ApiTestConfiguration.Apply

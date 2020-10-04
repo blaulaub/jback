@@ -1,4 +1,4 @@
-package ch.patchcode.jback.api;
+package ch.patchcode.jback.test;
 
 import ch.patchcode.jback.presentation.Perspective;
 import org.junit.jupiter.api.DisplayName;

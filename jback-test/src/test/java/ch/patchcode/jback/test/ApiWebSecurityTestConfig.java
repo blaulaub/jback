@@ -1,4 +1,4 @@
-package ch.patchcode.jback.api;
+package ch.patchcode.jback.test;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
