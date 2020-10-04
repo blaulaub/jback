@@ -25,7 +25,7 @@ public abstract class InitialRegistrationData {
     public abstract VerificationMean.Draft getVerificationMean();
 
     @JsonCreator
-    public static InitialRegistrationData create(
+    public static InitialRegistrationData of(
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName,
             @JsonProperty("verificationMean") VerificationMean.Draft verificationMean

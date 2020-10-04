@@ -2,7 +2,6 @@ package ch.patchcode.jback.api;
 
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.verification.VerificationByConsole;
-import ch.patchcode.jback.presentation.Perspective;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +30,7 @@ class RegistrationTest {
     void postingRegistrationYieldsPendingRegistrationId() throws Exception {
 
         // arrange
-        var content = InitialRegistrationData.create(
+        var content = InitialRegistrationData.of(
                 "Gregor",
                 "McGee",
                 new VerificationByConsole.Draft.Builder().build()
