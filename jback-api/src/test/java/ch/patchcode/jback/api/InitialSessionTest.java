@@ -11,13 +11,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Tests (or requirements) on a fresh session.
+ * <p>
+ * Fresh means the current user is not authenticated in any way.
+ */
 @ApiTestConfiguration.Apply
-class SessionTest {
+class InitialSessionTest {
 
     private final MockMvc mvc;
 
     @Autowired
-    public SessionTest(MockMvc mvc) {
+    public InitialSessionTest(MockMvc mvc) {
         this.mvc = mvc;
     }
 
