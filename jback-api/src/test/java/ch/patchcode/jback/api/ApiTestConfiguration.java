@@ -5,6 +5,7 @@ import ch.patchcode.jback.jpa.entitiesSpring.JpaEntitiesConfiguration;
 import ch.patchcode.jback.jpa.wrappers.JpaWrapperConfiguration;
 import ch.patchcode.jback.presentation.PresentationConfiguration;
 import ch.patchcode.jback.securitySpring.SecurityConfiguration;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -41,6 +43,11 @@ import java.util.Properties;
         ApiWebSecurityTestConfig.class
 })
 public class ApiTestConfiguration {
+
+    @Bean
+    public Api getApi(MockMvc mockMvc, ObjectMapper mapper) {
+        return new Api(mockMvc, mapper);
+    }
 
     @Bean
     public DataSource dataSource(Environment env) {

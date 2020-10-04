@@ -4,8 +4,6 @@ import ch.patchcode.jback.presentation.Perspective;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -19,11 +17,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ApiTestConfiguration.Apply
 class InitialSessionTest {
 
-    private final MockMvc mvc;
+    private final Api api;
 
     @Autowired
-    public InitialSessionTest(MockMvc mvc) {
-        this.mvc = mvc;
+    public InitialSessionTest(Api api) {
+        this.api = api;
     }
 
     @Test
@@ -31,9 +29,7 @@ class InitialSessionTest {
     void initialPerspectiveIsGuest() throws Exception {
 
         // act
-        var result = mvc.perform(get("/api/v1/session")
-                .accept(MediaType.APPLICATION_JSON)
-                .characterEncoding("utf-8"));
+        var result = api.getSession().andReturn();
 
         // assert
         result
