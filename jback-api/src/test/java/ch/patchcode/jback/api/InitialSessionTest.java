@@ -5,9 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.equalTo;
 
 /**
  * Tests (or requirements) on a fresh session.
@@ -33,7 +31,7 @@ class InitialSessionTest {
 
         // assert
         result
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.perspective").value(Perspective.GUEST.toString()));
+                .expectStatus().isOk()
+                .expectBody().jsonPath("$.perspective").value(equalTo(Perspective.GUEST.toString()));
     }
 }

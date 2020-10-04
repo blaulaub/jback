@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static ch.patchcode.jback.api.ConstantVerificationCodeProvider.VERIFICATION_CODE;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ApiTestConfiguration.Apply
 class RegistrationTest {
@@ -33,8 +31,8 @@ class RegistrationTest {
 
         // assert
         result
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.pendingRegistrationId").exists());
+                .expectStatus().isOk()
+                .expectBody().jsonPath("$.pendingRegistrationId").exists();
     }
 
     @Test
@@ -51,6 +49,6 @@ class RegistrationTest {
         ).andReturn();
 
         // assert
-        result.andExpect(status().isOk());
+        result.expectStatus().isOk();
     }
 }

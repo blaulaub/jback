@@ -6,46 +6,43 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Service
 public class Api {
 
-    private final MockMvc mvc;
+    private final WebTestClient webClient;
     private final ObjectMapper mapper;
 
     @Autowired
-    public Api(MockMvc mvc, ObjectMapper mapper) {
-        this.mvc = mvc;
+    public Api(WebTestClient webClient, ObjectMapper mapper) {
+        this.webClient = webClient;
         this.mapper = mapper;
     }
 
-    public Call getSession() throws Exception {
+    public Call getSession() {
 
         return new Call(
 
                 // call
-                mvc.perform(get("/api/v1/session")
+                webClient.get()
+                        .uri("/api/v1/session")
                         .accept(MediaType.APPLICATION_JSON)
-                        .characterEncoding("utf-8")),
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .exchange(),
 
                 // expect
                 asList(
-                        status().isOk(),
-                        jsonPath("$.perspective").exists()
+                        it -> it.expectStatus().isOk(),
+                        it -> it.expectBody().jsonPath("$.perspective").exists()
                 )
         );
 
@@ -56,49 +53,57 @@ public class Api {
         return new Call(
 
                 // call
-                mvc.perform(post("/api/v1/registration")
+                webClient.post()
+                        .uri("/api/v1/registration")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("utf-8")
-                        .content(mapper.writeValueAsString(registration))),
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .bodyValue(mapper.writeValueAsString(registration))
+                        .exchange(),
 
                 // expect
                 asList(
-                        status().isOk(),
-                        jsonPath("$.pendingRegistrationId").exists()));
+                        it -> it.expectStatus().isOk(),
+                        it -> it.expectBody().jsonPath("$.pendingRegistrationId").exists()
+                )
+        );
     }
 
     public Call putVerificationCode(UUID pendingRegistrationId, VerificationCode verificationCode) throws Exception {
         return new Call(
 
                 // call
-                mvc.perform(put("/api/v1/registration/{id}", pendingRegistrationId)
+                webClient.put().uri("/api/v1/registration/{id}", pendingRegistrationId)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("utf-8")
-                        .content(mapper.writeValueAsString(verificationCode))),
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .bodyValue(mapper.writeValueAsString(verificationCode))
+                        .exchange(),
 
                 // expect
-                asList(status().isOk())
+                asList(it -> it.expectStatus().isOk())
         );
     }
 
     public final class Call {
 
-        private final ResultActions result;
-        private final List<ResultMatcher> expectations;
+        private final WebTestClient.ResponseSpec result;
+        private final List<Function<WebTestClient.ResponseSpec, ?>> expectations;
 
-        public Call(ResultActions result, List<ResultMatcher> expectations) {
+        public Call(
+                WebTestClient.ResponseSpec result,
+                List<Function<WebTestClient.ResponseSpec, ?>> expectations
+        ) {
             this.result = result;
             this.expectations = expectations;
         }
 
-        public ResultActions andReturn() {
+        public WebTestClient.ResponseSpec andReturn() {
             return result;
         }
 
-        public ResultActions andAssumeGoodAndReturn() {
+        public WebTestClient.ResponseSpec andAssumeGoodAndReturn() {
             try {
-                for (ResultMatcher x : expectations) {
-                    x.match(result.andReturn());
+                for (Function<WebTestClient.ResponseSpec, ?> x : expectations) {
+                    x.apply(result);
                 }
             } catch (Exception e) {
                 assumeTrue(false);
@@ -108,7 +113,7 @@ public class Api {
 
         public <T> T andAssumeGoodAndReturn(Class<T> clazz) throws Exception {
 
-            String body = this.andAssumeGoodAndReturn().andReturn().getResponse().getContentAsString();
+            byte[] body = this.andAssumeGoodAndReturn().returnResult(clazz).getResponseBodyContent();
             return mapper.readValue(body, clazz);
         }
     }
