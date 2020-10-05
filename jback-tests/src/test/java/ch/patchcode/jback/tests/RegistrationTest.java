@@ -60,8 +60,8 @@ class RegistrationTest {
     }
 
     @Test
-    @DisplayName("after putting correct verification session becomes XXX")
-    void afterPuttingCorrectVerificationSessionBecomesXXX() throws Exception {
+    @DisplayName("after putting correct verification perspective becomes ENROLLING")
+    void afterPuttingCorrectVerificationSessionBecomesEnrolling() throws Exception {
 
         // arrange
         var content = Some.initialRegistrationData();
