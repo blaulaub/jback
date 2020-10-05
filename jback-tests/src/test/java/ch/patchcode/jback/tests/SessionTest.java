@@ -2,6 +2,7 @@ package ch.patchcode.jback.tests;
 
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.verification.VerificationCode;
+import ch.patchcode.jback.presentation.Perspective;
 import ch.patchcode.jback.testsInfra.Api;
 import ch.patchcode.jback.testsInfra.ApiTestConfiguration;
 import ch.patchcode.jback.testsInfra.Some;
@@ -12,65 +13,66 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
+import static org.hamcrest.Matchers.equalTo;
 
 @ApiTestConfiguration.Apply
-class RegistrationTest {
+class SessionTest {
 
     private final Api api;
 
     @Autowired
-    public RegistrationTest(@LocalServerPort int port, ObjectMapper mapper) {
+    public SessionTest(@LocalServerPort int port, ObjectMapper mapper) {
         this.api = new Api(port, mapper);
     }
 
     @Test
-    @DisplayName("posting initial registration data yields pending registration id")
-    void postingRegistrationYieldsPendingRegistrationId() throws Exception {
-
-        // arrange
-        var content = Some.initialRegistrationData();
+    @DisplayName("the initial session perspective is GUEST")
+    void initialPerspectiveIsGuest() {
 
         // act
-        var result = api.postRegistration(content).andReturn();
+        var result = api.getSession().andReturn();
 
         // assert
         result
                 .expectStatus().isOk()
-                .expectBody().jsonPath("$.pendingRegistrationId").exists();
+                .expectBody().jsonPath("$.perspective").value(equalTo(Perspective.GUEST.toString()));
     }
 
     @Test
-    @DisplayName("putting wrong verification code is forbidden")
-    void puttingWrongVerificationCodeIsForbidden() throws Exception {
+    @DisplayName("after putting wrong verification perspective remains GUEST")
+    void afterPuttingWrongVerificationSessionRemainsGuest() throws Exception {
 
         // arrange
         final String wrongCode = VERIFICATION_CODE + 1;
 
         var content = Some.initialRegistrationData();
         var info = api.postRegistration(content).andAssumeGoodAndReturn(PendingRegistrationInfo.class);
+        api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(wrongCode));
 
         // act
-        var result = api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(wrongCode)).andReturn();
+        var result = api.getSession().andReturn();
 
         // assert
-        result.expectStatus().isForbidden();
+        result
+                .expectStatus().isOk()
+                .expectBody().jsonPath("$.perspective").value(equalTo(Perspective.GUEST.toString()));
     }
 
     @Test
-    @DisplayName("putting correct verification code is ok")
-    void puttingCorrectVerificationCodeIsOk() throws Exception {
+    @DisplayName("after putting correct verification perspective becomes ENROLLING")
+    void afterPuttingCorrectVerificationSessionBecomesEnrolling() throws Exception {
 
         // arrange
         var content = Some.initialRegistrationData();
         var info = api.postRegistration(content).andAssumeGoodAndReturn(PendingRegistrationInfo.class);
+        api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(VERIFICATION_CODE)).andAssumeGoodAndReturn();
 
         // act
-        var result = api.putVerificationCode(
-                info.getPendingRegistrationId(),
-                VerificationCode.of(VERIFICATION_CODE)
-        ).andReturn();
+        var result = api.getSession().andReturn();
 
         // assert
-        result.expectStatus().isOk();
+        result
+                .expectStatus().isOk()
+                .expectBody().jsonPath("$.perspective").value(equalTo(Perspective.ENROLLING.toString()));
     }
 }
