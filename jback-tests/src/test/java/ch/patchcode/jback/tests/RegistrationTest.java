@@ -42,6 +42,23 @@ class RegistrationTest {
     }
 
     @Test
+    @DisplayName("putting wrong verification code is forbidden")
+    void puttingWrongVerificationCodeIsForbidden() throws Exception {
+
+        // arrange
+        final String wrongCode = VERIFICATION_CODE + 1;
+
+        var content = Some.initialRegistrationData();
+        var info = api.postRegistration(content).andAssumeGoodAndReturn(PendingRegistrationInfo.class);
+
+        // act
+        var result = api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(wrongCode)).andReturn();
+
+        // assert
+        result.expectStatus().isForbidden();
+    }
+
+    @Test
     @DisplayName("putting correct verification code is ok")
     void puttingCorrectVerificationCodeIsOk() throws Exception {
 
@@ -57,6 +74,26 @@ class RegistrationTest {
 
         // assert
         result.expectStatus().isOk();
+    }
+
+    @Test
+    @DisplayName("after putting wrong verification perspective remains GUEST")
+    void afterPuttingWrongVerificationSessionRemainsGuest() throws Exception {
+
+        // arrange
+        final String wrongCode = VERIFICATION_CODE + 1;
+
+        var content = Some.initialRegistrationData();
+        var info = api.postRegistration(content).andAssumeGoodAndReturn(PendingRegistrationInfo.class);
+        api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(wrongCode)).andReturn();
+
+        // act
+        var result = api.getSession().andReturn();
+
+        // assert
+        result
+                .expectStatus().isOk()
+                .expectBody().jsonPath("$.perspective").value(equalTo(Perspective.GUEST.toString()));
     }
 
     @Test
