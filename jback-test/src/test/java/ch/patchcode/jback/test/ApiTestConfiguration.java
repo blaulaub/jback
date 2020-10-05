@@ -103,8 +103,7 @@ public class ApiTestConfiguration {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
-    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-    @AutoConfigureWebTestClient
+    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
     @ContextConfiguration(classes = {ApiTestConfiguration.class})
     @ActiveProfiles("test")
     public @interface Apply {

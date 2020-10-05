@@ -1,9 +1,11 @@
 package ch.patchcode.jback.test;
 
 import ch.patchcode.jback.presentation.Perspective;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.server.LocalServerPort;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -18,8 +20,8 @@ class InitialSessionTest {
     private final Api api;
 
     @Autowired
-    public InitialSessionTest(Api api) {
-        this.api = api;
+    public InitialSessionTest(@LocalServerPort int port, ObjectMapper mapper) {
+        this.api = new Api(port, mapper);
     }
 
     @Test

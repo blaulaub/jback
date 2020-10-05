@@ -3,9 +3,7 @@ package ch.patchcode.jback.test;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.verification.VerificationCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.nio.charset.StandardCharsets;
@@ -16,15 +14,15 @@ import java.util.function.Function;
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
-@Service
 public class Api {
 
     private final WebTestClient webClient;
     private final ObjectMapper mapper;
 
-    @Autowired
-    public Api(WebTestClient webClient, ObjectMapper mapper) {
-        this.webClient = webClient;
+    public Api(int port, ObjectMapper mapper) {
+        this.webClient = WebTestClient.bindToServer()
+                .baseUrl("http://localhost:" + port)
+                .build();
         this.mapper = mapper;
     }
 
