@@ -1,4 +1,4 @@
-package ch.patchcode.jback.test;
+package ch.patchcode.jback.testsInfra;
 
 import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
 import org.springframework.context.annotation.Primary;

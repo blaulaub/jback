@@ -32,7 +32,7 @@
         <module>jback-spring</module>
         <module>jback-api</module>
         <module>jback-angular</module>
-        <module>jback-test</module>
+        <module>jback-tests</module>
         <module>jback-main</module>
     </modules>
 

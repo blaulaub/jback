@@ -1,15 +1,18 @@
-package ch.patchcode.jback.test;
+package ch.patchcode.jback.tests;
 
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.verification.VerificationCode;
 import ch.patchcode.jback.presentation.Perspective;
+import ch.patchcode.jback.testsInfra.Api;
+import ch.patchcode.jback.testsInfra.ApiTestConfiguration;
+import ch.patchcode.jback.testsInfra.Some;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 
-import static ch.patchcode.jback.test.ConstantVerificationCodeProvider.VERIFICATION_CODE;
+import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
 import static org.hamcrest.Matchers.equalTo;
 
 @ApiTestConfiguration.Apply

@@ -1,4 +1,4 @@
-package ch.patchcode.jback.test;
+package ch.patchcode.jback.testsInfra;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

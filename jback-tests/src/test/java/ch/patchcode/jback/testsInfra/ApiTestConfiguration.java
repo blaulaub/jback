@@ -1,4 +1,4 @@
-package ch.patchcode.jback.test;
+package ch.patchcode.jback.testsInfra;
 
 import ch.patchcode.jback.api.ApiConfiguration;
 import ch.patchcode.jback.core.CoreConfiguration;
@@ -7,7 +7,6 @@ import ch.patchcode.jback.jpa.wrappers.JpaWrapperConfiguration;
 import ch.patchcode.jback.presentation.PresentationConfiguration;
 import ch.patchcode.jback.securitySpring.SecurityConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

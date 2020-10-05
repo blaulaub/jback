@@ -1,6 +1,8 @@
-package ch.patchcode.jback.test;
+package ch.patchcode.jback.tests;
 
 import ch.patchcode.jback.presentation.Perspective;
+import ch.patchcode.jback.testsInfra.Api;
+import ch.patchcode.jback.testsInfra.ApiTestConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

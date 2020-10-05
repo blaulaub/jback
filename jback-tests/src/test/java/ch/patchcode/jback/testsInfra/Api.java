@@ -1,4 +1,4 @@
-package ch.patchcode.jback.test;
+package ch.patchcode.jback.testsInfra;
 
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.verification.VerificationCode;

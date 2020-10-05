@@ -1,4 +1,4 @@
-package ch.patchcode.jback.test;
+package ch.patchcode.jback.testsInfra;
 
 import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.ClientResponse;
