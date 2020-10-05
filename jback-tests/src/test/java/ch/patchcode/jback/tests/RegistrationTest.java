@@ -85,7 +85,7 @@ class RegistrationTest {
 
         var content = Some.initialRegistrationData();
         var info = api.postRegistration(content).andAssumeGoodAndReturn(PendingRegistrationInfo.class);
-        api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(wrongCode)).andReturn();
+        api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(wrongCode));
 
         // act
         var result = api.getSession().andReturn();

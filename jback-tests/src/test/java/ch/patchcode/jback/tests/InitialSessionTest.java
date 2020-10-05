@@ -27,8 +27,8 @@ class InitialSessionTest {
     }
 
     @Test
-    @DisplayName("the initial session perspective is 'GUEST'")
-    void initialPerspectiveIsGuest() throws Exception {
+    @DisplayName("the initial session perspective is GUEST")
+    void initialPerspectiveIsGuest() {
 
         // act
         var result = api.getSession().andReturn();
