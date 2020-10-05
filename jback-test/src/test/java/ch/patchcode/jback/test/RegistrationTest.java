@@ -4,7 +4,6 @@ import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.verification.VerificationCode;
 import ch.patchcode.jback.presentation.Perspective;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,6 @@ class RegistrationTest {
         result.expectStatus().isOk();
     }
 
-    @Disabled("testing sessions not supported yet, so this test will fail")
     @Test
     @DisplayName("after putting correct verification session becomes XXX")
     void afterPuttingCorrectVerificationSessionBecomesXXX() throws Exception {

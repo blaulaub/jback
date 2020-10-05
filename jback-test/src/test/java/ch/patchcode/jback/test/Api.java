@@ -3,12 +3,13 @@ package ch.patchcode.jback.test;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.verification.VerificationCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Function;
 
 import static java.util.Arrays.asList;
@@ -16,12 +17,16 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class Api {
 
+    private final static Logger LOG = LoggerFactory.getLogger(Api.class);
+
     private final WebTestClient webClient;
     private final ObjectMapper mapper;
+    private final CookieTrackerFilter cookieTrackerFilter = new CookieTrackerFilter();
 
     public Api(int port, ObjectMapper mapper) {
         this.webClient = WebTestClient.bindToServer()
                 .baseUrl("http://localhost:" + port)
+                .filter(cookieTrackerFilter)
                 .build();
         this.mapper = mapper;
     }
@@ -115,4 +120,5 @@ public class Api {
             return mapper.readValue(body, clazz);
         }
     }
+
 }
