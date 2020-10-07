@@ -13,6 +13,7 @@ import java.util.*;
 import java.util.function.Function;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class Api {
@@ -21,12 +22,12 @@ public class Api {
 
     private final WebTestClient webClient;
     private final ObjectMapper mapper;
-    private final CookieTrackerFilter cookieTrackerFilter = new CookieTrackerFilter();
 
     public Api(int port, ObjectMapper mapper) {
+
         this.webClient = WebTestClient.bindToServer()
                 .baseUrl("http://localhost:" + port)
-                .filter(cookieTrackerFilter)
+                .filter(new CookieTrackerFilter())
                 .build();
         this.mapper = mapper;
     }
@@ -72,6 +73,7 @@ public class Api {
     }
 
     public Call putVerificationCode(UUID pendingRegistrationId, VerificationCode verificationCode) throws Exception {
+
         return new Call(
 
                 // call
@@ -82,7 +84,20 @@ public class Api {
                         .exchange(),
 
                 // expect
-                asList(it -> it.expectStatus().isOk())
+                singletonList(it -> it.expectStatus().isOk())
+        );
+    }
+
+    public Call postLogout() {
+
+        return new Call(
+
+                // call
+                webClient.post().uri("/api/v1/session/logout")
+                        .exchange(),
+
+                // expect
+                singletonList(it -> it.expectStatus().isOk())
         );
     }
 
