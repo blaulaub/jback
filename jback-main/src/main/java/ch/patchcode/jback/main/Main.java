@@ -8,12 +8,13 @@ import ch.patchcode.jback.presentation.PresentationConfiguration;
 import ch.patchcode.jback.securitySpring.SecurityConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude= {UserDetailsServiceAutoConfiguration.class})
 @ComponentScan(basePackages = {"ch.patchcode.jback.main"})
 @Import({
         ApiConfiguration.class,

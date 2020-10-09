@@ -7,6 +7,7 @@ import ch.patchcode.jback.jpa.wrappers.JpaWrapperConfiguration;
 import ch.patchcode.jback.presentation.PresentationConfiguration;
 import ch.patchcode.jback.securitySpring.SecurityConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -31,7 +32,7 @@ import java.lang.annotation.Target;
 import java.util.Properties;
 
 @Configuration
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude= {UserDetailsServiceAutoConfiguration.class})
 @EnableWebMvc
 @ComponentScan
 @Import({
