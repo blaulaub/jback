@@ -1,10 +1,6 @@
 package ch.patchcode.jback.jpa.wrappers;
 
-import ch.patchcode.jback.jpa.entities.PersonalAuthenticationJpa;
-import ch.patchcode.jback.jpa.entities.PersonalAuthenticationJpaRepository;
-import ch.patchcode.jback.jpa.entities.PersonJpa;
-import ch.patchcode.jback.jpa.entities.PersonJpaRepository;
-import ch.patchcode.jback.jpa.entities.VerificationMeanJpa;
+import ch.patchcode.jback.jpa.entities.*;
 import ch.patchcode.jback.securityEntities.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.PersonalAuthenticationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 
 import static java.util.Collections.emptyList;
@@ -22,14 +19,18 @@ public class PersonalAuthenticationJpaRepoWrapper implements PersonalAuthenticat
 
     private final PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository;
     private final PersonJpaRepository personJpaRepository;
+    private final VerificationMeanJpaRepository verificationMeanJpaRepository;
 
     @Autowired
     public PersonalAuthenticationJpaRepoWrapper(
             PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository,
-            PersonJpaRepository personJpaRepository) {
+            PersonJpaRepository personJpaRepository,
+            VerificationMeanJpaRepository verificationMeanJpaRepository
+    ) {
 
         this.personalAuthenticationJpaRepository = personalAuthenticationJpaRepository;
         this.personJpaRepository = personJpaRepository;
+        this.verificationMeanJpaRepository = verificationMeanJpaRepository;
     }
 
     @Override
@@ -52,9 +53,13 @@ public class PersonalAuthenticationJpaRepoWrapper implements PersonalAuthenticat
 
         var entity = new PersonalAuthenticationJpa();
         entity.setSelf(self);
-        entity.setVerificationMeans(draft.getMeans().stream().map(it -> VerificationMeanJpa.fromDomain(entity, it)).collect(toList()));
         entity.setAuthorities(emptyList());
         entity.setClients(emptyList());
-        return personalAuthenticationJpaRepository.save(entity);
+        PersonalAuthenticationJpa result = personalAuthenticationJpaRepository.save(entity);
+
+        List<VerificationMeanJpa> means = draft.getMeans().stream().map(it -> VerificationMeanJpa.fromDomain(entity, it)).collect(toList());
+        result.setVerificationMeans(verificationMeanJpaRepository.saveAll(means));
+
+        return result;
     }
 }

@@ -1,5 +1,6 @@
 package ch.patchcode.jback.tests;
 
+import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.verification.VerificationCode;
 import ch.patchcode.jback.testsInfra.Api;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
+import static ch.patchcode.jback.testsInfra.Some.initialRegistrationData;
+import static java.util.Arrays.asList;
 
 @ApiTestConfiguration.Apply
 class RegistrationTest {
@@ -28,7 +31,7 @@ class RegistrationTest {
     void postingRegistrationYieldsPendingRegistrationId() throws Exception {
 
         // arrange
-        var content = Some.initialRegistrationData();
+        var content = initialRegistrationData();
 
         // act
         var result = api.postRegistration(content).andReturn();
@@ -46,8 +49,8 @@ class RegistrationTest {
         // arrange
         final String wrongCode = VERIFICATION_CODE + 1;
 
-        var content = Some.initialRegistrationData();
-        var info = api.postRegistration(content).andAssumeGoodAndReturn(PendingRegistrationInfo.class);
+        var info = api.postRegistration(initialRegistrationData())
+                .andAssumeGoodAndReturn(PendingRegistrationInfo.class);
 
         // act
         var result = api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(wrongCode)).andReturn();
@@ -61,8 +64,8 @@ class RegistrationTest {
     void puttingCorrectVerificationCodeIsOk() throws Exception {
 
         // arrange
-        var content = Some.initialRegistrationData();
-        var info = api.postRegistration(content).andAssumeGoodAndReturn(PendingRegistrationInfo.class);
+        var info = api.postRegistration(initialRegistrationData())
+                .andAssumeGoodAndReturn(PendingRegistrationInfo.class);
 
         // act
         var result = api.putVerificationCode(

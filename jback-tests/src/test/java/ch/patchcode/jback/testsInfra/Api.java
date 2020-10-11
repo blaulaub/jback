@@ -1,5 +1,6 @@
 package ch.patchcode.jback.testsInfra;
 
+import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.verification.VerificationCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -86,6 +87,24 @@ public class Api {
                 // expect
                 singletonList(it -> it.expectStatus().isOk())
         );
+    }
+
+    public Call postPersonMe(Person.Draft draft) throws Exception {
+
+        return new Call(
+
+                // call
+                webClient.post()
+                        .uri("/api/v1/persons/me")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .bodyValue(mapper.writeValueAsString(draft))
+                        .exchange(),
+
+                // expect
+                singletonList(it -> it.expectStatus().isOk())
+        );
+
     }
 
     public Call postLogout() {
