@@ -92,7 +92,7 @@ class SessionTest {
     void afterPostingMePerspectiveBecomesMember() throws Exception {
 
         // arrange
-        api.workflows.postMeToPersons(personDraft()).andAssumeGoodAndReturn();
+        api.workflows.registerAndPostMeToPersons(personDraft()).andAssumeGoodAndReturn();
 
         // act
         var result = api.getSession().andReturn();

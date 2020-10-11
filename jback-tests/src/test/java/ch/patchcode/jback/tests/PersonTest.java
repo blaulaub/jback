@@ -30,7 +30,7 @@ public class PersonTest {
         Person.Draft personDraft = personDraft();
 
         // act
-        var result = api.workflows.postMeToPersons(personDraft).andReturn();
+        var result = api.workflows.registerAndPostMeToPersons(personDraft).andReturn();
 
         // assert
         result
@@ -47,7 +47,7 @@ public class PersonTest {
     void postingMeTwiceIsForbidden() throws Exception {
 
         // arrange
-        api.workflows.postMeToPersons(personDraft()).andAssumeGoodAndReturn();
+        api.workflows.registerAndPostMeToPersons(personDraft()).andAssumeGoodAndReturn();
 
         // act
         var result = api.postPersonMe(personDraft()).andReturn();

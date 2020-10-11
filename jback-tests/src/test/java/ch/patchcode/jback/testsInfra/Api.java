@@ -201,7 +201,7 @@ public class Api {
         }
 
 
-        public CallResult postMeToPersons(Person.Draft content) throws Exception {
+        public CallResult registerAndPostMeToPersons(Person.Draft content) throws Exception {
 
             InitialRegistrationData initialData = InitialRegistrationData.Builder
                     .from(initialRegistrationData())
