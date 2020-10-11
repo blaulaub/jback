@@ -20,17 +20,19 @@ public class PersonalAuthenticationJpaRepoWrapper implements PersonalAuthenticat
     private final PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository;
     private final PersonJpaRepository personJpaRepository;
     private final VerificationMeanJpaRepository verificationMeanJpaRepository;
+    private final VerificationByPasswordRepository verificationByPasswordRepository;
 
     @Autowired
     public PersonalAuthenticationJpaRepoWrapper(
             PersonalAuthenticationJpaRepository personalAuthenticationJpaRepository,
             PersonJpaRepository personJpaRepository,
-            VerificationMeanJpaRepository verificationMeanJpaRepository
-    ) {
+            VerificationMeanJpaRepository verificationMeanJpaRepository,
+            VerificationByPasswordRepository verificationByPasswordRepository) {
 
         this.personalAuthenticationJpaRepository = personalAuthenticationJpaRepository;
         this.personJpaRepository = personJpaRepository;
         this.verificationMeanJpaRepository = verificationMeanJpaRepository;
+        this.verificationByPasswordRepository = verificationByPasswordRepository;
     }
 
     @Override
@@ -42,6 +44,14 @@ public class PersonalAuthenticationJpaRepoWrapper implements PersonalAuthenticat
 
     @Override
     public Optional<PersonalAuthentication> findByUserIdentification(String userIdentification) {
+
+        var byUsername = verificationByPasswordRepository.findByUsername(userIdentification);
+
+        if (!byUsername.isEmpty()) {
+            return  byUsername.stream().findFirst()
+                    .map(VerificationMeanJpa::getPersonalAuthentication)
+                    .map(PersonalAuthenticationJpa::toDomain);
+        }
 
         // TODO need to convert and lookup instead
         return Optional.empty();

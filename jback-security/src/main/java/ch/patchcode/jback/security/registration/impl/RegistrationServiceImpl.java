@@ -127,7 +127,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         @Override
-        public Void visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
+        public Void visit(VerificationByPassword.Draft verificationByUsernameAndPassword) {
 
             // if there is username and password, it does not make sense to send out a verification code
             throw new IllegalArgumentException();

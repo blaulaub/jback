@@ -43,7 +43,7 @@ public class AspSmsVerificationServiceImpl implements VerificationService.SmsVer
             }
 
             @Override
-            public String visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
+            public String visit(VerificationByPassword.Draft verificationByUsernameAndPassword) {
                 throw new IllegalArgumentException();
             }
         });

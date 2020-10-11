@@ -42,7 +42,7 @@ public abstract class VerificationMeanJpa {
 
         R visit(SmsVerification smsVerification);
 
-        R visit(UsernamePasswordVerification usernamePasswordVerification);
+        R visit(PasswordVerification passwordVerification);
     }
 
     public static VerificationMeanJpa fromDomain(PersonalAuthenticationJpa principal, VerificationMean.Draft mean) {
@@ -72,10 +72,10 @@ public abstract class VerificationMeanJpa {
             }
 
             @Override
-            public VerificationMeanJpa visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
-                var passwordVerification = new VerificationMeanJpa.UsernamePasswordVerification();
-                passwordVerification.setUsername(verificationByUsernameAndPassword.getUsername());
-                passwordVerification.setPassword(verificationByUsernameAndPassword.getPassword());
+            public VerificationMeanJpa visit(VerificationByPassword.Draft verificationByPassword) {
+                var passwordVerification = new PasswordVerification();
+                passwordVerification.setUsername(verificationByPassword.getUsername());
+                passwordVerification.setPassword(verificationByPassword.getPassword());
                 return passwordVerification;
             }
         });
@@ -109,11 +109,11 @@ public abstract class VerificationMeanJpa {
             }
 
             @Override
-            public VerificationMean visit(UsernamePasswordVerification usernamePasswordVerification) {
-                return new VerificationByUsernameAndPassword.Builder()
+            public VerificationMean visit(PasswordVerification passwordVerification) {
+                return new VerificationByPassword.Builder()
                         .setId(getId())
-                        .setUsername(usernamePasswordVerification.getUsername())
-                        .setPassword(usernamePasswordVerification.getPassword())
+                        .setUsername(passwordVerification.getUsername())
+                        .setPassword(passwordVerification.getPassword())
                         .build();
             }
         });
@@ -174,7 +174,7 @@ public abstract class VerificationMeanJpa {
 
     @Entity
     @DiscriminatorValue("password")
-    public static class UsernamePasswordVerification extends VerificationMeanJpa {
+    public static class PasswordVerification extends VerificationMeanJpa {
 
         private String username;
 

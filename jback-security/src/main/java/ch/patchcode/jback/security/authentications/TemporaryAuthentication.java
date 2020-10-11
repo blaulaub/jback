@@ -79,8 +79,8 @@ public class TemporaryAuthentication implements Principal {
                     }
 
                     @Override
-                    public VerificationByUsernameAndPassword visit(VerificationByUsernameAndPassword.Draft draft) {
-                        return new VerificationByUsernameAndPassword.Builder()
+                    public VerificationByPassword visit(VerificationByPassword.Draft draft) {
+                        return new VerificationByPassword.Builder()
                                 .setId(UUID.randomUUID())
                                 .setUsername(draft.getUsername())
                                 .setPassword(draft.getPassword())

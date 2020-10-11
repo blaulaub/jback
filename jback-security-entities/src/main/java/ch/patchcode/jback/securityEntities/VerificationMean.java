@@ -22,7 +22,7 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
 
             R visit(VerificationBySms.Draft draft);
 
-            R visit(VerificationByUsernameAndPassword.Draft draft);
+            R visit(VerificationByPassword.Draft draft);
         }
     }
 
@@ -34,6 +34,6 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
 
         R visit(VerificationBySms verificationBySms);
 
-        R visit(VerificationByUsernameAndPassword verificationByUsernameAndPassword);
+        R visit(VerificationByPassword verificationByPassword);
     }
 }

@@ -82,7 +82,7 @@ public class EmailVerificationServiceImpl implements VerificationService.EmailVe
             }
 
             @Override
-            public String visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
+            public String visit(VerificationByPassword.Draft verificationByUsernameAndPassword) {
 
                 throw new IllegalArgumentException();
             }

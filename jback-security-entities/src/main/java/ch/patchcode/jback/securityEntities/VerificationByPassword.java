@@ -5,7 +5,7 @@ import org.inferred.freebuilder.FreeBuilder;
 import java.util.UUID;
 
 @FreeBuilder
-public abstract class VerificationByUsernameAndPassword implements VerificationMean {
+public abstract class VerificationByPassword implements VerificationMean {
 
     @Override
     public abstract UUID getId();
@@ -48,10 +48,10 @@ public abstract class VerificationByUsernameAndPassword implements VerificationM
             return visitor.visit(this);
         }
 
-        public static class Builder extends VerificationByUsernameAndPassword_Draft_Builder {
+        public static class Builder extends VerificationByPassword_Draft_Builder {
         }
     }
 
-    public static class Builder extends VerificationByUsernameAndPassword_Builder {
+    public static class Builder extends VerificationByPassword_Builder {
     }
 }

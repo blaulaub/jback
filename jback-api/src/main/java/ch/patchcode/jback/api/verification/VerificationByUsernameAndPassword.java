@@ -1,5 +1,6 @@
 package ch.patchcode.jback.api.verification;
 
+import ch.patchcode.jback.securityEntities.VerificationByPassword;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -49,8 +50,8 @@ public abstract class VerificationByUsernameAndPassword extends VerificationMean
         }
     }
 
-    public ch.patchcode.jback.securityEntities.VerificationByUsernameAndPassword toDomain() {
-        return new ch.patchcode.jback.securityEntities.VerificationByUsernameAndPassword.Builder()
+    public VerificationByPassword toDomain() {
+        return new VerificationByPassword.Builder()
                 .setId(getId())
                 .setUsername(getUsername())
                 .setPassword(getPassword())
@@ -68,9 +69,9 @@ public abstract class VerificationByUsernameAndPassword extends VerificationMean
         public abstract String getPassword();
 
         @Override
-        public ch.patchcode.jback.securityEntities.VerificationByUsernameAndPassword.Draft toDomain() {
+        public VerificationByPassword.Draft toDomain() {
 
-            return new ch.patchcode.jback.securityEntities.VerificationByUsernameAndPassword.Draft.Builder()
+            return new VerificationByPassword.Draft.Builder()
                     .setUsername(getUsername())
                     .setPassword(getPassword())
                     .build();

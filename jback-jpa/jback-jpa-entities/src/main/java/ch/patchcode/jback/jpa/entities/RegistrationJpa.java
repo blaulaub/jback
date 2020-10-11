@@ -184,7 +184,7 @@ public abstract class RegistrationJpa {
         }
 
         @Override
-        public RegistrationJpa visit(VerificationByUsernameAndPassword.Draft verificationByUsernameAndPassword) {
+        public RegistrationJpa visit(VerificationByPassword.Draft verificationByUsernameAndPassword) {
 
             // if there was username and password, then registration is already over
             throw new IllegalArgumentException();
