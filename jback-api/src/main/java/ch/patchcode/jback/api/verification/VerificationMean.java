@@ -12,12 +12,14 @@ import java.util.UUID;
 @JsonSubTypes({
         @Type(value = VerificationByConsole.class, name = VerificationByConsole.TYPE),
         @Type(value = VerificationByEmail.class, name = VerificationByEmail.TYPE),
-        @Type(value = VerificationBySms.class, name = VerificationBySms.TYPE)
+        @Type(value = VerificationBySms.class, name = VerificationBySms.TYPE),
+        @Type(value = VerificationByUsernameAndPassword.class, name = VerificationByUsernameAndPassword.TYPE)
 })
 @ApiModel(subTypes = {
         VerificationByConsole.class,
         VerificationByEmail.class,
-        VerificationBySms.class
+        VerificationBySms.class,
+        VerificationByUsernameAndPassword.class
 })
 public abstract class VerificationMean {
 
@@ -33,12 +35,14 @@ public abstract class VerificationMean {
     @JsonSubTypes({
             @Type(value = VerificationByConsole.Draft.class, name = VerificationByConsole.TYPE),
             @Type(value = VerificationByEmail.Draft.class, name = VerificationByEmail.TYPE),
-            @Type(value = VerificationBySms.Draft.class, name = VerificationBySms.TYPE)
+            @Type(value = VerificationBySms.Draft.class, name = VerificationBySms.TYPE),
+            @Type(value = VerificationByUsernameAndPassword.Draft.class, name = VerificationByUsernameAndPassword.TYPE)
     })
     @ApiModel(subTypes = {
             VerificationByConsole.Draft.class,
             VerificationByEmail.Draft.class,
-            VerificationBySms.Draft.class
+            VerificationBySms.Draft.class,
+            VerificationByUsernameAndPassword.Draft.class
     })
     public static abstract class Draft {
 

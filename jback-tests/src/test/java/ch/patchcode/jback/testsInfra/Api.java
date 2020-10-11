@@ -3,7 +3,9 @@ package ch.patchcode.jback.testsInfra;
 import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
+import ch.patchcode.jback.api.session.LoginData;
 import ch.patchcode.jback.api.verification.VerificationCode;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -124,6 +126,27 @@ public class Api {
         );
 
     }
+
+    /**
+     * Calls the <tt>/api/v1/session/login</tt> endpoint.
+     * @return
+     */
+    public CallResult postLogin(LoginData loginData) throws Exception {
+
+        return new CallResult(
+
+                // call
+                webClient.post().uri("/api/v1/session/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .bodyValue(mapper.writeValueAsString(loginData))
+                        .exchange(),
+
+                // expect
+                singletonList(it -> it.expectStatus().isOk())
+        );
+    }
+
 
     /**
      * Calls the <tt>/api/v1/session/logout</tt> endpoint.

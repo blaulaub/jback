@@ -3,14 +3,12 @@ package ch.patchcode.jback.security.impl;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.LoginData;
-import ch.patchcode.jback.securityEntities.Principal;
+import ch.patchcode.jback.security.authentications.TemporaryAuthentication;
+import ch.patchcode.jback.securityEntities.*;
 import ch.patchcode.jback.security.TryLoginResult;
-import ch.patchcode.jback.securityEntities.PersonalAuthentication;
-import ch.patchcode.jback.securityEntities.PersonalAuthenticationRepository;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,18 +59,21 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public TryLoginResult tryLogin(LoginData data) {
+    public Principal tryLogin(LoginData data) {
 
         var userIdentification = data.getUserIdentification();
 
         var auth = personalAuthenticationService.findByUserIdentification(userIdentification);
+
         if (auth.isPresent()) {
 
-            // TODO where is the case that returns SUCCESS?
-            return TryLoginResult.NEED_CONFIRMATION_CODE;
+            // TODO This is wrong. We still need to check whether auth matches data. If so, and the user is fully
+            // TODO identified, returning auth is ok. If further proof is needed (e.g. a code via SMS or Email),
+            // TODO some temporary authentication should be returned.
+            return auth.get();
         } else {
 
-            return TryLoginResult.UNKNOWN_USER;
+            return null;
         }
 
     }

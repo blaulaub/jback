@@ -93,10 +93,19 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     @Override
     public TryLoginResult tryLogin(LoginData data) {
 
-        // maybe we can just delegate it further...
-        authorizationManager.tryLogin(data.toDomain());
+        var auth = authorizationManager.tryLogin(data.toDomain());
 
-        // TODO implement
+        if (auth == null) {
+
+            return TryLoginResult.UNKNOWN_USER;
+        }
+
+        if (auth instanceof PersonalAuthentication) {
+            SecurityContextHolder.getContext().setAuthentication((PersonalAuthentication) auth);
+            return TryLoginResult.SUCCESS;
+        }
+
+        // TODO implement need-confirmation-code cases
         throw new RuntimeException("not implemented");
     }
 }

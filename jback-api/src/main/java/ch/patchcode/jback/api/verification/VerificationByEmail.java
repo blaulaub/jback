@@ -46,6 +46,7 @@ public abstract class VerificationByEmail extends VerificationMean {
 
     public ch.patchcode.jback.securityEntities.VerificationByEmail toDomain() {
         return new ch.patchcode.jback.securityEntities.VerificationByEmail.Builder()
+                .setId(getId())
                 .setEmailAddress(getEmailAddress())
                 .build();
     }

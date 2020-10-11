@@ -19,7 +19,8 @@ public class PersonalAuthenticationServiceImpl implements PersonalAuthentication
     @Override
     public Optional<PersonalAuthentication> findByUserIdentification(String userIdentification) {
 
-        // TODO the repository should not be that clever
+        // TODO should the repository be that clever? userIdentification could be a username, phone number, etc;
+        // TODO the policy to resolve that maybe should be here (or maybe not)
         return personalAuthenticationRepository.findByUserIdentification(userIdentification);
     }
 }

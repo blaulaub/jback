@@ -15,12 +15,12 @@ public abstract class LoginData {
     public abstract String getUserIdentification();
 
     @ApiModelProperty
-    public abstract VerificationMean getVerificationMean();
+    public abstract VerificationMean.Draft getVerificationMean();
 
     @JsonCreator
     public static LoginData create(
             @JsonProperty(value = "userIdentification", required = true) String userIdentification,
-            @JsonProperty(value = "verificationMean", required = true) VerificationMean verificationMean
+            @JsonProperty(value = "verificationMean", required = true) VerificationMean.Draft verificationMean
     ) {
 
         return new LoginData.Builder()

@@ -1,5 +1,9 @@
 package ch.patchcode.jback.tests;
 
+import ch.patchcode.jback.api.persons.Person;
+import ch.patchcode.jback.api.session.LoginData;
+import ch.patchcode.jback.api.session.LoginResponse;
+import ch.patchcode.jback.api.verification.VerificationByUsernameAndPassword;
 import ch.patchcode.jback.presentation.Perspective;
 import ch.patchcode.jback.testsInfra.Api;
 import ch.patchcode.jback.testsInfra.ApiTestConfiguration;
@@ -101,5 +105,29 @@ class SessionTest {
         result
                 .expectStatus().isOk()
                 .expectBody().jsonPath("$.perspective").value(equalTo(Perspective.MEMBER.toString()));
+    }
+
+    @Test
+    @DisplayName("can login with username and password after registering me")
+    void canLoginWithUsernameAndPasswordAfterRegisteringMe() throws Exception {
+
+        // arrange
+        var registrationData = meDraft();
+        api.workflows.registerAndPostMeToPersons(registrationData).andAssumeGoodAndReturn();
+        api.postLogout();
+        var loginData = new LoginData.Builder()
+                .setUserIdentification(registrationData.getUsername())
+                .setVerificationMean(VerificationByUsernameAndPassword.Draft.create(
+                        registrationData.getUsername(),
+                        registrationData.getPassword()))
+                .build();
+
+        // act
+        var result = api.postLogin(loginData).andReturn();
+
+        // assert
+        result
+                .expectStatus().isOk();
+        // TODO also check that the perspective became MEMBER
     }
 }

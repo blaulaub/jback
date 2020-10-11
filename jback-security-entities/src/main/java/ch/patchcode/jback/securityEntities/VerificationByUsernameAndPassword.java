@@ -35,6 +35,14 @@ public abstract class VerificationByUsernameAndPassword implements VerificationM
 
         public abstract String getPassword();
 
+        public static Draft of(String username, String password) {
+
+            return new Builder()
+                    .setUsername(username)
+                    .setPassword(password)
+                    .build();
+        }
+
         @Override
         public <R> R accept(Visitor<R> visitor) {
             return visitor.visit(this);

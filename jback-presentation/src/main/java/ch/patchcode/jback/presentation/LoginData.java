@@ -8,7 +8,7 @@ public interface LoginData {
 
     String getUserIdentification();
 
-    VerificationMean getVerificationMean();
+    VerificationMean.Draft getVerificationMean();
 
     default ch.patchcode.jback.security.LoginData toDomain() {
 
