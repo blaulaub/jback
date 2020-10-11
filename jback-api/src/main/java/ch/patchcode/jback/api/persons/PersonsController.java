@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 import static ch.patchcode.jback.api.persons.Person.fromDomain;
@@ -61,10 +62,14 @@ public class PersonsController {
         var callerAuth = (Principal) context.getAuthentication();
 
         var person = personService.create(draft.toDomainPerson());
-        var auth = authorizationManager.createAuthorizationFor(
-                person,
-                callerAuth.getMeans().stream().map(VerificationMean::toNewDraft).collect(toList())
-        );
+
+        List<VerificationMean.Draft> means = callerAuth.getMeans().stream()
+                .map(VerificationMean::toNewDraft)
+                .collect(toList());
+        means.add(draft.toVerificationMean());
+
+        var auth = authorizationManager.createAuthorizationFor(person, means);
+
         context.setAuthentication(auth);
 
         return fromDomain(person);
