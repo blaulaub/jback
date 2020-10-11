@@ -31,14 +31,10 @@ public class PersonTest {
     void postingMeDuringRegistrationWorks() throws Exception {
 
         // arrange
-        var info = api.postRegistration(initialRegistrationData())
-                .andAssumeGoodAndReturn(PendingRegistrationInfo.class);
-        api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(VERIFICATION_CODE))
-                .andAssumeGoodAndReturn();
+        Person.Draft personDraft = Person.Draft.of("Tom", "Sawyer", asList("Technoparkstrasse 1", "8051 Zürich"));
 
         // act
-        var result = api.postPersonMe(Person.Draft.of("Tom", "Sawyer", asList("Technoparkstrasse 1", "8051 Zürich")))
-                .andReturn();
+        var result = api.workflows.postMeToPersons(personDraft).andReturn();
 
         // assert
         result
@@ -55,12 +51,7 @@ public class PersonTest {
     void postingMeTwiceIsForbidden() throws Exception {
 
         // arrange
-        var info = api.postRegistration(initialRegistrationData())
-                .andAssumeGoodAndReturn(PendingRegistrationInfo.class);
-        api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(VERIFICATION_CODE))
-                .andAssumeGoodAndReturn();
-        api.postPersonMe(Person.Draft.of("Tom", "Sawyer", asList("Technoparkstrasse 1", "8051 Zürich")))
-                .andAssumeGoodAndReturn();
+        api.workflows.postMeToPersons(Person.Draft.of("Tom", "Sawyer", asList("Technoparkstrasse 1", "8051 Zürich"))).andAssumeGoodAndReturn();
 
         // act
         var result = api.postPersonMe(Person.Draft.of("Tom", "Sawyer", asList("Technoparkstrasse 1", "8051 Zürich")))

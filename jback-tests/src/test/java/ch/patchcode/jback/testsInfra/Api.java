@@ -2,6 +2,7 @@ package ch.patchcode.jback.testsInfra;
 
 import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
+import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.verification.VerificationCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -13,10 +14,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Function;
 
+import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
+import static ch.patchcode.jback.testsInfra.Some.initialRegistrationData;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+/**
+ * Provides Java methods for REST API calls to the JBack backend.
+ */
 public class Api {
 
     private final static Logger LOG = LoggerFactory.getLogger(Api.class);
@@ -33,9 +39,12 @@ public class Api {
         this.mapper = mapper;
     }
 
-    public Call getSession() {
+    /**
+     * Calls the <tt>/api/v1/session</tt> endpoint.
+     */
+    public CallResult getSession() {
 
-        return new Call(
+        return new CallResult(
 
                 // call
                 webClient.get()
@@ -53,9 +62,12 @@ public class Api {
 
     }
 
-    public Call postRegistration(InitialRegistrationData registration) throws Exception {
+    /**
+     * Calls the <tt>/api/v1/registration</tt> endpoint.
+     */
+    public CallResult postRegistration(InitialRegistrationData registration) throws Exception {
 
-        return new Call(
+        return new CallResult(
 
                 // call
                 webClient.post()
@@ -73,9 +85,12 @@ public class Api {
         );
     }
 
-    public Call putVerificationCode(UUID pendingRegistrationId, VerificationCode verificationCode) throws Exception {
+    /**
+     * Calls the <tt>/api/v1/registration/{id}</tt> endpoint.
+     */
+    public CallResult putVerificationCode(UUID pendingRegistrationId, VerificationCode verificationCode) throws Exception {
 
-        return new Call(
+        return new CallResult(
 
                 // call
                 webClient.put().uri("/api/v1/registration/{id}", pendingRegistrationId)
@@ -89,9 +104,12 @@ public class Api {
         );
     }
 
-    public Call postPersonMe(Person.Draft draft) throws Exception {
+    /**
+     * Calls the <tt>/api/v1/persons/me</tt> endpoint.
+     */
+    public CallResult postPersonMe(Person.Draft draft) throws Exception {
 
-        return new Call(
+        return new CallResult(
 
                 // call
                 webClient.post()
@@ -110,9 +128,12 @@ public class Api {
 
     }
 
-    public Call postLogout() {
+    /**
+     * Calls the <tt>/api/v1/session/logout</tt> endpoint.
+     */
+    public CallResult postLogout() {
 
-        return new Call(
+        return new CallResult(
 
                 // call
                 webClient.post().uri("/api/v1/session/logout")
@@ -123,12 +144,15 @@ public class Api {
         );
     }
 
-    public final class Call {
+    /**
+     * Represents a REST call result of this {@link Api}.
+     */
+    public final class CallResult {
 
         private final WebTestClient.ResponseSpec result;
         private final List<Function<WebTestClient.ResponseSpec, ?>> expectations;
 
-        public Call(
+        public CallResult(
                 WebTestClient.ResponseSpec result,
                 List<Function<WebTestClient.ResponseSpec, ?>> expectations
         ) {
@@ -155,6 +179,48 @@ public class Api {
 
             byte[] body = this.andAssumeGoodAndReturn().returnResult(clazz).getResponseBodyContent();
             return mapper.readValue(body, clazz);
+        }
+    }
+
+    /**
+     * A bunch of pre-defined, standard workflows, for your convenience.
+     */
+    public final Workflows workflows = new Workflows();
+
+    /**
+     * A bunch of pre-defined, standard workflows, for your convenience.
+     */
+    public final class Workflows {
+
+        public CallResult registerWithCode(InitialRegistrationData content, String code) throws Exception {
+
+            var info = postRegistration(content)
+                    .andAssumeGoodAndReturn(PendingRegistrationInfo.class);
+
+            return putVerificationCode(
+                    info.getPendingRegistrationId(),
+                    VerificationCode.of(code)
+            );
+        }
+
+
+        public CallResult postMeToPersons(Person.Draft content) throws Exception {
+
+            InitialRegistrationData initialData = InitialRegistrationData.Builder
+                    .from(initialRegistrationData())
+                    .setFirstName(content.getFirstName())
+                    .setLastName(content.getLastName())
+                    .build();
+
+            var info = postRegistration(initialData)
+                    .andAssumeGoodAndReturn(PendingRegistrationInfo.class);
+
+            putVerificationCode(
+                    info.getPendingRegistrationId(),
+                    VerificationCode.of(VERIFICATION_CODE)
+            ).andAssumeGoodAndReturn();
+
+            return postPersonMe(content);
         }
     }
 }
