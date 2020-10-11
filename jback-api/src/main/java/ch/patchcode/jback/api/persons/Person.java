@@ -1,6 +1,7 @@
 package ch.patchcode.jback.api.persons;
 
 import ch.patchcode.jback.coreEntities.Address;
+import ch.patchcode.jback.securityEntities.VerificationByUsernameAndPassword;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -28,12 +29,12 @@ public interface Person {
             @JsonProperty("lastName") String lastName,
             @JsonProperty("address") List<String> address
     ) {
-        Builder builder = new Builder();
-        builder.setId(id);
-        builder.setFirstName(firstName);
-        builder.setLastName(lastName);
-        builder.addAllAddress(address);
-        return builder.build();
+        return new Builder()
+                .setId(id)
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .addAllAddress(address)
+                .build();
     }
 
     static Person fromDomain(ch.patchcode.jback.coreEntities.Person person) {
@@ -69,14 +70,14 @@ public interface Person {
                 @JsonProperty("lastName") String lastName,
                 @JsonProperty("address") List<String> address
         ) {
-            var builder = new Builder();
-            builder.setFirstName(firstName);
-            builder.setLastName(lastName);
-            builder.addAllAddress(address);
-            return builder.build();
+            return new Builder()
+                    .setFirstName(firstName)
+                    .setLastName(lastName)
+                    .addAllAddress(address)
+                    .build();
         }
 
-        public ch.patchcode.jback.coreEntities.Person.Draft toDomain() {
+        public ch.patchcode.jback.coreEntities.Person.Draft toDomainPerson() {
 
             var builder = new ch.patchcode.jback.coreEntities.Person.Draft.Builder();
             builder.setFirstName(getFirstName());
@@ -88,6 +89,41 @@ public interface Person {
         }
 
         public static class Builder extends Person_Draft_Builder {
+        }
+    }
+
+    @FreeBuilder
+    abstract class MeDraft extends Draft {
+
+        public abstract String getUsername();
+
+        public abstract String getPassword();
+
+        @JsonCreator
+        public static MeDraft of(
+                @JsonProperty("firstName") String firstName,
+                @JsonProperty("lastName") String lastName,
+                @JsonProperty("address") List<String> address,
+                @JsonProperty("username") String username,
+                @JsonProperty("password") String password
+        ) {
+            return new Builder()
+                    .setFirstName(firstName)
+                    .setLastName(lastName)
+                    .addAllAddress(address)
+                    .setUsername(username)
+                    .setPassword(password)
+                    .build();
+        }
+
+        public VerificationByUsernameAndPassword.Draft toVerificationMean() {
+            return new VerificationByUsernameAndPassword.Draft.Builder()
+                    .setUsername(getUsername())
+                    .setPassword(getPassword())
+                    .build();
+        }
+
+        public static class Builder extends Person_MeDraft_Builder {
         }
     }
 }

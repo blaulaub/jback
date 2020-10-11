@@ -11,7 +11,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
 import static ch.patchcode.jback.testsInfra.Some.initialRegistrationData;
-import static ch.patchcode.jback.testsInfra.Some.personDraft;
+import static ch.patchcode.jback.testsInfra.Some.meDraft;
 import static org.hamcrest.Matchers.equalTo;
 
 @ApiTestConfiguration.Apply
@@ -92,7 +92,7 @@ class SessionTest {
     void afterPostingMePerspectiveBecomesMember() throws Exception {
 
         // arrange
-        api.workflows.registerAndPostMeToPersons(personDraft()).andAssumeGoodAndReturn();
+        api.workflows.registerAndPostMeToPersons(meDraft()).andAssumeGoodAndReturn();
 
         // act
         var result = api.getSession().andReturn();

@@ -27,4 +27,14 @@ public abstract class Some {
                 asList("Technoparkstrasse 1", "8051 Zürich")
         );
     }
+
+    public static Person.MeDraft meDraft() {
+        return Person.MeDraft.of(
+                "Tom",
+                "Sawyer",
+                asList("Technoparkstrasse 1", "8051 Zürich"),
+                "tsawyer",
+                "asdf"
+        );
+    }
 }

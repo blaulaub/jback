@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 
-import static ch.patchcode.jback.testsInfra.Some.personDraft;
+import static ch.patchcode.jback.testsInfra.Some.meDraft;
 import static org.hamcrest.Matchers.contains;
 
 @ApiTestConfiguration.Apply
@@ -27,19 +27,19 @@ public class PersonTest {
     void postingMeDuringRegistrationWorks() throws Exception {
 
         // arrange
-        Person.Draft personDraft = personDraft();
+        Person.MeDraft meDraft = meDraft();
 
         // act
-        var result = api.workflows.registerAndPostMeToPersons(personDraft).andReturn();
+        var result = api.workflows.registerAndPostMeToPersons(meDraft).andReturn();
 
         // assert
         result
                 .expectStatus().isOk()
                 .expectBody()
                 .jsonPath("$.id").exists()
-                .jsonPath("$.firstName").isEqualTo(personDraft.getFirstName())
-                .jsonPath("$.lastName").isEqualTo(personDraft.getLastName())
-                .jsonPath("$.address").value(contains(personDraft.getAddress().toArray()));
+                .jsonPath("$.firstName").isEqualTo(meDraft.getFirstName())
+                .jsonPath("$.lastName").isEqualTo(meDraft.getLastName())
+                .jsonPath("$.address").value(contains(meDraft.getAddress().toArray()));
     }
 
     @Test
@@ -47,10 +47,10 @@ public class PersonTest {
     void postingMeTwiceIsForbidden() throws Exception {
 
         // arrange
-        api.workflows.registerAndPostMeToPersons(personDraft()).andAssumeGoodAndReturn();
+        api.workflows.registerAndPostMeToPersons(meDraft()).andAssumeGoodAndReturn();
 
         // act
-        var result = api.postPersonMe(personDraft()).andReturn();
+        var result = api.postPersonMe(meDraft()).andReturn();
 
         // assert
         result.expectStatus().isForbidden();

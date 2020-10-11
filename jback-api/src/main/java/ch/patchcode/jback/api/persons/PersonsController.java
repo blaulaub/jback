@@ -54,13 +54,13 @@ public class PersonsController {
     @PostMapping("me")
     @PreAuthorize("hasAuthority('CAN_CREATE_OWN_PERSON')")
     public Person createOwnPerson(
-            @RequestBody @ApiParam Person.Draft draft
+            @RequestBody @ApiParam Person.MeDraft draft
     ) {
 
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Principal) context.getAuthentication();
 
-        var person = personService.create(draft.toDomain());
+        var person = personService.create(draft.toDomainPerson());
         var auth = authorizationManager.createAuthorizationFor(
                 person,
                 callerAuth.getMeans().stream().map(VerificationMean::toNewDraft).collect(toList())
@@ -84,7 +84,7 @@ public class PersonsController {
 
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Principal) context.getAuthentication();
-        var person = personService.create(draft.toDomain());
+        var person = personService.create(draft.toDomainPerson());
         authorizationManager.addClient(callerAuth, person);
         return fromDomain(person);
     }
