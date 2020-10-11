@@ -5,13 +5,12 @@ import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.verification.VerificationCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 import java.util.function.Function;
 
 import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
@@ -24,8 +23,6 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
  * Provides Java methods for REST API calls to the JBack backend.
  */
 public class Api {
-
-    private final static Logger LOG = LoggerFactory.getLogger(Api.class);
 
     private final WebTestClient webClient;
     private final ObjectMapper mapper;
