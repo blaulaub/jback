@@ -102,7 +102,10 @@ public class Api {
                         .exchange(),
 
                 // expect
-                singletonList(it -> it.expectStatus().isOk())
+                asList(
+                        it -> it.expectStatus().isOk(),
+                        it -> it.expectBody().jsonPath("$.id").exists()
+                )
         );
 
     }
@@ -154,5 +157,4 @@ public class Api {
             return mapper.readValue(body, clazz);
         }
     }
-
 }

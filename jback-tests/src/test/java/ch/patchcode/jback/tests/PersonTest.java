@@ -49,4 +49,24 @@ public class PersonTest {
                 .jsonPath("$.lastName").isEqualTo("Sawyer")
                 .jsonPath("$.address").value(contains("Technoparkstrasse 1", "8051 Zürich"));
     }
+
+    @Test
+    @DisplayName("posting me twice is forbidden")
+    void postingMeTwiceIsForbidden() throws Exception {
+
+        // arrange
+        var info = api.postRegistration(initialRegistrationData())
+                .andAssumeGoodAndReturn(PendingRegistrationInfo.class);
+        api.putVerificationCode(info.getPendingRegistrationId(), VerificationCode.of(VERIFICATION_CODE))
+                .andAssumeGoodAndReturn();
+        api.postPersonMe(Person.Draft.of("Tom", "Sawyer", asList("Technoparkstrasse 1", "8051 Zürich")))
+                .andAssumeGoodAndReturn();
+
+        // act
+        var result = api.postPersonMe(Person.Draft.of("Tom", "Sawyer", asList("Technoparkstrasse 1", "8051 Zürich")))
+                .andReturn();
+
+        // assert
+        result.expectStatus().isForbidden();
+    }
 }
