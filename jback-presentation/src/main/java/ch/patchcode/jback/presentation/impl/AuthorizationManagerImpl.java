@@ -100,12 +100,9 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
             return TryLoginResult.UNKNOWN_USER;
         }
 
-        if (auth instanceof ch.patchcode.jback.securityEntities.PersonalAuthentication) {
-
-            SecurityContextHolder.getContext().setAuthentication(
-                    PersonalAuthentication.fromDomain(
-                            (ch.patchcode.jback.securityEntities.PersonalAuthentication) auth)
-            );
+        var potentialPersonalAuthentication = PersonalAuthentication.fromDomain(auth);
+        if (potentialPersonalAuthentication.isPresent()) {
+            SecurityContextHolder.getContext().setAuthentication(potentialPersonalAuthentication.get());
             return TryLoginResult.SUCCESS;
         }
 
