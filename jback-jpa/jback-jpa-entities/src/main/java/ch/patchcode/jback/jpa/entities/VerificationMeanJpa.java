@@ -74,6 +74,7 @@ public abstract class VerificationMeanJpa {
             @Override
             public VerificationMeanJpa visit(VerificationByPassword.Draft verificationByPassword) {
                 var passwordVerification = new PasswordVerification();
+                passwordVerification.setPersonalAuthentication(principal);
                 passwordVerification.setUsername(verificationByPassword.getUsername());
                 passwordVerification.setPassword(verificationByPassword.getPassword());
                 return passwordVerification;

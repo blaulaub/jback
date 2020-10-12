@@ -127,7 +127,7 @@ class SessionTest {
 
         // assert
         result
-                .expectStatus().isOk();
-        // TODO also check that the perspective became MEMBER
+                .expectStatus().isOk()
+                .expectBody().jsonPath("$.kind").value(equalTo(LoginResponse.Kind.SUCCESS.toString()));
     }
 }

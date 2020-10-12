@@ -16,13 +16,13 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
 
         interface Visitor<R> {
 
-            R visit(VerificationByConsole.Draft draft);
+            R visit(VerificationByConsole.Draft consoleDraft);
 
-            R visit(VerificationByEmail.Draft draft);
+            R visit(VerificationByEmail.Draft emailDraft);
 
-            R visit(VerificationBySms.Draft draft);
+            R visit(VerificationBySms.Draft smsDraft);
 
-            R visit(VerificationByPassword.Draft draft);
+            R visit(VerificationByPassword.Draft passwordDraft);
         }
     }
 

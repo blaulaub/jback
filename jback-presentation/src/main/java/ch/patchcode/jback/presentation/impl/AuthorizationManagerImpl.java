@@ -4,11 +4,11 @@ import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.LoginData;
 import ch.patchcode.jback.presentation.TryLoginResult;
-import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.security.registration.ConfirmationResult;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
 import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
+import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,8 +100,12 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
             return TryLoginResult.UNKNOWN_USER;
         }
 
-        if (auth instanceof PersonalAuthentication) {
-            SecurityContextHolder.getContext().setAuthentication((PersonalAuthentication) auth);
+        if (auth instanceof ch.patchcode.jback.securityEntities.PersonalAuthentication) {
+
+            SecurityContextHolder.getContext().setAuthentication(
+                    PersonalAuthentication.fromDomain(
+                            (ch.patchcode.jback.securityEntities.PersonalAuthentication) auth)
+            );
             return TryLoginResult.SUCCESS;
         }
 

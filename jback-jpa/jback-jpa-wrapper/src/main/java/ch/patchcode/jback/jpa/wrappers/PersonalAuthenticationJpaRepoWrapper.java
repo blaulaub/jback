@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -47,14 +46,9 @@ public class PersonalAuthenticationJpaRepoWrapper implements PersonalAuthenticat
 
         var byUsername = verificationByPasswordRepository.findByUsername(userIdentification);
 
-        if (!byUsername.isEmpty()) {
-            return  byUsername.stream().findFirst()
-                    .map(VerificationMeanJpa::getPersonalAuthentication)
-                    .map(PersonalAuthenticationJpa::toDomain);
-        }
-
-        // TODO need to convert and lookup instead
-        return Optional.empty();
+        return byUsername.stream().findFirst()
+                .map(VerificationMeanJpa::getPersonalAuthentication)
+                .map(PersonalAuthenticationJpa::toDomain);
     }
 
     private PersonalAuthenticationJpa persist(PersonalAuthentication.Draft draft) {
@@ -67,7 +61,7 @@ public class PersonalAuthenticationJpaRepoWrapper implements PersonalAuthenticat
         entity.setClients(emptyList());
         PersonalAuthenticationJpa result = personalAuthenticationJpaRepository.save(entity);
 
-        List<VerificationMeanJpa> means = draft.getMeans().stream().map(it -> VerificationMeanJpa.fromDomain(entity, it)).collect(toList());
+        List<VerificationMeanJpa> means = draft.getMeans().stream().map(it -> VerificationMeanJpa.fromDomain(result, it)).collect(toList());
         result.setVerificationMeans(verificationMeanJpaRepository.saveAll(means));
 
         return result;
