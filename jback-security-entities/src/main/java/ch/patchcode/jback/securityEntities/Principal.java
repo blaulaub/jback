@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Principal extends
         java.security.Principal,
-        ch.patchcode.jback.secBase.secModelImpl.Principal<Person, VerificationMean>  {
+        ch.patchcode.jback.secModel.Principal<Person, Authority, VerificationMean>  {
 
     String getFirstName();
 
@@ -17,9 +17,6 @@ public interface Principal extends
 
     @Override
     String getName();
-
-
-    // impl ch.patchcode.jback.secBase.secModelImpl.Principal
 
     @Override
     List<VerificationMean> getMeans();
