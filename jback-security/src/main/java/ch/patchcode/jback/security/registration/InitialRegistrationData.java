@@ -1,18 +1,15 @@
-package ch.patchcode.jback.security.secBaseImpl;
+package ch.patchcode.jback.security.registration;
 
 import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
 @FreeBuilder
-public interface InitialRegistrationData extends ch.patchcode.jback.secBase.InitialRegistrationData {
+public interface InitialRegistrationData {
 
-    @Override
     String getFirstName();
 
-    @Override
     String getLastName();
 
-    @Override
     VerificationMean.Draft getVerificationMean();
 
     class Builder extends InitialRegistrationData_Builder {

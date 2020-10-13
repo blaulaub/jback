@@ -5,7 +5,7 @@ import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.LoginData;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
 import ch.patchcode.jback.security.registration.RegistrationService;
-import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
+import ch.patchcode.jback.security.registration.InitialRegistrationData;
 import ch.patchcode.jback.securityEntities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -3,7 +3,7 @@ package ch.patchcode.jback.presentation;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.Principal;
-import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
+import ch.patchcode.jback.security.registration.InitialRegistrationData;
 import ch.patchcode.jback.security.verificationCodes.VerificationCode;
 import ch.patchcode.jback.securityEntities.VerificationMean;
 
