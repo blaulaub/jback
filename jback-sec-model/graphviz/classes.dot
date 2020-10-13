@@ -6,6 +6,7 @@ digraph G {
   "User" -> "Role";
   "Principal" -> "Privilege";
   "Principal" -> "Person";
+  "Principal" -> "AuthenticationMean";
   "Role" -> "Person";
   "Role" -> "Organisation";
   "Role" -> "Privilege";

@@ -1,16 +1,17 @@
 package ch.patchcode.jback.secBase.secModelImpl;
 
-import ch.patchcode.jback.secBase.VerificationMean;
+import ch.patchcode.jback.secModel.AuthenticationMean;
 
 import java.util.List;
 
-public interface Role<TVerificationMean extends VerificationMean> extends ch.patchcode.jback.secModel.Role<
+public interface Role<TAuthenticationMean extends AuthenticationMean> extends ch.patchcode.jback.secModel.Role<
         Organisation,
         Person,
-        Principal<TVerificationMean>,
+        Principal<TAuthenticationMean>,
+        TAuthenticationMean,
         Authority,
-        Role<TVerificationMean>,
-        User<TVerificationMean>>{
+        Role<TAuthenticationMean>,
+        User<TAuthenticationMean>>{
 
     // from secModel.Principal
 

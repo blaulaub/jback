@@ -2,7 +2,7 @@ package ch.patchcode.jback.securityEntities;
 
 import java.util.UUID;
 
-public interface VerificationMean extends ch.patchcode.jback.secBase.VerificationMean {
+public interface VerificationMean extends ch.patchcode.jback.secModel.AuthenticationMean {
 
     UUID getId();
 

@@ -2,7 +2,7 @@
 
 ## The entities
 
-This packages defines the basic entities of the security model of
+This packages conceptualizes the basic entities of the security model of
 our system:
 
 * **Principal** is someone who can be authenticated (by, e.g., a password)
@@ -10,6 +10,7 @@ our system:
 * **Privileges** is what is allowed to be done
 * **Organisation** is a body of persons, formed for a self-given purpose
 * **Role** is what a person plays in an organisation
+* **AuthenticationMean** is anything a principal can be authenticated by
 
 ![classes.svg](graphviz/classes.svg)
 
