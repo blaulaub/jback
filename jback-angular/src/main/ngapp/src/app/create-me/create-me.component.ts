@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  Validators,
+  FormArray,
+  FormBuilder,
+  AbstractControl,
+  ValidatorFn
+} from '@angular/forms';
 
 import { PersonService } from '../person/person.service';
-import { PersonDraft } from '../person/person-draft';
 import { SessionService } from '../session/session.service';
 
 @Component({
@@ -22,6 +28,11 @@ export class CreateMeComponent implements OnInit {
     private fb: FormBuilder
     ) {
 
+      let passwordInput = this.fb.control(null, [
+        Validators.required,
+        Validators.minLength(8)
+      ]);
+
       this.personForm = this.fb.group({
         firstName: this.fb.control(null, [
           Validators.required
@@ -36,9 +47,10 @@ export class CreateMeComponent implements OnInit {
           Validators.required,
           Validators.minLength(3)
         ]),
-        password: this.fb.control(null, [
+        password: passwordInput,
+        confirm: this.fb.control(null, [
           Validators.required,
-          Validators.minLength(8)
+          this.mustMatchWith(passwordInput)
         ])
       });  
     }
@@ -76,5 +88,12 @@ export class CreateMeComponent implements OnInit {
 
   removeLine(i: number) {
     this.address.removeAt(i);
+  }
+
+  private mustMatchWith(other: AbstractControl): ValidatorFn {
+
+    return (control: AbstractControl): {[key: string]: any} | null =>
+      (control.value != other.value) ? { mustMatchWith: { value: control.value}} : null;
+
   }
 }
