@@ -10,7 +10,7 @@ public interface VerificationMean extends ch.patchcode.jback.secBase.Verificatio
 
     Draft toNewDraft();
 
-    interface Draft extends ch.patchcode.jback.secBase.VerificationMean.Draft {
+    interface Draft {
 
         <R> R accept(Visitor<R> visitor);
 
