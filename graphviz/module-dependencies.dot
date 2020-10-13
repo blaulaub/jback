@@ -21,21 +21,16 @@ digraph G {
   "jback-api" -> "jback-security-entities";
   "jback-presentation" -> "jback-core";
   "jback-presentation" -> "jback-core-entities";
-  "jback-presentation" -> "jback-sec-base";
   "jback-presentation" -> "jback-security";
   "jback-presentation" -> "jback-security-entities";
   "jback-security" -> "jback-core-entities";
-  "jback-security" -> "jback-sec-base";
   "jback-security" -> "jback-security-entities";
   "jback-security-entities" -> "jback-core-entities";
-  "jback-security-entities" -> "jback-sec-base";
+  "jback-security-entities" -> "jback-sec-model";
   "jback-security-spring" -> "jback-security";
   "jback-security-spring" -> "jback-security-entities";
   "jback-core" -> "jback-core-entities";
-  "jback-core" -> "jback-sec-base";
-  "jback-core-entities" -> "jback-sec-base";
+  "jback-core-entities" -> "jback-sec-model";
   "jback-core-spring" -> "jback-core";
   "jback-core-spring" -> "jback-core-entities";
-  "jback-core-spring" -> "jback-sec-base";
-  "jback-sec-base" -> "jback-sec-model";
 }

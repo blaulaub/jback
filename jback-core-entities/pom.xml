@@ -17,7 +17,7 @@
 
         <dependency>
             <groupId>ch.patchcode</groupId>
-            <artifactId>jback-sec-base</artifactId>
+            <artifactId>jback-sec-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

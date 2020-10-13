@@ -11,7 +11,6 @@ This is a server backend.
 * **[jback-core](jback-core)** provides the business logic
 * **[jback-jpa](jback-jpa)** implements persistence using JPA and Spring Data
 * **[jback-main](jback-main)** ties everything together to a runnable jar
-* **[jback-sec-base](jback-sec-base)** declares fundamental security things shared between `jback-core` and `jback-security`
 * **[jback-sec-model](jback-sec-model)** declares a simple, generic security model
 * **[jback-security](jback-security)** implements security using Spring Security
 * **[jback-util](jback-util)** contains basic shared code

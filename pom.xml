@@ -22,7 +22,6 @@
 
     <modules>
         <module>jback-sec-model</module>
-        <module>jback-sec-base</module>
         <module>jback-core-entities</module>
         <module>jback-core</module>
         <module>jback-jpa</module>
