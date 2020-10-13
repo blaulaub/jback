@@ -1,4 +1,4 @@
-import { VerificationMean } from './verification-mean';
+import { VerificationMean } from '../verification-means/verification-mean';
 
 export class InitialRegistrationData {
 

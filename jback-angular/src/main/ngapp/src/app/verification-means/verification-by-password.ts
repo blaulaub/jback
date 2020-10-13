@@ -1,4 +1,4 @@
-import { VerificationMean } from '../registration/verification-mean'
+import { VerificationMean } from './verification-mean'
 
 export class VerificationByPassword extends VerificationMean {
 

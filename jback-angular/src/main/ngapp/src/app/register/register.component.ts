@@ -4,9 +4,8 @@ import { Router } from '@angular/router';
 import { RegistrationService } from '../registration/registration.service';
 
 import { InitialRegistrationData } from '../registration/initial-registration-data';
-import { VerificationMean } from '../registration/verification-mean';
-import { VerificationByEmail } from '../registration/verification-by-email';
-import { VerificationBySms } from '../registration/verification-by-sms';
+import { VerificationByEmail } from '../verification-means/verification-by-email';
+import { VerificationBySms } from '../verification-means/verification-by-sms';
 import { PendingRegistrationInfo } from '../registration/pending-registration-info';
 
 @Component({

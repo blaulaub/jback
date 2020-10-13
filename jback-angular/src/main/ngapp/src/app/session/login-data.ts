@@ -1,4 +1,4 @@
-import { VerificationByPassword } from './verification-by-password'
+import { VerificationByPassword } from '../verification-means/verification-by-password'
 
 export class LoginData {
 
