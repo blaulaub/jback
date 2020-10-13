@@ -1,10 +1,7 @@
 package ch.patchcode.jback.secBase;
 
-import org.inferred.freebuilder.FreeBuilder;
-
 import java.time.Instant;
 
-@FreeBuilder
 public interface PendingRegistration {
 
     String getFirstName();
@@ -16,7 +13,4 @@ public interface PendingRegistration {
     String getVerificationCode();
 
     Instant getExpiresAt();
-
-    class Builder extends PendingRegistration_Builder {
-    }
 }

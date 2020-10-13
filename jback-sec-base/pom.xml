@@ -21,13 +21,6 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- non-transient (like code generators) -->
-        <dependency>
-            <groupId>org.inferred</groupId>
-            <artifactId>freebuilder</artifactId>
-            <optional>true</optional>
-        </dependency>
-
     </dependencies>
 
 </project>
