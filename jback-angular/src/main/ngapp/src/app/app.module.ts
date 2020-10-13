@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CompleteComponent } from './complete/complete.component';
 import { CreateMeComponent } from './create-me/create-me.component';
 import { FrontPageComponent } from './front-page/front-page.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FrontPageComponent } from './front-page/front-page.component';
     RegisterComponent,
     CompleteComponent,
     CreateMeComponent,
-    FrontPageComponent
+    FrontPageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
