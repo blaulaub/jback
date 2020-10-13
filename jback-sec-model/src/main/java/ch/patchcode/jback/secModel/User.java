@@ -14,7 +14,7 @@ public interface User<
         TPrincipal extends Principal<TPerson, TPrivilege, TAuthenticationMean>,
         TAuthenticationMean extends AuthenticationMean,
         TPrivilege extends Privilege,
-        TRole extends Role<TOrganisation, TPerson, TPrincipal, TAuthenticationMean, TPrivilege, TRole, TUser>,
+        TRole extends Role<TOrganisation, TPerson, TPrivilege>,
         TUser extends User<TOrganisation, TPerson, TPrincipal, TAuthenticationMean, TPrivilege, TRole, TUser>
         > {
 

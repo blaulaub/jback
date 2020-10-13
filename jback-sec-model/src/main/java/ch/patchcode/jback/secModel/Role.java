@@ -8,12 +8,7 @@ import java.util.List;
 public interface Role<
         TOrganisation extends Organisation,
         TPerson extends Person,
-        TPrincipal extends Principal<TPerson, TPrivilege, TAuthenticationMean>,
-        TAuthenticationMean extends AuthenticationMean,
-        TPrivilege extends Privilege,
-        TRole extends Role<TOrganisation, TPerson, TPrincipal, TAuthenticationMean, TPrivilege, TRole, TUser>,
-        TUser extends User<TOrganisation, TPerson, TPrincipal, TAuthenticationMean, TPrivilege, TRole, TUser>
-        > {
+        TPrivilege extends Privilege> {
 
     /**
      * @return the person holding the role

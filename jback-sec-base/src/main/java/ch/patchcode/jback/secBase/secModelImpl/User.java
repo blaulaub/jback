@@ -16,7 +16,7 @@ public interface User<
         TPrincipal,
         TAuthenticationMean,
         Authority,
-        Role<TOrganisation, TPerson, TPrincipal, TAuthenticationMean>,
+        Role<TOrganisation, TPerson>,
         User<TOrganisation, TPerson, TPrincipal, TAuthenticationMean>> {
 
     // from secModel.User
@@ -25,5 +25,5 @@ public interface User<
     TPrincipal getPrincipal();
 
     @Override
-    Role<TOrganisation, TPerson, TPrincipal, TAuthenticationMean> getRole();
+    Role<TOrganisation, TPerson> getRole();
 }
