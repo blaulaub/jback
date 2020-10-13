@@ -1,11 +1,10 @@
-package ch.patchcode.jback.security.secBaseImpl;
+package ch.patchcode.jback.security.verificationCodes;
 
 import org.inferred.freebuilder.FreeBuilder;
 
 @FreeBuilder
-public interface VerificationCode extends ch.patchcode.jback.secBase.VerificationCode {
+public interface VerificationCode {
 
-    @Override
     String getVerificationCode();
 
     static VerificationCode of(String verificationCode) {

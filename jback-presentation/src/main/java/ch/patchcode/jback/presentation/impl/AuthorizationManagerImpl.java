@@ -7,7 +7,7 @@ import ch.patchcode.jback.presentation.TryLoginResult;
 import ch.patchcode.jback.security.registration.ConfirmationResult;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.secBaseImpl.InitialRegistrationData;
-import ch.patchcode.jback.security.secBaseImpl.VerificationCode;
+import ch.patchcode.jback.security.verificationCodes.VerificationCode;
 import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.slf4j.Logger;

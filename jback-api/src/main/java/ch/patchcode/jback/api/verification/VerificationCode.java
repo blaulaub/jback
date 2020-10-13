@@ -19,9 +19,9 @@ public abstract class VerificationCode {
         return new Builder().setVerificationCode(verificationCode).build();
     }
 
-    public ch.patchcode.jback.security.secBaseImpl.VerificationCode toDomain() {
+    public ch.patchcode.jback.security.verificationCodes.VerificationCode toDomain() {
 
-        return  ch.patchcode.jback.security.secBaseImpl.VerificationCode.of(getVerificationCode());
+        return  ch.patchcode.jback.security.verificationCodes.VerificationCode.of(getVerificationCode());
     }
 
     public static class Builder extends VerificationCode_Builder {}
