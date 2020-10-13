@@ -1,4 +1,4 @@
-package ch.patchcode.jback.secBase.secModelImpl;
+package ch.patchcode.jback.coreEntities;
 
 public enum Authority implements ch.patchcode.jback.secModel.Privilege {
 
