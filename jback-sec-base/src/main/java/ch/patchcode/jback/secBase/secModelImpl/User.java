@@ -1,21 +1,22 @@
 package ch.patchcode.jback.secBase.secModelImpl;
 
 import ch.patchcode.jback.secModel.AuthenticationMean;
+import ch.patchcode.jback.secModel.Person;
 
-public interface User<TAuthenticationMean extends AuthenticationMean> extends ch.patchcode.jback.secModel.User<
+public interface User<TPerson extends Person, TAuthenticationMean extends AuthenticationMean> extends ch.patchcode.jback.secModel.User<
         Organisation,
-        Person,
-        Principal<TAuthenticationMean>,
+        TPerson,
+        Principal<TPerson, TAuthenticationMean>,
         TAuthenticationMean,
         Authority,
-        Role<TAuthenticationMean>,
-        User<TAuthenticationMean>> {
+        Role<TPerson, TAuthenticationMean>,
+        User<TPerson, TAuthenticationMean>> {
 
     // from secModel.User
 
     @Override
-    Principal<TAuthenticationMean> getPrincipal();
+    Principal<TPerson, TAuthenticationMean> getPrincipal();
 
     @Override
-    Role<TAuthenticationMean> getRole();
+    Role<TPerson, TAuthenticationMean> getRole();
 }
