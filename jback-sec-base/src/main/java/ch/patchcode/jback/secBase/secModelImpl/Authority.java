@@ -5,6 +5,7 @@ public enum Authority implements ch.patchcode.jback.secModel.Privilege {
     /**
      * Authorized to create the person that represents the own identity.
      */
+
     CAN_CREATE_OWN_PERSON {
         @Override
         public <R> R accept(Visitor<R> visitor) {

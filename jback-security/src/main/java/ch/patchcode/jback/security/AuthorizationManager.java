@@ -8,11 +8,7 @@ import ch.patchcode.jback.securityEntities.VerificationMean;
 
 import java.util.UUID;
 
-public interface AuthorizationManager extends ch.patchcode.jback.secBase.AuthorizationManager<
-        Person,
-        VerificationMean,
-        Principal
-        > {
+public interface AuthorizationManager {
 
     /**
      * Let any user register when submitting some data, providing him with a {@see PendingRegistration.Id}.
@@ -26,7 +22,6 @@ public interface AuthorizationManager extends ch.patchcode.jback.secBase.Authori
 
     // from ch.patchcode.jback.secBase.AuthorizationManager
 
-    @Override
     void addClient(Principal principal, Person person);
 
     PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means);
