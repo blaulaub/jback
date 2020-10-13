@@ -6,23 +6,18 @@ import java.time.Instant;
 import java.util.UUID;
 
 @FreeBuilder
-public interface PendingRegistration extends ch.patchcode.jback.secBase.PendingRegistration {
+public interface PendingRegistration {
 
     UUID getId();
 
-    @Override
     String getFirstName();
 
-    @Override
     String getLastName();
 
-    @Override
     VerificationMean.Draft getVerificationMean();
 
-    @Override
     String getVerificationCode();
 
-    @Override
     Instant getExpiresAt();
 
     @FreeBuilder
