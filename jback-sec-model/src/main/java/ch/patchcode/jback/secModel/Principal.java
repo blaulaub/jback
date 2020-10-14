@@ -3,9 +3,9 @@ package ch.patchcode.jback.secModel;
 import java.util.List;
 
 /**
- * Some person or entity that can be authenticated.
+ * Something that can be authenticated through some {@link AuthenticationMean}s and then has some {@link Privilege}s.
  * <p>
- * An authenticated principal can then impersonate a person, inheriting that person's details, roles and privileges.
+ * An authenticated principal can then impersonate one or more {@link Person}s.
  */
 public interface Principal<
         TPerson extends Person,
@@ -14,24 +14,23 @@ public interface Principal<
         > {
 
     /**
-     * Zero, one or more persons that this principal can impersonate.
+     * One or more {@link Person}s that this principal can impersonate.
      *
-     * @return list of principals that can take control over this person
+     * @return one or more {@link Person}s that this principal can impersonate
      */
     List<TPerson> getPersons();
 
     /**
-     * Zero or more privileges that the (or usually: any) principal always has. E.g., a principal should be able to create at
-     * least one person for himself to impersonate.
+     * Zero or more {@link Privilege}s the principal has anyway, regardless of role.
      *
-     * @return list of privileges
+     * @return zero or more {@link Privilege}s the principal has anyway, regardless of role
      */
     List<TPrivilege> getBasicPrivileges();
 
     /**
-     * List of means the principal can be authenticated by.
+     * One or more {@link AuthenticationMean}s the principal by be authenticated by.
      *
-     * @return list of authentication means
+     * @return one or more {@link AuthenticationMean}s the principal by be authenticated by
      */
     List<TAuthenticationMean> getMeans();
 }

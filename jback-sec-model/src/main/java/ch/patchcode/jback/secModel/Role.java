@@ -3,7 +3,7 @@ package ch.patchcode.jback.secModel;
 import java.util.List;
 
 /**
- * Some role.
+ * Some role, taken by a particular {@link Person} in a particular {@link Organisation} with some particular {@link Privilege}s.
  */
 public interface Role<
         TOrganisation extends Organisation,
@@ -11,17 +11,23 @@ public interface Role<
         TPrivilege extends Privilege> {
 
     /**
-     * @return the person holding the role
+     * The {@link Person} holding this role.
+     *
+     * @return the {@link Person} holding this role
      */
     TPerson getPerson();
 
     /**
-     * @return the organisation the role is for
+     * The {@link Organisation} this role is for.
+     *
+     * @return the {@link Organisation} this role is for
      */
     TOrganisation getOrganisation();
 
     /**
-     * @return list of privileges granted by this role
+     * Zero or more {@link Privilege}s granted by this role.
+     *
+     * @return zero or more {@link Privilege}s granted by this role
      */
     List<TPrivilege> getPrivileges();
 }

@@ -1,9 +1,9 @@
 package ch.patchcode.jback.secModel;
 
 /**
- * An organisation is the scope within which a person may hold one or more roles, e.g., from being a member to holding a post to
- * being the organisation's top administrator.
+ * A body of {@link Person}s, formed for a self-given purpose.
+ * <p>
+ * Involved {@link Person}s are linked to the organisation by their {@link Role}s therein.
  */
 public interface Organisation {
-
 }

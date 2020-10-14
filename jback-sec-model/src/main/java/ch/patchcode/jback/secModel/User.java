@@ -1,12 +1,9 @@
 package ch.patchcode.jback.secModel;
 
 /**
- * Combines the two aspects of an authenticated principal and an authorized user.
+ * Combines the two aspects of taking a {@link Role} linked to an authenticated {@link Principal}.
  * <p>
- * This is intended as the root object identifying the session's user.
- * <p>
- * Note: A user may switch the impersonated person (if more than one is available) while keeping the principal. This should happen
- * without re-authentication.
+ * This is usually identifies a session's user.
  */
 public interface User<
         TOrganisation extends Organisation,
@@ -14,20 +11,28 @@ public interface User<
         TPrincipal extends Principal<TPerson, TPrivilege, TAuthenticationMean>,
         TAuthenticationMean extends AuthenticationMean,
         TPrivilege extends Privilege,
-        TRole extends Role<TOrganisation, TPerson, TPrivilege>,
-        TUser extends User<TOrganisation, TPerson, TPrincipal, TAuthenticationMean, TPrivilege, TRole, TUser>
+        TRole extends Role<TOrganisation, TPerson, TPrivilege>
         > {
 
     /**
-     * @return the principal by which the user is authenticated
+     * The {@link Principal} by which the user is authenticated.
+     *
+     * @return the {@link Principal} by which the user is authenticated
      */
     TPrincipal getPrincipal();
 
     /**
-     * @return the role currently taken by the user
+     * The {@link Role} currently taken by the user.
+     *
+     * @return the {@link Role} currently taken by the user
      */
     TRole getRole();
 
+    /**
+     * The {@link Person} behind the current {@link Role}.
+     *
+     * @return the {@link Person} behind the current {@link Role}
+     */
     default TPerson getPerson() {
 
         return getRole().getPerson();
