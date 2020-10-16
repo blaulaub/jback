@@ -26,6 +26,11 @@ public class TemporaryAuthentication implements Principal {
         this.mean = mean;
     }
 
+    public static TemporaryAuthentication of(String firstName, String lastName, VerificationMean.Draft mean) {
+
+        return new TemporaryAuthentication(firstName, lastName, mean);
+    }
+
     @Override
     public String getFirstName() {
 

@@ -8,7 +8,9 @@ import ch.patchcode.jback.security.registration.ConfirmationResult;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.registration.InitialRegistrationData;
 import ch.patchcode.jback.security.verificationCodes.VerificationCode;
+import ch.patchcode.jback.securityEntities.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.Principal;
+import ch.patchcode.jback.securityEntities.TemporaryAuthentication;
 import ch.patchcode.jback.securityEntities.VerificationMean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,8 +58,8 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
                 String firstName = pendingRegistration.getFirstName();
                 String lastName = pendingRegistration.getLastName();
                 VerificationMean.Draft verificationMean = pendingRegistration.getVerificationMean();
-                SecurityContextHolder.getContext()
-                        .setAuthentication(TemporaryAuthentication.of(firstName, lastName, verificationMean));
+                var authentication = SpringAuthentication.of(TemporaryAuthentication.of(firstName, lastName, verificationMean));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
 
             @Override
@@ -79,9 +81,9 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     }
 
     @Override
-    public PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means) {
+    public SpringAuthentication<PersonalAuthentication> createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means) {
 
-        return PersonalAuthentication.fromDomain(authorizationManager.createAuthorizationFor(person, means));
+        return SpringAuthentication.of(authorizationManager.createAuthorizationFor(person, means));
     }
 
     @Override
@@ -100,13 +102,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
             return TryLoginResult.UNKNOWN_USER;
         }
 
-        var potentialPersonalAuthentication = PersonalAuthentication.fromDomain(auth);
-        if (potentialPersonalAuthentication.isPresent()) {
-            SecurityContextHolder.getContext().setAuthentication(potentialPersonalAuthentication.get());
-            return TryLoginResult.SUCCESS;
-        }
-
-        // TODO implement need-confirmation-code cases
-        throw new RuntimeException("not implemented");
+        SecurityContextHolder.getContext().setAuthentication(SpringAuthentication.of(auth));
+        return TryLoginResult.SUCCESS;
     }
 }

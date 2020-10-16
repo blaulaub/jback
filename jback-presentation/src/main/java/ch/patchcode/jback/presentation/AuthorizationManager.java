@@ -1,7 +1,8 @@
 package ch.patchcode.jback.presentation;
 
 import ch.patchcode.jback.coreEntities.Person;
-import ch.patchcode.jback.presentation.impl.PersonalAuthentication;
+import ch.patchcode.jback.presentation.impl.SpringAuthentication;
+import ch.patchcode.jback.securityEntities.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.security.registration.InitialRegistrationData;
 import ch.patchcode.jback.security.verificationCodes.VerificationCode;
@@ -33,7 +34,7 @@ public interface AuthorizationManager {
      */
     UUID setupRegistration(InitialRegistrationData initialRegistrationData);
 
-    PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means);
+    SpringAuthentication<PersonalAuthentication> createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means);
 
     void addClient(Principal principal, Person person);
 

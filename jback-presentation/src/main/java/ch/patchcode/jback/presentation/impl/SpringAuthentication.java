@@ -17,6 +17,11 @@ public class SpringAuthentication<T extends Principal> implements Authentication
         this.principal = principal;
     }
 
+    public static <T extends Principal> SpringAuthentication<T> of(T principal) {
+
+        return new SpringAuthentication<>(principal);
+    }
+
     // from ch.patchcode.jback.securityEntities.Principal
 
     @Override
