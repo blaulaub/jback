@@ -13,6 +13,10 @@ public interface Principal extends
 
     String getLastName();
 
+    void accept(Visitor visitor);
+
+    <T> T accept(ResultVisitor<T> visitor);
+
     // impl java.security.Principal
 
     @Override
@@ -23,4 +27,18 @@ public interface Principal extends
 
     @Override
     List<Authority> getBasicPrivileges();
+
+    interface Visitor {
+
+        void visit(PersonalAuthentication personalAuthentication);
+
+        void visit(TemporaryAuthentication temporaryAuthentication);
+    }
+
+    interface ResultVisitor<T> {
+
+        T visit(PersonalAuthentication personalAuthentication);
+
+        T visit(TemporaryAuthentication temporaryAuthentication);
+    }
 }

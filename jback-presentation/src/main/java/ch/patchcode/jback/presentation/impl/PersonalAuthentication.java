@@ -7,18 +7,18 @@ import org.inferred.freebuilder.FreeBuilder;
 import java.util.Optional;
 
 @FreeBuilder
-public interface PersonalAuthentication extends
-        ch.patchcode.jback.securityEntities.PersonalAuthentication,
-        Authentication {
+public abstract class PersonalAuthentication
+        extends ch.patchcode.jback.securityEntities.PersonalAuthentication
+        implements Authentication {
 
-    static PersonalAuthentication fromDomain(ch.patchcode.jback.securityEntities.PersonalAuthentication auth) {
+    public static PersonalAuthentication fromDomain(ch.patchcode.jback.securityEntities.PersonalAuthentication auth) {
         return new Builder()
                 .setHolder(auth.getHolder())
                 .addAllMeans(auth.getMeans())
                 .build();
     }
 
-    static Optional<PersonalAuthentication> fromDomain(Principal principal) {
+    public static Optional<PersonalAuthentication> fromDomain(Principal principal) {
 
         return Optional.of(principal)
                 .filter(ch.patchcode.jback.securityEntities.PersonalAuthentication.class::isInstance)
@@ -26,6 +26,6 @@ public interface PersonalAuthentication extends
                 .map(PersonalAuthentication::fromDomain);
     }
 
-    class Builder extends PersonalAuthentication_Builder {
+    public static class Builder extends PersonalAuthentication_Builder {
     }
 }

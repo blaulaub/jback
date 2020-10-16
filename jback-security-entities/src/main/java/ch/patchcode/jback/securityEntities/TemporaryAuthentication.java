@@ -1,4 +1,4 @@
-package ch.patchcode.jback.security.authentications;
+package ch.patchcode.jback.securityEntities;
 
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.Authority;
@@ -37,6 +37,19 @@ public class TemporaryAuthentication implements Principal {
     public String getLastName() {
 
         return lastName;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
+        visitor.visit(this);
+
+    }
+
+    @Override
+    public <T> T accept(ResultVisitor<T> visitor) {
+
+        return visitor.visit(this);
     }
 
     // impl java.security.Principal
