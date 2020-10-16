@@ -2,8 +2,9 @@ package ch.patchcode.jback.api.session;
 
 import ch.patchcode.jback.presentation.Perspective;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
-import ch.patchcode.jback.securityEntities.Principal;
-import ch.patchcode.jback.securityEntities.TemporaryAuthentication;
+import ch.patchcode.jback.securityEntities.authentications.Principal;
+import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
+import ch.patchcode.jback.securityEntities.authentications.TemporaryAuthentication;
 import org.springframework.security.core.Authentication;
 
 public class SessionInfoBuilder {
@@ -31,7 +32,7 @@ public class SessionInfoBuilder {
 
             springAuth.accept(new Principal.Visitor() {
                 @Override
-                public void visit(ch.patchcode.jback.securityEntities.PersonalAuthentication personalAuth) {
+                public void visit(PersonalAuthentication personalAuth) {
                     builder.setPerspective(Perspective.MEMBER);
                 }
 

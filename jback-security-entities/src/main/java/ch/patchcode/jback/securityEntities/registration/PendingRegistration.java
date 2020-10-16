@@ -1,4 +1,4 @@
-package ch.patchcode.jback.securityEntities;
+package ch.patchcode.jback.securityEntities.registration;
 
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;

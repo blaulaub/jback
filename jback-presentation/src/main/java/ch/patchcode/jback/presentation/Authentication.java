@@ -1,6 +1,6 @@
 package ch.patchcode.jback.presentation;
 
-import ch.patchcode.jback.securityEntities.Principal;
+import ch.patchcode.jback.securityEntities.authentications.Principal;
 
 import java.util.Collection;
 

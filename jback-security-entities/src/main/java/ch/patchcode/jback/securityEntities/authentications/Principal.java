@@ -1,4 +1,4 @@
-package ch.patchcode.jback.securityEntities;
+package ch.patchcode.jback.securityEntities.authentications;
 
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.Authority;

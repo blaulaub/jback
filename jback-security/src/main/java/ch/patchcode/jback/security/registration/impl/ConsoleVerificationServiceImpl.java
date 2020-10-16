@@ -1,7 +1,7 @@
 package ch.patchcode.jback.security.registration.impl;
 
 import ch.patchcode.jback.security.registration.VerificationService.ConsoleVerificationService;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
+import ch.patchcode.jback.securityEntities.registration.PendingRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

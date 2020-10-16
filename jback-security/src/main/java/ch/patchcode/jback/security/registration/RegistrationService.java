@@ -1,6 +1,6 @@
 package ch.patchcode.jback.security.registration;
 
-import ch.patchcode.jback.securityEntities.PendingRegistration;
+import ch.patchcode.jback.securityEntities.registration.PendingRegistration;
 
 import java.util.Optional;
 import java.util.UUID;

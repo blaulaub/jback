@@ -1,6 +1,5 @@
 package ch.patchcode.jback.presentation.impl;
 
-import ch.patchcode.jback.securityEntities.PendingRegistration;
 import org.springframework.security.core.AuthenticationException;
 
 import java.util.UUID;

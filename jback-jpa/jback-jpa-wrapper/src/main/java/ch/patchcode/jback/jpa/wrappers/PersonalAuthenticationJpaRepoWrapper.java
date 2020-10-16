@@ -1,8 +1,8 @@
 package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.jpa.entities.*;
-import ch.patchcode.jback.securityEntities.PersonalAuthentication;
-import ch.patchcode.jback.securityEntities.PersonalAuthenticationRepository;
+import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
+import ch.patchcode.jback.securityEntities.authentications.PersonalAuthenticationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

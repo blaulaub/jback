@@ -2,8 +2,8 @@ package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.jpa.entities.RegistrationJpa;
 import ch.patchcode.jback.jpa.entities.RegistrationJpaRepository;
-import ch.patchcode.jback.securityEntities.PendingRegistrationRepository;
-import ch.patchcode.jback.securityEntities.PendingRegistration;
+import ch.patchcode.jback.securityEntities.registration.PendingRegistrationRepository;
+import ch.patchcode.jback.securityEntities.registration.PendingRegistration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

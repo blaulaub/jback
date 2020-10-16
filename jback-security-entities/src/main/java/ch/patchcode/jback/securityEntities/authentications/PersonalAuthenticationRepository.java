@@ -1,4 +1,4 @@
-package ch.patchcode.jback.securityEntities;
+package ch.patchcode.jback.securityEntities.authentications;
 
 import java.util.Optional;
 

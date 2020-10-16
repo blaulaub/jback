@@ -1,8 +1,8 @@
 package ch.patchcode.jback.security;
 
 import ch.patchcode.jback.coreEntities.Person;
-import ch.patchcode.jback.securityEntities.PersonalAuthentication;
-import ch.patchcode.jback.securityEntities.Principal;
+import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
+import ch.patchcode.jback.securityEntities.authentications.Principal;
 import ch.patchcode.jback.security.registration.InitialRegistrationData;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 

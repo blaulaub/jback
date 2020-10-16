@@ -3,7 +3,7 @@ package ch.patchcode.jback.presentation.impl;
 import ch.patchcode.jback.coreEntities.Authority;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.presentation.Authentication;
-import ch.patchcode.jback.securityEntities.Principal;
+import ch.patchcode.jback.securityEntities.authentications.Principal;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class SpringAuthentication<T extends Principal> implements Authentication
         return new SpringAuthentication<>(principal);
     }
 
-    // from ch.patchcode.jback.securityEntities.Principal
+    // from ch.patchcode.jback.securityEntities.authentications.Principal
 
     @Override
     public String getFirstName() {
