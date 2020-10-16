@@ -11,7 +11,7 @@ import ch.patchcode.jback.security.verificationCodes.VerificationCode;
 import ch.patchcode.jback.securityEntities.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.Principal;
 import ch.patchcode.jback.securityEntities.TemporaryAuthentication;
-import ch.patchcode.jback.securityEntities.VerificationMean;
+import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

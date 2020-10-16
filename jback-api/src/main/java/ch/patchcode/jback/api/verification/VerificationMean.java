@@ -29,7 +29,7 @@ public abstract class VerificationMean {
     @ApiModelProperty
     public abstract String getType();
 
-    public abstract ch.patchcode.jback.securityEntities.VerificationMean toDomain();
+    public abstract ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean toDomain();
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
     @JsonSubTypes({
@@ -49,6 +49,6 @@ public abstract class VerificationMean {
         @ApiModelProperty
         public abstract String getType();
 
-        public abstract ch.patchcode.jback.securityEntities.VerificationMean.Draft toDomain();
+        public abstract ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean.Draft toDomain();
     }
 }

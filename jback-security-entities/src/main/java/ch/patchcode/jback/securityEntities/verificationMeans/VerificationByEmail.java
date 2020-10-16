@@ -1,4 +1,4 @@
-package ch.patchcode.jback.securityEntities;
+package ch.patchcode.jback.securityEntities.verificationMeans;
 
 import org.inferred.freebuilder.FreeBuilder;
 

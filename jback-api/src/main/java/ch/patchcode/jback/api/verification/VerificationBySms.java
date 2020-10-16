@@ -44,8 +44,8 @@ public abstract class VerificationBySms extends VerificationMean {
         }
     }
 
-    public ch.patchcode.jback.securityEntities.VerificationBySms toDomain() {
-        return new ch.patchcode.jback.securityEntities.VerificationBySms.Builder()
+    public ch.patchcode.jback.securityEntities.verificationMeans.VerificationBySms toDomain() {
+        return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationBySms.Builder()
                 .setId(getId())
                 .setPhoneNumber(getPhoneNumber())
                 .build();
@@ -59,9 +59,9 @@ public abstract class VerificationBySms extends VerificationMean {
         public abstract String getPhoneNumber();
 
         @Override
-        public ch.patchcode.jback.securityEntities.VerificationBySms.Draft toDomain() {
+        public ch.patchcode.jback.securityEntities.verificationMeans.VerificationBySms.Draft toDomain() {
 
-            return new ch.patchcode.jback.securityEntities.VerificationBySms.Draft.Builder()
+            return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationBySms.Draft.Builder()
                     .setPhoneNumber(getPhoneNumber())
                     .build();
         }

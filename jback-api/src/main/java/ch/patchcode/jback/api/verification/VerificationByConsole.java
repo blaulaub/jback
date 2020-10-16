@@ -40,8 +40,8 @@ public abstract class VerificationByConsole extends VerificationMean {
         }
     }
 
-    public ch.patchcode.jback.securityEntities.VerificationByConsole toDomain() {
-        return new ch.patchcode.jback.securityEntities.VerificationByConsole.Builder()
+    public ch.patchcode.jback.securityEntities.verificationMeans.VerificationByConsole toDomain() {
+        return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationByConsole.Builder()
                 .setId(getId())
                 .build();
     }
@@ -51,9 +51,9 @@ public abstract class VerificationByConsole extends VerificationMean {
     public abstract static class Draft extends VerificationMean.Draft {
 
         @Override
-        public ch.patchcode.jback.securityEntities.VerificationByConsole.Draft toDomain() {
+        public ch.patchcode.jback.securityEntities.verificationMeans.VerificationByConsole.Draft toDomain() {
 
-            return new ch.patchcode.jback.securityEntities.VerificationByConsole.Draft();
+            return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationByConsole.Draft();
         }
 
         @JsonCreator

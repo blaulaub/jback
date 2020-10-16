@@ -2,6 +2,7 @@ package ch.patchcode.jback.security.registration.impl;
 
 import ch.patchcode.jback.security.registration.VerificationService;
 import ch.patchcode.jback.securityEntities.*;
+import ch.patchcode.jback.securityEntities.verificationMeans.*;
 
 public class AspSmsVerificationServiceImpl implements VerificationService.SmsVerificationService {
 

@@ -1,6 +1,6 @@
 package ch.patchcode.jback.jpa.entities;
 
-import ch.patchcode.jback.securityEntities.*;
+import ch.patchcode.jback.securityEntities.verificationMeans.*;
 
 import javax.persistence.*;
 import java.util.UUID;

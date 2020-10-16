@@ -2,6 +2,7 @@ package ch.patchcode.jback.securityEntities;
 
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.Authority;
+import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 
 import java.util.List;
 

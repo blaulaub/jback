@@ -8,6 +8,7 @@ import ch.patchcode.jback.security.registration.VerificationService.EmailVerific
 import ch.patchcode.jback.security.registration.VerificationService.SmsVerificationService;
 import ch.patchcode.jback.security.registration.InitialRegistrationData;
 import ch.patchcode.jback.security.verificationCodes.VerificationCodeProvider;
+import ch.patchcode.jback.securityEntities.verificationMeans.*;
 
 import javax.inject.Inject;
 import java.time.Duration;

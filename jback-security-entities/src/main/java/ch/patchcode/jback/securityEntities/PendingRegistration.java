@@ -1,5 +1,6 @@
 package ch.patchcode.jback.securityEntities;
 
+import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.time.Instant;

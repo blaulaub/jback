@@ -2,6 +2,7 @@ package ch.patchcode.jback.security.registration.impl;
 
 import ch.patchcode.jback.security.registration.VerificationService;
 import ch.patchcode.jback.securityEntities.*;
+import ch.patchcode.jback.securityEntities.verificationMeans.*;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;

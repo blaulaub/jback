@@ -4,7 +4,7 @@ import ch.patchcode.jback.coreEntities.Authority;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.presentation.Authentication;
 import ch.patchcode.jback.securityEntities.Principal;
-import ch.patchcode.jback.securityEntities.VerificationMean;
+import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 
 import java.util.List;
 

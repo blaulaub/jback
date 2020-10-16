@@ -1,7 +1,7 @@
 package ch.patchcode.jback.api.persons;
 
 import ch.patchcode.jback.coreEntities.Address;
-import ch.patchcode.jback.securityEntities.VerificationByPassword;
+import ch.patchcode.jback.securityEntities.verificationMeans.VerificationByPassword;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
