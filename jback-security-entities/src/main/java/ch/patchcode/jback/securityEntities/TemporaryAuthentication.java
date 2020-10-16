@@ -1,8 +1,7 @@
 package ch.patchcode.jback.securityEntities;
 
-import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.Authority;
-import ch.patchcode.jback.securityEntities.*;
+import ch.patchcode.jback.coreEntities.Person;
 
 import java.util.List;
 import java.util.UUID;
