@@ -27,12 +27,12 @@ public class ClubsController {
             @RequestBody @ApiParam Club.Draft draft
     ) {
 
-        return Club.from(clubService.create(draft.toDomain()));
+        return Club.fromDomain(clubService.create(draft.toDomain()));
     }
 
     @GetMapping("{id}")
     public Club getClubById(@PathVariable("id") UUID id) throws NotFoundException {
 
-        return clubService.getClub(id).map(Club::from).orElseThrow(NotFoundException::new);
+        return clubService.getClub(id).map(Club::fromDomain).orElseThrow(NotFoundException::new);
     }
 }

@@ -31,6 +31,18 @@ public abstract class MemberRole implements Role {
         return emptyList();
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+
+        visitor.visit(this);
+    }
+
+    @Override
+    public <T> T accept(ResultVisitor<T> visitor) {
+
+        return visitor.visit(this);
+    }
+
     public static class Builder extends MemberRole_Builder {
     }
 

@@ -20,6 +20,10 @@ public interface Role extends ch.patchcode.jback.secModel.Role<Club, Person, Aut
     @Override
     List<Authority> getPrivileges();
 
+    void accept(Visitor visitor);
+
+    <T> T accept(ResultVisitor<T> visitor);
+
     interface Draft {
 
         Person getPerson();
@@ -32,5 +36,15 @@ public interface Role extends ch.patchcode.jback.secModel.Role<Club, Person, Aut
 
             R visit(MemberRole.Draft draft);
         }
+    }
+
+    interface Visitor {
+
+        void visit(MemberRole memberRole);
+    }
+
+    interface ResultVisitor<T> {
+
+        T visit(MemberRole memberRole);
     }
 }

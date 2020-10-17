@@ -14,7 +14,7 @@ import java.util.UUID;
 @FreeBuilder
 public abstract class Club {
 
-    public static Club from(ch.patchcode.jback.coreEntities.Club club) {
+    public static Club fromDomain(ch.patchcode.jback.coreEntities.Club club) {
 
         Builder builder = new Builder();
 
