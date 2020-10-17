@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Club {
+public interface Club extends ch.patchcode.jback.secModel.Organisation {
 
     UUID getId();
 

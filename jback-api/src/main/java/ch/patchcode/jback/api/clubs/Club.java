@@ -3,6 +3,7 @@ package ch.patchcode.jback.api.clubs;
 import ch.patchcode.jback.api.persons.Person;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
@@ -52,6 +53,36 @@ public interface Club {
     Optional<URI> getUrl();
 
     class Builder extends Club_Builder {
+
+    }
+
+    @ApiModel
+    @FreeBuilder
+    abstract class Draft {
+
+        public abstract String getName();
+
+        @ApiModelProperty(dataType = "ch.patchcode.jback.api.persons.Person")
+        public abstract Optional<Person> getContact();
+
+        @ApiModelProperty(dataType = "java.net.URI")
+        public abstract Optional<URI> getUrl();
+
+        @JsonCreator
+        static Draft create(
+                @JsonProperty(value = "name", required = true) String name,
+                @JsonProperty("url") URI url,
+                @JsonProperty("contact") Person contact
+        ) {
+
+            return new Builder()
+                    .setName(name)
+                    .setUrl(Optional.ofNullable(url))
+                    .setContact(Optional.ofNullable(contact)).build();
+        }
+
+        public static class Builder extends Club_Draft_Builder {
+        }
 
     }
 }

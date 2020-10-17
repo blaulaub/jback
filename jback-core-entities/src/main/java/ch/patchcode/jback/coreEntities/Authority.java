@@ -3,9 +3,8 @@ package ch.patchcode.jback.coreEntities;
 public enum Authority implements ch.patchcode.jback.secModel.Privilege {
 
     /**
-     * Authorized to create the person that represents the own identity.
+     * Authorized to create the {@link Person} that represents the own identity.
      */
-
     CAN_CREATE_OWN_PERSON {
         @Override
         public <R> R accept(Visitor<R> visitor) {
@@ -14,12 +13,22 @@ public enum Authority implements ch.patchcode.jback.secModel.Privilege {
     },
 
     /**
-     * Authorized to create some other person that is not oneself.
+     * Authorized to create some other {@link Person} that is not oneself.
      */
     CAN_CREATE_CLIENT_PERSON {
         @Override
         public <R> R accept(Visitor<R> visitor) {
             return visitor.caseCanCreateClientPerson();
+        }
+    },
+
+    /**
+     * Authorized to create {@link Club}s.
+     */
+    CAN_CREATE_CLUB {
+        @Override
+        public <R> R accept(Visitor<R> visitor) {
+            return visitor.caseCanCreateClub();
         }
     };
 
@@ -30,5 +39,7 @@ public enum Authority implements ch.patchcode.jback.secModel.Privilege {
         R caseCanCreateOwnPerson();
 
         R caseCanCreateClientPerson();
+
+        R caseCanCreateClub();
     }
 }

@@ -7,7 +7,9 @@ public enum ApiAuthority implements GrantedAuthority {
 
     CAN_CREATE_OWN_PERSON,
 
-    CAN_CREATE_CLIENT_PERSON;
+    CAN_CREATE_CLIENT_PERSON,
+
+    CAN_CREATE_CLUB;
 
     @Override
     public String getAuthority() {
@@ -25,6 +27,11 @@ public enum ApiAuthority implements GrantedAuthority {
             @Override
             public ApiAuthority caseCanCreateClientPerson() {
                 return CAN_CREATE_CLIENT_PERSON;
+            }
+
+            @Override
+            public ApiAuthority caseCanCreateClub() {
+                return CAN_CREATE_CLUB;
             }
         });
     }

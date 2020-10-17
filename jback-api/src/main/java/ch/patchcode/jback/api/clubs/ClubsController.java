@@ -2,12 +2,11 @@ package ch.patchcode.jback.api.clubs;
 
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.presentation.clubs.ClubService;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -23,6 +22,15 @@ public class ClubsController {
     ) {
 
         this.clubService = clubService;
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('CAN_CREATE_CLUB')")
+    public Club postNewClub(
+            @RequestBody @ApiParam Club.Draft draft
+    ) {
+
+        throw new RuntimeException("not implemented");
     }
 
     @GetMapping("{id}")
