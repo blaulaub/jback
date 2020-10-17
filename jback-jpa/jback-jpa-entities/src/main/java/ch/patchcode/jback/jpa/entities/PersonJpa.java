@@ -70,16 +70,16 @@ public class PersonJpa {
 
     public static PersonJpa fromDomain(Person.Draft draft) {
 
-        var person = new PersonJpa();
-        person.setFirstName(draft.getFirstName());
-        person.setLastName(draft.getLastName());
+        var result = new PersonJpa();
+        result.setFirstName(draft.getFirstName());
+        result.setLastName(draft.getLastName());
         draft.getAddress()
                 .map(Address::getLines)
                 .map(lines -> IntStream.range(0, lines.size())
                         .mapToObj(idx -> AddressLine.of(idx, lines.get(idx)))
                         .collect(toList()))
-                .ifPresent(person::setAddressLines);
-        return person;
+                .ifPresent(result::setAddressLines);
+        return result;
     }
 
     public Person toDomain() {

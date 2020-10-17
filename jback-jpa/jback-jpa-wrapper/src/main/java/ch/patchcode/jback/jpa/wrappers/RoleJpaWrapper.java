@@ -9,8 +9,11 @@ import ch.patchcode.jback.jpa.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class RoleJpaWrapper implements RoleRepository {
@@ -48,6 +51,18 @@ public class RoleJpaWrapper implements RoleRepository {
         });
 
         return roleJpaRepository.save(role).toDomain();
+    }
+
+    @Override
+    public List<Role> findByPersonIn(List<Person> persons) {
+
+        return roleJpaRepository.findByPersonIn(
+                persons.stream()
+                        .map(this::toJpaIfConsistent)
+                        .collect(toList())
+        ).stream()
+                .map(RoleJpa::toDomain)
+                .collect(toList());
     }
 
     private PersonJpa toJpaIfConsistent(Person person) {

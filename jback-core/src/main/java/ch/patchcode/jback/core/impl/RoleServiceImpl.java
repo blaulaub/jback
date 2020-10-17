@@ -20,6 +20,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> getRolesFor(List<Person> persons) {
+
         return null;
     }
 }
