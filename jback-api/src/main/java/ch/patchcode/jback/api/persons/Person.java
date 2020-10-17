@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,7 +55,7 @@ public abstract class Person {
                 .setId(getId())
                 .setFirstName(getFirstName())
                 .setLastName(getLastName())
-                .setAddress(this::getAddress)
+                .setAddress(new Address.Builder().addAllLines(getAddress()).build())
                 .build();
     }
 

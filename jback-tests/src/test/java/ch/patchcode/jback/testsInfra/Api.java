@@ -177,6 +177,25 @@ public class Api {
     }
 
     /**
+     * Calls the <tt>/api/v1/clubs/{id}/members</tt> endpoint.
+     */
+    public CallResult putMember(UUID clubId, Person person) throws Exception {
+
+        return new CallResult(
+
+                // call
+                webClient.put().uri("/api/v1/clubs/{id}/members", clubId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .bodyValue(mapper.writeValueAsString(person))
+                        .exchange(),
+
+                // expect
+                singletonList(it -> it.expectStatus().isOk())
+        );
+    }
+
+    /**
      * Calls the <tt>/api/v1/session/login</tt> endpoint.
      */
     public CallResult postLogin(LoginData loginData) throws Exception {

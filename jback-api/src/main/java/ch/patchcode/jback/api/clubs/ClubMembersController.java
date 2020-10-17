@@ -21,12 +21,12 @@ public class ClubMembersController {
         this.clubMemberService = clubMemberService;
     }
 
-    @PostMapping
+    @PutMapping
     public void putMember(
-            @PathVariable UUID clubId,
+            @PathVariable UUID id,
             @RequestBody Person newMember
     ) {
 
-        clubMemberService.addPerson(clubId, newMember.toDomain());
+        clubMemberService.addPerson(id, newMember.toDomain());
     }
 }

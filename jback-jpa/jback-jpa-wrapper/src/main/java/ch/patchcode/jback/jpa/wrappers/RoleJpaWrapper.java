@@ -56,7 +56,9 @@ public class RoleJpaWrapper implements RoleRepository {
         if (personJpa.isEmpty()) {
             throw new RuntimeException("person not found");
         }
-        if (personJpa.map(PersonJpa::toDomain).filter(it -> it.equals(person)).isEmpty()) {
+        if (personJpa.map(PersonJpa::toDomain)
+                .filter(it -> it.equals(person))
+                .isEmpty()) {
             throw new RuntimeException("person mismatch (outdated?)");
         }
         return personJpa.get();
@@ -68,7 +70,9 @@ public class RoleJpaWrapper implements RoleRepository {
         if (clubJpa.isEmpty()) {
             throw new RuntimeException("club not found");
         }
-        if (clubJpa.map(ClubJpa::toDomain).filter(it -> it.equals(club)).isEmpty()) {
+        if (clubJpa.map(ClubJpa::toDomain)
+                .filter(it -> it.equals(club))
+                .isEmpty()) {
             throw new RuntimeException("club mismatch (outdated?)");
         }
         return clubJpa.get();
