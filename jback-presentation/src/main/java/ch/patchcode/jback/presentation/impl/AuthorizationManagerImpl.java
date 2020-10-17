@@ -1,12 +1,14 @@
 package ch.patchcode.jback.presentation.impl;
 
+import ch.patchcode.jback.core.RoleService;
 import ch.patchcode.jback.coreEntities.Person;
+import ch.patchcode.jback.coreEntities.roles.Role;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.LoginData;
 import ch.patchcode.jback.presentation.TryLoginResult;
 import ch.patchcode.jback.security.registration.ConfirmationResult;
-import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.registration.InitialRegistrationData;
+import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.verificationCodes.VerificationCode;
 import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
@@ -19,6 +21,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service("presentation.authorizationManager")
@@ -28,14 +31,17 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
 
     private final ch.patchcode.jback.security.AuthorizationManager authorizationManager;
     private final RegistrationService registrationService;
+    private final RoleService roleService;
 
     @Autowired
     public AuthorizationManagerImpl(
             ch.patchcode.jback.security.AuthorizationManager authorizationManager,
-            RegistrationService registrationService
-    ) {
+            RegistrationService registrationService,
+            RoleService roleService) {
+
         this.authorizationManager = authorizationManager;
         this.registrationService = registrationService;
+        this.roleService = roleService;
     }
 
     @Override
@@ -104,5 +110,11 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
 
         SecurityContextHolder.getContext().setAuthentication(SpringAuthentication.of(auth));
         return TryLoginResult.SUCCESS;
+    }
+
+    @Override
+    public List<Role> getAvailableRoles(Principal principal) {
+
+        return roleService.getRolesFor(principal.getPersons());
     }
 }

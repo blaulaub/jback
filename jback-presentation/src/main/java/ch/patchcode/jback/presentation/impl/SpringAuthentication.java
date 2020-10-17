@@ -117,4 +117,9 @@ public class SpringAuthentication<T extends Principal> implements Authentication
                 .map(ApiAuthority::of)
                 .collect(toSet());
     }
+
+    @Override
+    public T getPrincipal() {
+        return principal;
+    }
 }
