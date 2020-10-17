@@ -164,4 +164,30 @@ class SessionTest {
                 .expectStatus().isOk()
                 .expectBody().jsonPath("$.kind").value(equalTo(LoginResponse.Kind.SUCCESS.toString()));
     }
+
+    @Test
+    @DisplayName("superuser perspective is MEMBER")
+    void superuserPerspectiveIsMember() throws Exception {
+
+        // arrange
+        String username = env.getProperty("ADMIN_USERNAME");
+        String password = env.getProperty("ADMIN_PASSWORD");
+        assumeTrue("admin".equals(username));
+        assumeTrue("secret".equals(password));
+
+        var loginData = new LoginData.Builder()
+                .setUserIdentification(username)
+                .setVerificationMean(VerificationByUsernameAndPassword.Draft.create(username, password))
+                .build();
+
+        api.postLogin(loginData).andAssumeGoodAndReturn();
+
+        // act
+        var result = api.getSession().andReturn();
+
+        // assert
+        result
+                .expectStatus().isOk()
+                .expectBody().jsonPath("$.perspective").value(equalTo(Perspective.MEMBER.toString()));
+    }
 }
