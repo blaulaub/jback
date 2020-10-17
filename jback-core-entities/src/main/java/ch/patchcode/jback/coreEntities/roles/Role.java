@@ -7,8 +7,7 @@ import ch.patchcode.jback.secModel.Person;
 import java.util.List;
 import java.util.UUID;
 
-public interface Role
-        extends ch.patchcode.jback.secModel.Role<Club, Person, Authority> {
+public interface Role extends ch.patchcode.jback.secModel.Role<Club, Person, Authority> {
 
     UUID getId();
 
@@ -22,5 +21,16 @@ public interface Role
     List<Authority> getPrivileges();
 
     interface Draft {
+
+        Person getPerson();
+
+        Club getOrganisation();
+
+        <R> R accept(Visitor<R> visitor);
+
+        interface Visitor<R> {
+
+            R visit(MemberRole.Draft draft);
+        }
     }
 }

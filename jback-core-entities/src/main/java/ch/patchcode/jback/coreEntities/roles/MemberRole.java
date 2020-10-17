@@ -37,9 +37,17 @@ public abstract class MemberRole implements Role {
     @FreeBuilder
     public abstract static class Draft implements Role.Draft {
 
+        @Override
         public abstract Person getPerson();
 
+        @Override
         public abstract Club getOrganisation();
+
+        @Override
+        public <R> R accept(Visitor<R> visitor) {
+
+            return visitor.visit(this);
+        }
 
         public static class Builder extends MemberRole_Draft_Builder {
         }
