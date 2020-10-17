@@ -25,6 +25,6 @@ public class ClubServiceImpl implements ClubService {
     @Override
     public Club create(Club.Draft draft) {
 
-        throw new RuntimeException("not implemented");
+        return clubRepository.create(draft);
     }
 }

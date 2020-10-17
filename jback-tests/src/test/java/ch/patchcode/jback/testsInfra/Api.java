@@ -1,5 +1,6 @@
 package ch.patchcode.jback.testsInfra;
 
+import ch.patchcode.jback.api.clubs.Club;
 import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.session.LoginData;
@@ -128,7 +129,29 @@ public class Api {
                         it -> it.expectBody().jsonPath("$.id").exists()
                 )
         );
+    }
 
+    /**
+     * Calls the <tt>/api/v1/clubs</tt> endpoint.
+     */
+    public CallResult postClub(Club.Draft draft) throws Exception {
+
+        return new CallResult(
+
+                // call
+                webClient.post()
+                        .uri("/api/v1/clubs")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .bodyValue(mapper.writeValueAsString(draft))
+                        .exchange(),
+
+                // expect
+                asList(
+                        it -> it.expectStatus().isOk(),
+                        it -> it.expectBody().jsonPath("$.id").exists()
+                )
+        );
     }
 
     /**
@@ -149,7 +172,6 @@ public class Api {
                 singletonList(it -> it.expectStatus().isOk())
         );
     }
-
 
     /**
      * Calls the <tt>/api/v1/session/logout</tt> endpoint.
