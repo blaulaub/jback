@@ -46,4 +46,26 @@ public class ClubTest {
                 .jsonPath("$.id").exists()
                 .jsonPath("$.name").isEqualTo(draft.getName());
     }
+
+    @Test
+    @DisplayName("superuser can get club after creating it")
+    void superUserCanGetClubAfterCreatingIt() throws Exception {
+
+        // arrange
+        api.workflows.loginAsSuperuser().andAssumeGoodAndReturn();
+        Club.Draft draft = new Club.Draft.Builder()
+                .setName("Screaming Seagulls")
+                .build();
+        var clubId = api.postClub(draft).andAssumeGoodAndReturn(Club.class).getId();
+
+        // act
+        var result = api.getClub(clubId).andReturn();
+
+        // assert
+        result
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.id").isEqualTo(clubId.toString())
+                .jsonPath("$.name").isEqualTo(draft.getName());
+    }
 }

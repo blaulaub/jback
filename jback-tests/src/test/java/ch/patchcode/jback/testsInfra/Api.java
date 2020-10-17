@@ -63,7 +63,6 @@ public class Api {
                         it -> it.expectBody().jsonPath("$.perspective").exists()
                 )
         );
-
     }
 
     /**
@@ -150,6 +149,29 @@ public class Api {
                 asList(
                         it -> it.expectStatus().isOk(),
                         it -> it.expectBody().jsonPath("$.id").exists()
+                )
+        );
+    }
+
+    /**
+     * Calls the <tt>/api/v1/clubs/{id}</tt> endpoint.
+     */
+    public CallResult getClub(UUID clubId) {
+
+        return new CallResult(
+
+                // call
+                webClient.get()
+                        .uri("/api/v1/clubs/{id}", clubId)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .exchange(),
+
+                // expect
+                asList(
+                        it -> it.expectStatus().isOk(),
+                        it -> it.expectBody().jsonPath("$.id").isEqualTo(clubId.toString()),
+                        it -> it.expectBody().jsonPath("$.name").exists()
                 )
         );
     }
