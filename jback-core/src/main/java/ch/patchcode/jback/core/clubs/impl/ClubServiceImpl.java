@@ -21,4 +21,10 @@ public class ClubServiceImpl implements ClubService {
     public Optional<Club> getClub(UUID id) {
         return clubRepository.findById(id);
     }
+
+    @Override
+    public Club create(Club.Draft draft) {
+
+        throw new RuntimeException("not implemented");
+    }
 }

@@ -49,6 +49,15 @@ public abstract class Person {
         return builder.build();
     }
 
+    public ch.patchcode.jback.coreEntities.Person toDomain() {
+        return new ch.patchcode.jback.coreEntities.Person.Builder()
+                .setId(getId())
+                .setFirstName(getFirstName())
+                .setLastName(getLastName())
+                .setAddress(this::getAddress)
+                .build();
+    }
+
     public static class Builder extends Person_Builder {
     }
 
@@ -77,7 +86,7 @@ public abstract class Person {
                     .build();
         }
 
-        public ch.patchcode.jback.coreEntities.Person.Draft toDomainPerson() {
+        public ch.patchcode.jback.coreEntities.Person.Draft toDomain() {
 
             var builder = new ch.patchcode.jback.coreEntities.Person.Draft.Builder();
             builder.setFirstName(getFirstName());

@@ -1,7 +1,7 @@
 package ch.patchcode.jback.api.clubs;
 
 import ch.patchcode.jback.api.exceptions.NotFoundException;
-import ch.patchcode.jback.presentation.clubs.ClubService;
+import ch.patchcode.jback.core.clubs.ClubService;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,9 +17,7 @@ public class ClubsController {
     private final ClubService clubService;
 
     @Autowired
-    public ClubsController(
-            @Qualifier("presentation.clubService") ClubService clubService
-    ) {
+    public ClubsController(ClubService clubService) {
 
         this.clubService = clubService;
     }
@@ -30,7 +28,7 @@ public class ClubsController {
             @RequestBody @ApiParam Club.Draft draft
     ) {
 
-        throw new RuntimeException("not implemented");
+        return Club.from(clubService.create(draft.toDomain()));
     }
 
     @GetMapping("{id}")

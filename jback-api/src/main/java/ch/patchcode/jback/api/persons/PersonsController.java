@@ -61,7 +61,7 @@ public class PersonsController {
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Principal) context.getAuthentication();
 
-        var person = personService.create(draft.toDomainPerson());
+        var person = personService.create(draft.toDomain());
 
         List<VerificationMean.Draft> means = callerAuth.getMeans().stream()
                 .map(VerificationMean::toNewDraft)
@@ -89,7 +89,7 @@ public class PersonsController {
 
         var context = SecurityContextHolder.getContext();
         var callerAuth = (Principal) context.getAuthentication();
-        var person = personService.create(draft.toDomainPerson());
+        var person = personService.create(draft.toDomain());
         authorizationManager.addClient(callerAuth, person);
         return fromDomain(person);
     }

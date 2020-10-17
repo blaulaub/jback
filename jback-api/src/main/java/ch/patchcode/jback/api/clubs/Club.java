@@ -14,7 +14,7 @@ import java.util.UUID;
 @FreeBuilder
 public abstract class Club {
 
-    public static Club from(ch.patchcode.jback.presentation.clubs.Club club) {
+    public static Club from(ch.patchcode.jback.coreEntities.Club club) {
 
         Builder builder = new Builder();
 
@@ -79,6 +79,15 @@ public abstract class Club {
                     .setName(name)
                     .setUrl(Optional.ofNullable(url))
                     .setContact(Optional.ofNullable(contact)).build();
+        }
+
+        public ch.patchcode.jback.coreEntities.Club.Draft toDomain() {
+
+            return new ch.patchcode.jback.coreEntities.Club.Draft.Builder()
+                    .setName(getName())
+                    .setUrl(getUrl())
+                    .setContact(getContact().map(Person::toDomain))
+                    .build();
         }
 
         public static class Builder extends Club_Draft_Builder {
