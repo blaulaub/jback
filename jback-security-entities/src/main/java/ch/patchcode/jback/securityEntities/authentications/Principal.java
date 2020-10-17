@@ -34,6 +34,8 @@ public interface Principal extends
         void visit(PersonalAuthentication personalAuthentication);
 
         void visit(TemporaryAuthentication temporaryAuthentication);
+
+        void visit(SuperuserAuthentication superuserAuthentication);
     }
 
     interface ResultVisitor<T> {
@@ -41,5 +43,7 @@ public interface Principal extends
         T visit(PersonalAuthentication personalAuthentication);
 
         T visit(TemporaryAuthentication temporaryAuthentication);
+
+        T visit(SuperuserAuthentication superuserAuthentication);
     }
 }

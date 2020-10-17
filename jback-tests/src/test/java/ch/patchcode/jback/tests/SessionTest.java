@@ -1,6 +1,5 @@
 package ch.patchcode.jback.tests;
 
-import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.session.LoginData;
 import ch.patchcode.jback.api.session.LoginResponse;
 import ch.patchcode.jback.api.verification.VerificationByUsernameAndPassword;
@@ -12,14 +11,25 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.env.Environment;
+import org.springframework.test.context.TestPropertySource;
 
 import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
 import static ch.patchcode.jback.testsInfra.Some.initialRegistrationData;
 import static ch.patchcode.jback.testsInfra.Some.meDraft;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @ApiTestConfiguration.Apply
+@TestPropertySource(properties = {
+        "ADMIN_USERNAME=admin",
+        "ADMIN_PASSWORD=secret"
+})
 class SessionTest {
+
+    @Autowired
+    private Environment env;
 
     private final Api api;
 
@@ -120,6 +130,30 @@ class SessionTest {
                 .setVerificationMean(VerificationByUsernameAndPassword.Draft.create(
                         registrationData.getUsername(),
                         registrationData.getPassword()))
+                .build();
+
+        // act
+        var result = api.postLogin(loginData).andReturn();
+
+        // assert
+        result
+                .expectStatus().isOk()
+                .expectBody().jsonPath("$.kind").value(equalTo(LoginResponse.Kind.SUCCESS.toString()));
+    }
+
+    @Test
+    @DisplayName("can login with superuser credentials")
+    void canLoginWithSuperuserCredentials() throws Exception {
+
+        // arrange
+        String username = env.getProperty("ADMIN_USERNAME");
+        String password = env.getProperty("ADMIN_PASSWORD");
+        assumeTrue("admin".equals(username));
+        assumeTrue("secret".equals(password));
+
+        var loginData = new LoginData.Builder()
+                .setUserIdentification(username)
+                .setVerificationMean(VerificationByUsernameAndPassword.Draft.create(username, password))
                 .build();
 
         // act

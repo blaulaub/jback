@@ -4,8 +4,8 @@ import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.security.AuthorizationManager;
 import ch.patchcode.jback.security.LoginData;
 import ch.patchcode.jback.security.authentications.PersonalAuthenticationService;
-import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.registration.InitialRegistrationData;
+import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.PersonalAuthenticationRepository;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
@@ -95,22 +95,22 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
         return principal.orElse(null);
     }
 
-    private Principal getPrincipalForConsoleFromAuth(VerificationByConsole.Draft consoleDraft, PersonalAuthentication auth) {
+    private Principal getPrincipalForConsoleFromAuth(VerificationByConsole.Draft consoleDraft, Principal auth) {
 
         throw new RuntimeException("not implemented");
     }
 
-    private Principal getPrincipalForEmailFromAuth(VerificationByEmail.Draft emailDraft, PersonalAuthentication auth) {
+    private Principal getPrincipalForEmailFromAuth(VerificationByEmail.Draft emailDraft, Principal auth) {
 
         throw new RuntimeException("not implemented");
     }
 
-    private Principal principalForSmsFromAuth(VerificationBySms.Draft smsDraft, PersonalAuthentication auth) {
+    private Principal principalForSmsFromAuth(VerificationBySms.Draft smsDraft, Principal auth) {
 
         throw new RuntimeException("not implemented");
     }
 
-    private Principal principalForPasswordFromAuth(VerificationByPassword.Draft passwordDraft, PersonalAuthentication auth) {
+    private Principal principalForPasswordFromAuth(VerificationByPassword.Draft passwordDraft, Principal auth) {
 
         var matches = auth.getMeans().stream()
                 .filter(it -> it instanceof VerificationByPassword)
