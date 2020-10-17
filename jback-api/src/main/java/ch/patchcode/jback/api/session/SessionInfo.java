@@ -8,20 +8,20 @@ import org.inferred.freebuilder.FreeBuilder;
 import java.util.Optional;
 
 @FreeBuilder
-public interface SessionInfo {
+public abstract class SessionInfo {
 
-    boolean isAuthenticated();
+    public abstract boolean isAuthenticated();
 
-    String getPrincipalName();
+    public abstract String getPrincipalName();
 
-    Perspective getPerspective();
+    public abstract Perspective getPerspective();
 
-    Optional<String> getFirstName();
+    public abstract Optional<String> getFirstName();
 
-    Optional<String> getLastName();
+    public abstract Optional<String> getLastName();
 
     @JsonCreator
-    static SessionInfo of(
+    public static SessionInfo of(
             @JsonProperty(value = "authenticated", required = true) boolean authenticated,
             @JsonProperty(value = "principalName", required = true) String principalName,
             @JsonProperty(value = "perspective", required = true) Perspective perspective,
@@ -38,6 +38,6 @@ public interface SessionInfo {
         return builder.build();
     }
 
-    class Builder extends SessionInfo_Builder {
+    public static class Builder extends SessionInfo_Builder {
     }
 }
