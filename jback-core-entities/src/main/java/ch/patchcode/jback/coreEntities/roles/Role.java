@@ -2,7 +2,7 @@ package ch.patchcode.jback.coreEntities.roles;
 
 import ch.patchcode.jback.coreEntities.Authority;
 import ch.patchcode.jback.coreEntities.Club;
-import ch.patchcode.jback.secModel.Person;
+import ch.patchcode.jback.coreEntities.Person;
 
 import java.util.List;
 import java.util.UUID;
