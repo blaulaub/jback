@@ -2,7 +2,6 @@ package ch.patchcode.jback.jpa.entities;
 
 import ch.patchcode.jback.coreEntities.roles.MemberRole;
 import ch.patchcode.jback.coreEntities.roles.Role;
-import ch.patchcode.jback.securityEntities.verificationMeans.*;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -46,6 +45,21 @@ public abstract class RoleJpa {
     }
 
     public abstract <R> R accept(Visitor<R> visitor);
+
+    public Role toDomain() {
+
+        return this.accept(new Visitor<Role>() {
+
+            @Override
+            public Role visit(MemberRoleJpa memberRoleJpa) {
+                return new MemberRole.Builder()
+                        .setId(getId())
+                        .setPerson(getPerson().toDomain())
+                        .setOrganisation(getClub().toDomain())
+                        .build();
+            }
+        });
+    }
 
     public interface Visitor<R> {
 

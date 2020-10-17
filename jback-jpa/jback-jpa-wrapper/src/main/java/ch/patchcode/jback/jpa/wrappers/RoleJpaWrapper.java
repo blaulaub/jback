@@ -2,6 +2,7 @@ package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.coreEntities.roles.Role;
 import ch.patchcode.jback.coreEntities.roles.RoleRepository;
+import ch.patchcode.jback.jpa.entities.RoleJpa;
 import ch.patchcode.jback.jpa.entities.RoleJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,8 @@ public class RoleJpaWrapper implements RoleRepository {
 
     @Override
     public Optional<Role> findById(UUID id) {
-        throw new RuntimeException("not implemented");
+
+        return roleJpaRepository.findById(id).map(RoleJpa::toDomain);
     }
 
     @Override
