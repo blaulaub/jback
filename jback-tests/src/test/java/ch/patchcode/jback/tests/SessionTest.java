@@ -1,5 +1,7 @@
 package ch.patchcode.jback.tests;
 
+import ch.patchcode.jback.api.clubs.Club;
+import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.session.LoginData;
 import ch.patchcode.jback.api.session.LoginResponse;
 import ch.patchcode.jback.api.verification.VerificationByUsernameAndPassword;
@@ -14,8 +16,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.env.Environment;
 
 import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
-import static ch.patchcode.jback.testsInfra.Some.initialRegistrationData;
-import static ch.patchcode.jback.testsInfra.Some.meDraft;
+import static ch.patchcode.jback.testsInfra.Some.*;
 import static org.hamcrest.Matchers.equalTo;
 
 @ApiTestConfiguration.Apply
@@ -158,5 +159,33 @@ class SessionTest {
         result
                 .expectStatus().isOk()
                 .expectBody().jsonPath("$.perspective").value(equalTo(Perspective.MEMBER.toString()));
+    }
+
+    @Test
+    @DisplayName("after assigning to club person gets member role for the club")
+    void afterAssigningToClubPersonGetsMemberroleForTheClub() throws Exception {
+
+        // arrange
+
+        // - arrange basic data
+        var registrationData = meDraft();
+        Club.Draft draft = minimalisticClubDraft();
+
+        // - arrange person, club, and membership
+        var person = api.workflows.registerAndPostMeToPersons(registrationData).andAssumeGoodAndReturn(Person.class);
+        api.workflows.loginAsSuperuser().andAssumeGoodAndReturn();
+        var club = api.postClub(draft).andAssumeGoodAndReturn(Club.class);
+        api.putMember(club.getId(), person).andAssumeGoodAndReturn();
+
+        // - arrange login as (member) person
+        api.workflows.loginAsMeBy(registrationData).andAssumeGoodAndReturn();
+
+        // act
+        var result = api.getRoles().andReturn();
+
+        // assert
+        result
+                .expectStatus().isOk()
+                .expectBody().jsonPath("$").isArray();
     }
 }

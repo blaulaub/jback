@@ -67,4 +67,15 @@ public final class ApiWorkflows {
 
         return api.postLogin(loginData);
     }
+
+    public Api.CallResult loginAsMeBy(Person.MeDraft data) throws Exception {
+
+        var loginData = new LoginData.Builder()
+                .setUserIdentification(data.getUsername())
+                .setVerificationMean(VerificationByUsernameAndPassword.Draft.create(
+                        data.getUsername(),
+                        data.getPassword()))
+                .build();
+        return api.postLogin(loginData);
+    }
 }

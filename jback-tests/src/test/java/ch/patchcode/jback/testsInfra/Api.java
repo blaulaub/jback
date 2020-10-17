@@ -215,6 +215,29 @@ public class Api {
     }
 
     /**
+     * Calls the <tt>/api/v1/session/roles</tt> endpoint.
+     */
+    public CallResult getRoles() {
+
+        return new CallResult(
+
+                // call
+                webClient.get()
+                        .uri("/api/v1/session/roles")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .exchange(),
+
+                // expect
+                asList(
+                        it -> it.expectStatus().isOk(),
+                        it -> it.expectBody().jsonPath("$").isArray()
+                )
+        );
+    }
+
+
+    /**
      * Calls the <tt>/api/v1/session/logout</tt> endpoint.
      */
     public CallResult postLogout() {
@@ -250,6 +273,10 @@ public class Api {
             return result;
         }
 
+        /**
+         * To be used during test arrangement, this makes the positive outcome of the {@link CallResult}
+         * a test assumption.
+         */
         public WebTestClient.ResponseSpec andAssumeGoodAndReturn() {
             try {
                 for (Function<WebTestClient.ResponseSpec, ?> x : expectations) {
