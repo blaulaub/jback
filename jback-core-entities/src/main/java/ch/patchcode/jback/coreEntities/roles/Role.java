@@ -5,9 +5,12 @@ import ch.patchcode.jback.coreEntities.Club;
 import ch.patchcode.jback.secModel.Person;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface Role
         extends ch.patchcode.jback.secModel.Role<Club, Person, Authority> {
+
+    UUID getId();
 
     @Override
     Person getPerson();
@@ -17,4 +20,7 @@ public interface Role
 
     @Override
     List<Authority> getPrivileges();
+
+    interface Draft {
+    }
 }
