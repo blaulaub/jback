@@ -2,9 +2,7 @@ package ch.patchcode.jback.testsInfra;
 
 import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
-import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.session.LoginData;
-import ch.patchcode.jback.api.verification.VerificationByUsernameAndPassword;
 import ch.patchcode.jback.api.verification.VerificationCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.env.Environment;
@@ -16,8 +14,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
 
-import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
-import static ch.patchcode.jback.testsInfra.Some.initialRegistrationData;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
@@ -29,7 +25,11 @@ public class Api {
 
     private final WebTestClient webClient;
     private final ObjectMapper mapper;
-    private final Environment env;
+
+    /**
+     * A bunch of pre-defined, standard workflows, for your convenience.
+     */
+    public final ApiWorkflows workflows;
 
     public Api(int port, ObjectMapper mapper, Environment env) {
 
@@ -38,7 +38,8 @@ public class Api {
                 .filter(new CookieTrackerFilter())
                 .build();
         this.mapper = mapper;
-        this.env = env;
+
+        this.workflows = new ApiWorkflows(this, env);
     }
 
     /**
@@ -204,58 +205,4 @@ public class Api {
         }
     }
 
-    /**
-     * A bunch of pre-defined, standard workflows, for your convenience.
-     */
-    public final Workflows workflows = new Workflows();
-
-    /**
-     * A bunch of pre-defined, standard workflows, for your convenience.
-     */
-    public final class Workflows {
-
-        public CallResult registerWithCode(InitialRegistrationData content, String code) throws Exception {
-
-            var info = postRegistration(content)
-                    .andAssumeGoodAndReturn(PendingRegistrationInfo.class);
-
-            return putVerificationCode(
-                    info.getPendingRegistrationId(),
-                    VerificationCode.of(code)
-            );
-        }
-
-
-        public CallResult registerAndPostMeToPersons(Person.MeDraft content) throws Exception {
-
-            InitialRegistrationData initialData = InitialRegistrationData.Builder
-                    .from(initialRegistrationData())
-                    .setFirstName(content.getFirstName())
-                    .setLastName(content.getLastName())
-                    .build();
-
-            var info = postRegistration(initialData)
-                    .andAssumeGoodAndReturn(PendingRegistrationInfo.class);
-
-            putVerificationCode(
-                    info.getPendingRegistrationId(),
-                    VerificationCode.of(VERIFICATION_CODE)
-            ).andAssumeGoodAndReturn();
-
-            return postPersonMe(content);
-        }
-
-        public CallResult loginAsSuperuser() throws Exception {
-
-            String username = env.getProperty("ADMIN_USERNAME");
-            String password = env.getProperty("ADMIN_PASSWORD");
-
-            var loginData = new LoginData.Builder()
-                    .setUserIdentification(username)
-                    .setVerificationMean(VerificationByUsernameAndPassword.Draft.create(username, password))
-                    .build();
-
-            return postLogin(loginData);
-        }
-    }
 }
