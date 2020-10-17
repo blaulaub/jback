@@ -2,7 +2,7 @@ package ch.patchcode.jback.coreEntities.roles;
 
 import ch.patchcode.jback.coreEntities.Authority;
 import ch.patchcode.jback.coreEntities.Club;
-import ch.patchcode.jback.secModel.Person;
+import ch.patchcode.jback.coreEntities.Person;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.util.List;
