@@ -12,9 +12,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Club {
+public abstract class Club {
 
-    static Club from(ch.patchcode.jback.presentation.clubs.Club club) {
+    public static Club from(ch.patchcode.jback.presentation.clubs.Club club) {
 
         Builder builder = new Builder();
 
@@ -28,7 +28,7 @@ public interface Club {
     }
 
     @JsonCreator
-    static Club create(
+    public static Club of(
             @JsonProperty(value = "id", required = true) UUID id,
             @JsonProperty(value = "name", required = true) String name,
             @JsonProperty("url") URI url,
@@ -42,23 +42,23 @@ public interface Club {
                 .setContact(Optional.ofNullable(contact)).build();
     }
 
-    UUID getId();
+    public abstract UUID getId();
 
-    String getName();
+    public abstract String getName();
 
     @ApiModelProperty(dataType = "ch.patchcode.jback.api.persons.Person")
-    Optional<Person> getContact();
+    public abstract Optional<Person> getContact();
 
     @ApiModelProperty(dataType = "java.net.URI")
-    Optional<URI> getUrl();
+    public abstract Optional<URI> getUrl();
 
-    class Builder extends Club_Builder {
+    public static class Builder extends Club_Builder {
 
     }
 
     @ApiModel
     @FreeBuilder
-    abstract class Draft {
+    public static abstract class Draft {
 
         public abstract String getName();
 
@@ -69,7 +69,7 @@ public interface Club {
         public abstract Optional<URI> getUrl();
 
         @JsonCreator
-        static Draft create(
+        public static Draft of(
                 @JsonProperty(value = "name", required = true) String name,
                 @JsonProperty("url") URI url,
                 @JsonProperty("contact") Person contact
@@ -83,6 +83,5 @@ public interface Club {
 
         public static class Builder extends Club_Draft_Builder {
         }
-
     }
 }

@@ -12,18 +12,18 @@ import java.util.List;
 import java.util.UUID;
 
 @FreeBuilder
-public interface Person {
+public abstract class Person {
 
-    UUID getId();
+    public abstract UUID getId();
 
-    String getFirstName();
+    public abstract String getFirstName();
 
-    String getLastName();
+    public abstract String getLastName();
 
-    List<String> getAddress();
+    public abstract List<String> getAddress();
 
     @JsonCreator
-    static Person of(
+    public static Person of(
             @JsonProperty("id") UUID id,
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName,
@@ -37,7 +37,7 @@ public interface Person {
                 .build();
     }
 
-    static Person fromDomain(ch.patchcode.jback.coreEntities.Person person) {
+    public static Person fromDomain(ch.patchcode.jback.coreEntities.Person person) {
 
         Builder builder = new Builder();
 
@@ -49,12 +49,12 @@ public interface Person {
         return builder.build();
     }
 
-    class Builder extends Person_Builder {
+    public static class Builder extends Person_Builder {
     }
 
     @ApiModel
     @FreeBuilder
-    abstract class Draft {
+    public abstract static class Draft {
 
         @ApiModelProperty
         public abstract String getFirstName();
@@ -93,7 +93,7 @@ public interface Person {
     }
 
     @FreeBuilder
-    abstract class MeDraft extends Draft {
+    public abstract static class MeDraft extends Draft {
 
         public abstract String getUsername();
 
