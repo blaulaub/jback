@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.env.Environment;
 
 import static ch.patchcode.jback.testsInfra.Some.meDraft;
 import static org.hamcrest.Matchers.contains;
@@ -18,8 +19,8 @@ public class PersonTest {
     private final Api api;
 
     @Autowired
-    public PersonTest(@LocalServerPort int port, ObjectMapper mapper) {
-        this.api = new Api(port, mapper);
+    public PersonTest(@LocalServerPort int port, ObjectMapper mapper, Environment env) {
+        this.api = new Api(port, mapper, env);
     }
 
     @Test

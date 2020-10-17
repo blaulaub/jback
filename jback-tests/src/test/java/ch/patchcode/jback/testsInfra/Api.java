@@ -4,9 +4,10 @@ import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.session.LoginData;
+import ch.patchcode.jback.api.verification.VerificationByUsernameAndPassword;
 import ch.patchcode.jback.api.verification.VerificationCode;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -28,14 +29,16 @@ public class Api {
 
     private final WebTestClient webClient;
     private final ObjectMapper mapper;
+    private final Environment env;
 
-    public Api(int port, ObjectMapper mapper) {
+    public Api(int port, ObjectMapper mapper, Environment env) {
 
         this.webClient = WebTestClient.bindToServer()
                 .baseUrl("http://localhost:" + port)
                 .filter(new CookieTrackerFilter())
                 .build();
         this.mapper = mapper;
+        this.env = env;
     }
 
     /**
@@ -129,7 +132,6 @@ public class Api {
 
     /**
      * Calls the <tt>/api/v1/session/login</tt> endpoint.
-     * @return
      */
     public CallResult postLogin(LoginData loginData) throws Exception {
 
@@ -241,6 +243,19 @@ public class Api {
             ).andAssumeGoodAndReturn();
 
             return postPersonMe(content);
+        }
+
+        public CallResult loginAsSuperuser() throws Exception {
+
+            String username = env.getProperty("ADMIN_USERNAME");
+            String password = env.getProperty("ADMIN_PASSWORD");
+
+            var loginData = new LoginData.Builder()
+                    .setUserIdentification(username)
+                    .setVerificationMean(VerificationByUsernameAndPassword.Draft.create(username, password))
+                    .build();
+
+            return postLogin(loginData);
         }
     }
 }

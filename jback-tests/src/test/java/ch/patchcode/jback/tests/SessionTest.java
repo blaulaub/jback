@@ -18,8 +18,6 @@ import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VER
 import static ch.patchcode.jback.testsInfra.Some.initialRegistrationData;
 import static ch.patchcode.jback.testsInfra.Some.meDraft;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @ApiTestConfiguration.Apply
 @TestPropertySource(properties = {
@@ -28,14 +26,11 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 })
 class SessionTest {
 
-    @Autowired
-    private Environment env;
-
     private final Api api;
 
     @Autowired
-    public SessionTest(@LocalServerPort int port, ObjectMapper mapper) {
-        this.api = new Api(port, mapper);
+    public SessionTest(@LocalServerPort int port, ObjectMapper mapper, Environment env) {
+        this.api = new Api(port, mapper, env);
     }
 
     @Test
@@ -145,19 +140,8 @@ class SessionTest {
     @DisplayName("can login with superuser credentials")
     void canLoginWithSuperuserCredentials() throws Exception {
 
-        // arrange
-        String username = env.getProperty("ADMIN_USERNAME");
-        String password = env.getProperty("ADMIN_PASSWORD");
-        assumeTrue("admin".equals(username));
-        assumeTrue("secret".equals(password));
-
-        var loginData = new LoginData.Builder()
-                .setUserIdentification(username)
-                .setVerificationMean(VerificationByUsernameAndPassword.Draft.create(username, password))
-                .build();
-
         // act
-        var result = api.postLogin(loginData).andReturn();
+        var result = api.workflows.loginAsSuperuser().andReturn();
 
         // assert
         result
@@ -170,17 +154,7 @@ class SessionTest {
     void superuserPerspectiveIsMember() throws Exception {
 
         // arrange
-        String username = env.getProperty("ADMIN_USERNAME");
-        String password = env.getProperty("ADMIN_PASSWORD");
-        assumeTrue("admin".equals(username));
-        assumeTrue("secret".equals(password));
-
-        var loginData = new LoginData.Builder()
-                .setUserIdentification(username)
-                .setVerificationMean(VerificationByUsernameAndPassword.Draft.create(username, password))
-                .build();
-
-        api.postLogin(loginData).andAssumeGoodAndReturn();
+        api.workflows.loginAsSuperuser().andAssumeGoodAndReturn();
 
         // act
         var result = api.getSession().andReturn();
