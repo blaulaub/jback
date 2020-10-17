@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.env.Environment;
 
+import static ch.patchcode.jback.testsInfra.Some.minimalisticClubDraft;
+
 @ApiTestConfiguration.Apply
 public class ClubTest {
 
@@ -27,9 +29,7 @@ public class ClubTest {
         // arrange
         api.workflows.loginAsSuperuser().andAssumeGoodAndReturn();
 
-        Club.Draft draft = new Club.Draft.Builder()
-                .setName("Screaming Seagulls")
-                .build();
+        Club.Draft draft = minimalisticClubDraft();
 
         // act
         var result = api.postClub(draft).andReturn();
@@ -48,9 +48,7 @@ public class ClubTest {
 
         // arrange
         api.workflows.loginAsSuperuser().andAssumeGoodAndReturn();
-        Club.Draft draft = new Club.Draft.Builder()
-                .setName("Screaming Seagulls")
-                .build();
+        Club.Draft draft = minimalisticClubDraft();
         var clubId = api.postClub(draft).andAssumeGoodAndReturn(Club.class).getId();
 
         // act

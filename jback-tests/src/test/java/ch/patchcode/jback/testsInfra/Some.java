@@ -1,5 +1,6 @@
 package ch.patchcode.jback.testsInfra;
 
+import ch.patchcode.jback.api.clubs.Club;
 import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.verification.VerificationByConsole;
@@ -36,5 +37,11 @@ public abstract class Some {
                 "tsawyer",
                 "asdf"
         );
+    }
+
+    public static Club.Draft minimalisticClubDraft() {
+        return new Club.Draft.Builder()
+                .setName("Screaming Seagulls")
+                .build();
     }
 }
