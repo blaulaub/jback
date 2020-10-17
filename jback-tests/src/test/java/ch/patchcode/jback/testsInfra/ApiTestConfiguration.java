@@ -20,6 +20,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -106,6 +107,10 @@ public class ApiTestConfiguration {
     @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
     @ContextConfiguration(classes = {ApiTestConfiguration.class})
     @ActiveProfiles("test")
+    @TestPropertySource(properties = {
+            "ADMIN_USERNAME=admin",
+            "ADMIN_PASSWORD=secret"
+    })
     public @interface Apply {
     }
 }
