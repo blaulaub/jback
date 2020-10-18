@@ -5,6 +5,7 @@ import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +21,7 @@ import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/api/v1/persons")
+@Api(tags = "Persons")
 public class PersonsController {
 
     private final PersonService personService;

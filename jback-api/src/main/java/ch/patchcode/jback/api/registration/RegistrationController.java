@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/api/v1/registration")
-@Api
+@Api(tags = "Registration")
 public class RegistrationController {
 
     private final static Logger LOG = LoggerFactory.getLogger(RegistrationController.class);

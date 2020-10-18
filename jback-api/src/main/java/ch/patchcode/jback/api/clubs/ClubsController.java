@@ -2,6 +2,7 @@ package ch.patchcode.jback.api.clubs;
 
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.clubs.ClubService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/clubs")
+@Api(tags = "Clubs")
 public class ClubsController {
 
     private final ClubService clubService;

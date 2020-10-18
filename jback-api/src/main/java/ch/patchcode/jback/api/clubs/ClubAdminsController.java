@@ -6,6 +6,7 @@ import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.core.NotAllowedException;
 import ch.patchcode.jback.core.clubs.ClubMemberService;
 import ch.patchcode.jback.core.clubs.ClubNotFoundException;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/clubs/{id}/admins")
+@Api(tags = "Clubs")
 public class ClubAdminsController {
 
     private final ClubMemberService clubMemberService;

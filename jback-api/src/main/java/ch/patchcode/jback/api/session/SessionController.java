@@ -4,6 +4,7 @@ import ch.patchcode.jback.api.roles.Role;
 import ch.patchcode.jback.api.roles.Roles;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/api/v1/session")
+@Api(tags = "Session")
 public class SessionController {
 
     private final static Logger LOG = LoggerFactory.getLogger(SessionController.class);
@@ -74,4 +76,5 @@ public class SessionController {
         List<ch.patchcode.jback.coreEntities.roles.Role> roles = authorizationManager.getAvailableRoles(springAuth.getPrincipal());
         return Roles.of(roles.stream().map(Role::fromDomain).collect(toList()));
     }
+
 }
