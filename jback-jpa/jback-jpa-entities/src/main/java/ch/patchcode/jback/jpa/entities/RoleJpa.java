@@ -1,5 +1,6 @@
 package ch.patchcode.jback.jpa.entities;
 
+import ch.patchcode.jback.coreEntities.roles.AdminRole;
 import ch.patchcode.jback.coreEntities.roles.MemberRole;
 import ch.patchcode.jback.coreEntities.roles.Role;
 
@@ -48,11 +49,20 @@ public abstract class RoleJpa {
 
     public Role toDomain() {
 
-        return this.accept(new Visitor<Role>() {
+        return this.accept(new Visitor<>() {
 
             @Override
             public Role visit(MemberRoleJpa memberRoleJpa) {
                 return new MemberRole.Builder()
+                        .setId(getId())
+                        .setPerson(getPerson().toDomain())
+                        .setOrganisation(getClub().toDomain())
+                        .build();
+            }
+
+            @Override
+            public Role visit(AdminRoleJpa adminRoleJpa) {
+                return new AdminRole.Builder()
                         .setId(getId())
                         .setPerson(getPerson().toDomain())
                         .setOrganisation(getClub().toDomain())
@@ -64,11 +74,23 @@ public abstract class RoleJpa {
     public interface Visitor<R> {
 
         R visit(MemberRoleJpa memberRoleJpa);
+
+        R visit(AdminRoleJpa adminRoleJpa);
     }
 
     @Entity
     @DiscriminatorValue("member")
     public static class MemberRoleJpa extends RoleJpa {
+
+        @Override
+        public <R> R accept(Visitor<R> visitor) {
+            return visitor.visit(this);
+        }
+    }
+
+    @Entity
+    @DiscriminatorValue("admin")
+    public static class AdminRoleJpa extends RoleJpa {
 
         @Override
         public <R> R accept(Visitor<R> visitor) {

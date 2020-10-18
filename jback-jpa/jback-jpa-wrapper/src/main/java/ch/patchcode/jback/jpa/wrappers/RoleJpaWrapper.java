@@ -2,6 +2,7 @@ package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.coreEntities.Club;
 import ch.patchcode.jback.coreEntities.Person;
+import ch.patchcode.jback.coreEntities.roles.AdminRole;
 import ch.patchcode.jback.coreEntities.roles.MemberRole;
 import ch.patchcode.jback.coreEntities.roles.Role;
 import ch.patchcode.jback.coreEntities.roles.RoleRepository;
@@ -38,12 +39,21 @@ public class RoleJpaWrapper implements RoleRepository {
     @Override
     public Role create(Role.Draft draft) {
 
-        RoleJpa role = draft.accept(new Role.Draft.Visitor<RoleJpa>() {
+        RoleJpa role = draft.accept(new Role.Draft.Visitor<>() {
 
             @Override
             public RoleJpa visit(MemberRole.Draft draft) {
 
                 var role = new RoleJpa.MemberRoleJpa();
+                role.setPerson(toJpaIfConsistent(draft.getPerson()));
+                role.setClub(RoleJpaWrapper.this.toJpaIfConsistent(draft.getOrganisation()));
+                return role;
+            }
+
+            @Override
+            public RoleJpa visit(AdminRole.Draft draft) {
+
+                var role = new RoleJpa.AdminRoleJpa();
                 role.setPerson(toJpaIfConsistent(draft.getPerson()));
                 role.setClub(RoleJpaWrapper.this.toJpaIfConsistent(draft.getOrganisation()));
                 return role;

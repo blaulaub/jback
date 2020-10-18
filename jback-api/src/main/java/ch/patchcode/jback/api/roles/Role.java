@@ -23,11 +23,16 @@ public abstract class Role {
 
     public static Role fromDomain(ch.patchcode.jback.coreEntities.roles.Role role) {
 
-        return role.accept(new ch.patchcode.jback.coreEntities.roles.Role.ResultVisitor<Role>() {
+        return role.accept(new ch.patchcode.jback.coreEntities.roles.Role.ResultVisitor<>() {
 
             @Override
             public Role visit(ch.patchcode.jback.coreEntities.roles.MemberRole memberRole) {
                 return MemberRole.fromDomain(memberRole);
+            }
+
+            @Override
+            public Role visit(ch.patchcode.jback.coreEntities.roles.AdminRole adminRole) {
+                return AdminRole.fromDomain(adminRole);
             }
         });
     }

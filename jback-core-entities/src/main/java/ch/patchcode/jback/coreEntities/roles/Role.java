@@ -35,16 +35,22 @@ public interface Role extends ch.patchcode.jback.secModel.Role<Club, Person, Aut
         interface Visitor<R> {
 
             R visit(MemberRole.Draft draft);
+
+            R visit(AdminRole.Draft draft);
         }
     }
 
     interface Visitor {
 
         void visit(MemberRole memberRole);
+
+        void visit(AdminRole adminRole);
     }
 
     interface ResultVisitor<T> {
 
         T visit(MemberRole memberRole);
+
+        T visit(AdminRole adminRole);
     }
 }
