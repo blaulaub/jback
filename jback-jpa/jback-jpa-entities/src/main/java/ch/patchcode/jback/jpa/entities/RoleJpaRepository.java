@@ -10,5 +10,7 @@ public interface RoleJpaRepository {
 
     Optional<RoleJpa> findById(UUID uuid);
 
+    List<RoleJpa> findByPersonAndClub(PersonJpa person, ClubJpa club);
+
     List<RoleJpa> findByPersonIn(List<PersonJpa> persons);
 }

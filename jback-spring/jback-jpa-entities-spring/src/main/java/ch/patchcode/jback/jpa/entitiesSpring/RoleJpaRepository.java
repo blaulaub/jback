@@ -1,5 +1,6 @@
 package ch.patchcode.jback.jpa.entitiesSpring;
 
+import ch.patchcode.jback.jpa.entities.ClubJpa;
 import ch.patchcode.jback.jpa.entities.PersonJpa;
 import ch.patchcode.jback.jpa.entities.RoleJpa;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,6 +20,9 @@ public interface RoleJpaRepository extends
 
     @Override
     Optional<RoleJpa> findById(UUID uuid);
+
+    @Override
+    List<RoleJpa> findByPersonAndClub(PersonJpa person, ClubJpa club);
 
     @Override
     List<RoleJpa> findByPersonIn(List<PersonJpa> persons);

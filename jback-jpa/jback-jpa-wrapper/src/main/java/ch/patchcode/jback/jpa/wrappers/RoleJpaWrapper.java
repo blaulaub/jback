@@ -64,6 +64,17 @@ public class RoleJpaWrapper implements RoleRepository {
     }
 
     @Override
+    public List<Role> findByPersonAndClub(Person person, Club club) {
+
+        return roleJpaRepository.findByPersonAndClub(
+                toJpaIfConsistent(person),
+                toJpaIfConsistent(club)
+        ).stream()
+                .map(RoleJpa::toDomain)
+                .collect(toList());
+    }
+
+    @Override
     public List<Role> findByPersonIn(List<Person> persons) {
 
         List<PersonJpa> personJpas = persons.stream()
