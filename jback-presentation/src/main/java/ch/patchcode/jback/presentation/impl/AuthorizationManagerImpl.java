@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service("presentation.authorizationManager")
@@ -116,5 +117,14 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     public List<Role> getAvailableRoles(Principal principal) {
 
         return roleService.getRolesFor(principal.getPersons());
+    }
+
+    @Override
+    public Optional<Role> getCurrentRole() {
+
+        return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+                .filter(it -> it instanceof SpringAuthentication)
+                .<SpringAuthentication<?>>map(it -> (SpringAuthentication<?>) it)
+                .flatMap(SpringAuthentication::getRole);
     }
 }

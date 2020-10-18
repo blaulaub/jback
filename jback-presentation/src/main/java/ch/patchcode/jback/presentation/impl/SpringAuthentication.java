@@ -48,6 +48,11 @@ public class SpringAuthentication<T extends Principal> implements Authentication
         return new SpringAuthentication<>(principal);
     }
 
+    public Optional<Role> getRole() {
+
+        return Optional.ofNullable(role);
+    }
+
     // from ch.patchcode.jback.securityEntities.authentications.Principal
 
     @Override

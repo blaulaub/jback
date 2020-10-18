@@ -255,6 +255,29 @@ public class Api {
         );
     }
 
+    /**
+     * Calls the <tt>/api/v1/session/roles</tt> endpoint.
+     */
+    public CallResult getCurrentRole() {
+
+        return new CallResult(
+
+                // call
+                webClient.get()
+                        .uri("/api/v1/session/currentRole")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .acceptCharset(StandardCharsets.UTF_8)
+                        .exchange(),
+
+                // expect
+                asList(
+                        it -> it.expectStatus().isOk(),
+                        it -> it.expectBody().jsonPath("$.type").exists(),
+                        it -> it.expectBody().jsonPath("$.person").exists(),
+                        it -> it.expectBody().jsonPath("$.club").exists()
+                )
+        );
+    }
 
     /**
      * Calls the <tt>/api/v1/session/logout</tt> endpoint.

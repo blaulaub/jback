@@ -1,5 +1,6 @@
 package ch.patchcode.jback.api.session;
 
+import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.api.roles.Role;
 import ch.patchcode.jback.api.roles.Roles;
 import ch.patchcode.jback.presentation.AuthorizationManager;
@@ -75,6 +76,12 @@ public class SessionController {
         var springAuth = (SpringAuthentication<?>) auth;
         List<ch.patchcode.jback.coreEntities.roles.Role> roles = authorizationManager.getAvailableRoles(springAuth.getPrincipal());
         return Roles.of(roles.stream().map(Role::fromDomain).collect(toList()));
+    }
+
+    @GetMapping("currentRole")
+    public Role currentRole() throws NotFoundException {
+
+        return authorizationManager.getCurrentRole().map(Role::fromDomain).orElseThrow(() -> new NotFoundException());
     }
 
 }

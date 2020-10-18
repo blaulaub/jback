@@ -10,6 +10,7 @@ import ch.patchcode.jback.securityEntities.authentications.Principal;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface AuthorizationManager {
@@ -43,4 +44,6 @@ public interface AuthorizationManager {
     TryLoginResult tryLogin(LoginData data);
 
     List<Role> getAvailableRoles(Principal principal);
+
+    Optional<Role> getCurrentRole();
 }
