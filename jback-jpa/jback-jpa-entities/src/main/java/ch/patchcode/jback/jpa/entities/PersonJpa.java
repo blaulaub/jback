@@ -33,9 +33,6 @@ public class PersonJpa {
     @OrderBy("line")
     private List<AddressLine> addressLines;
 
-    @ElementCollection
-    private List<String> authorities;
-
     public String getFirstName() {
         return firstName;
     }
@@ -58,14 +55,6 @@ public class PersonJpa {
 
     public void setAddressLines(List<AddressLine> addressLines) {
         this.addressLines = addressLines;
-    }
-
-    public List<String> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<String> authorities) {
-        this.authorities = authorities;
     }
 
     public static PersonJpa fromDomain(Person.Draft draft) {
