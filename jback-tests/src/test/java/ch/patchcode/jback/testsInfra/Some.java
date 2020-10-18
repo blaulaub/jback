@@ -5,9 +5,13 @@ import ch.patchcode.jback.api.persons.Person;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.verification.VerificationByConsole;
 
+import java.util.Random;
+
 import static java.util.Arrays.asList;
 
 public abstract class Some {
+
+    private final static Random RND = new Random();
 
     private Some() {
         throw new RuntimeException("I am a utility class");
@@ -34,7 +38,7 @@ public abstract class Some {
                 "Tom",
                 "Sawyer",
                 asList("Technoparkstrasse 1", "8051 Zürich"),
-                "tsawyer",
+                String.format("tsawyer_%08X", RND.nextInt()),
                 "asdf"
         );
     }

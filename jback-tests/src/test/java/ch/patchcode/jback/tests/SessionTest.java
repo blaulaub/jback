@@ -2,8 +2,6 @@ package ch.patchcode.jback.tests;
 
 import ch.patchcode.jback.api.clubs.Club;
 import ch.patchcode.jback.api.persons.Person;
-import ch.patchcode.jback.api.roles.Role;
-import ch.patchcode.jback.api.roles.Roles;
 import ch.patchcode.jback.api.session.LoginData;
 import ch.patchcode.jback.api.session.LoginResponse;
 import ch.patchcode.jback.api.verification.VerificationByUsernameAndPassword;
@@ -11,16 +9,11 @@ import ch.patchcode.jback.presentation.Perspective;
 import ch.patchcode.jback.testsInfra.Api;
 import ch.patchcode.jback.testsInfra.ApiTestConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.env.Environment;
-import org.springframework.test.web.reactive.server.FluxExchangeResult;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
 import static ch.patchcode.jback.testsInfra.Some.*;
@@ -34,11 +27,6 @@ class SessionTest {
     @Autowired
     public SessionTest(@LocalServerPort int port, ObjectMapper mapper, Environment env) {
         this.api = new Api(port, mapper, env);
-    }
-
-    @BeforeEach
-    @Transactional
-    void doEverythingTransactional() {
     }
 
     @Test
