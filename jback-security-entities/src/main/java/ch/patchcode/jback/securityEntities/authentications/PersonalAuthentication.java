@@ -6,6 +6,7 @@ import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.Collections.singletonList;
 
@@ -72,6 +73,18 @@ public abstract class PersonalAuthentication implements Principal {
     }
 
     public static class Builder extends PersonalAuthentication_Builder {
+
+        @Override
+        public PersonalAuthentication build() {
+
+            var holderBuilder = getHolderBuilder();
+            this.mutatePersons(persons -> {
+                if (persons.stream().noneMatch(it -> Objects.equals(it.getId(), holderBuilder.getId()))) {
+                    persons.add(holderBuilder);
+                }
+            });
+            return super.build();
+        }
     }
 
     @FreeBuilder

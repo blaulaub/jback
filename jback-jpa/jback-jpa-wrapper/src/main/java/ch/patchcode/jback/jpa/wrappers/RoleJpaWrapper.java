@@ -56,11 +56,13 @@ public class RoleJpaWrapper implements RoleRepository {
     @Override
     public List<Role> findByPersonIn(List<Person> persons) {
 
-        return roleJpaRepository.findByPersonIn(
-                persons.stream()
-                        .map(this::toJpaIfConsistent)
-                        .collect(toList())
-        ).stream()
+        List<PersonJpa> personJpas = persons.stream()
+                .map(this::toJpaIfConsistent)
+                .collect(toList());
+
+        List<RoleJpa> roleJpaRepositoryByPersonIn = roleJpaRepository.findByPersonIn(personJpas);
+
+        return roleJpaRepositoryByPersonIn.stream()
                 .map(RoleJpa::toDomain)
                 .collect(toList());
     }

@@ -5,11 +5,13 @@ import ch.patchcode.jback.api.verification.VerificationCode;
 import ch.patchcode.jback.testsInfra.Api;
 import ch.patchcode.jback.testsInfra.ApiTestConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.Transactional;
 
 import static ch.patchcode.jback.testsInfra.ConstantVerificationCodeProvider.VERIFICATION_CODE;
 import static ch.patchcode.jback.testsInfra.Some.initialRegistrationData;
@@ -22,6 +24,11 @@ class RegistrationTest {
     @Autowired
     public RegistrationTest(@LocalServerPort int port, ObjectMapper mapper, Environment env) {
         this.api = new Api(port, mapper, env);
+    }
+
+    @BeforeEach
+    @Transactional
+    void doEverythingTransactional() {
     }
 
     @Test

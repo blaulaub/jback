@@ -1,6 +1,7 @@
 package ch.patchcode.jback.api.session;
 
 import ch.patchcode.jback.api.roles.Role;
+import ch.patchcode.jback.api.roles.Roles;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
 import org.slf4j.Logger;
@@ -61,16 +62,16 @@ public class SessionController {
     }
 
     @GetMapping("roles")
-    public List<Role> roles() {
+    public Roles roles() {
 
         var auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(auth instanceof SpringAuthentication)) {
-            return emptyList();
+            return Roles.of(emptyList());
         }
 
         var springAuth = (SpringAuthentication<?>) auth;
         List<ch.patchcode.jback.coreEntities.roles.Role> roles = authorizationManager.getAvailableRoles(springAuth.getPrincipal());
-        return roles.stream().map(Role::fromDomain).collect(toList());
+        return Roles.of(roles.stream().map(Role::fromDomain).collect(toList()));
     }
 }

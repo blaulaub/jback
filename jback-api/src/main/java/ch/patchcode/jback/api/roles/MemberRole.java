@@ -3,6 +3,8 @@ package ch.patchcode.jback.api.roles;
 
 import ch.patchcode.jback.api.clubs.Club;
 import ch.patchcode.jback.api.persons.Person;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import org.inferred.freebuilder.FreeBuilder;
 
@@ -17,6 +19,18 @@ public abstract class MemberRole extends Role {
         return new Builder()
                 .setPerson(Person.fromDomain(memberRole.getPerson()))
                 .setClub(Club.fromDomain(memberRole.getOrganisation()))
+                .build();
+    }
+
+    @JsonCreator
+    public static MemberRole of(
+            @JsonProperty("person") Person person,
+            @JsonProperty("club") Club club
+    ) {
+
+        return new Builder()
+                .setPerson(person)
+                .setClub(club)
                 .build();
     }
 
