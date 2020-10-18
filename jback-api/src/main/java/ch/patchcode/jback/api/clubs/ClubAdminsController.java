@@ -8,6 +8,7 @@ import ch.patchcode.jback.core.clubs.ClubMemberService;
 import ch.patchcode.jback.core.clubs.ClubNotFoundException;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -28,6 +29,7 @@ public class ClubAdminsController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('CAN_ASSIGN_ADMIN')")
     public void putAdmin(
             @PathVariable UUID id,
             @RequestBody Person person

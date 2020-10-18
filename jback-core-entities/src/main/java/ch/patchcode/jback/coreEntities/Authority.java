@@ -30,6 +30,26 @@ public enum Authority implements ch.patchcode.jback.secModel.Privilege {
         public <R> R accept(Visitor<R> visitor) {
             return visitor.caseCanCreateClub();
         }
+    },
+
+    /**
+     * Authorized to assign a member to a {@link Club}
+     */
+    CAN_ASSIGN_MEMBER {
+        @Override
+        public <R> R accept(Visitor<R> visitor) {
+            return visitor.caseCanAssignMember();
+        }
+    },
+
+    /**
+     * Authorized to assign an admin to a {@link Club}
+     */
+    CAN_ASSIGN_ADMIN {
+        @Override
+        public <R> R accept(Visitor<R> visitor) {
+            return visitor.caseCanAssignAdmin();
+        }
     };
 
     public abstract <R> R accept(Visitor<R> visitor);
@@ -41,5 +61,9 @@ public enum Authority implements ch.patchcode.jback.secModel.Privilege {
         R caseCanCreateClientPerson();
 
         R caseCanCreateClub();
+
+        R caseCanAssignMember();
+
+        R caseCanAssignAdmin();
     }
 }
