@@ -14,9 +14,19 @@ public abstract class MemberRole extends Role {
 
     public static final String TYPE = "member";
 
+    public ch.patchcode.jback.coreEntities.roles.MemberRole toDomain() {
+
+        return new ch.patchcode.jback.coreEntities.roles.MemberRole.Builder()
+                .setId(getId())
+                .setPerson(getPerson().toDomain())
+                .setOrganisation(getClub().toDomain())
+                .build();
+    }
+
     public static MemberRole fromDomain(ch.patchcode.jback.coreEntities.roles.MemberRole memberRole) {
 
         return new Builder()
+                .setId(memberRole.getId())
                 .setPerson(Person.fromDomain(memberRole.getPerson()))
                 .setClub(Club.fromDomain(memberRole.getOrganisation()))
                 .build();

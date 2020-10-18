@@ -1,5 +1,6 @@
 package ch.patchcode.jback.presentation.impl;
 
+import ch.patchcode.jback.core.NotAllowedException;
 import ch.patchcode.jback.core.RoleService;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.Role;
@@ -126,5 +127,27 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
                 .filter(it -> it instanceof SpringAuthentication)
                 .<SpringAuthentication<?>>map(it -> (SpringAuthentication<?>) it)
                 .flatMap(SpringAuthentication::getRole);
+    }
+
+    @Override
+    public void setCurrentRole(Role role) throws NotAllowedException {
+
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(auth instanceof SpringAuthentication)) {
+
+            throw new NotAllowedException();
+        }
+
+        var springAuth = (SpringAuthentication<?>) auth;
+
+        Principal principal = springAuth.getPrincipal();
+
+        if (getAvailableRoles(principal).stream().noneMatch(it -> it.equals(role))) {
+
+            throw new NotAllowedException();
+        }
+
+        SecurityContextHolder.getContext().setAuthentication(new SpringAuthentication<>(principal, role));
     }
 }

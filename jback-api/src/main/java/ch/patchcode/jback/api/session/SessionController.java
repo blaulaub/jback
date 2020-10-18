@@ -1,10 +1,13 @@
 package ch.patchcode.jback.api.session;
 
+import ch.patchcode.jback.api.exceptions.ForbiddenException;
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.api.roles.Role;
 import ch.patchcode.jback.api.roles.Roles;
+import ch.patchcode.jback.core.NotAllowedException;
 import ch.patchcode.jback.presentation.AuthorizationManager;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
+import ch.patchcode.jback.securityEntities.authentications.Principal;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,9 +82,18 @@ public class SessionController {
     }
 
     @GetMapping("currentRole")
-    public Role currentRole() throws NotFoundException {
+    public Role getCurrentRole() throws NotFoundException {
 
-        return authorizationManager.getCurrentRole().map(Role::fromDomain).orElseThrow(() -> new NotFoundException());
+        return authorizationManager.getCurrentRole().map(Role::fromDomain).orElseThrow(NotFoundException::new);
     }
 
+    @PutMapping("currentRole")
+    public void setCurrentRole(Role role) throws ForbiddenException {
+
+        try {
+            authorizationManager.setCurrentRole(role.toDomain());
+        } catch (NotAllowedException e) {
+            throw new ForbiddenException();
+        }
+    }
 }

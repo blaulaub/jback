@@ -14,9 +14,19 @@ public abstract class AdminRole extends Role {
 
     public static final String TYPE = "admin";
 
+    public ch.patchcode.jback.coreEntities.roles.AdminRole toDomain() {
+
+        return new ch.patchcode.jback.coreEntities.roles.AdminRole.Builder()
+                .setId(getId())
+                .setPerson(getPerson().toDomain())
+                .setOrganisation(getClub().toDomain())
+                .build();
+    }
+
     public static AdminRole fromDomain(ch.patchcode.jback.coreEntities.roles.AdminRole adminRole) {
 
         return new Builder()
+                .setId(adminRole.getId())
                 .setPerson(Person.fromDomain(adminRole.getPerson()))
                 .setClub(Club.fromDomain(adminRole.getOrganisation()))
                 .build();

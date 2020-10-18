@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.swagger.annotations.ApiModel;
 
+import java.util.UUID;
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = MemberRole.class, name = MemberRole.TYPE)
@@ -15,11 +17,15 @@ import io.swagger.annotations.ApiModel;
 })
 public abstract class Role {
 
+    public abstract UUID getId();
+
     public abstract String getType();
 
     public abstract Person getPerson();
 
     public abstract Club getClub();
+
+    public abstract ch.patchcode.jback.coreEntities.roles.Role toDomain();
 
     public static Role fromDomain(ch.patchcode.jback.coreEntities.roles.Role role) {
 

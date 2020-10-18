@@ -1,5 +1,6 @@
 package ch.patchcode.jback.presentation;
 
+import ch.patchcode.jback.core.NotAllowedException;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.Role;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
@@ -46,4 +47,6 @@ public interface AuthorizationManager {
     List<Role> getAvailableRoles(Principal principal);
 
     Optional<Role> getCurrentRole();
+
+    void setCurrentRole(Role toDomain) throws NotAllowedException;
 }

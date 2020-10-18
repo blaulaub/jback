@@ -14,6 +14,16 @@ import java.util.UUID;
 @FreeBuilder
 public abstract class Club {
 
+    public ch.patchcode.jback.coreEntities.Club toDomain() {
+
+        return new ch.patchcode.jback.coreEntities.Club.Builder()
+                .setId(getId())
+                .setName(getName())
+                .setContact(getContact().map(Person::toDomain))
+                .setUrl(getUrl())
+                .build();
+    }
+
     public static Club fromDomain(ch.patchcode.jback.coreEntities.Club club) {
 
         Builder builder = new Builder();
