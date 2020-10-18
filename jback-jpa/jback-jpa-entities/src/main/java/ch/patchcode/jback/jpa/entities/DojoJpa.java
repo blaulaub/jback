@@ -1,7 +1,11 @@
 package ch.patchcode.jback.jpa.entities;
 
+import ch.patchcode.jback.coreEntities.Address;
+import ch.patchcode.jback.coreEntities.Dojo;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Entity(name = DojoJpa.ENTITY_NAME)
@@ -49,5 +53,18 @@ public class DojoJpa {
 
     public void setAddressLines(List<AddressLine> addressLines) {
         this.addressLines = addressLines;
+    }
+
+    public Dojo toDomain() {
+
+        var builder = new Dojo.Builder()
+                .setId(getId())
+                .setName(getName())
+                .setClub(getClub().toDomain());
+        Optional.ofNullable(getAddressLines())
+                .map(it -> it.stream().map(AddressLine::getValue))
+                .map(it -> new Address.Builder().addAllLines(it).build())
+                .ifPresent(builder::setAddress);
+        return builder.build();
     }
 }
