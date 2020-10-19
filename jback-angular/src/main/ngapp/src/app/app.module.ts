@@ -10,6 +10,7 @@ import { CompleteComponent } from './complete/complete.component';
 import { CreateMeComponent } from './create-me/create-me.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { LoginComponent } from './login/login.component';
+import { CreateClubComponent } from './create-club/create-club.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginComponent } from './login/login.component';
     CompleteComponent,
     CreateMeComponent,
     FrontPageComponent,
-    LoginComponent
+    LoginComponent,
+    CreateClubComponent
   ],
   imports: [
     BrowserModule,

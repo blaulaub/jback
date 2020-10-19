@@ -17,6 +17,10 @@ This is the front page of JBack.
 
 <div *ngIf="userIsMember()">
     As registered user, you can do the following:
+
+    <ul>
+        <li><a routerLink="/createClub">Create club</a> to create a club.</li>
+    </ul>
 </div>
 
 <div *ngIf="userIsEnrolling() || userIsMember()">
