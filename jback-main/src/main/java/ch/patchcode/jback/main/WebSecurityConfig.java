@@ -19,12 +19,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // get API session is open to anybody
                 .antMatchers(HttpMethod.GET, "/api/v1/session").permitAll()
-                // API registration is open to anybody
+                .antMatchers(HttpMethod.POST, "/api/v1/session/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/session/logout").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/v1/registration").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/v1/registration/*").permitAll()
-                // API is open to authenticated (only)
-                .antMatchers("/api/v1/*").authenticated()
-                .antMatchers("/api/v1/*").denyAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/clubs").authenticated()
+                // API remainder is closed to anybody else
+                .antMatchers("/api/v1/**/*").denyAll()
                 // swagger is open (that looks like wide open)
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-resources/*").permitAll()
@@ -32,7 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs/*").permitAll()
                 // otherwise the SPA takes over
                 .anyRequest().permitAll();
-
 
         // how to login
         http.formLogin().disable();
