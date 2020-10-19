@@ -4,7 +4,6 @@ import ch.patchcode.jback.coreEntities.Authority;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.Role;
 import ch.patchcode.jback.presentation.ApiAuthority;
-import ch.patchcode.jback.presentation.Authentication;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 
@@ -15,7 +14,8 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toSet;
 
-public class SpringAuthentication<T extends Principal> implements Authentication {
+public class SpringAuthentication<T extends Principal>
+        implements Principal, org.springframework.security.core.Authentication {
 
     private final T principal;
 
@@ -124,7 +124,28 @@ public class SpringAuthentication<T extends Principal> implements Authentication
     }
 
     @Override
+    public Object getCredentials() {
+        return null;
+    }
+
+    @Override
+    public Object getDetails() {
+        return null;
+    }
+
+    @Override
     public T getPrincipal() {
         return principal;
+    }
+
+    @Override
+    public boolean isAuthenticated() {
+        return true;
+    }
+
+    @Override
+    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+
+        throw new IllegalArgumentException("immutable");
     }
 }
