@@ -3,7 +3,7 @@
 This is the front page of JBack.
 
 <div *ngIf="userIsGuest()">
-    You can do a number of things... currently only one:
+    As visitor to this page you can do the following:
 
     <ul>
         <li><a routerLink="/register">Register</a> to get a user account. Becoming a registered user allows you to use advanced features of this site.</li>
@@ -16,7 +16,7 @@ This is the front page of JBack.
 </div>
 
 <div *ngIf="userIsMember()">
-    Now that you registered, it is time for us to put more stuff in this site...
+    As registered user, you can do the following:
 </div>
 
 <div *ngIf="userIsEnrolling() || userIsMember()">
