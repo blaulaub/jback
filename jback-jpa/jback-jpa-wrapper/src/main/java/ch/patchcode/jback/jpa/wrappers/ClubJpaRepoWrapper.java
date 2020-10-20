@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class ClubJpaRepoWrapper implements ClubRepository {
@@ -39,6 +42,22 @@ public class ClubJpaRepoWrapper implements ClubRepository {
     public Club create(Club.Draft draft) {
 
         return clubJpaRepository.save(fromDomain(draft)).toDomain();
+    }
+
+    @Override
+    public List<Club> findAllLimitedTo(int count) {
+
+        return clubJpaRepository.findAllLimitedTo(count).stream()
+                .map(ClubJpa::toDomain)
+                .collect(toList());
+    }
+
+    @Override
+    public List<Club> findByNameContainingLimitedTo(String pattern, int count) {
+
+        return clubJpaRepository.findAllByNameContainingLimitedTo(pattern, count).stream()
+                .map(ClubJpa::toDomain)
+                .collect(toList());
     }
 
     private ClubJpa fromDomain(Club.Draft draft) {

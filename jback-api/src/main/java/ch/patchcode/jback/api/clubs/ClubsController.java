@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
+
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/api/v1/clubs")
@@ -21,6 +24,12 @@ public class ClubsController {
     public ClubsController(ClubService clubService) {
 
         this.clubService = clubService;
+    }
+
+    @GetMapping
+    public List<Club> getClubs(@RequestParam String pattern) {
+
+        return clubService.find(pattern).stream().map(Club::fromDomain).collect(toList());
     }
 
     @PostMapping
