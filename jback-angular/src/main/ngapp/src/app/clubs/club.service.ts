@@ -12,6 +12,11 @@ export class ClubService {
 
   constructor(private http: HttpClient) { }
 
+  getClub(id: String): Observable<Club> {
+
+    return this.http.get<Club>(`/api/v1/clubs/${id}`)
+  }
+
   searchClubs(term: String): Observable<Club[]> {
 
     if (!term.trim()) {

@@ -12,8 +12,8 @@
             </tr>
         </thead>
         <tbody *ngIf="matchingClubsCount() > 0">
-            <tr *ngFor="let club of matchingClubs">
-                <td>{{club.name}}</td>
+            <tr *ngFor="let club of matchingClubs">                
+                <td><a routerLink="/club/{{club.id}}">{{club.name}}</a></td>
                 <td>{{club.url}}</td>
             </tr>
         </tbody>
