@@ -12,7 +12,7 @@ import { FrontPageComponent } from './front-page/front-page.component';
 import { LoginComponent } from './login/login.component';
 import { CreateClubComponent } from './create-club/create-club.component';
 import { BrowseClubsComponent } from './browse-clubs/browse-clubs.component';
-import { ShowClubComponent } from './show-club/show-club.component';
+import { ShowClubComponent } from './clubs/show-club/show-club.component';
 
 @NgModule({
   declarations: [

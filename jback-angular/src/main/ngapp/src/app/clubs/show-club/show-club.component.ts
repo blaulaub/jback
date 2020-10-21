@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ClubService } from '../clubs/club.service';
-import { Club } from '../clubs/club';
+import { ClubService } from '../club.service';
+import { Club } from '../club';
 
 @Component({
   selector: 'app-show-club',
