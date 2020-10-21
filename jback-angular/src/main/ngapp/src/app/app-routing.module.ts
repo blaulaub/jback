@@ -7,7 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { CompleteComponent } from './complete/complete.component';
 import { CreateMeComponent } from './create-me/create-me.component';
 import { CreateClubComponent } from './create-club/create-club.component';
-import { BrowseClubsComponent } from './browse-clubs/browse-clubs.component';
+import { BrowseClubsComponent } from './clubs/browse-clubs/browse-clubs.component';
 import { ShowClubComponent } from './clubs/show-club/show-club.component';
 
 const routes: Routes = [

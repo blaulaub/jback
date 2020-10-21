@@ -4,8 +4,8 @@ import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 
-import { ClubService } from '../clubs/club.service';
-import { Club } from '../clubs/club';
+import { ClubService } from '../club.service';
+import { Club } from '../club';
 
 @Component({
   selector: 'app-browse-clubs',
