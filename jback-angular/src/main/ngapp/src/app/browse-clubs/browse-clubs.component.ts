@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import {
+  debounceTime, distinctUntilChanged, switchMap
+} from 'rxjs/operators';
 
 import { ClubService } from '../clubs/club.service';
 import { Club } from '../clubs/club';
@@ -10,15 +14,23 @@ import { Club } from '../clubs/club';
 })
 export class BrowseClubsComponent implements OnInit {
 
-  searchTerm: String = null
+  searchTerm: string = null
 
   matchingClubs: Club[] = null
+
+  private searchTerms = new Subject<string>();
 
   constructor(
     private clubService: ClubService
   ) { }
 
   ngOnInit(): void {
+
+    this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => this.clubService.searchClubs(term))
+    ).subscribe(clubs => this.matchingClubs = clubs)
   }
 
   matchingClubsCount(): Number {
@@ -31,8 +43,7 @@ export class BrowseClubsComponent implements OnInit {
   }
 
   updateSearch(newTerm) {
-    this.clubService.searchClubs(newTerm)
-      .subscribe(it => this.matchingClubs = it)
+    this.searchTerms.next(newTerm)
   }
 
 }
