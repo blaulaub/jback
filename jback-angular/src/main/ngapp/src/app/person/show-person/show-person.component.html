@@ -1,0 +1,10 @@
+<div *ngIf="person">
+    <h1>{{person.firstName}} {{person.lastName}}</h1>
+
+    <div *ngIf="person.address">
+        <p *ngFor="let line of person.address">
+            {{line}}
+        </p>
+
+    </div>
+</div>

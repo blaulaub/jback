@@ -8,7 +8,9 @@ export interface SessionInfo {
 
     perspective: keyof typeof Perspective;
 
-    firstName: string;
+    firstName: string | null;
   
-    lastName: string;
+    lastName: string | null;
+
+    userId: string | null;
 }

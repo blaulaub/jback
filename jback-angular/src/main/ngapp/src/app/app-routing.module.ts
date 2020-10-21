@@ -9,6 +9,7 @@ import { CreateMeComponent } from './registration/create-me/create-me.component'
 import { CreateClubComponent } from './clubs/create-club/create-club.component';
 import { BrowseClubsComponent } from './clubs/browse-clubs/browse-clubs.component';
 import { ShowClubComponent } from './clubs/show-club/show-club.component';
+import { ShowPersonComponent } from './person/show-person/show-person.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/frontpage', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'createMe', component: CreateMeComponent },
   { path: 'createClub', component: CreateClubComponent },
   { path: 'browseClubs', component: BrowseClubsComponent },
-  { path: 'club/:id', component: ShowClubComponent }
+  { path: 'club/:id', component: ShowClubComponent },
+  { path: 'person/:id', component: ShowPersonComponent }
 ];
 
 @NgModule({

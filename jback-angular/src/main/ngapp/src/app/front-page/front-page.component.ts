@@ -14,6 +14,8 @@ export class FrontPageComponent implements OnInit {
 
   perspective: keyof typeof Perspective;
 
+  userId: string | null = null;
+
   constructor(
     private sessionService: SessionService,
     private router: Router
@@ -25,7 +27,10 @@ export class FrontPageComponent implements OnInit {
 
   private updatePerspective() {
     this.sessionService.getSessionInfo()
-      .subscribe(result => this.perspective = result.perspective);
+      .subscribe(result => {
+        this.perspective = result.perspective;
+        this.userId = result.userId;
+      });
   }
 
   logout() {

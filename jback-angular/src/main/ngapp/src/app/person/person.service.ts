@@ -13,6 +13,11 @@ export class PersonService {
 
   constructor(private http: HttpClient) { }
 
+  getPerson(id: String): Observable<Person> {
+
+    return this.http.get<Person>(`/api/v1/persons/${id}`)
+  }
+
   postCreateOwnPerson(data: PersonDraft): Observable<Person> {
     return this.http.post<Person>("/api/v1/persons/me", data);
   }

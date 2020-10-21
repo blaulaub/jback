@@ -13,6 +13,7 @@ import { CreateMeComponent } from './registration/create-me/create-me.component'
 import { CreateClubComponent } from './clubs/create-club/create-club.component';
 import { BrowseClubsComponent } from './clubs/browse-clubs/browse-clubs.component';
 import { ShowClubComponent } from './clubs/show-club/show-club.component';
+import { ShowPersonComponent } from './person/show-person/show-person.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ShowClubComponent } from './clubs/show-club/show-club.component';
     LoginComponent,
     CreateClubComponent,
     BrowseClubsComponent,
-    ShowClubComponent
+    ShowClubComponent,
+    ShowPersonComponent
   ],
   imports: [
     BrowserModule,
