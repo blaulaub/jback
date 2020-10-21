@@ -24,6 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/v1/session/logout").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/v1/registration").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/v1/registration/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/persons/*").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/v1/persons/me").hasAuthority(ApiAuthority.CAN_CREATE_OWN_PERSON.toString())
                 .antMatchers(HttpMethod.GET, "/api/v1/clubs").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/clubs").authenticated()
