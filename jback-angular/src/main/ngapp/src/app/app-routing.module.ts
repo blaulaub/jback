@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { CompleteComponent } from './complete/complete.component';
 import { CreateMeComponent } from './create-me/create-me.component';
 import { CreateClubComponent } from './create-club/create-club.component';
+import { BrowseClubsComponent } from './browse-clubs/browse-clubs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/frontpage', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'complete/:id', component: CompleteComponent },
   { path: 'createMe', component: CreateMeComponent },
-  { path: 'createClub', component: CreateClubComponent }
+  { path: 'createClub', component: CreateClubComponent },
+  { path: 'browseClubs', component: BrowseClubsComponent }
 ];
 
 @NgModule({

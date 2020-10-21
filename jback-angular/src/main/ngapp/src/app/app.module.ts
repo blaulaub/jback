@@ -11,6 +11,7 @@ import { CreateMeComponent } from './create-me/create-me.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { LoginComponent } from './login/login.component';
 import { CreateClubComponent } from './create-club/create-club.component';
+import { BrowseClubsComponent } from './browse-clubs/browse-clubs.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CreateClubComponent } from './create-club/create-club.component';
     CreateMeComponent,
     FrontPageComponent,
     LoginComponent,
-    CreateClubComponent
+    CreateClubComponent,
+    BrowseClubsComponent
   ],
   imports: [
     BrowserModule,

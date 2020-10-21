@@ -1,0 +1,26 @@
+<div>
+    <label>Search Club:</label>
+    <input [(ngModel)]="searchTerm" placeholder="search..." (ngModelChange)="updateSearch($event)">
+</div>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="matchingClubsCount() > 0">
+            <tr *ngFor="let club of matchingClubs">
+                <td>{{club.name}}</td>
+                <td>{{club.url}}</td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="matchingClubsCount() == 0">
+            <tr>
+                <td colspan="2" style="text-align:center"><i>no clubs found</i></td>    
+            </tr>
+        </tbody>
+    </table>
+</div>

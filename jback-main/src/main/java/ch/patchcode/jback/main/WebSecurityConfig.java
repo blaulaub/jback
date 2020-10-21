@@ -23,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/v1/session/logout").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/v1/registration").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/v1/registration/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/clubs").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/clubs").authenticated()
                 // API remainder is closed to anybody else
                 .antMatchers("/api/v1/**/*").denyAll()
