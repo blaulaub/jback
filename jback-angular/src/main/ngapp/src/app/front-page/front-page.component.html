@@ -20,9 +20,6 @@ This is the front page of JBack.
 
     <ul>
         <li><a routerLink="/createClub">Create club</a> to create a club.</li>
+        <li><a [routerLink]="" (click)="logout()">Logout</a></li>
     </ul>
-</div>
-
-<div *ngIf="userIsEnrolling() || userIsMember()">
-    <a [routerLink]="" (click)="logout()">Logout</a>
 </div>
