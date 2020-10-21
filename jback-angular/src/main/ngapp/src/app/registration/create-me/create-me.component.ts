@@ -9,8 +9,8 @@ import {
   ValidatorFn
 } from '@angular/forms';
 
-import { PersonService } from '../person/person.service';
-import { SessionService } from '../session/session.service';
+import { PersonService } from '../../person/person.service';
+import { SessionService } from '../../session/session.service';
 
 @Component({
   selector: 'app-create-me',

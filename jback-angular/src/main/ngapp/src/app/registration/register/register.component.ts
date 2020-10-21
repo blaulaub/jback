@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { RegistrationService } from '../registration/registration.service';
+import { RegistrationService } from '../registration.service';
 
-import { InitialRegistrationData } from '../registration/initial-registration-data';
-import { VerificationByEmail } from '../verification-means/verification-by-email';
-import { VerificationBySms } from '../verification-means/verification-by-sms';
-import { PendingRegistrationInfo } from '../registration/pending-registration-info';
+import { InitialRegistrationData } from '../initial-registration-data';
+import { PendingRegistrationInfo } from '../pending-registration-info';
+import { VerificationByEmail } from '../../verification-means/verification-by-email';
+import { VerificationBySms } from '../../verification-means/verification-by-sms';
 
 @Component({
   selector: 'app-register',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { RegistrationService } from '../registration/registration.service';
+import { RegistrationService } from '../registration.service';
 
-import { VerificationCode } from '../registration/verification-code';
+import { VerificationCode } from '../verification-code';
 
 @Component({
   selector: 'app-complete',

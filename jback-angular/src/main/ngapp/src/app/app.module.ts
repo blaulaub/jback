@@ -4,12 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CompleteComponent } from './complete/complete.component';
-import { CreateMeComponent } from './create-me/create-me.component';
-import { FrontPageComponent } from './front-page/front-page.component';
 import { LoginComponent } from './login/login.component';
+import { FrontPageComponent } from './front-page/front-page.component';
+import { RegisterComponent } from './registration/register/register.component';
+import { CompleteComponent } from './registration/complete/complete.component';
+import { CreateMeComponent } from './registration/create-me/create-me.component';
 import { CreateClubComponent } from './clubs/create-club/create-club.component';
 import { BrowseClubsComponent } from './clubs/browse-clubs/browse-clubs.component';
 import { ShowClubComponent } from './clubs/show-club/show-club.component';
