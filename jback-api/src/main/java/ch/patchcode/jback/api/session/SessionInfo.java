@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @FreeBuilder
 public abstract class SessionInfo {
@@ -20,13 +21,16 @@ public abstract class SessionInfo {
 
     public abstract Optional<String> getLastName();
 
+    public abstract Optional<UUID> getUserId();
+
     @JsonCreator
     public static SessionInfo of(
             @JsonProperty(value = "authenticated", required = true) boolean authenticated,
             @JsonProperty(value = "principalName", required = true) String principalName,
             @JsonProperty(value = "perspective", required = true) Perspective perspective,
             @JsonProperty("firstName") String firstName,
-            @JsonProperty("lastName") String lastName
+            @JsonProperty("lastName") String lastName,
+            @JsonProperty("userId") UUID userId
     ) {
 
         Builder builder = new Builder();
@@ -35,6 +39,7 @@ public abstract class SessionInfo {
         builder.setPerspective(perspective);
         Optional.ofNullable(firstName).ifPresent(builder::setFirstName);
         Optional.ofNullable(lastName).ifPresent(builder::setLastName);
+        Optional.ofNullable(userId).ifPresent(builder::setUserId);
         return builder.build();
     }
 

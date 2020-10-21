@@ -35,6 +35,7 @@ public class SessionInfoBuilder {
                 @Override
                 public void visit(PersonalAuthentication personalAuth) {
                     builder.setPerspective(Perspective.MEMBER);
+                    builder.setUserId(personalAuth.getHolder().getId());
                 }
 
                 @Override
