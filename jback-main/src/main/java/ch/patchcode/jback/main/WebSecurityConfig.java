@@ -25,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/api/v1/registration/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/clubs").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/clubs").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/v1/clubs/*").permitAll()
                 // API remainder is closed to anybody else
                 .antMatchers("/api/v1/**/*").denyAll()
                 // swagger is open (that looks like wide open)
