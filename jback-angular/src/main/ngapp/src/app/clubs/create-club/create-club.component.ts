@@ -7,7 +7,7 @@ import {
   AbstractControl
 } from '@angular/forms';
 
-import { ClubService } from '../clubs/club.service';
+import { ClubService } from '../club.service';
 
 @Component({
   selector: 'app-create-club',
