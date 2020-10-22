@@ -16,6 +16,7 @@ import { ShowClubComponent } from './clubs/show-club/show-club.component';
 import { ShowPersonComponent } from './person/show-person/show-person.component';
 import { ClubActionsComponent } from './clubs/show-club/club-actions/club-actions.component';
 import { RequestMembershipComponent } from './memberships/request-membership/request-membership.component';
+import { PersonActionsComponent } from './person/show-person/person-actions/person-actions.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RequestMembershipComponent } from './memberships/request-membership/req
     ShowClubComponent,
     ShowPersonComponent,
     ClubActionsComponent,
-    RequestMembershipComponent
+    RequestMembershipComponent,
+    PersonActionsComponent
   ],
   imports: [
     BrowserModule,
