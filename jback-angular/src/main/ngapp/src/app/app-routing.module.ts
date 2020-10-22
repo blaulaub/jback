@@ -10,6 +10,7 @@ import { CreateClubComponent } from './clubs/create-club/create-club.component';
 import { BrowseClubsComponent } from './clubs/browse-clubs/browse-clubs.component';
 import { ShowClubComponent } from './clubs/show-club/show-club.component';
 import { ShowPersonComponent } from './person/show-person/show-person.component';
+import { RequestMembershipComponent } from './memberships/request-membership/request-membership.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/frontpage', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'createClub', component: CreateClubComponent },
   { path: 'browseClubs', component: BrowseClubsComponent },
   { path: 'club/:id', component: ShowClubComponent },
+  { path: 'club/:id/requestMembership', component: RequestMembershipComponent },
   { path: 'person/:id', component: ShowPersonComponent }
 ];
 

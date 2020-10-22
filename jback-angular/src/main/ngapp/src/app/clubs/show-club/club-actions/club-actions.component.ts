@@ -15,8 +15,4 @@ export class ClubActionsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  requestMembership() {
-    console.error("not implemented.")
-  }
 }
