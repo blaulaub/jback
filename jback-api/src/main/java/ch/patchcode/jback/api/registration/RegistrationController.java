@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -51,13 +49,12 @@ public class RegistrationController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> putCompleteRegistration(
+    public void putCompleteRegistration(
             @PathVariable("id") UUID id,
             @RequestBody @ApiParam VerificationCode verificationCode
     ) {
 
         LOG.debug("processing registration code for {}", id);
         authorizationManager.authenticate(id, verificationCode.toDomain());
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
