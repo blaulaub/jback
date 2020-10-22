@@ -17,6 +17,7 @@ import { ShowPersonComponent } from './person/show-person/show-person.component'
 import { ClubActionsComponent } from './clubs/show-club/club-actions/club-actions.component';
 import { RequestMembershipComponent } from './memberships/request-membership/request-membership.component';
 import { PersonActionsComponent } from './person/show-person/person-actions/person-actions.component';
+import { CreateChildComponent } from './registration/create-child/create-child.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PersonActionsComponent } from './person/show-person/person-actions/pers
     ShowPersonComponent,
     ClubActionsComponent,
     RequestMembershipComponent,
-    PersonActionsComponent
+    PersonActionsComponent,
+    CreateChildComponent
   ],
   imports: [
     BrowserModule,

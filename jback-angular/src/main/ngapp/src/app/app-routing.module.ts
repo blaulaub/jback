@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './registration/register/register.component';
 import { CompleteComponent } from './registration/complete/complete.component';
 import { CreateMeComponent } from './registration/create-me/create-me.component';
+import { CreateChildComponent } from './registration/create-child/create-child.component';
 import { CreateClubComponent } from './clubs/create-club/create-club.component';
 import { BrowseClubsComponent } from './clubs/browse-clubs/browse-clubs.component';
 import { ShowClubComponent } from './clubs/show-club/show-club.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'browseClubs', component: BrowseClubsComponent },
   { path: 'club/:id', component: ShowClubComponent },
   { path: 'club/:id/requestMembership', component: RequestMembershipComponent },
-  { path: 'person/:id', component: ShowPersonComponent }
+  { path: 'person/:id', component: ShowPersonComponent },
+  { path: 'person/:id/createChild', component: CreateChildComponent }
 ];
 
 @NgModule({

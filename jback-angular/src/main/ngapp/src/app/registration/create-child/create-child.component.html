@@ -1,0 +1,21 @@
+<h1>Register Child</h1>
+
+<div [formGroup]="childForm">
+
+<h2>Personal Details</h2>
+
+<div>
+  <label>First Name:</label>
+  <input formControlName="firstName" placeholder="first name" required/>
+</div>
+
+<div>
+  <label>Last Name:</label>
+  <input formControlName="lastName" placeholder="last name" required/>
+</div>
+
+<button [disabled]="!childForm.valid" (click)="submit()">
+  Submit
+</button>
+
+</div>
