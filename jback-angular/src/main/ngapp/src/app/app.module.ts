@@ -14,6 +14,7 @@ import { CreateClubComponent } from './clubs/create-club/create-club.component';
 import { BrowseClubsComponent } from './clubs/browse-clubs/browse-clubs.component';
 import { ShowClubComponent } from './clubs/show-club/show-club.component';
 import { ShowPersonComponent } from './person/show-person/show-person.component';
+import { ClubActionsComponent } from './clubs/show-club/club-actions/club-actions.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ShowPersonComponent } from './person/show-person/show-person.component'
     CreateClubComponent,
     BrowseClubsComponent,
     ShowClubComponent,
-    ShowPersonComponent
+    ShowPersonComponent,
+    ClubActionsComponent
   ],
   imports: [
     BrowserModule,
