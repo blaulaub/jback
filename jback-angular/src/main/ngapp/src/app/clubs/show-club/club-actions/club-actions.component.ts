@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import {Club } from '../../club';
+import { Club } from '../../club';
 
 @Component({
   selector: 'app-club-actions',
