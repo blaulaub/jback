@@ -13,4 +13,6 @@ export interface SessionInfo {
     lastName: string | null;
 
     userId: string | null;
+
+    personId: string | null;
 }

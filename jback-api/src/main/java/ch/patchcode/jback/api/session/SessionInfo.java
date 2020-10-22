@@ -21,7 +21,17 @@ public abstract class SessionInfo {
 
     public abstract Optional<String> getLastName();
 
+    /**
+     * ID of the person as which the user authenticated.
+     */
     public abstract Optional<UUID> getUserId();
+
+    /**
+     * ID of the person which the user currently impersonates.
+     */
+    public Optional<UUID> getPersonId() {
+        return getUserId();
+    };
 
     @JsonCreator
     public static SessionInfo of(
