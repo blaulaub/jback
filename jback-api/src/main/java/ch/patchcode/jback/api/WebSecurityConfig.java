@@ -18,28 +18,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // who can access what (the order here is important)
         http.authorizeRequests()
-                // get API session is open to anybody
+
                 .antMatchers(HttpMethod.GET, "/api/v1/session").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/session/roles").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/session/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/session/logout").authenticated()
+
                 .antMatchers(HttpMethod.POST, "/api/v1/registration").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/v1/registration/????????-????-????-????-????????????").permitAll()
+
                 .antMatchers(HttpMethod.GET, "/api/v1/persons/????????-????-????-????-????????????").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/v1/persons/????????-????-????-????-????????????").hasAuthority(ApiAuthority.CAN_CREATE_CLIENT_PERSON.toString())
                 .antMatchers(HttpMethod.POST, "/api/v1/persons/me").hasAuthority(ApiAuthority.CAN_CREATE_OWN_PERSON.toString())
+
                 .antMatchers(HttpMethod.GET, "/api/v1/clubs").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/clubs").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/v1/clubs").hasAuthority(ApiAuthority.CAN_CREATE_CLUB.toString())
                 .antMatchers(HttpMethod.GET, "/api/v1/clubs/????????-????-????-????-????????????").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/v1/clubs/????????-????-????-????-????????????/members").hasAuthority(ApiAuthority.CAN_ASSIGN_MEMBER.toString())
                 .antMatchers(HttpMethod.PUT, "/api/v1/clubs/????????-????-????-????-????????????/admins").hasAuthority(ApiAuthority.CAN_ASSIGN_ADMIN.toString())
+
                 // API remainder is closed to anybody else
                 .antMatchers("/api/v1/**/*").denyAll()
+
                 // swagger is open (that looks like wide open)
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-resources/*").permitAll()
                 .antMatchers("/webjars/springfox-swagger-ui/*").permitAll()
                 .antMatchers("/v2/api-docs/*").permitAll()
-                // otherwise the SPA takes over
+
+                // otherwise the Angular SPA takes over
                 .anyRequest().permitAll();
 
         // how to login

@@ -9,7 +9,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,7 +54,6 @@ public class PersonsController {
      * permanent principal for that person.
      */
     @PostMapping("me")
-    @PreAuthorize("hasAuthority('CAN_CREATE_OWN_PERSON')")
     public Person createOwnPerson(
             @RequestBody @ApiParam Person.MeDraft draft
     ) {
@@ -84,7 +82,6 @@ public class PersonsController {
      * @return the new person
      */
     @PostMapping
-    @PreAuthorize("hasAuthority('CAN_CREATE_CLIENT_PERSON')")
     public Person createClientPerson(
             @RequestBody @ApiParam Person.Draft draft
     ) {

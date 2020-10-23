@@ -5,7 +5,6 @@ import ch.patchcode.jback.core.clubs.ClubService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +32,6 @@ public class ClubsController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('CAN_CREATE_CLUB')")
     public Club postNewClub(
             @RequestBody @ApiParam Club.Draft draft
     ) {
