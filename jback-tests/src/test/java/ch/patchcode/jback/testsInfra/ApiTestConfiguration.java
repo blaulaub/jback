@@ -1,6 +1,7 @@
 package ch.patchcode.jback.testsInfra;
 
 import ch.patchcode.jback.api.ApiConfiguration;
+import ch.patchcode.jback.api.WebSecurityConfig;
 import ch.patchcode.jback.core.CoreConfiguration;
 import ch.patchcode.jback.jpa.entitiesSpring.JpaEntitiesConfiguration;
 import ch.patchcode.jback.jpa.wrappers.JpaWrapperConfiguration;
@@ -43,7 +44,7 @@ import java.util.Properties;
         PresentationConfiguration.class,
         CoreConfiguration.class,
         SecurityConfiguration.class,
-        ApiWebSecurityTestConfig.class
+        WebSecurityConfig.class
 })
 public class ApiTestConfiguration {
 

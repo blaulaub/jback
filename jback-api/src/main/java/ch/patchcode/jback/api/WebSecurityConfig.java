@@ -1,4 +1,4 @@
-package ch.patchcode.jback.main;
+package ch.patchcode.jback.api;
 
 import ch.patchcode.jback.presentation.ApiAuthority;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // get API session is open to anybody
                 .antMatchers(HttpMethod.GET, "/api/v1/session").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/session/roles").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/session/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/session/logout").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/v1/registration").permitAll()
@@ -29,6 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/v1/clubs").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/clubs").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/v1/clubs/*").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/v1/clubs/????????-????-????-????-????????????/members").hasAuthority(ApiAuthority.CAN_ASSIGN_MEMBER.toString())
+                .antMatchers(HttpMethod.PUT, "/api/v1/clubs/????????-????-????-????-????????????/admins").hasAuthority(ApiAuthority.CAN_ASSIGN_ADMIN.toString())
                 // API remainder is closed to anybody else
                 .antMatchers("/api/v1/**/*").denyAll()
                 // swagger is open (that looks like wide open)
