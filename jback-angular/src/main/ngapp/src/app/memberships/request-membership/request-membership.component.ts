@@ -23,8 +23,8 @@ export class RequestMembershipComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id')
-    this.clubService.getClub(id).subscribe(it => this.club = it)
+    const id = this.route.snapshot.paramMap.get('id');
+    this.clubService.getClub(id).subscribe(it => this.club = it);
   }
 
 }

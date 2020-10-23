@@ -1,12 +1,12 @@
-import { VerificationMean } from './verification-mean'
+import { VerificationMean } from './verification-mean';
 
 export class VerificationBySms extends VerificationMean {
 
-  readonly type = "sms";
+  readonly type = 'sms';
 
-  phoneNumber = "";
+  phoneNumber = '';
 
   isValid(): boolean {
-    return typeof this.phoneNumber === "string" && this.phoneNumber !== "";
+    return typeof this.phoneNumber === 'string' && this.phoneNumber !== '';
   }
 }

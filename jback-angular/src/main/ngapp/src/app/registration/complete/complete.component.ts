@@ -30,8 +30,8 @@ export class CompleteComponent implements OnInit {
     return this.model.isValid();
   }
 
-  complete() {
+  complete(): void {
     this.registrationService.putVerificationCode(this.id, this.model)
-      .subscribe(() => this.router.navigate(["createMe"]));
+      .subscribe(() => this.router.navigate(['createMe']));
   }
 }

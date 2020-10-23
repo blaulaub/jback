@@ -20,8 +20,8 @@ export class ShowPersonComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id')
-    this.personService.getPerson(id).subscribe(it => this.person = it)
+    const id = this.route.snapshot.paramMap.get('id');
+    this.personService.getPerson(id).subscribe(it => this.person = it);
   }
 
 }

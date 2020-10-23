@@ -9,7 +9,7 @@ export class InitialRegistrationData {
   verificationMean: VerificationMean = null;
 
   private notNullOrEmpty(str: string): boolean {
-    return typeof str === "string" && str !== "";
+    return typeof str === 'string' && str !== '';
   }
 
   isValid(): boolean {

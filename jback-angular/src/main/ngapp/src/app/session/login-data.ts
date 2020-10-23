@@ -1,8 +1,8 @@
-import { VerificationByPassword } from '../verification-means/verification-by-password'
+import { VerificationByPassword } from '../verification-means/verification-by-password';
 
 export class LoginData {
 
-  userIdentification = "";
+  userIdentification = '';
 
   verificationMean = new VerificationByPassword();
 }

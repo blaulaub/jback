@@ -27,11 +27,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isSms() : boolean {
+  isSms(): boolean {
     return this.model.verificationMean instanceof VerificationBySms;
   }
 
-  isEmail() : boolean {
+  isEmail(): boolean {
     return this.model.verificationMean instanceof VerificationByEmail;
   }
 
@@ -39,12 +39,12 @@ export class RegisterComponent implements OnInit {
     return this.model.isValid();
   }
 
-  submit() {
+  submit(): void {
     this.registrationService.postInitialRegistrationData(this.model)
       .subscribe(result => this.navigateTo(result));
   }
 
-  private navigateTo(info: PendingRegistrationInfo) {
-    this.router.navigate(["complete", info.pendingRegistrationId]);
+  private navigateTo(info: PendingRegistrationInfo): void {
+    this.router.navigate(['complete', info.pendingRegistrationId]);
   }
 }

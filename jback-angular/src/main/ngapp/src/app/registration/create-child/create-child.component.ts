@@ -38,17 +38,17 @@ export class CreateChildComponent implements OnInit {
       lastName: this.fb.control(null, [
         Validators.required
       ])
-    });  
+    });
 
   }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.personService.getPerson(id).subscribe(it => this.person = it)
+    const id = this.route.snapshot.paramMap.get('id');
+    this.personService.getPerson(id).subscribe(it => this.person = it);
   }
 
-  submit() {
-    console.error("not implemented");
+  submit(): void {
+    console.error('not implemented');
   }
 
 }

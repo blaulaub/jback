@@ -1,12 +1,12 @@
-import { VerificationMean } from './verification-mean'
+import { VerificationMean } from './verification-mean';
 
 export class VerificationByEmail extends VerificationMean {
 
-  readonly type = "email";
+  readonly type = 'email';
 
-  emailAddress = "";
+  emailAddress = '';
 
   isValid(): boolean {
-    return typeof this.emailAddress === "string" && this.emailAddress !== "";
+    return typeof this.emailAddress === 'string' && this.emailAddress !== '';
   }
 }

@@ -15,10 +15,10 @@ export class RegistrationService {
   constructor(private http: HttpClient) { }
 
   postInitialRegistrationData(data: InitialRegistrationData): Observable<PendingRegistrationInfo> {
-    return this.http.post<PendingRegistrationInfo>("/api/v1/registration", data);
+    return this.http.post<PendingRegistrationInfo>('/api/v1/registration', data);
   }
 
   putVerificationCode(id: string, data: VerificationCode): Observable<void> {
-    return this.http.put<void>("/api/v1/registration/" + id, data);
+    return this.http.put<void>('/api/v1/registration/' + id, data);
   }
 }
