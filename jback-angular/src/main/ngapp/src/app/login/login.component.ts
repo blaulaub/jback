@@ -36,14 +36,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit() {
+  submit(): void {
 
-    let loginData = new LoginData();
+    const loginData = new LoginData();
     loginData.userIdentification = this.loginForm.controls.username.value;
     loginData.verificationMean.username = this.loginForm.controls.username.value;
     loginData.verificationMean.password = this.loginForm.controls.password.value;
 
     this.sessionService.postLogin(loginData)
-      .subscribe(() => this.router.navigate(["frontpage"]));
+      .subscribe(() => this.router.navigate(['frontpage']));
   }
 }

@@ -25,7 +25,7 @@ export class FrontPageComponent implements OnInit {
     this.updatePerspective();
   }
 
-  private updatePerspective() {
+  private updatePerspective(): void {
     this.sessionService.getSessionInfo()
       .subscribe(result => {
         this.perspective = result.perspective;
@@ -33,20 +33,20 @@ export class FrontPageComponent implements OnInit {
       });
   }
 
-  logout() {
+  logout(): void {
     this.sessionService.postLogout()
-      .subscribe(() => this.updatePerspective())
+      .subscribe(() => this.updatePerspective());
   }
 
   userIsGuest(): boolean {
-    return Perspective[this.perspective] ==  Perspective.GUEST;
+    return Perspective[this.perspective] ===  Perspective.GUEST;
   }
 
   userIsEnrolling(): boolean {
-    return Perspective[this.perspective] ==  Perspective.ENROLLING;
+    return Perspective[this.perspective] ===  Perspective.ENROLLING;
   }
 
   userIsMember(): boolean {
-    return Perspective[this.perspective] ==  Perspective.MEMBER;
+    return Perspective[this.perspective] ===  Perspective.MEMBER;
   }
 }

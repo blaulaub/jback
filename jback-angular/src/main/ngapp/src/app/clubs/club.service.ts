@@ -12,22 +12,22 @@ export class ClubService {
 
   constructor(private http: HttpClient) { }
 
-  getClub(id: String): Observable<Club> {
+  getClub(id: string): Observable<Club> {
 
-    return this.http.get<Club>(`/api/v1/clubs/${id}`)
+    return this.http.get<Club>(`/api/v1/clubs/${id}`);
   }
 
-  searchClubs(term: String): Observable<Club[]> {
+  searchClubs(term: string): Observable<Club[]> {
 
     if (!term.trim()) {
-      return of([])
+      return of([]);
     }
 
-    return this.http.get<Club[]>(`/api/v1/clubs?pattern=${term}`)
+    return this.http.get<Club[]>(`/api/v1/clubs?pattern=${term}`);
   }
 
   postCreateClub(data: ClubDraft): Observable<Club> {
-    return this.http.post<Club>("/api/v1/clubs", data)
+    return this.http.post<Club>('/api/v1/clubs', data);
   }
 
 }

@@ -1,5 +1,5 @@
 export class PersonDraft {
-  
+
   firstName: string = null;
 
   lastName: string = null;
@@ -22,4 +22,3 @@ export class PersonDraft {
       draft.address.every(line => PersonDraft.notNullOrEmpty(line));
   }
 }
-  

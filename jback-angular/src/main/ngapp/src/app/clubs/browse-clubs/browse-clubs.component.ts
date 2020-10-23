@@ -14,9 +14,9 @@ import { Club } from '../club';
 })
 export class BrowseClubsComponent implements OnInit {
 
-  searchTerm: string = null
+  searchTerm: string = null;
 
-  matchingClubs: Club[] = null
+  matchingClubs: Club[] = null;
 
   private searchTerms = new Subject<string>();
 
@@ -30,10 +30,10 @@ export class BrowseClubsComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) => this.clubService.searchClubs(term))
-    ).subscribe(clubs => this.matchingClubs = clubs)
+    ).subscribe(clubs => this.matchingClubs = clubs);
   }
 
-  matchingClubsCount(): Number {
+  matchingClubsCount(): number {
 
     if (this.matchingClubs == null) {
       return 0;
@@ -42,8 +42,8 @@ export class BrowseClubsComponent implements OnInit {
     return this.matchingClubs.length;
   }
 
-  updateSearch(newTerm) {
-    this.searchTerms.next(newTerm)
+  updateSearch(newTerm): void {
+    this.searchTerms.next(newTerm);
   }
 
 }

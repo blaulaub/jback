@@ -29,19 +29,19 @@ export class CreateClubComponent implements OnInit {
         Validators.required
       ]),
       url: this.fb.control(null, [])
-    });  
+    });
   }
 
   ngOnInit(): void {
   }
 
-  submit() {
+  submit(): void {
     this.clubService.postCreateClub({
       name: this.clubForm.controls.name.value,
       url: this.clubForm.controls.url.value,
       contact: null
     })
-      .subscribe(() => this.router.navigate(["frontpage"]));
+      .subscribe(() => this.router.navigate(['frontpage']));
   }
 
 }

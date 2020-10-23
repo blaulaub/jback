@@ -2,13 +2,12 @@ import { Person } from '../person/person';
 
 export class Club {
 
-    id: string;
+  id: string;
 
-    name: string = null;
-  
-    url: string | null = null;
+  name: string = null;
 
-    contact: Person | null = null;
+  url: string | null = null;
 
-  }
-  
+  contact: Person | null = null;
+
+}

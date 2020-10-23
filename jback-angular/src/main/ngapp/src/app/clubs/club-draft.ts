@@ -2,11 +2,9 @@ import { Person } from '../person/person';
 
 export class ClubDraft {
 
-    name: string = null;
-  
-    url: string | null = null;
+  name: string = null;
 
-    contact: Person | null = null;
+  url: string | null = null;
 
-  }
-  
+  contact: Person | null = null;
+}
