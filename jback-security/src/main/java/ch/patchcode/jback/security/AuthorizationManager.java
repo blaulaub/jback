@@ -1,5 +1,6 @@
 package ch.patchcode.jback.security;
 
+import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
@@ -20,9 +21,10 @@ public interface AuthorizationManager {
      */
     UUID setupRegistration(InitialRegistrationData initialRegistrationData);
 
-    // from ch.patchcode.jback.secBase.AuthorizationManager
-
-    void addClient(Principal principal, Person person);
+    /**
+     * Adds the given {@link Person} to the {@link Principal}'s persons.
+     */
+    Principal addPersonToPrincipal(Principal principal, Person person) throws NotAllowedException;
 
     PersonalAuthentication createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means);
 

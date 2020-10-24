@@ -3,7 +3,7 @@ package ch.patchcode.jback.api.clubs;
 import ch.patchcode.jback.api.exceptions.ForbiddenException;
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.api.persons.Person;
-import ch.patchcode.jback.core.NotAllowedException;
+import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.core.clubs.ClubMemberService;
 import ch.patchcode.jback.core.clubs.ClubNotFoundException;
 import io.swagger.annotations.Api;
@@ -43,7 +43,7 @@ public class ClubAdminsController {
 
         } catch (NotAllowedException e) {
 
-            throw new ForbiddenException();
+            throw new ForbiddenException(e);
         }
     }
 }

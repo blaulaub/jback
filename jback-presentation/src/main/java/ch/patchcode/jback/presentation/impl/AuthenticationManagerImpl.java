@@ -1,6 +1,6 @@
 package ch.patchcode.jback.presentation.impl;
 
-import ch.patchcode.jback.core.NotAllowedException;
+import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.core.RoleService;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.Role;
@@ -11,7 +11,6 @@ import ch.patchcode.jback.security.registration.ConfirmationResult;
 import ch.patchcode.jback.security.registration.InitialRegistrationData;
 import ch.patchcode.jback.security.registration.RegistrationService;
 import ch.patchcode.jback.security.verificationCodes.VerificationCode;
-import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
 import ch.patchcode.jback.securityEntities.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
@@ -89,15 +88,15 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     }
 
     @Override
-    public SpringAuthentication<PersonalAuthentication> createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means) {
+    public SpringAuthentication<?> createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means) {
 
         return SpringAuthentication.of(authorizationManager.createAuthorizationFor(person, means));
     }
 
     @Override
-    public void addClient(Principal principal, Person person) {
+    public SpringAuthentication<?> addPersonToPrincipal(Principal principal, Person person) throws NotAllowedException {
 
-        authorizationManager.addClient(principal, person);
+        return SpringAuthentication.of(authorizationManager.addPersonToPrincipal(principal, person));
     }
 
     @Override

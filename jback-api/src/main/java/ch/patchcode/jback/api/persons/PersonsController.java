@@ -1,9 +1,13 @@
 package ch.patchcode.jback.api.persons;
 
+import ch.patchcode.jback.api.exceptions.ForbiddenException;
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
+import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.presentation.AuthenticationManager;
+import ch.patchcode.jback.presentation.impl.SpringAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
+import ch.patchcode.jback.securityEntities.verificationMeans.VerificationByPassword;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -11,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,39 +54,64 @@ public class PersonsController {
     @PostMapping
     public Person createPerson(
             @RequestBody @ApiParam Person.Draft draft
-    ) {
+    ) throws ForbiddenException {
 
-        var context = SecurityContextHolder.getContext();
-        var callerAuth = (Principal) context.getAuthentication();
-        var person = personService.create(draft.toDomain());
-        authenticationManager.addClient(callerAuth, person);
-        return fromDomain(person);
+        var currentPrincipal = principalFromRequest();
+        var newPerson = personService.create(draft.toDomain());
+
+        try {
+            SpringAuthentication<?> auth = null;
+            auth = authenticationManager.addPersonToPrincipal(currentPrincipal, newPerson);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        } catch (NotAllowedException e) {
+            throw new ForbiddenException(e);
+        }
+
+        return fromDomain(newPerson);
     }
 
     /**
      * Creates a {@link Person} with authentication means.
      * <p>
-     * The resulting {@link Person} is able to login to the system.
+     * The resulting {@link Person} is able to login to the system. To that purpose,
+     * a username-password-verification is created from the corresponding data given
+     * in the {@link PersonWithPasswordDraft}. Furthermore, the person obtains copies
+     * of the verification means of the current principal.
      */
     @PostMapping("with-password")
     public Person createPersonWithPassword(
             @RequestBody @ApiParam PersonWithPasswordDraft draft
     ) {
 
-        var context = SecurityContextHolder.getContext();
-        var callerAuth = (Principal) context.getAuthentication();
+        var currentPrincipal = principalFromRequest();
 
         var person = personService.create(draft.toDomain());
 
-        List<VerificationMean.Draft> means = callerAuth.getMeans().stream()
-                .map(VerificationMean::toNewDraft)
-                .collect(toList());
-        means.add(draft.toVerificationMean());
+        var means = new ArrayList<VerificationMean.Draft>();
+        means.addAll(verificationMeansFromPrincipal(currentPrincipal));
+        means.add(verificationMeanFromDraft(draft));
 
         var auth = authenticationManager.createAuthorizationFor(person, means);
-
-        context.setAuthentication(auth);
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
         return fromDomain(person);
+    }
+
+    private List<VerificationMean.Draft> verificationMeansFromPrincipal(Principal currentPrincipal) {
+
+        return currentPrincipal.getMeans().stream()
+                .map(VerificationMean::toNewDraft)
+                .collect(toList());
+    }
+
+    private VerificationByPassword.Draft verificationMeanFromDraft(PersonWithPasswordDraft draft) {
+
+        return draft.toVerificationMean();
+    }
+
+    private Principal principalFromRequest() {
+
+        var context = SecurityContextHolder.getContext();
+        return (Principal) context.getAuthentication();
     }
 }

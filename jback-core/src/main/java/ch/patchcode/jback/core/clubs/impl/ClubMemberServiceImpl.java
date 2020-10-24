@@ -1,6 +1,6 @@
 package ch.patchcode.jback.core.clubs.impl;
 
-import ch.patchcode.jback.core.NotAllowedException;
+import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.core.clubs.ClubMemberService;
 import ch.patchcode.jback.core.clubs.ClubNotFoundException;
 import ch.patchcode.jback.coreEntities.Club;

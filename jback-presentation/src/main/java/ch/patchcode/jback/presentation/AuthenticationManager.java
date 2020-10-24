@@ -1,12 +1,11 @@
 package ch.patchcode.jback.presentation;
 
-import ch.patchcode.jback.core.NotAllowedException;
+import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.Role;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
 import ch.patchcode.jback.security.registration.InitialRegistrationData;
 import ch.patchcode.jback.security.verificationCodes.VerificationCode;
-import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 
@@ -38,9 +37,9 @@ public interface AuthenticationManager {
      */
     UUID setupRegistration(InitialRegistrationData initialRegistrationData);
 
-    SpringAuthentication<PersonalAuthentication> createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means);
+    SpringAuthentication<?> createAuthorizationFor(Person person, Iterable<VerificationMean.Draft> means);
 
-    void addClient(Principal principal, Person person);
+    SpringAuthentication<?> addPersonToPrincipal(Principal principal, Person person) throws NotAllowedException;
 
     TryLoginResult tryLogin(LoginData data);
 
