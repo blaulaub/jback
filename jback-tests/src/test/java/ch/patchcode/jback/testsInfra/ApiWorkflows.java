@@ -1,6 +1,6 @@
 package ch.patchcode.jback.testsInfra;
 
-import ch.patchcode.jback.api.persons.Person;
+import ch.patchcode.jback.api.persons.PersonWithPasswordDraft;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.registration.PendingRegistrationInfo;
 import ch.patchcode.jback.api.session.LoginData;
@@ -36,7 +36,7 @@ public final class ApiWorkflows {
     }
 
 
-    public Api.CallResult registerAndPostMeToPersons(Person.MeDraft content) throws Exception {
+    public Api.CallResult registerAndPostMeToPersons(PersonWithPasswordDraft content) throws Exception {
 
         InitialRegistrationData initialData = InitialRegistrationData.Builder
                 .from(initialRegistrationData())
@@ -52,7 +52,7 @@ public final class ApiWorkflows {
                 VerificationCode.of(VERIFICATION_CODE)
         ).andAssumeGoodAndReturn();
 
-        return api.postPersonMe(content);
+        return api.postPersonWithPassword(content);
     }
 
     public Api.CallResult loginAsSuperuser() throws Exception {
@@ -68,7 +68,7 @@ public final class ApiWorkflows {
         return api.postLogin(loginData);
     }
 
-    public Api.CallResult loginAsMeBy(Person.MeDraft data) throws Exception {
+    public Api.CallResult loginAsMeBy(PersonWithPasswordDraft data) throws Exception {
 
         var loginData = new LoginData.Builder()
                 .setUserIdentification(data.getUsername())

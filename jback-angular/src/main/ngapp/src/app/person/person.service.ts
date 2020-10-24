@@ -19,6 +19,6 @@ export class PersonService {
   }
 
   postCreateOwnPerson(data: PersonDraft): Observable<Person> {
-    return this.http.post<Person>('/api/v1/persons/me', data);
+    return this.http.post<Person>('/api/v1/persons/with-password', data);
   }
 }

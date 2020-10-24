@@ -97,7 +97,7 @@ class SessionTest {
     void afterPostingMePerspectiveBecomesMember() throws Exception {
 
         // arrange
-        api.workflows.registerAndPostMeToPersons(meDraft()).andAssumeGoodAndReturn();
+        api.workflows.registerAndPostMeToPersons(personWithPasswordDraft()).andAssumeGoodAndReturn();
 
         // act
         var result = api.getSession().andReturn();
@@ -113,7 +113,7 @@ class SessionTest {
     void canLoginWithUsernameAndPasswordAfterRegisteringMe() throws Exception {
 
         // arrange
-        var registrationData = meDraft();
+        var registrationData = personWithPasswordDraft();
         api.workflows.registerAndPostMeToPersons(registrationData).andAssumeGoodAndReturn();
         api.postLogout();
         var loginData = new LoginData.Builder()
@@ -168,7 +168,7 @@ class SessionTest {
         // arrange
 
         // - arrange basic data
-        var registrationData = meDraft();
+        var registrationData = personWithPasswordDraft();
         Club.Draft draft = minimalisticClubDraft();
 
         // - arrange person, club, and membership

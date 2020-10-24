@@ -2,6 +2,7 @@ package ch.patchcode.jback.testsInfra;
 
 import ch.patchcode.jback.api.clubs.Club;
 import ch.patchcode.jback.api.persons.Person;
+import ch.patchcode.jback.api.persons.PersonWithPasswordDraft;
 import ch.patchcode.jback.api.registration.InitialRegistrationData;
 import ch.patchcode.jback.api.verification.VerificationByConsole;
 
@@ -33,8 +34,8 @@ public abstract class Some {
         );
     }
 
-    public static Person.MeDraft meDraft() {
-        return Person.MeDraft.of(
+    public static PersonWithPasswordDraft personWithPasswordDraft() {
+        return PersonWithPasswordDraft.of(
                 "Tom",
                 "Sawyer",
                 asList("Technoparkstrasse 1", "8051 Zürich"),

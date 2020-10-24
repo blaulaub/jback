@@ -110,13 +110,13 @@ public class Api {
     /**
      * Calls the <tt>/api/v1/persons/me</tt> endpoint.
      */
-    public CallResult postPersonMe(Person.Draft draft) throws Exception {
+    public CallResult postPersonWithPassword(Person.Draft draft) throws Exception {
 
         return new CallResult(
 
                 // call
                 webClient.post()
-                        .uri("/api/v1/persons/me")
+                        .uri("/api/v1/persons/with-password")
                         .contentType(MediaType.APPLICATION_JSON)
                         .acceptCharset(StandardCharsets.UTF_8)
                         .bodyValue(mapper.writeValueAsString(draft))

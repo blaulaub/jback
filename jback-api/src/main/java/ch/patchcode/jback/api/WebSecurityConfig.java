@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.GET, "/api/v1/persons/????????-????-????-????-????????????").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/v1/persons/????????-????-????-????-????????????").hasAuthority(ApiAuthority.CAN_CREATE_CLIENT_PERSON.toString())
-                .antMatchers(HttpMethod.POST, "/api/v1/persons/me").hasAuthority(ApiAuthority.CAN_CREATE_OWN_PERSON.toString())
+                .antMatchers(HttpMethod.POST, "/api/v1/persons/with-password").hasAuthority(ApiAuthority.CAN_CREATE_OWN_PERSON.toString())
 
                 .antMatchers(HttpMethod.GET, "/api/v1/clubs").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/clubs").hasAuthority(ApiAuthority.CAN_CREATE_CLUB.toString())

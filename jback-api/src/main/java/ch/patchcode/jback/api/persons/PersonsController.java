@@ -42,20 +42,9 @@ public class PersonsController {
         return personService.getPerson(id).map(Person::fromDomain).orElseThrow(NotFoundException::new);
     }
 
-    /**
-     * Let the currently authenticated principal create a person for himself.
-     * <p>
-     * As part of this, a new principal is created for the new person, and the new
-     * principal takes over the current session.
-     * <p>
-     * Ideally, this is part of the registration, where anybody, after passing the
-     * initial verification, then provides some more details about her own personality.
-     * In that process, the current, temporary principal will be replaced by the
-     * permanent principal for that person.
-     */
-    @PostMapping("me")
+    @PostMapping("with-password")
     public Person createOwnPerson(
-            @RequestBody @ApiParam Person.MeDraft draft
+            @RequestBody @ApiParam PersonWithPasswordDraft draft
     ) {
 
         var context = SecurityContextHolder.getContext();

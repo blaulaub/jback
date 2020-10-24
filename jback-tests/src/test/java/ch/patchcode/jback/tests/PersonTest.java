@@ -1,6 +1,6 @@
 package ch.patchcode.jback.tests;
 
-import ch.patchcode.jback.api.persons.Person;
+import ch.patchcode.jback.api.persons.PersonWithPasswordDraft;
 import ch.patchcode.jback.testsInfra.Api;
 import ch.patchcode.jback.testsInfra.ApiTestConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.env.Environment;
 
-import static ch.patchcode.jback.testsInfra.Some.meDraft;
+import static ch.patchcode.jback.testsInfra.Some.personWithPasswordDraft;
 import static org.hamcrest.Matchers.contains;
 
 @ApiTestConfiguration.Apply
@@ -28,7 +28,7 @@ public class PersonTest {
     void postingMeDuringRegistrationWorks() throws Exception {
 
         // arrange
-        Person.MeDraft meDraft = meDraft();
+        PersonWithPasswordDraft meDraft = personWithPasswordDraft();
 
         // act
         var result = api.workflows.registerAndPostMeToPersons(meDraft).andReturn();
@@ -48,10 +48,10 @@ public class PersonTest {
     void postingMeTwiceIsForbidden() throws Exception {
 
         // arrange
-        api.workflows.registerAndPostMeToPersons(meDraft()).andAssumeGoodAndReturn();
+        api.workflows.registerAndPostMeToPersons(personWithPasswordDraft()).andAssumeGoodAndReturn();
 
         // act
-        var result = api.postPersonMe(meDraft()).andReturn();
+        var result = api.postPersonWithPassword(personWithPasswordDraft()).andReturn();
 
         // assert
         result.expectStatus().isForbidden();

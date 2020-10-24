@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.env.Environment;
 
-import static ch.patchcode.jback.testsInfra.Some.meDraft;
+import static ch.patchcode.jback.testsInfra.Some.personWithPasswordDraft;
 import static ch.patchcode.jback.testsInfra.Some.minimalisticClubDraft;
 
 @ApiTestConfiguration.Apply
@@ -31,7 +31,7 @@ public class ClubAdminsTest {
         // arrange
         Club.Draft draft = minimalisticClubDraft();
 
-        var person = api.workflows.registerAndPostMeToPersons(meDraft()).andAssumeGoodAndReturn(Person.class);
+        var person = api.workflows.registerAndPostMeToPersons(personWithPasswordDraft()).andAssumeGoodAndReturn(Person.class);
         api.workflows.loginAsSuperuser().andAssumeGoodAndReturn();
         var club = api.postClub(draft).andAssumeGoodAndReturn(Club.class);
 
@@ -49,7 +49,7 @@ public class ClubAdminsTest {
         // arrange
         Club.Draft draft = minimalisticClubDraft();
 
-        var person = api.workflows.registerAndPostMeToPersons(meDraft()).andAssumeGoodAndReturn(Person.class);
+        var person = api.workflows.registerAndPostMeToPersons(personWithPasswordDraft()).andAssumeGoodAndReturn(Person.class);
         api.workflows.loginAsSuperuser().andAssumeGoodAndReturn();
         var club = api.postClub(draft).andAssumeGoodAndReturn(Club.class);
         api.putMember(club.getId(), person).andAssumeGoodAndReturn();
