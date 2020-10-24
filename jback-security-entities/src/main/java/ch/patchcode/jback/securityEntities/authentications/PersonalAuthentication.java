@@ -7,21 +7,14 @@ import org.inferred.freebuilder.FreeBuilder;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import static java.util.Collections.singletonList;
 
 @FreeBuilder
 public abstract class PersonalAuthentication implements Principal {
 
-    public static PersonalAuthentication of(
-            Person holder,
-            Iterable<VerificationMean> means
-    ) {
-        return new Builder()
-                .setHolder(holder)
-                .addAllMeans(means)
-                .build();
-    }
+    public abstract UUID getId();
 
     public abstract Person getHolder();
 

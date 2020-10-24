@@ -68,6 +68,7 @@ public class PersonalAuthenticationJpa {
     public PersonalAuthentication toDomain() {
 
         return new PersonalAuthentication.Builder()
+                .setId(getId())
                 .setHolder(getSelf().toDomain())
                 .addAllMeans(getVerificationMeans().stream().map(VerificationMeanJpa::toDomain))
                 .build();
