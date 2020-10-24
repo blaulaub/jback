@@ -92,16 +92,12 @@ export class RegisterComponent implements OnInit {
   }
 
   private toVerificationMean(): VerificationMean {
-    console.log(this.registrationForm);
-    console.log(this.registrationForm.controls);
     if (this.registrationForm.controls.verificationMean?.value.type === 'email') {
-      console.log('seems to have an email address');
       let result = new VerificationByEmail();
       result.emailAddress = (this.registrationForm.controls.byEmail as FormGroup).controls.emailAddress.value;
       return result;
     }
     if (this.registrationForm.controls.verificationMean?.value.type === 'sms') {
-      console.log('seems to have an sms address');
       let result = new VerificationBySms();
       result.phoneNumber = (this.registrationForm.controls.bySms as FormGroup).controls.phoneNumber.value;
       return result;      
@@ -110,18 +106,12 @@ export class RegisterComponent implements OnInit {
     return null;
   }
 
-  private toInitialRegistrationData(): InitialRegistrationData {
-    let result = new InitialRegistrationData();
-    result.firstName = this.registrationForm.controls.firstName.value;
-    result.lastName = this.registrationForm.controls.lastName.value;
-    result.verificationMean = this.toVerificationMean();
-    return result;
-  }
-
   submit(): void {
-    this.registrationService.postInitialRegistrationData(
-      this.toInitialRegistrationData()
-    ).subscribe(result => this.navigateTo(result));
+    this.registrationService.postInitialRegistrationData({
+      firstName: this.registrationForm.controls.firstName.value,
+      lastName: this.registrationForm.controls.lastName.value,
+      verificationMean: this.toVerificationMean()
+      }).subscribe(result => this.navigateTo(result));
   }
 
   private navigateTo(info: PendingRegistrationInfo): void {
