@@ -5,33 +5,37 @@
   For that, you may give us an email address or a phone number, and we will send you a verification code in return.
 </div>
 
+<div [formGroup]="registrationForm">
+
 <div>
   <label>First Name:</label>
-  <input [(ngModel)]="model.firstName" placeholder="first name"/>
+  <input formControlName="firstName" placeholder="first name" required/>
 </div>
 
 <div>
   <label>Last Name:</label>
-  <input [(ngModel)]="model.lastName" placeholder="last name"/>
+  <input formControlName="lastName" placeholder="last name" required/>
 </div>
 
 <div>
   <label>Verification Method:</label>
-  <select [(ngModel)]="model.verificationMean">
-    <option *ngFor="let verificationMean of verificationMeans" [ngValue]="verificationMean">{{ verificationMean.type }}</option>
+  <select formControlName="verificationMean" (change)="recheck()" required>
+    <option [ngValue]="verificationMean"  *ngFor="let verificationMean of verificationMeans">{{ verificationMean.type }}</option>
   </select>
 </div>
 
-<div *ngIf="isEmail()">
+<div *ngIf="registrationForm.value.verificationMean?.type == 'email'" formGroupName="byEmail">
   <label>Email Address:</label>
-  <input [(ngModel)]="model.verificationMean.emailAddress" placeholder="email@address.com"/>
+  <input formControlName="emailAddress" placeholder="email@address.com"/>
 </div>
 
-<div *ngIf="isSms()">
+<div *ngIf="registrationForm.value.verificationMean?.type == 'sms'" formGroupName="bySms">
   <label>SMS Phone Number:</label>
-  <input [(ngModel)]="model.verificationMean.phoneNumber" placeholder="+41 44 444 44 44"/>
+  <input formControlName="phoneNumber" placeholder="+41 44 444 44 44"/>
 </div>
 
-<button [disabled]="!canSubmit()" (click)="submit()">
+<button [disabled]="!registrationForm.valid" (click)="submit()">
   Submit
 </button>
+
+</div>

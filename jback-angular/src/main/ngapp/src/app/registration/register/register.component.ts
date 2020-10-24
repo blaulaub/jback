@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  AbstractControl,
+  ValidatorFn,
+  ValidationErrors
+} from '@angular/forms';
 
 import { RegistrationService } from '../registration.service';
 
 import { InitialRegistrationData } from '../initial-registration-data';
 import { PendingRegistrationInfo } from '../pending-registration-info';
+import { VerificationMean } from '../../verification-means/verification-mean';
 import { VerificationByEmail } from '../../verification-means/verification-by-email';
 import { VerificationBySms } from '../../verification-means/verification-by-sms';
 
@@ -15,33 +24,104 @@ import { VerificationBySms } from '../../verification-means/verification-by-sms'
 })
 export class RegisterComponent implements OnInit {
 
-  readonly verificationMeans = [ new VerificationByEmail(), new VerificationBySms() ];
+  readonly verificationMeans = [
+    new VerificationByEmail(),
+    new VerificationBySms()
+  ];
 
-  model = new InitialRegistrationData();
+  registrationForm: FormGroup;
 
   constructor(
     private registrationService: RegistrationService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+
+    const verificationMean = this.fb.control(null, [ RegisterComponent.validVerificationMean ]);
+
+    this.registrationForm = this.fb.group({
+      firstName: this.fb.control(null, [ Validators.required ]),
+      lastName: this.fb.control(null, [ Validators.required ]),
+      verificationMean: verificationMean,
+      byEmail: this.fb.group({
+        emailAddress: this.fb.control(null, [ this.validEmailIfRequired(verificationMean) ])
+      }),
+      bySms: this.fb.group({
+        phoneNumber: this.fb.control(null, [ this.validPhoneNumberIfRequired(verificationMean) ])
+      })
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  isSms(): boolean {
-    return this.model.verificationMean instanceof VerificationBySms;
+  recheck(): void {
+    (this.registrationForm.controls.byEmail as FormGroup).controls.emailAddress.updateValueAndValidity();
+    (this.registrationForm.controls.bySms as FormGroup).controls.phoneNumber.updateValueAndValidity();
   }
 
-  isEmail(): boolean {
-    return this.model.verificationMean instanceof VerificationByEmail;
+  static validVerificationMean(c: AbstractControl): ValidationErrors {
+
+    if (c.value === null) {
+      return { verificationMean: "must be selected" };
+    } else {
+      return {};
+    }
   }
 
-  canSubmit(): boolean {
-    return this.model.isValid();
+  validEmailIfRequired(mean: AbstractControl): ValidatorFn {
+
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      if (mean.value?.type === 'email') {
+        return Validators.required(control);
+      } else {
+        return RegisterComponent.validVerificationMean(mean);
+      }
+    }
+  }
+
+  validPhoneNumberIfRequired(mean: AbstractControl): ValidatorFn {
+
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      if (mean.value?.type === 'sms') {
+        return Validators.required(control);
+      } else {
+        return RegisterComponent.validVerificationMean(mean);
+      }
+    }
+  }
+
+  private toVerificationMean(): VerificationMean {
+    console.log(this.registrationForm);
+    console.log(this.registrationForm.controls);
+    if (this.registrationForm.controls.verificationMean?.value.type === 'email') {
+      console.log('seems to have an email address');
+      let result = new VerificationByEmail();
+      result.emailAddress = (this.registrationForm.controls.byEmail as FormGroup).controls.emailAddress.value;
+      return result;
+    }
+    if (this.registrationForm.controls.verificationMean?.value.type === 'sms') {
+      console.log('seems to have an sms address');
+      let result = new VerificationBySms();
+      result.phoneNumber = (this.registrationForm.controls.bySms as FormGroup).controls.phoneNumber.value;
+      return result;      
+    }
+    console.log('seems to be missing');
+    return null;
+  }
+
+  private toInitialRegistrationData(): InitialRegistrationData {
+    let result = new InitialRegistrationData();
+    result.firstName = this.registrationForm.controls.firstName.value;
+    result.lastName = this.registrationForm.controls.lastName.value;
+    result.verificationMean = this.toVerificationMean();
+    return result;
   }
 
   submit(): void {
-    this.registrationService.postInitialRegistrationData(this.model)
-      .subscribe(result => this.navigateTo(result));
+    this.registrationService.postInitialRegistrationData(
+      this.toInitialRegistrationData()
+    ).subscribe(result => this.navigateTo(result));
   }
 
   private navigateTo(info: PendingRegistrationInfo): void {
