@@ -1,4 +1,4 @@
-export class PersonDraft {
+export class PersonWithPasswordDraft {
 
   firstName: string = null;
 

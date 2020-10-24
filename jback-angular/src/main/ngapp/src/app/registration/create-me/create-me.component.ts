@@ -69,7 +69,7 @@ export class CreateMeComponent implements OnInit {
   }
 
   submit(): void {
-    this.personService.postCreateOwnPerson({
+    this.personService.postPersonWithPassword({
       firstName: this.personForm.controls.firstName.value,
       lastName: this.personForm.controls.lastName.value,
       address: this.personForm.controls.address.value,
