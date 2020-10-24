@@ -19,6 +19,7 @@ class PersonalAuthenticationTest {
         var holder = somePerson();
 
         var authentication = new PersonalAuthentication.Builder()
+                .setId(UUID.randomUUID())
                 .setHolder(holder)
                 .addMeans(someVerificationMean())
                 .build();
@@ -39,6 +40,7 @@ class PersonalAuthenticationTest {
         var holder = somePerson();
 
         var authentication = new PersonalAuthentication.Builder()
+                .setId(UUID.randomUUID())
                 .setHolder(holder)
                 .addPersons(holder)
                 .addMeans(someVerificationMean())

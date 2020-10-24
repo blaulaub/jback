@@ -20,6 +20,8 @@ import { Person } from '../../person/person';
 })
 export class CreateChildComponent implements OnInit {
 
+  private id: string;
+
   person: Person = null;
 
   childForm: FormGroup;
@@ -43,12 +45,16 @@ export class CreateChildComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.personService.getPerson(id).subscribe(it => this.person = it);
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.personService.getPerson(this.id).subscribe(it => this.person = it);
   }
 
   submit(): void {
-    console.error('not implemented');
+    this.personService.postPerson({
+      firstName: this.childForm.controls.firstName.value,
+      lastName: this.childForm.controls.lastName.value,
+      address: []
+    })
+      .subscribe(() => this.router.navigate(['person', this.id]));
   }
-
 }

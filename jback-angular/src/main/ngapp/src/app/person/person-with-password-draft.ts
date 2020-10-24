@@ -1,12 +1,8 @@
-export class PersonWithPasswordDraft {
+import { PersonDraft } from './person-draft';
 
-  firstName: string = null;
-
-  lastName: string = null;
+export class PersonWithPasswordDraft extends PersonDraft {
 
   username: string = null;
 
   password: string = null;
-
-  address: string[] = [];
 }
