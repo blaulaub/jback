@@ -45,8 +45,8 @@ public class RoleJpaWrapper implements RoleRepository {
             public RoleJpa visit(MemberRole.Draft draft) {
 
                 var role = new RoleJpa.MemberRoleJpa();
-                role.setPerson(toJpaIfConsistent(draft.getPerson()));
-                role.setClub(RoleJpaWrapper.this.toJpaIfConsistent(draft.getOrganisation()));
+                role.setPerson(personJpaRepository.toJpaIfConsistent(draft.getPerson()));
+                role.setClub(clubJpaRepository.toJpaIfConsistent(draft.getOrganisation()));
                 return role;
             }
 
@@ -54,8 +54,8 @@ public class RoleJpaWrapper implements RoleRepository {
             public RoleJpa visit(AdminRole.Draft draft) {
 
                 var role = new RoleJpa.AdminRoleJpa();
-                role.setPerson(toJpaIfConsistent(draft.getPerson()));
-                role.setClub(RoleJpaWrapper.this.toJpaIfConsistent(draft.getOrganisation()));
+                role.setPerson(personJpaRepository.toJpaIfConsistent(draft.getPerson()));
+                role.setClub(clubJpaRepository.toJpaIfConsistent(draft.getOrganisation()));
                 return role;
             }
         });
@@ -67,8 +67,8 @@ public class RoleJpaWrapper implements RoleRepository {
     public List<Role> findByPersonAndClub(Person person, Club club) {
 
         return roleJpaRepository.findByPersonAndClub(
-                toJpaIfConsistent(person),
-                toJpaIfConsistent(club)
+                personJpaRepository.toJpaIfConsistent(person),
+                clubJpaRepository.toJpaIfConsistent(club)
         ).stream()
                 .map(RoleJpa::toDomain)
                 .collect(toList());
@@ -78,7 +78,7 @@ public class RoleJpaWrapper implements RoleRepository {
     public List<Role> findByPersonIn(List<Person> persons) {
 
         List<PersonJpa> personJpas = persons.stream()
-                .map(this::toJpaIfConsistent)
+                .map(personJpaRepository::toJpaIfConsistent)
                 .collect(toList());
 
         List<RoleJpa> roleJpaRepositoryByPersonIn = roleJpaRepository.findByPersonIn(personJpas);
@@ -86,33 +86,5 @@ public class RoleJpaWrapper implements RoleRepository {
         return roleJpaRepositoryByPersonIn.stream()
                 .map(RoleJpa::toDomain)
                 .collect(toList());
-    }
-
-    private PersonJpa toJpaIfConsistent(Person person) {
-
-        var personJpa = personJpaRepository.findById(person.getId());
-        if (personJpa.isEmpty()) {
-            throw new RuntimeException("person not found");
-        }
-        if (personJpa.map(PersonJpa::toDomain)
-                .filter(it -> it.equals(person))
-                .isEmpty()) {
-            throw new RuntimeException("person mismatch (outdated?)");
-        }
-        return personJpa.get();
-    }
-
-    private ClubJpa toJpaIfConsistent(Club club) {
-
-        var clubJpa = clubJpaRepository.findById(club.getId());
-        if (clubJpa.isEmpty()) {
-            throw new RuntimeException("club not found");
-        }
-        if (clubJpa.map(ClubJpa::toDomain)
-                .filter(it -> it.equals(club))
-                .isEmpty()) {
-            throw new RuntimeException("club mismatch (outdated?)");
-        }
-        return clubJpa.get();
     }
 }
