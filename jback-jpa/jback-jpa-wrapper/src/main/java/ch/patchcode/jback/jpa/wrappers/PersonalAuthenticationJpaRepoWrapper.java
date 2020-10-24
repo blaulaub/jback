@@ -1,5 +1,6 @@
 package ch.patchcode.jback.jpa.wrappers;
 
+import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.jpa.entities.*;
 import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.PersonalAuthenticationRepository;
@@ -49,6 +50,20 @@ public class PersonalAuthenticationJpaRepoWrapper implements PersonalAuthenticat
         return byUsername.stream().findFirst()
                 .map(VerificationMeanJpa::getPersonalAuthentication)
                 .map(PersonalAuthenticationJpa::toDomain);
+    }
+
+    @Override
+    public PersonalAuthentication addPerson(PersonalAuthentication personalAuthentication, Person person) {
+
+        var authenticationJpa = personalAuthenticationJpaRepository.toJpaIfConsistent(personalAuthentication);
+        var personJpa = personJpaRepository.toJpaIfConsistent(person);
+
+        if (authenticationJpa.getClients().contains(personJpa)) {
+            return personalAuthentication;
+        }
+
+        authenticationJpa.getClients().add(personJpa);
+        return personalAuthenticationJpaRepository.save(authenticationJpa).toDomain();
     }
 
     private PersonalAuthenticationJpa persist(PersonalAuthentication.Draft draft) {

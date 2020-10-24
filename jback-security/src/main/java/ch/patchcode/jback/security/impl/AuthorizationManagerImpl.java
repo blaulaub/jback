@@ -50,8 +50,8 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
             @Override
             public Principal visit(PersonalAuthentication personalAuthentication) {
 
-                // TODO: update personal authentication with new person
-                return null;
+                // update personal authentication with new person
+                return personalAuthenticationRepository.addPerson(personalAuthentication, person);
             }
 
             @Override
