@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface AuthorizationManager {
+public interface AuthenticationManager {
 
     /**
      * Let any user conclude hist pending authentication.

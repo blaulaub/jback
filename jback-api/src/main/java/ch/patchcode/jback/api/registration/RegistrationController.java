@@ -1,14 +1,13 @@
 package ch.patchcode.jback.api.registration;
 
 import ch.patchcode.jback.api.verification.VerificationCode;
-import ch.patchcode.jback.presentation.AuthorizationManager;
+import ch.patchcode.jback.presentation.AuthenticationManager;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -23,14 +22,14 @@ public class RegistrationController {
 
     private final static Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
 
-    private final AuthorizationManager authorizationManager;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
     public RegistrationController(
-            @Qualifier("presentation.authorizationManager") AuthorizationManager authorizationManager
+            AuthenticationManager authenticationManager
     ) {
 
-        this.authorizationManager = authorizationManager;
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping
@@ -44,7 +43,7 @@ public class RegistrationController {
     ) {
 
         LOG.debug("processing registration request for {}", data);
-        var id = authorizationManager.setupRegistration(data.toDomain());
+        var id = authenticationManager.setupRegistration(data.toDomain());
         return PendingRegistrationInfo.of(id);
     }
 
@@ -55,6 +54,6 @@ public class RegistrationController {
     ) {
 
         LOG.debug("processing registration code for {}", id);
-        authorizationManager.authenticate(id, verificationCode.toDomain());
+        authenticationManager.authenticate(id, verificationCode.toDomain());
     }
 }

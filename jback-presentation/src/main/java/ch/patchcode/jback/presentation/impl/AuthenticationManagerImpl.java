@@ -4,7 +4,7 @@ import ch.patchcode.jback.core.NotAllowedException;
 import ch.patchcode.jback.core.RoleService;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.Role;
-import ch.patchcode.jback.presentation.AuthorizationManager;
+import ch.patchcode.jback.presentation.AuthenticationManager;
 import ch.patchcode.jback.presentation.LoginData;
 import ch.patchcode.jback.presentation.TryLoginResult;
 import ch.patchcode.jback.security.registration.ConfirmationResult;
@@ -26,8 +26,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service("presentation.authorizationManager")
-public class AuthorizationManagerImpl implements AuthorizationManager {
+@Service
+public class AuthenticationManagerImpl implements AuthenticationManager {
 
     private final static Logger LOG = LoggerFactory.getLogger(ch.patchcode.jback.security.impl.AuthorizationManagerImpl.class);
 
@@ -36,7 +36,7 @@ public class AuthorizationManagerImpl implements AuthorizationManager {
     private final RoleService roleService;
 
     @Autowired
-    public AuthorizationManagerImpl(
+    public AuthenticationManagerImpl(
             ch.patchcode.jback.security.AuthorizationManager authorizationManager,
             RegistrationService registrationService,
             RoleService roleService) {

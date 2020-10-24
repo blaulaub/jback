@@ -5,14 +5,12 @@ import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.api.roles.Role;
 import ch.patchcode.jback.api.roles.Roles;
 import ch.patchcode.jback.core.NotAllowedException;
-import ch.patchcode.jback.presentation.AuthorizationManager;
+import ch.patchcode.jback.presentation.AuthenticationManager;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
-import ch.patchcode.jback.securityEntities.authentications.Principal;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -32,14 +30,14 @@ public class SessionController {
 
     private final static Logger LOG = LoggerFactory.getLogger(SessionController.class);
 
-    private final AuthorizationManager authorizationManager;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
     public SessionController(
-            @Qualifier("presentation.authorizationManager") AuthorizationManager authorizationManager
+            AuthenticationManager authenticationManager
     ) {
 
-        this.authorizationManager = authorizationManager;
+        this.authenticationManager = authenticationManager;
     }
 
     @GetMapping
@@ -53,7 +51,7 @@ public class SessionController {
     @PostMapping("login")
     public LoginResponse login(@RequestBody LoginData data) {
 
-        return LoginResponse.fromDomain(authorizationManager.tryLogin(data.toDomain()));
+        return LoginResponse.fromDomain(authenticationManager.tryLogin(data.toDomain()));
     }
 
     @PostMapping("logout")
@@ -77,21 +75,21 @@ public class SessionController {
         }
 
         var springAuth = (SpringAuthentication<?>) auth;
-        List<ch.patchcode.jback.coreEntities.roles.Role> roles = authorizationManager.getAvailableRoles(springAuth.getPrincipal());
+        List<ch.patchcode.jback.coreEntities.roles.Role> roles = authenticationManager.getAvailableRoles(springAuth.getPrincipal());
         return Roles.of(roles.stream().map(Role::fromDomain).collect(toList()));
     }
 
     @GetMapping("currentRole")
     public Role getCurrentRole() throws NotFoundException {
 
-        return authorizationManager.getCurrentRole().map(Role::fromDomain).orElseThrow(NotFoundException::new);
+        return authenticationManager.getCurrentRole().map(Role::fromDomain).orElseThrow(NotFoundException::new);
     }
 
     @PutMapping("currentRole")
     public void setCurrentRole(Role role) throws ForbiddenException {
 
         try {
-            authorizationManager.setCurrentRole(role.toDomain());
+            authenticationManager.setCurrentRole(role.toDomain());
         } catch (NotAllowedException e) {
             throw new ForbiddenException();
         }
