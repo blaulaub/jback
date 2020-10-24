@@ -42,8 +42,30 @@ public class PersonsController {
         return personService.getPerson(id).map(Person::fromDomain).orElseThrow(NotFoundException::new);
     }
 
+    /**
+     * Creates a {@link Person} without authentication means.
+     * <p>
+     * The resulting {@link Person} will not be able to log in.
+     */
+    @PostMapping
+    public Person createPerson(
+            @RequestBody @ApiParam Person.Draft draft
+    ) {
+
+        var context = SecurityContextHolder.getContext();
+        var callerAuth = (Principal) context.getAuthentication();
+        var person = personService.create(draft.toDomain());
+        authorizationManager.addClient(callerAuth, person);
+        return fromDomain(person);
+    }
+
+    /**
+     * Creates a {@link Person} with authentication means.
+     * <p>
+     * The resulting {@link Person} is able to login to the system.
+     */
     @PostMapping("with-password")
-    public Person createOwnPerson(
+    public Person createPersonWithPassword(
             @RequestBody @ApiParam PersonWithPasswordDraft draft
     ) {
 
@@ -61,24 +83,6 @@ public class PersonsController {
 
         context.setAuthentication(auth);
 
-        return fromDomain(person);
-    }
-
-    /**
-     * Lets an authorized user create a new person.
-     *
-     * @param draft contains information about the person
-     * @return the new person
-     */
-    @PostMapping
-    public Person createClientPerson(
-            @RequestBody @ApiParam Person.Draft draft
-    ) {
-
-        var context = SecurityContextHolder.getContext();
-        var callerAuth = (Principal) context.getAuthentication();
-        var person = personService.create(draft.toDomain());
-        authorizationManager.addClient(callerAuth, person);
         return fromDomain(person);
     }
 }
