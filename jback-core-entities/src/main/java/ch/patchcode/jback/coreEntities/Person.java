@@ -3,7 +3,6 @@ package ch.patchcode.jback.coreEntities;
 import org.inferred.freebuilder.FreeBuilder;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -58,8 +57,6 @@ public final class Person implements ch.patchcode.jback.secModel.Person, Seriali
         String getLastName();
 
         Optional<Address> getAddress();
-
-        List<Authority> getExtraPrivileges();
 
         class Builder extends Person_Draft_Builder {
         }
