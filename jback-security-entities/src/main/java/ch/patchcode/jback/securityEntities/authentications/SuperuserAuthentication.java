@@ -5,24 +5,26 @@ import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationByPassword;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
-public class SuperuserAuthentication implements Principal {
+public final class SuperuserAuthentication implements Principal, Serializable {
 
     private final VerificationByPassword verificationMean;
 
     public SuperuserAuthentication(String username, String password) {
 
-        this.verificationMean = new VerificationByPassword.Builder()
-                .setId(new UUID(0L, 0L))
-                .setUsername(username)
-                .setPassword(password)
-                .build();
+        this.verificationMean = new VerificationByPassword(
+                new UUID(0L, 0L),
+                username,
+                password
+        );
     }
 
     @Override
@@ -72,5 +74,18 @@ public class SuperuserAuthentication implements Principal {
     public List<Authority> getBasicPrivileges() {
 
         return asList(Authority.values());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SuperuserAuthentication that = (SuperuserAuthentication) o;
+        return verificationMean.equals(that.verificationMean);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(verificationMean);
     }
 }

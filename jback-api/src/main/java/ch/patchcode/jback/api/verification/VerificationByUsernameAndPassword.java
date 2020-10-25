@@ -51,11 +51,11 @@ public abstract class VerificationByUsernameAndPassword extends VerificationMean
     }
 
     public VerificationByPassword toDomain() {
-        return new VerificationByPassword.Builder()
-                .setId(getId())
-                .setUsername(getUsername())
-                .setPassword(getPassword())
-                .build();
+        return new VerificationByPassword(
+                getId(),
+                getUsername(),
+                getPassword()
+        );
     }
 
     @ApiModel

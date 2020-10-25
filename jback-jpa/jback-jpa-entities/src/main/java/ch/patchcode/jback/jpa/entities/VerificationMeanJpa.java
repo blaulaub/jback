@@ -111,11 +111,11 @@ public abstract class VerificationMeanJpa {
 
             @Override
             public VerificationMean visit(PasswordVerification passwordVerification) {
-                return new VerificationByPassword.Builder()
-                        .setId(getId())
-                        .setUsername(passwordVerification.getUsername())
-                        .setPassword(passwordVerification.getPassword())
-                        .build();
+                return new VerificationByPassword(
+                        getId(),
+                        passwordVerification.getUsername(),
+                        passwordVerification.getPassword()
+                );
             }
         });
     }
