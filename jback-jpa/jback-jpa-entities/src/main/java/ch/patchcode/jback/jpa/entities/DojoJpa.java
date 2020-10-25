@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static java.util.stream.Collectors.toList;
+
 @Entity(name = DojoJpa.ENTITY_NAME)
 @Table(name = DojoJpa.ENTITY_NAME)
 public class DojoJpa {
@@ -62,8 +64,9 @@ public class DojoJpa {
                 .setName(getName())
                 .setClub(getClub().toDomain());
         Optional.ofNullable(getAddressLines())
-                .map(it -> it.stream().map(AddressLine::getValue))
-                .map(it -> new Address.Builder().addAllLines(it).build())
+                .map(it -> it.stream().map(AddressLine::getValue).collect(toList()))
+                .filter(it -> !it.isEmpty())
+                .map(Address::new)
                 .ifPresent(builder::setAddress);
         return builder.build();
     }

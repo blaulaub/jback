@@ -41,9 +41,7 @@ public abstract class VerificationByConsole extends VerificationMean {
     }
 
     public ch.patchcode.jback.securityEntities.verificationMeans.VerificationByConsole toDomain() {
-        return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationByConsole.Builder()
-                .setId(getId())
-                .build();
+        return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationByConsole(getId());
     }
 
     @ApiModel

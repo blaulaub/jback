@@ -75,25 +75,17 @@ public class TemporaryAuthentication implements Principal {
 
                     @Override
                     public VerificationByConsole visit(VerificationByConsole.Draft draft) {
-                        return new VerificationByConsole.Builder()
-                                .setId(UUID.randomUUID())
-                                .build();
+                        return new VerificationByConsole(UUID.randomUUID());
                     }
 
                     @Override
                     public VerificationByEmail visit(VerificationByEmail.Draft draft) {
-                        return new VerificationByEmail.Builder()
-                                .setId(UUID.randomUUID())
-                                .setEmailAddress(draft.getEmailAddress())
-                                .build();
+                        return new VerificationByEmail(UUID.randomUUID(), draft.getEmailAddress());
                     }
 
                     @Override
                     public VerificationBySms visit(VerificationBySms.Draft draft) {
-                        return new VerificationBySms.Builder()
-                                .setId(UUID.randomUUID())
-                                .setPhoneNumber(draft.getPhoneNumber())
-                                .build();
+                        return new VerificationBySms(UUID.randomUUID(), draft.getPhoneNumber());
                     }
 
                     @Override

@@ -2,15 +2,31 @@ package ch.patchcode.jback.securityEntities.verificationMeans;
 
 import org.inferred.freebuilder.FreeBuilder;
 
+import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
-@FreeBuilder
-public abstract class VerificationBySms implements VerificationMean {
+import static java.util.Objects.requireNonNull;
+
+public final class VerificationBySms implements VerificationMean, Serializable {
+
+    private final UUID id;
+
+    private final String phoneNumber;
+
+    public VerificationBySms(UUID id, String phoneNumber) {
+        this.id = requireNonNull(id);
+        this.phoneNumber = requireNonNull(phoneNumber);
+    }
 
     @Override
-    public abstract UUID getId();
+    public UUID getId() {
+        return id;
+    }
 
-    public abstract String getPhoneNumber();
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
     @Override
     public <R> R accept(Visitor<R> registrationHandler) {
@@ -39,6 +55,17 @@ public abstract class VerificationBySms implements VerificationMean {
         }
     }
 
-    public static class Builder extends VerificationBySms_Builder {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VerificationBySms that = (VerificationBySms) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(phoneNumber, that.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, phoneNumber);
     }
 }

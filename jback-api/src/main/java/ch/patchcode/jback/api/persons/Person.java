@@ -49,12 +49,11 @@ public abstract class Person {
     }
 
     public ch.patchcode.jback.coreEntities.Person toDomain() {
-        return new ch.patchcode.jback.coreEntities.Person.Builder()
-                .setId(getId())
-                .setFirstName(getFirstName())
-                .setLastName(getLastName())
-                .setAddress(new Address.Builder().addAllLines(getAddress()).build())
-                .build();
+        return new ch.patchcode.jback.coreEntities.Person(
+                getId(),
+                getFirstName(),
+                getLastName(),
+                new Address(getAddress()));
     }
 
     public static class Builder extends Person_Builder {
@@ -90,9 +89,7 @@ public abstract class Person {
             var builder = new ch.patchcode.jback.coreEntities.Person.Draft.Builder();
             builder.setFirstName(getFirstName());
             builder.setLastName(getLastName());
-            builder.setAddress(new Address.Builder()
-                    .addAllLines(getAddress())
-                    .build());
+            builder.setAddress(new Address(getAddress()));
             return builder.build();
         }
 

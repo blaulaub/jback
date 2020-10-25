@@ -73,14 +73,14 @@ public class PersonJpa {
 
     public Person toDomain() {
 
-        var builder = new Person.Builder()
-                .setId(getId())
-                .setFirstName(getFirstName())
-                .setLastName(getLastName());
-        Optional.ofNullable(getAddressLines())
-                .map(it -> it.stream().map(AddressLine::getValue))
-                .map(it -> new Address.Builder().addAllLines(it).build())
-                .ifPresent(builder::setAddress);
-        return builder.build();
+        return new Person(
+                getId(),
+                getFirstName(),
+                getLastName(),
+                Optional.ofNullable(getAddressLines())
+                        .map(it -> it.stream().map(AddressLine::getValue).collect(toList()))
+                        .filter(it -> !it.isEmpty())
+                        .map(Address::new)
+                        .orElse(null));
     }
 }

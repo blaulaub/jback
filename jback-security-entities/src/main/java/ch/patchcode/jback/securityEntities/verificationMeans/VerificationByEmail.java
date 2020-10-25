@@ -2,15 +2,31 @@ package ch.patchcode.jback.securityEntities.verificationMeans;
 
 import org.inferred.freebuilder.FreeBuilder;
 
+import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
-@FreeBuilder
-public abstract class VerificationByEmail implements VerificationMean {
+import static java.util.Objects.requireNonNull;
+
+public final class VerificationByEmail implements VerificationMean, Serializable {
+
+    private final UUID id;
+
+    private final String emailAddress;
+
+    public VerificationByEmail(UUID id, String emailAddress) {
+        this.id = requireNonNull(id);
+        this.emailAddress = requireNonNull(emailAddress);
+    }
 
     @Override
-    public abstract UUID getId();
+    public UUID getId() {
+        return id;
+    }
 
-    public abstract String getEmailAddress();
+    public String getEmailAddress() {
+        return emailAddress;
+    }
 
     @Override
     public <R> R accept(Visitor<R> registrationHandler) {
@@ -39,6 +55,17 @@ public abstract class VerificationByEmail implements VerificationMean {
         }
     }
 
-    public static class Builder extends VerificationByEmail_Builder {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VerificationByEmail that = (VerificationByEmail) o;
+        return id.equals(that.id) &&
+                emailAddress.equals(that.emailAddress);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, emailAddress);
     }
 }

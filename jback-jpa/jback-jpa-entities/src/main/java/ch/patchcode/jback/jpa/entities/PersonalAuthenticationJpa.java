@@ -5,6 +5,9 @@ import ch.patchcode.jback.securityEntities.authentications.PersonalAuthenticatio
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity(name = PersonalAuthenticationJpa.ENTITY_NAME)
 @Table(name = PersonalAuthenticationJpa.ENTITY_NAME)
@@ -67,10 +70,10 @@ public class PersonalAuthenticationJpa {
 
     public PersonalAuthentication toDomain() {
 
-        return new PersonalAuthentication.Builder()
-                .setId(getId())
-                .setHolder(getSelf().toDomain())
-                .addAllMeans(getVerificationMeans().stream().map(VerificationMeanJpa::toDomain))
-                .build();
+        return new PersonalAuthentication(
+                getId(),
+                getSelf().toDomain(),
+                getClients().stream().map(PersonJpa::toDomain).collect(toList()),
+                getVerificationMeans().stream().map(VerificationMeanJpa::toDomain).collect(toList()));
     }
 }

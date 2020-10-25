@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PersonalAuthenticationTest {
 
@@ -18,11 +21,11 @@ class PersonalAuthenticationTest {
         // arrange
         var holder = somePerson();
 
-        var authentication = new PersonalAuthentication.Builder()
-                .setId(UUID.randomUUID())
-                .setHolder(holder)
-                .addMeans(someVerificationMean())
-                .build();
+        var authentication = new PersonalAuthentication(
+                UUID.randomUUID(),
+                holder,
+                emptyList(),
+                singletonList(someVerificationMean()));
 
         // act
         var persons = authentication.getPersons();
@@ -39,12 +42,11 @@ class PersonalAuthenticationTest {
         // arrange
         var holder = somePerson();
 
-        var authentication = new PersonalAuthentication.Builder()
-                .setId(UUID.randomUUID())
-                .setHolder(holder)
-                .addPersons(holder)
-                .addMeans(someVerificationMean())
-                .build();
+        var authentication = new PersonalAuthentication(
+                UUID.randomUUID(),
+                holder,
+                singletonList(holder),
+                singletonList(someVerificationMean()));
 
         // act
         var persons = authentication.getPersons();
@@ -55,14 +57,10 @@ class PersonalAuthenticationTest {
     }
 
     private Person somePerson() {
-        return new Person.Builder()
-                .setId(UUID.randomUUID())
-                .setFirstName("Karl")
-                .setLastName("Valentin")
-                .build();
+        return new Person(UUID.randomUUID(), "Karl", "Valentin", null);
     }
 
     private static VerificationByConsole someVerificationMean() {
-        return new VerificationByConsole.Builder().setId(UUID.randomUUID()).build();
+        return new VerificationByConsole(UUID.randomUUID());
     }
 }
