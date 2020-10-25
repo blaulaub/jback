@@ -1,7 +1,5 @@
 package ch.patchcode.jback.securityEntities.verificationMeans;
 
-import org.inferred.freebuilder.FreeBuilder;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -44,25 +42,26 @@ public final class VerificationByPassword implements VerificationMean, Serializa
 
     @Override
     public Draft toNewDraft() {
-        return new Draft.Builder()
-                .setUsername(this.getUsername())
-                .setPassword(this.getPassword())
-                .build();
+        return new Draft(this.getUsername(), this.getPassword());
     }
 
-    @FreeBuilder
-    public abstract static class Draft implements VerificationMean.Draft {
+    public final static class Draft implements VerificationMean.Draft, Serializable {
 
-        public abstract String getUsername();
+        private final String username;
 
-        public abstract String getPassword();
+        private final String password;
 
-        public static Draft of(String username, String password) {
+        public Draft(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
 
-            return new Builder()
-                    .setUsername(username)
-                    .setPassword(password)
-                    .build();
+        public String getUsername() {
+            return username;
+        }
+
+        public String getPassword() {
+            return password;
         }
 
         @Override
@@ -70,7 +69,18 @@ public final class VerificationByPassword implements VerificationMean, Serializa
             return visitor.visit(this);
         }
 
-        public static class Builder extends VerificationByPassword_Draft_Builder {
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Draft draft = (Draft) o;
+            return username.equals(draft.username) &&
+                    password.equals(draft.password);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(username, password);
         }
     }
 

@@ -59,9 +59,7 @@ public abstract class VerificationBySms extends VerificationMean {
         @Override
         public ch.patchcode.jback.securityEntities.verificationMeans.VerificationBySms.Draft toDomain() {
 
-            return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationBySms.Draft.Builder()
-                    .setPhoneNumber(getPhoneNumber())
-                    .build();
+            return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationBySms.Draft(getPhoneNumber());
         }
 
         @JsonCreator

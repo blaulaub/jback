@@ -1,7 +1,5 @@
 package ch.patchcode.jback.securityEntities.verificationMeans;
 
-import org.inferred.freebuilder.FreeBuilder;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -36,22 +34,37 @@ public final class VerificationBySms implements VerificationMean, Serializable {
 
     @Override
     public Draft toNewDraft() {
-        return new Draft.Builder()
-                .setPhoneNumber(this.getPhoneNumber())
-                .build();
+        return new Draft(this.getPhoneNumber());
     }
 
-    @FreeBuilder
-    public abstract static class Draft implements VerificationMean.Draft {
+    public final static class Draft implements VerificationMean.Draft, Serializable {
 
-        public abstract String getPhoneNumber();
+        private final String phoneNumber;
+
+        public Draft(String phoneNumber) {
+            this.phoneNumber = requireNonNull(phoneNumber);
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
 
         @Override
         public <R> R accept(Visitor<R> visitor) {
             return visitor.visit(this);
         }
 
-        public static class Builder extends VerificationBySms_Draft_Builder {
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Draft draft = (Draft) o;
+            return phoneNumber.equals(draft.phoneNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(phoneNumber);
         }
     }
 

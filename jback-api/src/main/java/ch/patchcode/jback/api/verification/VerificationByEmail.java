@@ -59,9 +59,7 @@ public abstract class VerificationByEmail extends VerificationMean {
         @Override
         public ch.patchcode.jback.securityEntities.verificationMeans.VerificationByEmail.Draft toDomain() {
 
-            return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationByEmail.Draft.Builder()
-                    .setEmailAddress(getEmailAddress())
-                    .build();
+            return new ch.patchcode.jback.securityEntities.verificationMeans.VerificationByEmail.Draft(getEmailAddress());
         }
 
         @JsonCreator

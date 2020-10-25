@@ -32,10 +32,7 @@ public abstract class PersonWithPasswordDraft extends Person.Draft {
     }
 
     public VerificationByPassword.Draft toVerificationMean() {
-        return new VerificationByPassword.Draft.Builder()
-                .setUsername(getUsername())
-                .setPassword(getPassword())
-                .build();
+        return new VerificationByPassword.Draft(getUsername(), getPassword());
     }
 
     public static class Builder extends PersonWithPasswordDraft_Builder {

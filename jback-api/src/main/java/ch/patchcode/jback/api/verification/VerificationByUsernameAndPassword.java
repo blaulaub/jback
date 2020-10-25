@@ -71,10 +71,7 @@ public abstract class VerificationByUsernameAndPassword extends VerificationMean
         @Override
         public VerificationByPassword.Draft toDomain() {
 
-            return new VerificationByPassword.Draft.Builder()
-                    .setUsername(getUsername())
-                    .setPassword(getPassword())
-                    .build();
+            return new VerificationByPassword.Draft(getUsername(), getPassword());
         }
 
         @JsonCreator

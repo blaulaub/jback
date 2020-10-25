@@ -118,9 +118,7 @@ public abstract class RegistrationJpa {
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
-                    .setVerificationMean(new VerificationByEmail.Draft.Builder()
-                            .setEmailAddress(getEmail())
-                            .build())
+                    .setVerificationMean(new VerificationByEmail.Draft(getEmail()))
                     .build();
         }
     }
@@ -143,9 +141,7 @@ public abstract class RegistrationJpa {
         public PendingRegistration toDomain() {
 
             return toDomainBaseBuilder()
-                    .setVerificationMean(new VerificationBySms.Draft.Builder()
-                            .setPhoneNumber(getPhoneNumber())
-                            .build())
+                    .setVerificationMean(new VerificationBySms.Draft(getPhoneNumber()))
                     .build();
         }
     }

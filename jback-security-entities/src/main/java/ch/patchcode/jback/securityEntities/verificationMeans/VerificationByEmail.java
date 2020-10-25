@@ -1,7 +1,5 @@
 package ch.patchcode.jback.securityEntities.verificationMeans;
 
-import org.inferred.freebuilder.FreeBuilder;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -36,22 +34,37 @@ public final class VerificationByEmail implements VerificationMean, Serializable
 
     @Override
     public Draft toNewDraft() {
-        return new Draft.Builder()
-                .setEmailAddress(this.getEmailAddress())
-                .build();
+        return new Draft(this.getEmailAddress());
     }
 
-    @FreeBuilder
-    public abstract static class Draft implements VerificationMean.Draft {
+    public final static class Draft implements VerificationMean.Draft, Serializable {
 
-        public abstract String getEmailAddress();
+        private final String emailAddress;
+
+        public Draft(String emailAddress) {
+            this.emailAddress = requireNonNull(emailAddress);
+        }
+
+        public String getEmailAddress() {
+            return emailAddress;
+        }
 
         @Override
         public <R> R accept(Visitor<R> visitor) {
             return visitor.visit(this);
         }
 
-        public static class Builder extends VerificationByEmail_Draft_Builder {
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Draft draft = (Draft) o;
+            return emailAddress.equals(draft.emailAddress);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(emailAddress);
         }
     }
 

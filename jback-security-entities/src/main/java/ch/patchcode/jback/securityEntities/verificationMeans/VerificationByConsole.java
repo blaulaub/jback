@@ -31,13 +31,26 @@ public final class VerificationByConsole implements VerificationMean, Serializab
         return new Draft();
     }
 
-    public static class Draft implements VerificationMean.Draft {
+    public static final class Draft implements VerificationMean.Draft, Serializable {
 
         // boring - there are no parameters :-)
 
         @Override
         public <R> R accept(Visitor<R> visitor) {
             return visitor.visit(this);
+        }
+
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return 858_726_684;
         }
     }
 
