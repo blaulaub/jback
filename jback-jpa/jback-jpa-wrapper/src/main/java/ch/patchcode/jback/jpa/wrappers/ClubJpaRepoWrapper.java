@@ -64,11 +64,7 @@ public class ClubJpaRepoWrapper implements ClubRepository {
 
         ClubJpa club = new ClubJpa();
         club.setName(draft.getName());
-        draft.getContact()
-                .map(Person::getId)
-                .map(personJpaRepository::findById)
-                .map(it -> it.orElseThrow(EntityNotFoundException::new))
-                .ifPresent(club::setContact);
+        draft.getContact().map(personJpaRepository::toJpaIfConsistent).ifPresent(club::setContact);
         draft.getUrl()
                 .map(URI::toString)
                 .ifPresent(club::setUri);
