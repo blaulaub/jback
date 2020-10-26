@@ -18,6 +18,10 @@ export class PersonService {
     return this.http.get<Person>(`/api/v1/persons/${id}`);
   }
 
+  getPersonForCurrentPrincipal(): Observable<Person[]> {
+    return this.http.get<Person[]>(`/api/v1/persons/for-current-principal`);
+  }
+
   postPerson(data: PersonDraft): Observable<Person> {
     return this.http.post<Person>('/api/v1/persons', data);
   }

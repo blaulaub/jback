@@ -6,7 +6,10 @@ import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.presentation.AuthenticationManager;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
+import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
+import ch.patchcode.jback.securityEntities.authentications.SuperuserAuthentication;
+import ch.patchcode.jback.securityEntities.authentications.TemporaryAuthentication;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationByPassword;
 import ch.patchcode.jback.securityEntities.verificationMeans.VerificationMean;
 import io.swagger.annotations.Api;
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static ch.patchcode.jback.api.persons.Person.fromDomain;
+import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -95,6 +99,35 @@ public class PersonsController {
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         return fromDomain(person);
+    }
+
+    @GetMapping("for-current-principal")
+    public List<Person> getPersonsForCurrentPrincipal() {
+
+        return principalFromRequest().accept(new Principal.ResultVisitor<>() {
+
+            @Override
+            public List<Person> visit(PersonalAuthentication personalAuthentication) {
+
+                return personalAuthentication.getPersons().stream()
+                        .map(Person::fromDomain)
+                        .collect(toList());
+            }
+
+            @Override
+            public List<Person> visit(TemporaryAuthentication temporaryAuthentication) {
+
+                // of course a temporary has none
+                return emptyList();
+            }
+
+            @Override
+            public List<Person> visit(SuperuserAuthentication superuserAuthentication) {
+
+                // technical the superuser owns all persons, but returning all would be suicidal
+                return emptyList();
+            }
+        });
     }
 
     private List<VerificationMean.Draft> verificationMeansFromPrincipal(Principal currentPrincipal) {

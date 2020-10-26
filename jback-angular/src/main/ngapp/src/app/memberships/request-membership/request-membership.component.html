@@ -2,7 +2,18 @@
 
     <h1>Membership Application for «{{club.name}}»</h1>
 
-    <p>
-        This component is incomplete. We need to figure out as which person you are acting first, this is not implemented yet.
-    </p>
+    <div [formGroup]="membershipForm">
+
+        <div>
+            <label>Person:</label>
+            <select formControlName="person" required>
+              <option [ngValue]="person"  *ngFor="let person of persons">{{ displayName(person) }}</option>
+            </select>
+        </div>
+
+        <p>
+            The rest of this form is under development - sorry!
+        </p>
+    </div>
+
 </div>
