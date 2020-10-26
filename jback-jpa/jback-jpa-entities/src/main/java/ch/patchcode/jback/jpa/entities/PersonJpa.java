@@ -77,10 +77,6 @@ public class PersonJpa {
                 getId(),
                 getFirstName(),
                 getLastName(),
-                Optional.ofNullable(getAddressLines())
-                        .map(it -> it.stream().map(AddressLine::getValue).collect(toList()))
-                        .filter(it -> !it.isEmpty())
-                        .map(Address::new)
-                        .orElse(null));
+                new Address(getAddressLines().stream().map(AddressLine::getValue).collect(toList())));
     }
 }

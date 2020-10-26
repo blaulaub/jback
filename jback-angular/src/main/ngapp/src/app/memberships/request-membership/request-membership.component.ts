@@ -21,6 +21,8 @@ import { Person } from '../../person/person';
 })
 export class RequestMembershipComponent implements OnInit {
 
+  private id: string;
+
   membershipForm: FormGroup;
 
   club: Club = null;
@@ -42,8 +44,8 @@ export class RequestMembershipComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.clubService.getClub(id).subscribe(it => this.club = it);
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.clubService.getClub(this.id).subscribe(it => this.club = it);
     this.personService.getPersonForCurrentPrincipal().subscribe(it => this.persons = it);
   }
 
@@ -52,7 +54,10 @@ export class RequestMembershipComponent implements OnInit {
   }
 
   submit(): void {
-    console.error('Not implemented');
+    this.clubService.postMembershipApplication(this.id, {
+      person: this.membershipForm.controls.person.value,
+      club: this.club
+    })
+      .subscribe(() => this.router.navigate(['club', this.id]));
   }
-
 }

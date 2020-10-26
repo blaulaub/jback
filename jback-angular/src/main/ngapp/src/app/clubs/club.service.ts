@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { ClubDraft } from './club-draft';
 import { Club } from './club';
+import { ClubMembershipAppicationDraft } from './club-membership-application-draft';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class ClubService {
 
   postCreateClub(data: ClubDraft): Observable<Club> {
     return this.http.post<Club>('/api/v1/clubs', data);
+  }
+
+  postMembershipApplication(id: string, data: ClubMembershipAppicationDraft): Observable<void> {
+    return this.http.post<void>(`/api/v1/clubs/${id}/membership-applications`, data);
   }
 
 }
