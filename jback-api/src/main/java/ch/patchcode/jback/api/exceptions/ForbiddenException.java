@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.FORBIDDEN)
 public class ForbiddenException extends Exception {
 
+    public ForbiddenException() {
+    }
+
     public ForbiddenException(Throwable e) {
         super(e);
     }

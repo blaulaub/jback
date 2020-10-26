@@ -48,7 +48,11 @@ export class RequestMembershipComponent implements OnInit {
   }
 
   displayName(person: Person): string {
-    return [person.firstName, person.lastName].join(" ");
+    return [person.firstName, person.lastName].join(' ');
+  }
+
+  submit(): void {
+    console.error('Not implemented');
   }
 
 }

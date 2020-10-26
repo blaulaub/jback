@@ -11,9 +11,9 @@
             </select>
         </div>
 
-        <p>
-            The rest of this form is under development - sorry!
-        </p>
+        <button [disabled]="!membershipForm.valid" (click)="submit()">
+            Submit
+        </button>
     </div>
 
 </div>

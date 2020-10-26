@@ -23,7 +23,7 @@ public abstract class Person {
 
     @JsonCreator
     public static Person of(
-            @JsonProperty("id") UUID id,
+            @JsonProperty(value = "id", required = true) UUID id,
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName,
             @JsonProperty("address") List<String> address

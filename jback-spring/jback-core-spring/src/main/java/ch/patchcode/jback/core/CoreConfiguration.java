@@ -1,12 +1,15 @@
 package ch.patchcode.jback.core;
 
 import ch.patchcode.jback.core.clubs.ClubMemberService;
+import ch.patchcode.jback.core.clubs.ClubMembershipApplicationService;
 import ch.patchcode.jback.core.clubs.ClubService;
 import ch.patchcode.jback.core.clubs.impl.ClubMemberServiceImpl;
+import ch.patchcode.jback.core.clubs.impl.ClubMembershipApplicationServiceImpl;
 import ch.patchcode.jback.core.clubs.impl.ClubServiceImpl;
 import ch.patchcode.jback.core.impl.RoleServiceImpl;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.core.persons.impl.PersonServiceImpl;
+import ch.patchcode.jback.coreEntities.ClubMembershipApplicationRepository;
 import ch.patchcode.jback.coreEntities.ClubRepository;
 import ch.patchcode.jback.coreEntities.PersonRepository;
 import ch.patchcode.jback.coreEntities.roles.RoleRepository;
@@ -38,6 +41,14 @@ public class CoreConfiguration {
                 clubRepository,
                 roleRepository
         );
+    }
+
+    @Bean
+    public ClubMembershipApplicationService getClubMembershipApplicationService(
+            ClubMembershipApplicationRepository clubMembershipApplicationRepository
+    ) {
+
+        return new ClubMembershipApplicationServiceImpl(clubMembershipApplicationRepository);
     }
 
     @Bean
