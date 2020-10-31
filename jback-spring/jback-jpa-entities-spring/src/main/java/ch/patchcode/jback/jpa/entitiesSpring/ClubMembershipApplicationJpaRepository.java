@@ -8,9 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ClubMembershipApplicationJpaRepository extends
-        JpaRepository<ClubMembershipApplicationJpa, UUID>,
-        ch.patchcode.jback.jpa.entities.ClubMembershipApplicationJpaRepository {
+public interface ClubMembershipApplicationJpaRepository extends JpaRepository<ClubMembershipApplicationJpa, UUID> {
 
     @Override
     <S extends ClubMembershipApplicationJpa> S save(S s);

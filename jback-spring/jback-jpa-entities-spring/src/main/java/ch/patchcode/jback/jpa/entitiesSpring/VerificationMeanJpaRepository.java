@@ -9,9 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface VerificationMeanJpaRepository extends
-        JpaRepository<VerificationMeanJpa, UUID>,
-        ch.patchcode.jback.jpa.entities.VerificationMeanJpaRepository {
+public interface VerificationMeanJpaRepository extends JpaRepository<VerificationMeanJpa, UUID> {
 
     @Override
     <S extends VerificationMeanJpa> S save(S s);

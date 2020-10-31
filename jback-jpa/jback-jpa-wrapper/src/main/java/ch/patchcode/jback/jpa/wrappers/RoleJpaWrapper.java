@@ -7,6 +7,8 @@ import ch.patchcode.jback.coreEntities.roles.MemberRole;
 import ch.patchcode.jback.coreEntities.roles.Role;
 import ch.patchcode.jback.coreEntities.roles.RoleRepository;
 import ch.patchcode.jback.jpa.entities.*;
+import ch.patchcode.jback.jpa.entitiesSpring.ClubJpaRepository;
+import ch.patchcode.jback.jpa.entitiesSpring.PersonJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

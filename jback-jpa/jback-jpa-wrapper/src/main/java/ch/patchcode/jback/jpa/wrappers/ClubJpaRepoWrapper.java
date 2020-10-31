@@ -2,14 +2,12 @@ package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.coreEntities.Club;
 import ch.patchcode.jback.coreEntities.ClubRepository;
-import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.jpa.entities.ClubJpa;
-import ch.patchcode.jback.jpa.entities.ClubJpaRepository;
-import ch.patchcode.jback.jpa.entities.PersonJpaRepository;
+import ch.patchcode.jback.jpa.entitiesSpring.ClubJpaRepository;
+import ch.patchcode.jback.jpa.entitiesSpring.PersonJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;

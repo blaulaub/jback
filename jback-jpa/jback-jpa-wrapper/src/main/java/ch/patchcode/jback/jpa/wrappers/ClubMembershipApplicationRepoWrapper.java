@@ -2,10 +2,10 @@ package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.coreEntities.ClubMembershipApplication;
 import ch.patchcode.jback.coreEntities.ClubMembershipApplicationRepository;
-import ch.patchcode.jback.jpa.entities.ClubJpaRepository;
 import ch.patchcode.jback.jpa.entities.ClubMembershipApplicationJpa;
-import ch.patchcode.jback.jpa.entities.ClubMembershipApplicationJpaRepository;
-import ch.patchcode.jback.jpa.entities.PersonJpaRepository;
+import ch.patchcode.jback.jpa.entitiesSpring.ClubJpaRepository;
+import ch.patchcode.jback.jpa.entitiesSpring.ClubMembershipApplicationJpaRepository;
+import ch.patchcode.jback.jpa.entitiesSpring.PersonJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

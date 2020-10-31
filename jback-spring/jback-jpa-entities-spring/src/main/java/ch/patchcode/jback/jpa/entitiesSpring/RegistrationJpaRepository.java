@@ -8,13 +8,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface RegistrationJpaRepository extends
-        JpaRepository<RegistrationJpa, UUID>,
-        ch.patchcode.jback.jpa.entities.RegistrationJpaRepository {
+public interface RegistrationJpaRepository extends JpaRepository<RegistrationJpa, UUID> {
 
     @Override
     <S extends RegistrationJpa> S save(S s);
 
     @Override
     Optional<RegistrationJpa> findById(UUID uuid);
+
+    @Override
+    void deleteById(UUID uuid);
 }

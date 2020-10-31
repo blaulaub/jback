@@ -8,10 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface VerificationByPasswordRepository extends
-        JpaRepository<PasswordVerification, UUID>,
-        ch.patchcode.jback.jpa.entities.VerificationByPasswordRepository {
+public interface VerificationByPasswordRepository extends JpaRepository<PasswordVerification, UUID> {
 
-    @Override
     <S extends PasswordVerification> List<S> findByUsername(String username);
 }
