@@ -24,6 +24,15 @@ public class ClubMembershipApplicationsController {
         this.clubMembershipApplicationService = clubMembershipApplicationService;
     }
 
+    @GetMapping
+    public ClubMembershipApplicationPage getApplications(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size
+    ) {
+
+        return ClubMembershipApplicationPage.fromDomain(clubMembershipApplicationService.getApplications(page, size));
+    }
+
     @PostMapping
     public void postNewApplication(
             @PathVariable UUID id,

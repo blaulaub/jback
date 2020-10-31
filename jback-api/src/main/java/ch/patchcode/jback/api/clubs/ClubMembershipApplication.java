@@ -47,6 +47,14 @@ public abstract class ClubMembershipApplication {
         }
     }
 
+    public static ClubMembershipApplication fromDomain(ch.patchcode.jback.coreEntities.ClubMembershipApplication application) {
+        return new Builder()
+                .setId(application.getId())
+                .setPerson(Person.fromDomain(application.getPerson()))
+                .setClub(Club.fromDomain(application.getClub()))
+                .build();
+    }
+
     public static class Builder extends ClubMembershipApplication_Builder {
     }
 }

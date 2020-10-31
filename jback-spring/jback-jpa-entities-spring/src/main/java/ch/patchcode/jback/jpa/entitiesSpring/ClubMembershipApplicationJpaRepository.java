@@ -1,6 +1,8 @@
 package ch.patchcode.jback.jpa.entitiesSpring;
 
 import ch.patchcode.jback.jpa.entities.ClubMembershipApplicationJpa;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +17,7 @@ public interface ClubMembershipApplicationJpaRepository extends JpaRepository<Cl
 
     @Override
     Optional<ClubMembershipApplicationJpa> findById(UUID uuid);
+
+    @Override
+    Page<ClubMembershipApplicationJpa> findAll(Pageable pageable);
 }
