@@ -1,5 +1,6 @@
 package ch.patchcode.jback.core.clubs.impl;
 
+import ch.patchcode.jback.core.clubs.ClubMembershipApplicationNotFoundException;
 import ch.patchcode.jback.core.clubs.ClubMembershipApplicationService;
 import ch.patchcode.jback.coreEntities.ClubMembershipApplication;
 import ch.patchcode.jback.coreEntities.ClubMembershipApplicationRepository;
@@ -19,6 +20,14 @@ public class ClubMembershipApplicationServiceImpl implements ClubMembershipAppli
     public List<ClubMembershipApplication> getApplications(UUID clubId, UUID afterApplicationId, int size) {
 
         return clubMembershipApplicationRepository.getApplications(clubId, afterApplicationId, size);
+    }
+
+    @Override
+    public ClubMembershipApplication getApplication(UUID clubId, UUID applicationId) throws ClubMembershipApplicationNotFoundException {
+        return clubMembershipApplicationRepository
+                .findById(applicationId)
+                .filter(it -> it.getClub().getId().equals(clubId))
+                .orElseThrow(ClubMembershipApplicationNotFoundException::new);
     }
 
     @Override

@@ -36,8 +36,11 @@ export class ClubService {
     return this.http.post<void>(`/api/v1/clubs/${id}/membership-applications`, data);
   }
 
-  getMembershipApplications(clubId: string, ): Observable<ClubMembershipApplication[]> {
+  getMembershipApplications(clubId: string): Observable<ClubMembershipApplication[]> {
     return this.http.get<ClubMembershipApplication[]>(`/api/v1/clubs/${clubId}/membership-applications`);
   }
 
+  getMembershipApplication(clubId: string, applicationId: string): Observable<ClubMembershipApplication> {
+    return this.http.get<ClubMembershipApplication>(`/api/v1/clubs/${clubId}/membership-applications/${applicationId}`);
+  }
 }

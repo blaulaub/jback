@@ -2,6 +2,8 @@ package ch.patchcode.jback.api.clubs;
 
 import ch.patchcode.jback.api.exceptions.BadRequestException;
 import ch.patchcode.jback.api.exceptions.ForbiddenException;
+import ch.patchcode.jback.api.exceptions.NotFoundException;
+import ch.patchcode.jback.core.clubs.ClubMembershipApplicationNotFoundException;
 import ch.patchcode.jback.core.clubs.ClubMembershipApplicationService;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
 import io.swagger.annotations.Api;
@@ -37,6 +39,19 @@ public class ClubMembershipApplicationsController {
         return clubMembershipApplicationService.getApplications(clubId, afterApplicationId, size).stream()
                 .map(ClubMembershipApplication::fromDomain)
                 .collect(toList());
+    }
+
+    @GetMapping("{applicationId}")
+    public ClubMembershipApplication getApplication(
+            @PathVariable UUID clubId,
+            @PathVariable UUID applicationId
+    ) throws NotFoundException {
+
+        try {
+            return ClubMembershipApplication.fromDomain(clubMembershipApplicationService.getApplication(clubId, applicationId));
+        } catch (ClubMembershipApplicationNotFoundException e) {
+            throw new NotFoundException(e);
+        }
     }
 
     @PostMapping

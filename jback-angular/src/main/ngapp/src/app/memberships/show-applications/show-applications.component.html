@@ -1,5 +1,5 @@
 <div *ngIf="applications">
     <ul *ngFor="let application of applications">
-        <li>{{application.person.firstName}} {{application.person.lastName}}</li>
+        <li><a routerLink="{{application.id}}">{{application.person.firstName}} {{application.person.lastName}}</a></li>
     </ul>
 </div>

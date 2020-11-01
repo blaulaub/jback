@@ -19,6 +19,7 @@ import { ShowClubComponent } from './clubs/show-club/show-club.component';
 import { ClubActionsComponent } from './clubs/show-club/club-actions/club-actions.component';
 import { RequestMembershipComponent } from './memberships/request-membership/request-membership.component';
 import { ShowApplicationsComponent } from './memberships/show-applications/show-applications.component';
+import { ShowApplicationComponent } from './memberships/show-application/show-application.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ShowApplicationsComponent } from './memberships/show-applications/show-
     RequestMembershipComponent,
     PersonActionsComponent,
     CreateChildComponent,
-    ShowApplicationsComponent
+    ShowApplicationsComponent,
+    ShowApplicationComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { CreateClubComponent } from './clubs/create-club/create-club.component';
 import { BrowseClubsComponent } from './clubs/browse-clubs/browse-clubs.component';
 import { ShowClubComponent } from './clubs/show-club/show-club.component';
 import { ShowApplicationsComponent } from './memberships/show-applications/show-applications.component';
+import { ShowApplicationComponent } from './memberships/show-application/show-application.component';
 import { ShowPersonComponent } from './person/show-person/show-person.component';
 import { RequestMembershipComponent } from './memberships/request-membership/request-membership.component';
 
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'club/:id', component: ShowClubComponent },
   { path: 'club/:id/requestMembership', component: RequestMembershipComponent },
   { path: 'club/:id/membershipApplications', component: ShowApplicationsComponent },
+  { path: 'club/:id/membershipApplications/:applicationId', component: ShowApplicationComponent },
   { path: 'person/:id', component: ShowPersonComponent },
   { path: 'person/:id/createChild', component: CreateChildComponent }
 ];

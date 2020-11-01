@@ -9,5 +9,7 @@ public interface ClubMembershipApplicationService {
 
     List<ClubMembershipApplication> getApplications(UUID clubId, UUID afterApplicationId, int size);
 
+    ClubMembershipApplication getApplication(UUID clubId, UUID applicationId) throws ClubMembershipApplicationNotFoundException;
+
     void fileNewApplication(ClubMembershipApplication.Draft draft);
 }
