@@ -8,7 +8,7 @@ public interface ClubMembershipApplicationRepository {
 
     Optional<ClubMembershipApplication> findById(UUID id);
 
-    List<ClubMembershipApplication> getApplications(UUID afterId, int size);
+    List<ClubMembershipApplication> getApplications(UUID clubId, UUID afterApplicationId, int size);
 
     ClubMembershipApplication create(ClubMembershipApplication.Draft draft);
 }

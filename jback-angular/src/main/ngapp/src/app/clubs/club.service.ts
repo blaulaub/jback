@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { ClubDraft } from './club-draft';
 import { Club } from './club';
 import { ClubMembershipAppicationDraft } from './club-membership-application-draft';
+import { ClubMembershipApplication } from './club-membership-application';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class ClubService {
 
   postMembershipApplication(id: string, data: ClubMembershipAppicationDraft): Observable<void> {
     return this.http.post<void>(`/api/v1/clubs/${id}/membership-applications`, data);
+  }
+
+  getMembershipApplications(clubId: string, ): Observable<ClubMembershipApplication[]> {
+    return this.http.get<ClubMembershipApplication[]>(`/api/v1/clubs/${clubId}/membership-applications`);
   }
 
 }

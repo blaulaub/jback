@@ -15,7 +15,7 @@ import java.util.UUID;
 import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping("/api/v1/clubs/{id}/membership-applications")
+@RequestMapping("/api/v1/clubs/{clubId}/membership-applications")
 @Api(tags = "Clubs")
 public class ClubMembershipApplicationsController {
 
@@ -29,22 +29,23 @@ public class ClubMembershipApplicationsController {
 
     @GetMapping
     public List<ClubMembershipApplication> getApplications(
-            @RequestParam(name = "after", required = false) UUID id,
+            @PathVariable UUID clubId,
+            @RequestParam(name = "after", required = false) UUID afterApplicationId,
             @RequestParam(name = "size", defaultValue = "20") int size
     ) {
 
-        return clubMembershipApplicationService.getApplications(id, size).stream()
+        return clubMembershipApplicationService.getApplications(clubId, afterApplicationId, size).stream()
                 .map(ClubMembershipApplication::fromDomain)
                 .collect(toList());
     }
 
     @PostMapping
     public void postNewApplication(
-            @PathVariable UUID id,
+            @PathVariable UUID clubId,
             @RequestBody ClubMembershipApplication.Draft application
     ) throws ForbiddenException, BadRequestException {
 
-        if (!id.equals(application.getClub().getId())) {
+        if (!clubId.equals(application.getClub().getId())) {
             throw new BadRequestException();
         }
 

@@ -16,9 +16,9 @@ public class ClubMembershipApplicationServiceImpl implements ClubMembershipAppli
     }
 
     @Override
-    public List<ClubMembershipApplication> getApplications(UUID afterId, int size) {
+    public List<ClubMembershipApplication> getApplications(UUID clubId, UUID afterApplicationId, int size) {
 
-        return clubMembershipApplicationRepository.getApplications(afterId, size);
+        return clubMembershipApplicationRepository.getApplications(clubId, afterApplicationId, size);
     }
 
     @Override

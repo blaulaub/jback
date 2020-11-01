@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface ClubMembershipApplicationService {
 
-    List<ClubMembershipApplication> getApplications(UUID afterId, int size);
+    List<ClubMembershipApplication> getApplications(UUID clubId, UUID afterApplicationId, int size);
 
     void fileNewApplication(ClubMembershipApplication.Draft draft);
 }

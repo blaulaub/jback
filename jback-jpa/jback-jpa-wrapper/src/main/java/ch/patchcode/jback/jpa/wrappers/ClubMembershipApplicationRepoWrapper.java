@@ -41,10 +41,11 @@ public class ClubMembershipApplicationRepoWrapper implements ClubMembershipAppli
     }
 
     @Override
-    public List<ClubMembershipApplication> getApplications(UUID afterId, int size) {
+    public List<ClubMembershipApplication> getApplications(UUID clubId, UUID afterApplicationId, int size) {
 
-        return clubMembershipApplicationJpaRepository.findAllByIdGreaterThan(
-                Optional.ofNullable(afterId).orElse(NULL_ID),
+        return clubMembershipApplicationJpaRepository.findAllByClubIdAndIdGreaterThan(
+                clubId,
+                Optional.ofNullable(afterApplicationId).orElse(NULL_ID),
                 PageRequest.of(0, size)
         ).map(ClubMembershipApplicationJpa::toDomain).getContent();
     }

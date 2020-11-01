@@ -1,0 +1,5 @@
+<div *ngIf="applications">
+    <ul *ngFor="let application of applications">
+        <li>{{application | json}}</li>
+    </ul>
+</div>
