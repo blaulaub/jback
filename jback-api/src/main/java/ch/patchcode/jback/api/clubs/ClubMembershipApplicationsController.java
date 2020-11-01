@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
+
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/api/v1/clubs/{id}/membership-applications")
@@ -25,12 +28,14 @@ public class ClubMembershipApplicationsController {
     }
 
     @GetMapping
-    public ClubMembershipApplicationPage getApplications(
-            @RequestParam(name = "page", defaultValue = "0") int page,
+    public List<ClubMembershipApplication> getApplications(
+            @RequestParam(name = "after", required = false) UUID id,
             @RequestParam(name = "size", defaultValue = "20") int size
     ) {
 
-        return ClubMembershipApplicationPage.fromDomain(clubMembershipApplicationService.getApplications(page, size));
+        return clubMembershipApplicationService.getApplications(id, size).stream()
+                .map(ClubMembershipApplication::fromDomain)
+                .collect(toList());
     }
 
     @PostMapping

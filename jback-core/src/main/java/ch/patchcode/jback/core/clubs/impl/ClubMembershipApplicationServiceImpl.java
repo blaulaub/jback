@@ -3,7 +3,9 @@ package ch.patchcode.jback.core.clubs.impl;
 import ch.patchcode.jback.core.clubs.ClubMembershipApplicationService;
 import ch.patchcode.jback.coreEntities.ClubMembershipApplication;
 import ch.patchcode.jback.coreEntities.ClubMembershipApplicationRepository;
-import ch.patchcode.jback.coreEntities.Page;
+
+import java.util.List;
+import java.util.UUID;
 
 public class ClubMembershipApplicationServiceImpl implements ClubMembershipApplicationService {
 
@@ -14,9 +16,9 @@ public class ClubMembershipApplicationServiceImpl implements ClubMembershipAppli
     }
 
     @Override
-    public Page<ClubMembershipApplication> getApplications(int page, int size) {
+    public List<ClubMembershipApplication> getApplications(UUID afterId, int size) {
 
-        return clubMembershipApplicationRepository.getApplications(page, size);
+        return clubMembershipApplicationRepository.getApplications(afterId, size);
     }
 
     @Override

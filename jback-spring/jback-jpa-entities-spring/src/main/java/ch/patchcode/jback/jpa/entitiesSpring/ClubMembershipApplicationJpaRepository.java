@@ -18,6 +18,5 @@ public interface ClubMembershipApplicationJpaRepository extends JpaRepository<Cl
     @Override
     Optional<ClubMembershipApplicationJpa> findById(UUID uuid);
 
-    @Override
-    Page<ClubMembershipApplicationJpa> findAll(Pageable pageable);
+    Page<ClubMembershipApplicationJpa> findAllByIdGreaterThan(UUID id, Pageable pageable);
 }

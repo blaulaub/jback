@@ -2,7 +2,6 @@ package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.coreEntities.ClubMembershipApplication;
 import ch.patchcode.jback.coreEntities.ClubMembershipApplicationRepository;
-import ch.patchcode.jback.coreEntities.Page;
 import ch.patchcode.jback.jpa.entities.ClubMembershipApplicationJpa;
 import ch.patchcode.jback.jpa.entitiesSpring.ClubJpaRepository;
 import ch.patchcode.jback.jpa.entitiesSpring.ClubMembershipApplicationJpaRepository;
@@ -11,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class ClubMembershipApplicationRepoWrapper implements ClubMembershipApplicationRepository {
 
+    public static final UUID NULL_ID = UUID.nameUUIDFromBytes(new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     private final ClubMembershipApplicationJpaRepository clubMembershipApplicationJpaRepository;
     private final PersonJpaRepository personJpaRepository;
     private final ClubJpaRepository clubJpaRepository;
@@ -40,16 +41,12 @@ public class ClubMembershipApplicationRepoWrapper implements ClubMembershipAppli
     }
 
     @Override
-    public Page<ClubMembershipApplication> getApplications(int page, int size) {
+    public List<ClubMembershipApplication> getApplications(UUID afterId, int size) {
 
-        var result = clubMembershipApplicationJpaRepository.findAll(PageRequest.of(page, size));
-        return new Page.Builder<ClubMembershipApplication>()
-                .addAllItems(result.map(ClubMembershipApplicationJpa::toDomain))
-                .setRequestedSize(size)
-                .setRequestedPage(page)
-                .setTotalItems(result.getTotalElements())
-                .setTotalPages(result.getTotalPages())
-                .build();
+        return clubMembershipApplicationJpaRepository.findAllByIdGreaterThan(
+                Optional.ofNullable(afterId).orElse(NULL_ID),
+                PageRequest.of(0, size)
+        ).map(ClubMembershipApplicationJpa::toDomain).getContent();
     }
 
     @Override

@@ -1,11 +1,13 @@
 package ch.patchcode.jback.core.clubs;
 
 import ch.patchcode.jback.coreEntities.ClubMembershipApplication;
-import ch.patchcode.jback.coreEntities.Page;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface ClubMembershipApplicationService {
 
-    Page<ClubMembershipApplication> getApplications(int page, int size);
+    List<ClubMembershipApplication> getApplications(UUID afterId, int size);
 
     void fileNewApplication(ClubMembershipApplication.Draft draft);
 }
