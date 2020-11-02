@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { Club } from '../../../clubs/club';
 import { ClubMembershipApplication } from '../../../clubs/club-membership-application';
 
 @Component({
@@ -10,6 +11,10 @@ import { ClubMembershipApplication } from '../../../clubs/club-membership-applic
 export class ApplicationActionsComponent implements OnInit {
 
   @Input() application: ClubMembershipApplication;
+
+  get club(): Club {
+    return this.application.club;
+  }
 
   constructor() { }
 
