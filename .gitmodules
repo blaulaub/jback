@@ -1,3 +1,6 @@
 [submodule "jback-sec-model"]
 	path = jback-sec-model
 	url = git@github.com:blaulaub/jback-sec-model.git
+[submodule "jback-core-entities"]
+	path = jback-core-entities
+	url = git@github.com:blaulaub/jback-core-entities.git
