@@ -6,9 +6,9 @@ import ch.patchcode.jback.coreEntities.Club;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.AdminRole;
 import ch.patchcode.jback.coreEntities.roles.MemberRole;
-import ch.patchcode.jback.coreEntities.roles.RoleRepository;
 import ch.patchcode.jback.coreRepositories.ClubRepository;
 import ch.patchcode.jback.coreRepositories.NotAllowedException;
+import ch.patchcode.jback.coreRepositories.RoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

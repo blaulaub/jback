@@ -9,10 +9,10 @@ import ch.patchcode.jback.core.clubs.impl.ClubServiceImpl;
 import ch.patchcode.jback.core.impl.RoleServiceImpl;
 import ch.patchcode.jback.core.persons.PersonService;
 import ch.patchcode.jback.core.persons.impl.PersonServiceImpl;
-import ch.patchcode.jback.coreEntities.roles.RoleRepository;
 import ch.patchcode.jback.coreRepositories.ClubMembershipApplicationRepository;
 import ch.patchcode.jback.coreRepositories.ClubRepository;
 import ch.patchcode.jback.coreRepositories.PersonRepository;
+import ch.patchcode.jback.coreRepositories.RoleRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

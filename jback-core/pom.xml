@@ -22,12 +22,6 @@
         </dependency>
 
         <dependency>
-            <groupId>ch.patchcode</groupId>
-            <artifactId>jback-sec-model</artifactId>
-            <version>0.9.2</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>

@@ -3,7 +3,7 @@ package ch.patchcode.jback.core.impl;
 import ch.patchcode.jback.core.RoleService;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.Role;
-import ch.patchcode.jback.coreEntities.roles.RoleRepository;
+import ch.patchcode.jback.coreRepositories.RoleRepository;
 
 import javax.inject.Inject;
 import java.util.List;

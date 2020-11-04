@@ -5,7 +5,7 @@ import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.AdminRole;
 import ch.patchcode.jback.coreEntities.roles.MemberRole;
 import ch.patchcode.jback.coreEntities.roles.Role;
-import ch.patchcode.jback.coreEntities.roles.RoleRepository;
+import ch.patchcode.jback.coreRepositories.RoleRepository;
 import ch.patchcode.jback.jpa.entities.*;
 import ch.patchcode.jback.jpa.entitiesSpring.ClubJpaRepository;
 import ch.patchcode.jback.jpa.entitiesSpring.PersonJpaRepository;
