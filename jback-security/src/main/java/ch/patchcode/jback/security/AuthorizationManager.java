@@ -1,7 +1,7 @@
 package ch.patchcode.jback.security;
 
-import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.coreEntities.Person;
+import ch.patchcode.jback.coreRepositories.NotAllowedException;
 import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.Principal;
 import ch.patchcode.jback.security.registration.InitialRegistrationData;

@@ -3,7 +3,7 @@ package ch.patchcode.jback.api.persons;
 import ch.patchcode.jback.api.exceptions.ForbiddenException;
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.core.persons.PersonService;
-import ch.patchcode.jback.coreEntities.NotAllowedException;
+import ch.patchcode.jback.coreRepositories.NotAllowedException;
 import ch.patchcode.jback.presentation.AuthenticationManager;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
 import ch.patchcode.jback.securityEntities.authentications.PersonalAuthentication;

@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.coreEntities.Dojo;
-import ch.patchcode.jback.coreEntities.DojoRepository;
+import ch.patchcode.jback.coreRepositories.DojoRepository;
 import ch.patchcode.jback.jpa.entities.DojoJpa;
 import ch.patchcode.jback.jpa.entities.DojoJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

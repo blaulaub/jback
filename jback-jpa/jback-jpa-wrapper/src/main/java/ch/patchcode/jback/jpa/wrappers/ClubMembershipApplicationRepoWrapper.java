@@ -1,7 +1,7 @@
 package ch.patchcode.jback.jpa.wrappers;
 
 import ch.patchcode.jback.coreEntities.ClubMembershipApplication;
-import ch.patchcode.jback.coreEntities.ClubMembershipApplicationRepository;
+import ch.patchcode.jback.coreRepositories.ClubMembershipApplicationRepository;
 import ch.patchcode.jback.jpa.entities.ClubMembershipApplicationJpa;
 import ch.patchcode.jback.jpa.entitiesSpring.ClubJpaRepository;
 import ch.patchcode.jback.jpa.entitiesSpring.ClubMembershipApplicationJpaRepository;

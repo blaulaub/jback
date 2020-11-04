@@ -1,14 +1,14 @@
 package ch.patchcode.jback.core.clubs.impl;
 
-import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.core.clubs.ClubMemberService;
 import ch.patchcode.jback.core.clubs.ClubNotFoundException;
 import ch.patchcode.jback.coreEntities.Club;
-import ch.patchcode.jback.coreEntities.ClubRepository;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.AdminRole;
 import ch.patchcode.jback.coreEntities.roles.MemberRole;
 import ch.patchcode.jback.coreEntities.roles.RoleRepository;
+import ch.patchcode.jback.coreRepositories.ClubRepository;
+import ch.patchcode.jback.coreRepositories.NotAllowedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

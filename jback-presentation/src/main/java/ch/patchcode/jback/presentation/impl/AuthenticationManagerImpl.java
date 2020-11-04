@@ -1,9 +1,9 @@
 package ch.patchcode.jback.presentation.impl;
 
-import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.core.RoleService;
 import ch.patchcode.jback.coreEntities.Person;
 import ch.patchcode.jback.coreEntities.roles.Role;
+import ch.patchcode.jback.coreRepositories.NotAllowedException;
 import ch.patchcode.jback.presentation.AuthenticationManager;
 import ch.patchcode.jback.presentation.LoginData;
 import ch.patchcode.jback.presentation.TryLoginResult;

@@ -2,7 +2,7 @@ package ch.patchcode.jback.core.clubs.impl;
 
 import ch.patchcode.jback.core.clubs.ClubService;
 import ch.patchcode.jback.coreEntities.Club;
-import ch.patchcode.jback.coreEntities.ClubRepository;
+import ch.patchcode.jback.coreRepositories.ClubRepository;
 
 import javax.inject.Inject;
 import java.util.List;

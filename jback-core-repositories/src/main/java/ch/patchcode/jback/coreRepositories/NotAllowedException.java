@@ -1,4 +1,4 @@
-package ch.patchcode.jback.coreEntities;
+package ch.patchcode.jback.coreRepositories;
 
 public class NotAllowedException extends Exception {
 }

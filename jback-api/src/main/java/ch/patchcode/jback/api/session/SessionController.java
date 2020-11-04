@@ -4,7 +4,7 @@ import ch.patchcode.jback.api.exceptions.ForbiddenException;
 import ch.patchcode.jback.api.exceptions.NotFoundException;
 import ch.patchcode.jback.api.roles.Role;
 import ch.patchcode.jback.api.roles.Roles;
-import ch.patchcode.jback.coreEntities.NotAllowedException;
+import ch.patchcode.jback.coreRepositories.NotAllowedException;
 import ch.patchcode.jback.presentation.AuthenticationManager;
 import ch.patchcode.jback.presentation.impl.SpringAuthentication;
 import io.swagger.annotations.Api;

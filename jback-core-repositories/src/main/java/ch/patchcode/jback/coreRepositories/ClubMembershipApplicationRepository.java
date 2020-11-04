@@ -1,4 +1,6 @@
-package ch.patchcode.jback.coreEntities;
+package ch.patchcode.jback.coreRepositories;
+
+import ch.patchcode.jback.coreEntities.ClubMembershipApplication;
 
 import java.util.List;
 import java.util.Optional;

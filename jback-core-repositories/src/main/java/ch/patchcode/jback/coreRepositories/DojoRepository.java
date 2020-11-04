@@ -1,4 +1,6 @@
-package ch.patchcode.jback.coreEntities;
+package ch.patchcode.jback.coreRepositories;
+
+import ch.patchcode.jback.coreEntities.Dojo;
 
 import java.util.Optional;
 import java.util.UUID;

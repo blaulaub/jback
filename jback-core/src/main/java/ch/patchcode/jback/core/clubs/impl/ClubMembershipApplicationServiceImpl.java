@@ -3,7 +3,7 @@ package ch.patchcode.jback.core.clubs.impl;
 import ch.patchcode.jback.core.clubs.ClubMembershipApplicationNotFoundException;
 import ch.patchcode.jback.core.clubs.ClubMembershipApplicationService;
 import ch.patchcode.jback.coreEntities.ClubMembershipApplication;
-import ch.patchcode.jback.coreEntities.ClubMembershipApplicationRepository;
+import ch.patchcode.jback.coreRepositories.ClubMembershipApplicationRepository;
 
 import java.util.List;
 import java.util.UUID;

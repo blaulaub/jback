@@ -1,7 +1,7 @@
 package ch.patchcode.jback.core.clubs;
 
-import ch.patchcode.jback.coreEntities.NotAllowedException;
 import ch.patchcode.jback.coreEntities.Person;
+import ch.patchcode.jback.coreRepositories.NotAllowedException;
 
 import java.util.UUID;
 

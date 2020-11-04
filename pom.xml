@@ -22,6 +22,7 @@
 
     <modules>
         <module>jback-core-entities</module>
+        <module>jback-core-repositories</module>
         <module>jback-core</module>
         <module>jback-jpa</module>
         <module>jback-security-entities</module>
