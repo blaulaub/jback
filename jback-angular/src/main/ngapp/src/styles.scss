@@ -28,15 +28,21 @@ div.jback-page {
         width: 100%;  // it will fully cover horizontal space
         flex-wrap: wrap;
 
+        align-items: center;  // cross-(vertical-)align children regardless of margin
+
         div.jback-role {
 
             order: 1;
             flex: 1;  // it will take up all remaining space until next element
+
+            margin: 8px;
         }
 
         div.jback-login {
 
             order: 2;
+
+            margin: 8px;
         }
     }
 
@@ -51,5 +57,11 @@ div.jback-page {
     div.jback-footer {
 
         order: 3;  // after jback-content
+
+        color: #606060;
+        font-style: italic;
+
+        margin-top: 8px;
+        margin-bottom: 2px;
     }
 }
