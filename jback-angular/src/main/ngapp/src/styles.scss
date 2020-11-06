@@ -1,4 +1,10 @@
-html, body {
+html {
+    height: 100%;  // give full vertical height to the body
+}
+
+body {
+    height: 100%;  // give full vertical height to all content
+    margin: 0;  // disable any default margin
     font: 100% Helvetica, sans-serif;
 }
 
@@ -7,6 +13,8 @@ div.jback-page {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    height: 100%;  // fill the browser window height (use the space provided by parent)
 
     div.jback-header {
 
@@ -35,7 +43,7 @@ div.jback-page {
     div.jback-content {
 
         order: 2;  // after jback-header
-        flex: 2;
+        flex: 1;
 
         overflow: auto;
     }
