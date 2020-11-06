@@ -4,3 +4,6 @@
 [submodule "jback-core-entities"]
 	path = jback-core-entities
 	url = git@github.com:blaulaub/jback-core-entities.git
+[submodule "jback-angular/src/main/jback-frontend"]
+	path = jback-angular/src/main/jback-frontend
+	url = git@github.com:blaulaub/jback-frontend.git
