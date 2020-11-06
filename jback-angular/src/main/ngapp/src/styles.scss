@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+    font: 100% Helvetica, sans-serif;
+}
+
+div.jback-page {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    div.jback-header {
+
+        color: white;
+        background-color: red;
+
+        order: 1;
+
+        display: flex;
+        flex-direction: row;
+        width: 100%;  // it will fully cover horizontal space
+        flex-wrap: wrap;
+
+        div.jback-role {
+
+            order: 1;
+            flex: 1;  // it will take up all remaining space until next element
+        }
+
+        div.jback-login {
+
+            order: 2;
+        }
+    }
+
+    div.jback-content {
+
+        order: 2;  // after jback-header
+        flex: 2;
+
+        overflow: auto;
+    }
+
+    div.jback-footer {
+
+        order: 3;  // after jback-content
+    }
+}
