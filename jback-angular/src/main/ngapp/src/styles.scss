@@ -18,10 +18,10 @@ div.jback-page {
 
     div.jback-header {
 
+        order: 1;
+
         color: white;
         background-color: red;
-
-        order: 1;
 
         display: flex;
         flex-direction: row;
@@ -43,7 +43,7 @@ div.jback-page {
     div.jback-content {
 
         order: 2;  // after jback-header
-        flex: 1;
+        flex: 1;  // fill vertical space
 
         overflow: auto;
     }
